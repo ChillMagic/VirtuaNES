@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+Ôªø//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      Konami VRC6                                                     //
 //                                                           Norix      //
@@ -13,7 +13,7 @@
 
 APU_VRC6::APU_VRC6()
 {
-	// âºê›íË
+	// ‰ªÆË®≠ÂÆö
 	Reset( APU_CLOCK, 22050 );
 }
 
@@ -84,8 +84,8 @@ void	APU_VRC6::Write( WORD addr, BYTE data )
 			ch2.reg[2] = data;
 			ch2.enable = data&0x80;
 			ch2.freq   = INT2FIX( (((data&0x0F)<<8)|ch2.reg[1])+1 );
-//			ch2.adder = 0;	// ÉNÉäÉAÇ∑ÇÈÇ∆ÉmÉCÉYÇÃå¥àˆÇ…Ç»ÇÈ
-//			ch2.accum = 0;	// ÉNÉäÉAÇ∑ÇÈÇ∆ÉmÉCÉYÇÃå¥àˆÇ…Ç»ÇÈ
+//			ch2.adder = 0;	// „ÇØ„É™„Ç¢„Åô„Çã„Å®„Éé„Ç§„Ç∫„ÅÆÂéüÂõ†„Å´„Å™„Çã
+//			ch2.accum = 0;	// „ÇØ„É™„Ç¢„Åô„Çã„Å®„Éé„Ç§„Ç∫„ÅÆÂéüÂõ†„Å´„Å™„Çã
 			break;
 	}
 }
@@ -146,7 +146,7 @@ INT	APU_VRC6::RectangleRender( RECTANGLE& ch )
 		return	ch.output_vol;
 	}
 
-	// àÍíËà»è„ÇÃé¸îgêîÇÕèàóùÇµÇ»Ç¢(ñ≥ë )
+	// ‰∏ÄÂÆö‰ª•‰∏ä„ÅÆÂë®Ê≥¢Êï∞„ÅØÂá¶ÁêÜ„Åó„Å™„ÅÑ(ÁÑ°ÈßÑ)
 	if( ch.freq < INT2FIX( 8 ) ) {
 		ch.output_vol = 0;
 		return	ch.output_vol;
@@ -193,7 +193,7 @@ INT	APU_VRC6::SawtoothRender( SAWTOOTH& ch )
 		return	ch.output_vol;
 	}
 
-	// àÍíËà»è„ÇÃé¸îgêîÇÕèàóùÇµÇ»Ç¢(ñ≥ë )
+	// ‰∏ÄÂÆö‰ª•‰∏ä„ÅÆÂë®Ê≥¢Êï∞„ÅØÂá¶ÁêÜ„Åó„Å™„ÅÑ(ÁÑ°ÈßÑ)
 	if( ch.freq < INT2FIX( 9 ) ) {
 		return	ch.output_vol;
 	}

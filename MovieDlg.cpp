@@ -1,5 +1,5 @@
-//
-// ƒo[ƒWƒ‡ƒ“ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -61,7 +61,7 @@ DLGCMD	CMovieDlg::OnOK( DLGCMDPARAM )
 	Config.movie.bPadDisplay = IsBTNCHECK( IDC_MVI_PADDISPLAY );
 	Config.movie.bTimeDisplay = IsBTNCHECK( IDC_MVI_TIMEDISPLAY );
 
-	// ‘S•”OFF‚Ìê‡‚Í1P‚¾‚¯‹L˜^‰Â”\‚É‚µ‚Ä‚¨‚­
+	// å…¨éƒ¨OFFã®å ´åˆã¯1Pã ã‘è¨˜éŒ²å¯èƒ½ã«ã—ã¦ãŠã
 	if( !Config.movie.bUsePlayer[0] && !Config.movie.bUsePlayer[1]
 	 && !Config.movie.bUsePlayer[2] && !Config.movie.bUsePlayer[3] ) {
 		Config.movie.bUsePlayer[0] = 0xFF;

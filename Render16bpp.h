@@ -1,4 +1,4 @@
-//
+ï»¿//
 // 16bit Normal
 //
 void	CDirectDraw::Render16bpp_Normal( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2& ddsd, BOOL bForceWrite )
@@ -286,7 +286,7 @@ _r16bs_loop:
 			mov		edx, [eax+0]
 			cmp		edx, [ebx+0]
 			je		_r16bs_skip1
-//			mov		[ebx+0], edx		// 1‰ñ–Ú‚Í‘‚«‚Ü‚È‚¢
+//			mov		[ebx+0], edx		// 1å›ç›®ã¯æ›¸ãè¾¼ã¾ãªã„
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8
@@ -306,7 +306,7 @@ _r16bs_skip1:
 			mov		edx, [eax+4]
 			cmp		edx, [ebx+4]
 			je		_r16bs_skip2
-//			mov		[ebx+4], edx		// 1‰ñ–Ú‚Í‘‚«‚Ü‚È‚¢
+//			mov		[ebx+4], edx		// 1å›ç›®ã¯æ›¸ãè¾¼ã¾ãªã„
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8
@@ -343,7 +343,7 @@ _r16bs_loop2:
 			mov		edx, [eax+0]
 			cmp		edx, [ebx+0]
 			je		_r16bs_skip3
-			mov		[ebx+0], edx		// 2‰ñ–Ú‚Í‘‚«‚Ş
+			mov		[ebx+0], edx		// 2å›ç›®ã¯æ›¸ãè¾¼ã‚€
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8
@@ -363,7 +363,7 @@ _r16bs_skip3:
 			mov		edx, [eax+4]
 			cmp		edx, [ebx+4]
 			je		_r16bs_skip4
-			mov		[ebx+4], edx		// 2‰ñ–Ú‚Í‘‚«‚Ş
+			mov		[ebx+4], edx		// 2å›ç›®ã¯æ›¸ãè¾¼ã‚€
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8
@@ -550,7 +550,7 @@ _r16bn_d_loop:
 			mov		edx, [eax+0]
 			cmp		edx, [ebx+0]
 			je		_r16bn_d_skip1
-//			mov		[ebx+0], edx		// 1‰ñ–Ú‚Í‘‚«‚Ü‚È‚¢
+//			mov		[ebx+0], edx		// 1å›ç›®ã¯æ›¸ãè¾¼ã¾ãªã„
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8
@@ -574,7 +574,7 @@ _r16bn_d_skip1:
 			mov		edx, [eax+4]
 			cmp		edx, [ebx+4]
 			je		_r16bn_d_skip2
-//			mov		[ebx+4], edx		// 1‰ñ–Ú‚Í‘‚«‚Ü‚È‚¢
+//			mov		[ebx+4], edx		// 1å›ç›®ã¯æ›¸ãè¾¼ã¾ãªã„
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8
@@ -615,7 +615,7 @@ _r16bn_d_loop2:
 			mov		edx, [eax+0]
 			cmp		edx, [ebx+0]
 			je		_r16bn_d_skip3
-			mov		[ebx+0], edx		// 2‰ñ–Ú‚Í‘‚«‚Ş
+			mov		[ebx+0], edx		// 2å›ç›®ã¯æ›¸ãè¾¼ã‚€
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8
@@ -639,7 +639,7 @@ _r16bn_d_skip3:
 			mov		edx, [eax+4]
 			cmp		edx, [ebx+4]
 			je		_r16bn_d_skip4
-			mov		[ebx+4], edx		// 2‰ñ–Ú‚Í‘‚«‚Ş
+			mov		[ebx+4], edx		// 2å›ç›®ã¯æ›¸ãè¾¼ã‚€
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8
@@ -833,7 +833,7 @@ _r16bs_d_loop:
 			mov		edx, [eax+0]
 			cmp		edx, [ebx+0]
 			je		_r16bs_d_skip1
-//			mov		[ebx+0], edx		// 1‰ñ–Ú‚Í‘‚«‚Ü‚È‚¢
+//			mov		[ebx+0], edx		// 1å›ç›®ã¯æ›¸ãè¾¼ã¾ãªã„
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8
@@ -857,7 +857,7 @@ _r16bs_d_skip1:
 			mov		edx, [eax+4]
 			cmp		edx, [ebx+4]
 			je		_r16bs_d_skip2
-//			mov		[ebx+4], edx		// 1‰ñ–Ú‚Í‘‚«‚Ü‚È‚¢
+//			mov		[ebx+4], edx		// 1å›ç›®ã¯æ›¸ãè¾¼ã¾ãªã„
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8
@@ -898,7 +898,7 @@ _r16bs_d_loop2:
 			mov		edx, [eax+0]
 			cmp		edx, [ebx+0]
 			je		_r16bs_d_skip3
-			mov		[ebx+0], edx		// 2‰ñ–Ú‚Í‘‚«‚Ş
+			mov		[ebx+0], edx		// 2å›ç›®ã¯æ›¸ãè¾¼ã‚€
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8
@@ -922,7 +922,7 @@ _r16bs_d_skip3:
 			mov		edx, [eax+4]
 			cmp		edx, [ebx+4]
 			je		_r16bs_d_skip4
-			mov		[ebx+4], edx		// 2‰ñ–Ú‚Í‘‚«‚Ş
+			mov		[ebx+4], edx		// 2å›ç›®ã¯æ›¸ãè¾¼ã‚€
 			movzx		ecx, dl
 			mov		ecx, [esi+ecx*4]
 			shr		edx, 8

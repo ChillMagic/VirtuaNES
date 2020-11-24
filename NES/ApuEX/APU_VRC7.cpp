@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      Konami VRC7                                                     //
 //                                                           Norix      //
@@ -9,7 +9,7 @@
 
 APU_VRC7::APU_VRC7()
 {
-	OPLL_init( 3579545, (uint32)22050 );	// ‰¼‚ÌƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg
+	OPLL_init( 3579545, (uint32)22050 );	// ä»®ã®ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ãƒ¬ãƒ¼ãƒˆ
 	VRC7_OPLL = OPLL_new();
 
 	if( VRC7_OPLL ) {
@@ -18,7 +18,7 @@ APU_VRC7::APU_VRC7()
 		VRC7_OPLL->masterVolume = 128;
 	}
 
-	// ‰¼Ý’è
+	// ä»®è¨­å®š
 	Reset( APU_CLOCK, 22050 );
 }
 
@@ -27,7 +27,7 @@ APU_VRC7::~APU_VRC7()
 	if( VRC7_OPLL ) {
 		OPLL_delete( VRC7_OPLL );
 		VRC7_OPLL = NULL;
-//		OPLL_close();	// –³‚­‚Ä‚à—Ç‚¢(’†g–³‚µ)
+//		OPLL_close();	// ç„¡ãã¦ã‚‚è‰¯ã„(ä¸­èº«ç„¡ã—)
 	}
 }
 

@@ -1,4 +1,4 @@
-#ifndef _EMU2413_H_
+﻿#ifndef _EMU2413_H_
 #define _EMU2413_H_
 
 #ifdef __cplusplus

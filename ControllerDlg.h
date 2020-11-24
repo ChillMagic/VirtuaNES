@@ -1,5 +1,5 @@
-//
-// ƒRƒ“ƒgƒ[ƒ‰ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CCONTROLLERDLG_INCLUDED__
 #define	__CCONTROLLERDLG_INCLUDED__

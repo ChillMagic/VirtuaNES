@@ -1,4 +1,4 @@
-#include "Typedef.h"
+﻿#include "Typedef.h"
 #include "App.h"
 #include "Pathlib.h"
 #include "Config.h"

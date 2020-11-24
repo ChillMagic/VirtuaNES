@@ -1,5 +1,5 @@
-//
-// ƒ`[ƒgƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒãƒ¼ãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CCHEATDLG_INCLUDED__
 #define	__CCHEATDLG_INCLUDED__
@@ -14,7 +14,7 @@ using namespace std;
 #include "Wnd.h"
 #include "cheat.h"
 
-// ƒT[ƒ`ƒ_ƒCƒAƒƒO
+// ã‚µãƒ¼ãƒãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 class	CSearchDlg : public CWnd
 {
 public:
@@ -80,11 +80,11 @@ private:
 		BYTE	SRAM_F[0x2000];	// RAM Flag
 	};
 
-	struct	RESULT	m_Result;	// ¡‰ñƒf[ƒ^
-	struct	RESULT	m_ResultOld;	// ‚P‰ñ‘O
+	struct	RESULT	m_Result;	// ä»Šå›ãƒ‡ãƒ¼ã‚¿
+	struct	RESULT	m_ResultOld;	// ï¼‘å›å‰
 };
 
-// ƒ`[ƒgƒR[ƒh•ÒWƒ_ƒCƒAƒƒO
+// ãƒãƒ¼ãƒˆã‚³ãƒ¼ãƒ‰ç·¨é›†ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 class	CCheatCodeEditDlg : public CWnd
 {
 public:
@@ -105,7 +105,7 @@ protected:
 private:
 };
 
-// ƒ`[ƒgƒR[ƒh“ü—Íƒ_ƒCƒAƒƒO
+// ãƒãƒ¼ãƒˆã‚³ãƒ¼ãƒ‰å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 class	CCheatCodeInputDlg : public CWnd
 {
 public:
@@ -125,7 +125,7 @@ protected:
 private:
 };
 
-// ƒ`[ƒgƒR[ƒhƒ_ƒCƒAƒƒO
+// ãƒãƒ¼ãƒˆã‚³ãƒ¼ãƒ‰ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 class	CCheatCodeDlg : public CWnd
 {
 public:

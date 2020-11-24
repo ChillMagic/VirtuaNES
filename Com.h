@@ -1,5 +1,5 @@
-//
-// COM—˜—pƒTƒ|[ƒgƒNƒ‰ƒX
+ï»¿//
+// COMåˆ©ç”¨ã‚µãƒãƒ¼ãƒˆã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CCOM_INCLUDED__
 #define	__CCOM_INCLUDED__

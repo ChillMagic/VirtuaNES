@@ -1,7 +1,7 @@
+ï»¿//
+// ã¸ãªã¡ã‚‡ã“ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹
 //
-// ‚Ö‚È‚¿‚å‚±ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX
-//
-// Œp³‚µ‚È‚¢‚ÆˆÓ–¡‚ª–³‚¢^^;
+// ç¶™æ‰¿ã—ãªã„ã¨æ„å‘³ãŒç„¡ã„^^;
 //
 #ifndef	__CWND_INCLUDED__
 #define	__CWND_INCLUDED__
@@ -18,15 +18,15 @@ using namespace std;
 // prototype
 class	CWnd;
 
-// ƒ‚[ƒhƒŒƒX‘¼‚ğˆ—‚·‚éˆ×‚ÌƒCƒ“ƒ`ƒLƒNƒ‰ƒX
+// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ä»–ã‚’å‡¦ç†ã™ã‚‹ç‚ºã®ã‚¤ãƒ³ãƒã‚­ã‚¯ãƒ©ã‚¹
 class	CWndList
 {
 public:
 	CWndList();
 	~CWndList();
 
-	static	void	Add( CWnd* pWnd );	// ƒŠƒXƒg‚É‰Á‚¦‚é
-	static	void	Del( CWnd* pWnd );	// ƒŠƒXƒg‚©‚çíœ‚·‚é
+	static	void	Add( CWnd* pWnd );	// ãƒªã‚¹ãƒˆã«åŠ ãˆã‚‹
+	static	void	Del( CWnd* pWnd );	// ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 
 	static	BOOL	IsDialogMessage( LPMSG msg );
 protected:
@@ -34,7 +34,7 @@ private:
 	static	list<CWnd*>	m_WndPtrList;
 };
 
-// •’Ê‚ÌƒEƒCƒ“ƒhƒE
+// æ™®é€šã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦
 class	CWnd
 {
 public:
@@ -69,8 +69,8 @@ protected:
 private:
 };
 
-// ƒEƒCƒ“ƒhƒEƒƒbƒZ[ƒW—p
-// ƒNƒ‰ƒX’è‹`ƒ}ƒNƒ
+// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç”¨
+// ã‚¯ãƒ©ã‚¹å®šç¾©ãƒã‚¯ãƒ­
 #define	WND_MESSAGE_MAP()	HRESULT DispatchWnd( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );
 
 #define	WNDMSG			BOOL
@@ -81,7 +81,7 @@ private:
 #define	WNDCMDPARAM		HWND hWnd, UINT uID
 #define	WNDNOTIFYPARAM		HWND hWnd, UINT uID, NMHDR* pNMHDR, LRESULT& hResult
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒgƒ}ƒNƒ
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒˆãƒã‚¯ãƒ­
 #define	WND_MESSAGE_BEGIN(cls)	\
 	HRESULT cls::DispatchWnd( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam ) {\
 		HRESULT	hResult = 0L;\
@@ -92,7 +92,7 @@ private:
 			return	hResult;\
 	}\
 	break;
-// ƒRƒ}ƒ“ƒh‚ÍCOMMAND_BEGIN() ` COMMAND_END()‚Ì’†‚É‹Lq‚·‚é(’P‚È‚éif‚È‚Ì‚Å(^^;)
+// ã‚³ãƒãƒ³ãƒ‰ã¯COMMAND_BEGIN() ã€œ COMMAND_END()ã®ä¸­ã«è¨˜è¿°ã™ã‚‹(å˜ãªã‚‹ifãªã®ã§(^^;)
 #define	WND_COMMAND_BEGIN() \
 	case	WM_COMMAND: {
 #define	WND_ON_COMMAND(id,fnc) \
@@ -111,7 +111,7 @@ private:
 #define	WND_COMMAND_END() \
 	return	0L; }; break;
 
-// WM_NOTIFY‚ÍNOTIFY_BEGIN() ` NOTIFY_END()‚Ì’†‚É‹Lq‚·‚é(’P‚È‚éif‚È‚Ì‚Å^^;)
+// WM_NOTIFYã¯NOTIFY_BEGIN() ã€œ NOTIFY_END()ã®ä¸­ã«è¨˜è¿°ã™ã‚‹(å˜ãªã‚‹ifãªã®ã§^^;)
 #define	WND_NOTIFY_BEGIN() \
 	case	WM_NOTIFY: { \
 		LRESULT	hResult = 0L;
@@ -131,8 +131,8 @@ private:
 	return	::DefWindowProc( hWnd, msg, wParam, lParam );\
 	}
 
-// ƒ_ƒCƒAƒƒOƒƒbƒZ[ƒW—p
-// ƒNƒ‰ƒX’è‹`ƒ}ƒNƒ
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç”¨
+// ã‚¯ãƒ©ã‚¹å®šç¾©ãƒã‚¯ãƒ­
 #define	DLG_MESSAGE_MAP()	BOOL DispatchDlg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );
 
 #define	DLGMSG			BOOL
@@ -143,7 +143,7 @@ private:
 #define	DLGCMDPARAM		HWND hWnd, UINT uID
 #define	DLGNOTIFYPARAM		HWND hWnd, UINT uID, NMHDR* pNMHDR, LRESULT& hResult
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒgƒ}ƒNƒ
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒˆãƒã‚¯ãƒ­
 #define	DLG_MESSAGE_BEGIN(cls)	\
 	BOOL cls::DispatchDlg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam ) {\
 		BOOL	bResult = TRUE;\
@@ -154,7 +154,7 @@ private:
 			return	bResult;\
 	}\
 	break;
-// ƒRƒ}ƒ“ƒh‚ÍCOMMAND_BEGIN() ` COMMAND_END()‚Ì’†‚É‹Lq‚·‚é(’P‚È‚éif‚È‚Ì‚Å^^;)
+// ã‚³ãƒãƒ³ãƒ‰ã¯COMMAND_BEGIN() ã€œ COMMAND_END()ã®ä¸­ã«è¨˜è¿°ã™ã‚‹(å˜ãªã‚‹ifãªã®ã§^^;)
 #define	DLG_COMMAND_BEGIN() \
 	case	WM_COMMAND: {
 #define	DLG_ON_COMMAND(id,fnc) \
@@ -173,7 +173,7 @@ private:
 #define	DLG_COMMAND_END() \
 	return	FALSE; }; break;
 
-// WM_NOTIFY‚ÍNOTIFY_BEGIN() ` NOTIFY_END()‚Ì’†‚É‹Lq‚·‚é(’P‚È‚éif‚È‚Ì‚Å^^;)
+// WM_NOTIFYã¯NOTIFY_BEGIN() ã€œ NOTIFY_END()ã®ä¸­ã«è¨˜è¿°ã™ã‚‹(å˜ãªã‚‹ifãªã®ã§^^;)
 #define	DLG_NOTIFY_BEGIN() \
 	case	WM_NOTIFY: { \
 		LRESULT	hResult = 0L;
@@ -194,7 +194,7 @@ private:
 	}
 
 //
-// ƒ_ƒCƒAƒƒO“àƒRƒ“ƒgƒ[ƒ‹ƒwƒ‹ƒp[ƒ}ƒNƒ
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°å†…ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãƒ˜ãƒ«ãƒ‘ãƒ¼ãƒã‚¯ãƒ­
 //
 #define	BTNCHECK(ctrlid,check)	::CheckDlgButton(m_hWnd,(ctrlid),(check)?BST_CHECKED:BST_UNCHECKED)
 #define	IsBTNCHECK(ctrlid)	((::IsDlgButtonChecked(m_hWnd,(ctrlid))==BST_CHECKED)?TRUE:FALSE)

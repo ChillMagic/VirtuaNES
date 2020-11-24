@@ -1,5 +1,5 @@
-//
-// ƒŒƒWƒXƒgƒŠƒTƒ|[ƒgƒNƒ‰ƒX
+ï»¿//
+// ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‚µãƒãƒ¼ãƒˆã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CREGISTRY_INCLUDED__
 #define	__CREGISTRY_INCLUDED__

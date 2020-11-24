@@ -1,5 +1,5 @@
-//
-// ƒWƒ‡ƒCƒXƒeƒBƒbƒNŽ²Ý’èƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯è»¸è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -62,7 +62,7 @@ DLGMSG	CJoyAxisDlg::OnInitDialog( DLGMSGPARAM )
 		::SendDlgItemMessage( m_hWnd, i, PBM_SETSTEP, (WPARAM)1, 0 ); 
 	}
 
-	// IDƒRƒ“ƒ{ƒ{ƒbƒNƒX
+	// IDã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹
 	::SendDlgItemMessage( m_hWnd, IDC_AST_ID_COMBO, CB_RESETCONTENT, 0, 0 );
 	CHAR	szStr[MAX_PATH+16];
 	for( i = 0; i < DirectInput.m_nJoystickNum; i++ ) {

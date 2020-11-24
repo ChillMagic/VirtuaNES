@@ -1,5 +1,5 @@
-//
-// ƒtƒHƒ‹ƒ_ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒ•ã‚©ãƒ«ãƒ€ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CFOLDERDLG_INCLUDED__
 #define	__CFOLDERDLG_INCLUDED__

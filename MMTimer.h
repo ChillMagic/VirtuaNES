@@ -1,4 +1,4 @@
-//
+ï»¿//
 // Multimedia timer support
 //
 #ifndef	__CMMTIMER_INCLUDED__
@@ -22,9 +22,9 @@ protected:
 private:
 	static	BOOL	m_bInitialize;
 
-	// ‚•ª‰ğ”\ƒJƒEƒ“ƒ^‚ğ—˜—po—ˆ‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+	// é«˜åˆ†è§£èƒ½ã‚«ã‚¦ãƒ³ã‚¿ã‚’åˆ©ç”¨å‡ºæ¥ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
 	static	BOOL	m_bHigh;
-	// ‚•ª‰ğ”\ƒJƒEƒ“ƒ^ü”g”
+	// é«˜åˆ†è§£èƒ½ã‚«ã‚¦ãƒ³ã‚¿å‘¨æ³¢æ•°
 	static	SQWORD	m_hpFrequency;
 };
 

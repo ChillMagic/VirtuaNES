@@ -1,5 +1,5 @@
-//
-// ƒ€[ƒr[î•ñƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒ ãƒ¼ãƒ“ãƒ¼æƒ…å ±ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -46,11 +46,11 @@ DLGMSG	CMovieInfoDlg::OnInitDialog( DLGMSGPARAM )
 	::wsprintf( szTemp, "%04X", m_wVersion );
 	::SetDlgItemText( m_hWnd, IDC_MIF_VERSION, szTemp );
 
-	// ƒtƒŒ[ƒ€”
+	// ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
 	::wsprintf( szTemp, "%d frames", m_dwFrames );
 	::SetDlgItemText( m_hWnd, IDC_MIF_FRAMES, szTemp );
 
-	// ŠÔ
+	// æ™‚é–“
 	INT	t, h, m, s;
 	t = (INT)m_dwFrames;
 	h = t / (60*60*60);
@@ -62,7 +62,7 @@ DLGMSG	CMovieInfoDlg::OnInitDialog( DLGMSGPARAM )
 	::wsprintf( szTemp, "%02d:%02d:%02d", h, m, s );
 	::SetDlgItemText( m_hWnd, IDC_MIF_TIMES, szTemp );
 
-	// B‚è’¼‚µ‰ñ”
+	// æ’®ã‚Šç›´ã—å›æ•°
 	if( m_dwRerecordTimes == 0xFFFFFFFF ) {
 		::SetDlgItemText( m_hWnd, IDC_MIF_RERECORDTIMES, "----" );
 	} else {

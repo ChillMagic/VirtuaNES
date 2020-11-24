@@ -1,5 +1,5 @@
-//
-// ƒ`ƒƒƒbƒgƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒãƒ£ãƒƒãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CCHATDLG_INCLUDED__
 #define	__CCHATDLG_INCLUDED__
@@ -42,11 +42,11 @@ protected:
 	DLGCMD		OnSend( DLGCMDPARAM );
 	//
 
-	// ˆÊ’u
-	RECT		m_rcClient;	// ƒNƒ‰ƒCƒAƒ“ƒgƒGƒŠƒA
-	RECT		m_rcMessage;	// ƒƒbƒZ[ƒW˜g
-	RECT		m_rcEdit;	// ƒGƒfƒBƒbƒg˜g
-	RECT		m_rcButton;	// ‘—Mƒ{ƒ^ƒ“
+	// ä½ç½®
+	RECT		m_rcClient;	// ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‚¨ãƒªã‚¢
+	RECT		m_rcMessage;	// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸æž 
+	RECT		m_rcEdit;	// ã‚¨ãƒ‡ã‚£ãƒƒãƒˆæž 
+	RECT		m_rcButton;	// é€ä¿¡ãƒœã‚¿ãƒ³
 
 private:
 };

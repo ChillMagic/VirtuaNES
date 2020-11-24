@@ -1,5 +1,5 @@
-//
-// ƒpƒXƒ‰ƒCƒuƒ‰ƒŠƒNƒ‰ƒX
+ï»¿//
+// ãƒ‘ã‚¹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚¯ãƒ©ã‚¹
 //
 #include "Pathlib.h"
 
@@ -106,7 +106,7 @@ BOOL	CPathlib::SelectFolder( HWND hWnd, LPCSTR lpszTitle, LPSTR lpszFolder )
 	// For Folder setup
 	bi.lpfn = (BFFCALLBACK)BffCallback;
 
-	// ÅŒã‚É'\'‚ª•t‚¢‚Ä‚¢‚é‚ÆƒfƒtƒHƒ‹ƒg‘I‘ð‚µ‚Ä‚­‚ê‚È‚¢(Win98)‚Ì‚Å...
+	// æœ€å¾Œã«'\'ãŒä»˜ã„ã¦ã„ã‚‹ã¨ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆé¸æŠžã—ã¦ãã‚Œãªã„(Win98)ã®ã§...
 	if( lpszFolder ) {
 		if( ::strlen(lpszFolder) > 3 ) {
 			if( lpszFolder[::strlen(lpszFolder)-1] == '\\' )
@@ -121,7 +121,7 @@ BOOL	CPathlib::SelectFolder( HWND hWnd, LPCSTR lpszTitle, LPSTR lpszFolder )
 	if( (pidl = ::SHBrowseForFolder( &bi )) ) {
 		path.resize( _MAX_PATH+1 );
 		::SHGetPathFromIDList( pidl, lpszFolder );
-		if( ::strlen(lpszFolder) > 3 ) {	// ƒhƒ‰ƒCƒu–¼‚Ìê‡‚ðœ‚­
+		if( ::strlen(lpszFolder) > 3 ) {	// ãƒ‰ãƒ©ã‚¤ãƒ–åã®å ´åˆã‚’é™¤ã
 			::strcat( lpszFolder, "\\" );
 		}
 		IMalloc* pMalloc;

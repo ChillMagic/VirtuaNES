@@ -1,5 +1,5 @@
-//
-// ƒA[ƒJƒCƒuƒtƒ@ƒCƒ‹‘€ì
+ï»¿//
+// ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«æ“ä½œ
 //
 // Original:NesterJ arc.cpp arc.h by Mikami Kana
 // Original:NNNesterJ ulunzip.cpp
@@ -97,7 +97,7 @@ static	BOOL	bFileMatching[] = {
 
 #define M_ERROR_MESSAGE_OFF		0x00800000L
 
-// zlib‚ðŽg—p‚µ‚½ZIP‰ð“€ƒ‹[ƒ`ƒ“
+// zlibã‚’ä½¿ç”¨ã—ãŸZIPè§£å‡ãƒ«ãƒ¼ãƒãƒ³
 BOOL	ZlibUnZip( LPCSTR fname, LPBYTE* ppBuf, LPDWORD lpdwSize )
 {
 	unzFile		unzipFile = NULL;
@@ -167,7 +167,7 @@ INDIVIDUALINFO	idvinfo;
 
 //	char*	pExt = ::PathFindExtension( fname );
 //	if( _stricmp( pExt, ".zip" ) == 0 ) {
-		// ZIP‚È‚ç‚Ü‚¸zlibƒ‰ƒCƒuƒ‰ƒŠ‚Ì‰ð“€‚ðŽg‚Á‚Ä‚Ý‚é
+		// ZIPãªã‚‰ã¾ãšzlibãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®è§£å‡ã‚’ä½¿ã£ã¦ã¿ã‚‹
 		if( ZlibUnZip( fname, ppBuf, lpdwSize ) ) {
 //DEBUGOUT( "zlib unzip ok! [%s]\n", fname );
 			return	TRUE;
@@ -176,10 +176,10 @@ INDIVIDUALINFO	idvinfo;
 
 	hDLL = NULL;
 	for( INT i = 0; pszArchiver[i]; i++ ) {
-		// DLLƒAƒ“ƒ[ƒh
+		// DLLã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 		FREEDLL( hDLL );
 
-		// DLLƒ[ƒh
+		// DLLãƒ­ãƒ¼ãƒ‰
 		if( !(hDLL = LoadLibrary( pszArchiver[i] )) )
 			continue;
 
@@ -188,11 +188,11 @@ INDIVIDUALINFO	idvinfo;
 		CHECKARCHIVE	CheckArchive;
 		if( !(CheckArchive = (CHECKARCHIVE)GetProcAddress( hDLL, szTemp )) )
 			continue;
-		// ‘Î‰ž‚·‚éƒA[ƒJƒCƒu‚©ƒ`ƒFƒbƒN‚·‚é
+		// å¯¾å¿œã™ã‚‹ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 		if( !CheckArchive( fname, 1 ) )
 			continue;
 
-		// ƒA[ƒJƒCƒu“à‚É‘Î‰ž‚·‚éƒtƒ@ƒCƒ‹‚ª‚ ‚é‚©‚Ìƒ`ƒFƒbƒN
+		// ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–å†…ã«å¯¾å¿œã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚‹ã‹ã®ãƒã‚§ãƒƒã‚¯
 		OPENARCHIVE	OpenArchive;
 		CLOSEARCHIVE	CloseArchive;
 		FINDFIRST	FindFirst;
@@ -217,7 +217,7 @@ INDIVIDUALINFO	idvinfo;
 				bFound = TRUE;
 				break;
 			} else if( ret == -1 ) {	// Not found.
-			} else {			// ˆÙíI—¹
+			} else {			// ç•°å¸¸çµ‚äº†
 				break;
 			}
 		}
@@ -225,7 +225,7 @@ INDIVIDUALINFO	idvinfo;
 			continue;
 
 		if( !pszCommand[i] ) {
-		// ƒƒ‚ƒŠ‰ð“€‚ ‚è(UNLHA32,UNZIP32)
+		// ãƒ¡ãƒ¢ãƒªè§£å‡ã‚ã‚Š(UNLHA32,UNZIP32)
 			*lpdwSize = idvinfo.dwOriginalSize;
 			*ppBuf = (LPBYTE)malloc( *lpdwSize );
 
@@ -239,7 +239,7 @@ INDIVIDUALINFO	idvinfo;
 				BYTE	szFile[FNAME_MAX32+1];
 				LPBYTE	lpF0, lpF1;
 
-				// ³‹K•\Œ»‚ðØ‚éƒIƒvƒVƒ‡ƒ“‚ª—~‚µ‚©‚Á‚½....
+				// æ­£è¦è¡¨ç¾ã‚’åˆ‡ã‚‹ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãŒæ¬²ã—ã‹ã£ãŸ....
 				lpF0 = (LPBYTE)idvinfo.szFileName;
 				lpF1 = szFile;
 				while( *lpF0 ) {
@@ -263,7 +263,7 @@ INDIVIDUALINFO	idvinfo;
 			if( ret == 0 )
 				return TRUE;
 		} else {
-		// ƒƒ‚ƒŠ‰ð“€‚ª–³‚¢ê‡
+		// ãƒ¡ãƒ¢ãƒªè§£å‡ãŒç„¡ã„å ´åˆ
 			CHAR	szCmd [256];
 			CHAR	szTempPath[_MAX_PATH];
 			EXECUTECOMMAND	ExecuteCommand;
@@ -280,32 +280,32 @@ INDIVIDUALINFO	idvinfo;
 
 			FILE *fp = NULL;
 			if( (fp = fopen( FileName.c_str(), "rb" )) ) {
-				// ƒtƒ@ƒCƒ‹ƒTƒCƒYŽæ“¾
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºå–å¾—
 				fseek( fp, 0, SEEK_END );
 				*lpdwSize = ftell( fp );
 				fseek( fp, 0, SEEK_SET );
 				if( *lpdwSize < 17 ) {
-					// ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ª¬‚³‚·‚¬‚Ü‚·
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºãŒå°ã•ã™ãŽã¾ã™
 					throw	CApp::GetErrorString( IDS_ERROR_SMALLFILE );
 				}
 
-				// ƒeƒ“ƒ|ƒ‰ƒŠƒƒ‚ƒŠŠm•Û
+				// ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ¡ãƒ¢ãƒªç¢ºä¿
 				if( !(*ppBuf = (LPBYTE)malloc( *lpdwSize )) ) {
 					FCLOSE( fp );
-					// ƒƒ‚ƒŠ‚ðŠm•Ûo—ˆ‚Ü‚¹‚ñ
+					// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 					throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 				}
-				// ƒTƒCƒY•ª“Ç‚Ýž‚Ý
+				// ã‚µã‚¤ã‚ºåˆ†èª­ã¿è¾¼ã¿
 				if( fread( *ppBuf, *lpdwSize, 1, fp ) != 1 ) {
 					FCLOSE( fp );
 					FREE( *ppBuf );
-					// ƒtƒ@ƒCƒ‹‚Ì“Ç‚Ýž‚Ý‚ÉŽ¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_READ );
 				}
 				FCLOSE( fp );
 				DeleteFile( FileName.c_str() );
 			} else {
-				// xxx ƒtƒ@ƒCƒ‹‚ðŠJ‚¯‚Ü‚¹‚ñ
+				// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 				LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 				sprintf( szErrorString, szErrStr, fname );
 				throw	szErrorString;

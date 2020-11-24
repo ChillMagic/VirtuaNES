@@ -1,7 +1,7 @@
+ï»¿//
+// ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤ã‚¯ãƒ©ã‚¹
 //
-// ƒlƒbƒgƒvƒŒƒCƒNƒ‰ƒX
-//
-// –¾¦“I‚ÉWinSock Lib‚ğƒŠƒ“ƒN
+// æ˜ç¤ºçš„ã«WinSock Libã‚’ãƒªãƒ³ã‚¯
 #pragma comment(lib, "wsock32.lib")
 
 #include "DebugOut.h"
@@ -31,20 +31,20 @@ CNetPlay::CNetPlay()
 
 CNetPlay::~CNetPlay()
 {
-	// ‚Æ‚è‚ ‚¦‚¸
+	// ã¨ã‚Šã‚ãˆãš
 	Release();
 }
 
 BOOL	CNetPlay::Initialize( HWND hWnd )
 {
-	// ‚Æ‚è‚ ‚¦‚¸
+	// ã¨ã‚Šã‚ãˆãš
 	Release();
 
-	// WinSock DLL‚Ì‰Šú‰»
+	// WinSock DLLã®åˆæœŸåŒ–
 	if( ::WSAStartup( MAKEWORD(1,1), &m_WSAdata ) )
 		return	FALSE;
 
-	// ƒo[ƒWƒ‡ƒ“ˆá‚¤‚¶‚á`‚ñ
+	// ãƒãƒ¼ã‚¸ãƒ§ãƒ³é•ã†ã˜ã‚ƒã€œã‚“
 	if( m_WSAdata.wVersion != MAKEWORD(1,1) ) {
 		::WSACleanup();
 		return	FALSE;
@@ -70,13 +70,13 @@ DEBUGOUT( "CNetPlay:ASyncHostCheck [%s]\n", lpszHost );
 
 	unsigned long IP_address = ::inet_addr( lpszHost );
 	if( IP_address != INADDR_NONE ) {
-		DEBUGOUT( "CNetPlay:¶IP‚Á‚·\n" );
+		DEBUGOUT( "CNetPlay:ç”ŸIPã£ã™\n" );
 		return	0;
 	}
 
 	m_hWndASync = hWnd;
 
-	// ƒzƒXƒgŒŸõŠJn
+	// ãƒ›ã‚¹ãƒˆæ¤œç´¢é–‹å§‹
 	m_hASyncTask = ::WSAAsyncGetHostByName( hWnd, WM_NETPLAY_HOSTBYNAME, lpszHost, m_HostEntry, MAXGETHOSTSTRUCT );
 
 	if( m_hASyncTask ) {
@@ -116,7 +116,7 @@ BOOL	CNetPlay::Connect( BOOL bServer, const char* lpszIP, unsigned short Port )
 
 	if( bServer ) {
 	// Server
-		// Ú‘±’Ê’mƒ\ƒPƒbƒgì¬
+		// æ¥ç¶šé€šçŸ¥ã‚½ã‚±ãƒƒãƒˆä½œæˆ
 		if( m_SocketConnect == INVALID_SOCKET ) {
 			m_SocketConnect = ::socket( AF_INET, SOCK_STREAM, IPPROTO_TCP );
 			if( m_SocketConnect == INVALID_SOCKET ) {
@@ -125,7 +125,7 @@ BOOL	CNetPlay::Connect( BOOL bServer, const char* lpszIP, unsigned short Port )
 			}
 		}
 
-		// Ä—˜—p‚ğ‹–‰Â‚µ‚Ä‚İ‚é
+		// å†åˆ©ç”¨ã‚’è¨±å¯ã—ã¦ã¿ã‚‹
 		unsigned long ulOpt = 1;
 		if( ::setsockopt( m_SocketConnect, SOL_SOCKET, SO_REUSEADDR, (const char*)&ulOpt, sizeof(ulOpt) ) == SOCKET_ERROR ) {
 			DEBUGOUT( "CNetPlay:setsockopt failed. (SO_REUSEADDR)\n" );
@@ -133,7 +133,7 @@ BOOL	CNetPlay::Connect( BOOL bServer, const char* lpszIP, unsigned short Port )
 			return	FALSE;
 		}
 
-		// ƒ|[ƒg‚ÆŒ‹‚Ñ‚Â‚¯‚é
+		// ãƒãƒ¼ãƒˆã¨çµã³ã¤ã‘ã‚‹
 		ZEROMEMORY( &m_SAddr_Server, sizeof(m_SAddr_Server) );
 		m_SAddr_Server.sin_family      = AF_INET;
 		m_SAddr_Server.sin_addr.s_addr = ::htonl( INADDR_ANY );
@@ -144,20 +144,20 @@ BOOL	CNetPlay::Connect( BOOL bServer, const char* lpszIP, unsigned short Port )
 			return	FALSE;
 		}
 //-----------------
-		// ƒ`ƒƒƒbƒg—pƒ\ƒPƒbƒgì¬
+		// ãƒãƒ£ãƒƒãƒˆç”¨ã‚½ã‚±ãƒƒãƒˆä½œæˆ
 		m_SocketChat = ::socket( AF_INET, SOCK_DGRAM, IPPROTO_UDP );
 		if( m_SocketChat == INVALID_SOCKET ) {
 			DEBUGOUT( "create socket failed.[chat]\n" );
 			Disconnect();
 			return	FALSE;
 		}
-		// ƒ|[ƒg‚ÉÚ‘±
+		// ãƒãƒ¼ãƒˆã«æ¥ç¶š
 		if( ::bind( m_SocketChat, (struct sockaddr *)&m_SAddr_Server, sizeof(m_SAddr_Server) ) == SOCKET_ERROR ) {
 			DEBUGOUT( "CNetPlay:connect failed. [chat]\n" );
 			Disconnect();
 			return	FALSE;
 		}
-		// ƒuƒƒbƒLƒ“ƒOƒ‚[ƒhİ’è
+		// ãƒ–ãƒ­ãƒƒã‚­ãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰è¨­å®š
 		unsigned long ulArg = 1;
 		if( ::ioctlsocket( m_SocketChat, FIONBIO, &ulArg ) == SOCKET_ERROR ) {
 			DEBUGOUT( "CNetPlay:ioctlsocket failed.[chat]\n" );
@@ -165,14 +165,14 @@ BOOL	CNetPlay::Connect( BOOL bServer, const char* lpszIP, unsigned short Port )
 			return	FALSE;
 		}
 //-----------------
-		// Ú‘±—v‹ƒCƒxƒ“ƒg‚Ìİ’è
+		// æ¥ç¶šè¦æ±‚ã‚¤ãƒ™ãƒ³ãƒˆã®è¨­å®š
 		if( ::WSAAsyncSelect( m_SocketConnect, m_hWnd, WM_NETPLAY, FD_ACCEPT ) == SOCKET_ERROR ) {
 			DEBUGOUT( "CNetPlay:WSAAsyncSelect failed.\n" );
 			CLOSESOCKET( m_SocketConnect );
 			return	FALSE;
 		}
 
-		// Ú‘±—v‹ó•tŠJn‚µ‚Ä‚İ‚é
+		// æ¥ç¶šè¦æ±‚å—ä»˜é–‹å§‹ã—ã¦ã¿ã‚‹
 		if( ::listen( m_SocketConnect, 1 ) == SOCKET_ERROR ) {
 			DEBUGOUT( "CNetPlay:listen failed.\n" );
 			CLOSESOCKET( m_SocketConnect );
@@ -181,21 +181,21 @@ BOOL	CNetPlay::Connect( BOOL bServer, const char* lpszIP, unsigned short Port )
 	} else {
 	// Client
 		unsigned long	ulOpt;
-		// IPƒAƒhƒŒƒXH
+		// IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼Ÿ
 		unsigned long IP_address = ::inet_addr( lpszIP );
 		if( IP_address == INADDR_NONE ) {
-			DEBUGOUT( "CNetPlay:IPƒAƒhƒŒƒX‚ª•s³‚Å‚·B\"%s\"\n", lpszIP );
+			DEBUGOUT( "CNetPlay:IPã‚¢ãƒ‰ãƒ¬ã‚¹ãŒä¸æ­£ã§ã™ã€‚\"%s\"\n", lpszIP );
 			return	FALSE;
 		}
 
-		// ƒf[ƒ^’ÊMƒ\ƒPƒbƒgì¬
+		// ãƒ‡ãƒ¼ã‚¿é€šä¿¡ã‚½ã‚±ãƒƒãƒˆä½œæˆ
 		m_SocketData = ::socket( AF_INET, SOCK_STREAM, IPPROTO_TCP );
 		if( m_SocketData == INVALID_SOCKET ) {
 			DEBUGOUT( "CNetPlay:socket failed.\n" );
 			return	FALSE;
 		}
 
-		// Ä—˜—p‚ğ‹–‰Â‚µ‚Ä‚İ‚é
+		// å†åˆ©ç”¨ã‚’è¨±å¯ã—ã¦ã¿ã‚‹
 		ulOpt = 1;
 		if( ::setsockopt( m_SocketData, SOL_SOCKET, SO_REUSEADDR, (const char*)&ulOpt, sizeof(ulOpt) ) == SOCKET_ERROR ) {
 			DEBUGOUT( "CNetPlay:setsockopt failed. (SO_REUSEADDR)\n" );
@@ -203,7 +203,7 @@ BOOL	CNetPlay::Connect( BOOL bServer, const char* lpszIP, unsigned short Port )
 			return	FALSE;
 		}
 
-		// NagleƒAƒ‹ƒSƒŠƒYƒ€‚Ì–³Œø‰»
+		// Nagleã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã®ç„¡åŠ¹åŒ–
 		ulOpt = 1;
 		if( ::setsockopt( m_SocketData, IPPROTO_TCP, TCP_NODELAY, (const char*)&ulOpt, sizeof(ulOpt) ) == SOCKET_ERROR ) {
 			DEBUGOUT( "CNetPlay:setsockopt failed.\n" );
@@ -211,7 +211,7 @@ BOOL	CNetPlay::Connect( BOOL bServer, const char* lpszIP, unsigned short Port )
 			return	FALSE;
 		}
 
-		// ƒuƒƒbƒLƒ“ƒOƒ‚[ƒhİ’è
+		// ãƒ–ãƒ­ãƒƒã‚­ãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰è¨­å®š
 		unsigned long	ulArg = 1;
 		if( ::ioctlsocket( m_SocketData, FIONBIO, &ulArg ) == SOCKET_ERROR ) {
 			DEBUGOUT( "CNetPlay:ioctlsocket failed.\n" );
@@ -220,14 +220,14 @@ BOOL	CNetPlay::Connect( BOOL bServer, const char* lpszIP, unsigned short Port )
 		}
 
 //-----------------
-		// ƒ`ƒƒƒbƒg—pƒ\ƒPƒbƒgì¬
+		// ãƒãƒ£ãƒƒãƒˆç”¨ã‚½ã‚±ãƒƒãƒˆä½œæˆ
 		m_SocketChat = ::socket( AF_INET, SOCK_DGRAM, IPPROTO_UDP );
 		if( m_SocketChat == INVALID_SOCKET ) {
 			DEBUGOUT( "create socket failed.[chat]\n" );
 			Disconnect();
 			return	FALSE;
 		}
-		// ƒuƒƒbƒLƒ“ƒOƒ‚[ƒhİ’è
+		// ãƒ–ãƒ­ãƒƒã‚­ãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰è¨­å®š
 //		unsigned long ulArg = 1;
 		ulArg = 1;
 		if( ::ioctlsocket( m_SocketChat, FIONBIO, &ulArg ) == SOCKET_ERROR ) {
@@ -237,14 +237,14 @@ BOOL	CNetPlay::Connect( BOOL bServer, const char* lpszIP, unsigned short Port )
 		}
 //-----------------
 
-		// Ú‘±Š®—¹ƒCƒxƒ“ƒg‚Ìİ’è
+		// æ¥ç¶šå®Œäº†ã‚¤ãƒ™ãƒ³ãƒˆã®è¨­å®š
 		if( ::WSAAsyncSelect( m_SocketData, m_hWnd, WM_NETPLAY, FD_CONNECT ) == SOCKET_ERROR ) {
 			DEBUGOUT( "CNetPlay:WSAAsyncSelect failed.\n" );
 			CLOSESOCKET( m_SocketData );
 			return	FALSE;
 		}
 
-		// Ú‘±‚ğ—v‹‚µ‚Ä‚İ‚é
+		// æ¥ç¶šã‚’è¦æ±‚ã—ã¦ã¿ã‚‹
 		ZEROMEMORY( &m_SAddr_Server, sizeof(m_SAddr_Server) );
 		m_SAddr_Server.sin_family      = AF_INET;
 		m_SAddr_Server.sin_addr.s_addr = IP_address;
@@ -273,7 +273,7 @@ DEBUGOUT( "CNetPlay::Disconnect\n" );
 		m_hASyncTask = NULL;
 	}
 
-	// ƒ\ƒPƒbƒg‚ğƒVƒƒƒbƒgƒ_ƒEƒ“‚µ‚Ä”jŠü
+	// ã‚½ã‚±ãƒƒãƒˆã‚’ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³ã—ã¦ç ´æ£„
 	if( m_SocketConnect != INVALID_SOCKET ) {
 		::shutdown( m_SocketConnect, SD_BOTH );
 		CLOSESOCKET( m_SocketConnect );
@@ -297,12 +297,12 @@ INT	CNetPlay::Send( BYTE data )
 
 	while( TRUE ) {
 		if( ::send( m_SocketData, (char*)&data, sizeof(BYTE), 0 ) == SOCKET_ERROR ) {
-			// ƒuƒƒbƒN‚³‚ê‚½‚©‚à’m‚ê‚È‚¢‚Ì‚ÅÄ“x’§í
+			// ãƒ–ãƒ­ãƒƒã‚¯ã•ã‚ŒãŸã‹ã‚‚çŸ¥ã‚Œãªã„ã®ã§å†åº¦æŒ‘æˆ¦
 			if( ::WSAGetLastError() == WSAEWOULDBLOCK ) {
-				::Sleep(0);	// ŒÅ‚Ü‚ç‚È‚¢‘[’u
+				::Sleep(0);	// å›ºã¾ã‚‰ãªã„æªç½®
 				continue;
 			} else {
-			// ’v–½“IƒGƒ‰[‚Á‚Û‚¢
+			// è‡´å‘½çš„ã‚¨ãƒ©ãƒ¼ã£ã½ã„
 				DEBUGOUT( "CNetPlay:send failed. code=%d\n", ::WSAGetLastError() );
 				Disconnect();
 				return	-1L;
@@ -319,7 +319,7 @@ INT	CNetPlay::Recv( BYTE& data )
 	if( !m_hWnd || !m_bConnect || m_SocketData == INVALID_SOCKET )
 		return	-1L;
 
-	// ƒf[ƒ^‚ª“Í‚¢‚Ä‚¢‚é‚©‚ğŠm”F
+	// ãƒ‡ãƒ¼ã‚¿ãŒå±Šã„ã¦ã„ã‚‹ã‹ã‚’ç¢ºèª
 	unsigned long	len = 0;
 	if( ::ioctlsocket( m_SocketData, FIONREAD, (unsigned long*)&len ) == SOCKET_ERROR ) {
 		DEBUGOUT( "CNetPlay:ioctlsocket failed.\n" );
@@ -328,10 +328,10 @@ INT	CNetPlay::Recv( BYTE& data )
 	}
 
 	if( !len ) {
-		// ƒf[ƒ^‚ª“Í‚¢‚Ä‚¢‚È‚¢
+		// ãƒ‡ãƒ¼ã‚¿ãŒå±Šã„ã¦ã„ãªã„
 		return	0L;
 	} else {
-		// 1ƒoƒCƒg“Ç‚İ‚İ
+		// 1ãƒã‚¤ãƒˆèª­ã¿è¾¼ã¿
 		if( ::recv( m_SocketData, (char*)&data, sizeof(BYTE), 0 ) == SOCKET_ERROR ) {
 			DEBUGOUT( "CNetPlay:recv failed.\n" );
 			Disconnect();
@@ -350,9 +350,9 @@ INT	CNetPlay::RecvTime( BYTE& data, unsigned long timeout )
 	INT	ret;
 	DWORD	dwTimeOut = ::timeGetTime();
 	while( (ret = NetPlay.Recv( data )) == 0 ) {
-		// ŒÅ‚Ü‚ç‚È‚¢‘[’u
+		// å›ºã¾ã‚‰ãªã„æªç½®
 		::Sleep( 0 );
-		// ƒ^ƒCƒ€ƒAƒEƒg‚Ìƒ`ƒFƒbƒN
+		// ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã®ãƒã‚§ãƒƒã‚¯
 		if( (::timeGetTime()-dwTimeOut) > timeout ) {
 			return	-1;
 		}
@@ -407,18 +407,18 @@ BOOL	CNetPlay::BufferCheck()
 	}
 
 	// Frame control
-	// ‘¬‚·‚¬‚©H
+	// é€Ÿã™ãã‹ï¼Ÿ
 	if( m_nRecvSize < SOCKET_BLOCK_SIZE ) {
-		return	-1;	// ­‚µ‘Ò‚Á‚Ä‚­‚ê
+		return	-1;	// å°‘ã—å¾…ã£ã¦ãã‚Œ
 	}
-	// ’x‚·‚¬‚©H
+	// é…ã™ãã‹ï¼Ÿ
 	if( m_nRecvSize > ((m_nLatency+2)*SOCKET_BLOCK_SIZE) ) {
-		return	1;	// ­‚µi‚ß‚Ä‚­‚ê
+		return	1;	// å°‘ã—é€²ã‚ã¦ãã‚Œ
 	}
 	return	0;
 }
 
-// “¯Šú‘Oˆ—(ƒŒƒCƒeƒ“ƒV‚Ì•ª‚¾‚¯æ‚É‘—M‚µ‚Ä“¯Šú‚ğæ‚é)
+// åŒæœŸå‰å‡¦ç†(ãƒ¬ã‚¤ãƒ†ãƒ³ã‚·ã®åˆ†ã ã‘å…ˆã«é€ä¿¡ã—ã¦åŒæœŸã‚’å–ã‚‹)
 INT	CNetPlay::Sync()
 {
 BYTE	senddata[SOCKET_BLOCK_SIZE];
@@ -433,17 +433,17 @@ DEBUGOUT( "CNetPlay::Sync\n" );
 
 DEBUGOUT( "CNetPlay::Sync sending...\n" );
 
-	// ƒf[ƒ^‘—M
+	// ãƒ‡ãƒ¼ã‚¿é€ä¿¡
 	for( INT i = 0; i < m_nLatency+1; i++ ) {
 		while( TRUE ) {
 			if( ::send( m_SocketData, (char*)senddata, SOCKET_BLOCK_SIZE, 0 ) == SOCKET_ERROR ) {
-				// ƒuƒƒbƒN‚³‚ê‚½‚©‚à’m‚ê‚È‚¢‚Ì‚ÅÄ“x’§í
+				// ãƒ–ãƒ­ãƒƒã‚¯ã•ã‚ŒãŸã‹ã‚‚çŸ¥ã‚Œãªã„ã®ã§å†åº¦æŒ‘æˆ¦
 				if( ::WSAGetLastError() == WSAEWOULDBLOCK ) {
 DEBUGOUT( "send::WSAEWOULDBLOCK!!\n" );
-					::Sleep(0);	// ŒÅ‚Ü‚ç‚È‚¢‘[’u
+					::Sleep(0);	// å›ºã¾ã‚‰ãªã„æªç½®
 					continue;
 				} else {
-				// ’v–½“IƒGƒ‰[‚Á‚Û‚¢
+				// è‡´å‘½çš„ã‚¨ãƒ©ãƒ¼ã£ã½ã„
 DEBUGOUT( "CNetPlay:Sync send failed. [%s]\n", SocketErrorDump( ::WSAGetLastError() ) );
 					Disconnect();
 					return	-1L;
@@ -455,7 +455,7 @@ DEBUGOUT( "CNetPlay:Sync send failed. [%s]\n", SocketErrorDump( ::WSAGetLastErro
 		m_nSendPtr = (m_nSendPtr+SOCKET_BLOCK_SIZE) & SOCKET_BUFFER_SIZE-1;
 	}
 
-	// ‘Šèƒf[ƒ^‚Ìƒoƒbƒtƒ@ƒŠƒ“ƒOƒf[ƒ^‘Ò‚¿(10•b‚Åƒ^ƒCƒ€ƒAƒEƒg)
+	// ç›¸æ‰‹ãƒ‡ãƒ¼ã‚¿ã®ãƒãƒƒãƒ•ã‚¡ãƒªãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿å¾…ã¡(10ç§’ã§ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆ)
 	DWORD	dwTime = ::timeGetTime();
 	while( m_nRecvSize < (m_nLatency+1)*SOCKET_BLOCK_SIZE ) {
 		if( !RecvBuffer() ) {
@@ -477,23 +477,23 @@ DEBUGOUT( "CNetPlay::Sync OK!\n" );
 	return	0;
 }
 
-// ƒvƒŒƒCƒ„[ƒL[‚ÌXV
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ¼ã®æ›´æ–°
 INT	CNetPlay::ModifyPlayer( LPBYTE p1, LPBYTE p2 )
 {
 	if( !m_hWnd || !m_bConnect || m_SocketData == INVALID_SOCKET )
 		return	-1L;
 
-	// ‘—‚é‚×‚«ƒ|ƒCƒ“ƒg‚Å‘—M
+	// é€ã‚‹ã¹ããƒã‚¤ãƒ³ãƒˆã§é€ä¿¡
 	if( m_nFrameCount == 0 ) {
 		while( TRUE ) {
 			if( ::send( m_SocketData, (char*)p1, SOCKET_BLOCK_SIZE, 0 ) == SOCKET_ERROR ) {
-				// ƒuƒƒbƒN‚³‚ê‚½‚©‚à’m‚ê‚È‚¢‚Ì‚ÅÄ“x’§í
+				// ãƒ–ãƒ­ãƒƒã‚¯ã•ã‚ŒãŸã‹ã‚‚çŸ¥ã‚Œãªã„ã®ã§å†åº¦æŒ‘æˆ¦
 				if( ::WSAGetLastError() == WSAEWOULDBLOCK ) {
 DEBUGOUT( "send::WSAEWOULDBLOCK!!\n" );
-					::Sleep(0);	// ŒÅ‚Ü‚ç‚È‚¢‘[’u
+					::Sleep(0);	// å›ºã¾ã‚‰ãªã„æªç½®
 					continue;
 				} else {
-				// ’v–½“IƒGƒ‰[‚Á‚Û‚¢
+				// è‡´å‘½çš„ã‚¨ãƒ©ãƒ¼ã£ã½ã„
 					DEBUGOUT( "CNetPlay:ModifyPlayer send failed. code=%d\n", ::WSAGetLastError() );
 					Disconnect();
 					return	-1L;
@@ -503,14 +503,14 @@ DEBUGOUT( "send::WSAEWOULDBLOCK!!\n" );
 			}
 		}
 
-		// ƒoƒbƒtƒ@‚É•ú‚è‚Ş
+		// ãƒãƒƒãƒ•ã‚¡ã«æ”¾ã‚Šè¾¼ã‚€
 		for( INT i = 0; i < SOCKET_BLOCK_SIZE; i++ ) {
 			m_SendBuffer[ m_nSendPtr ] = p1[i];
 			m_nSendPtr = (m_nSendPtr+1) & SOCKET_BUFFER_SIZE-1;
 		}
 	}
 
-	// ‘Šèƒf[ƒ^‘Ò‚¿(10•b‚Åƒ^ƒCƒ€ƒAƒEƒg)
+	// ç›¸æ‰‹ãƒ‡ãƒ¼ã‚¿å¾…ã¡(10ç§’ã§ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆ)
 	DWORD	dwTime = ::timeGetTime();
 	while( m_nRecvSize < SOCKET_BLOCK_SIZE ) {
 		if( !RecvBuffer() ) {
@@ -526,7 +526,7 @@ DEBUGOUT( "send::WSAEWOULDBLOCK!!\n" );
 		::Sleep( 1 );
 	}
 
-	// î•ñXV
+	// æƒ…å ±æ›´æ–°
 	INT	p = m_nRingPtr;
 	for( INT i = 0; i < SOCKET_BLOCK_SIZE; i++ ) {
 		p1[i] = m_SendBuffer[ p ];
@@ -536,7 +536,7 @@ DEBUGOUT( "send::WSAEWOULDBLOCK!!\n" );
 
 	INT	Count = m_nFrameCount;
 
-	// ƒXƒeƒbƒvXV
+	// ã‚¹ãƒ†ãƒƒãƒ—æ›´æ–°
 	if( ++m_nFrameCount > m_nFrameStep ) {
 		m_nFrameCount = 0;
 
@@ -567,7 +567,7 @@ DEBUGOUT( "ChatSend Client:%s", lpStr );
 
 HRESULT	CNetPlay::WndProc( HWND hWnd, WPARAM wParam, LPARAM lParam )
 {
-	// ƒGƒ‰[H
+	// ã‚¨ãƒ©ãƒ¼ï¼Ÿ
 	if( WSAGETSELECTERROR(lParam) ) {
 		DEBUGOUT( "CNetPlay::WndProc error.[%s]\n", SocketErrorDump( WSAGETSELECTERROR(lParam) ) );
 
@@ -586,7 +586,7 @@ HRESULT	CNetPlay::WndProc( HWND hWnd, WPARAM wParam, LPARAM lParam )
 			int	len = sizeof(m_SAddr_Client);
 			m_SocketData = ::accept( m_SocketConnect, (sockaddr*)&m_SAddr_Client, &len );
 
-			// Ú‘±—pƒ\ƒPƒbƒg‚Í•Â‚¶‚é
+			// æ¥ç¶šç”¨ã‚½ã‚±ãƒƒãƒˆã¯é–‰ã˜ã‚‹
 			::shutdown( m_SocketConnect, SD_BOTH );
 			CLOSESOCKET( m_SocketConnect );
 
@@ -600,7 +600,7 @@ HRESULT	CNetPlay::WndProc( HWND hWnd, WPARAM wParam, LPARAM lParam )
 
 			DEBUGOUT( "done.\n" );
 
-			// NagleƒAƒ‹ƒSƒŠƒYƒ€‚Ì–³Œø‰»
+			// Nagleã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã®ç„¡åŠ¹åŒ–
 			unsigned long ulOpt = 1;
 			if( ::setsockopt( m_SocketData, IPPROTO_TCP, TCP_NODELAY, (const char*)&ulOpt, sizeof(ulOpt) ) == SOCKET_ERROR ) {
 				DEBUGOUT( "CNetPlay:setsockopt failed.\n" );
@@ -611,7 +611,7 @@ HRESULT	CNetPlay::WndProc( HWND hWnd, WPARAM wParam, LPARAM lParam )
 				return	0L;
 			}
 
-			// ƒuƒƒbƒLƒ“ƒOƒ‚[ƒhİ’è
+			// ãƒ–ãƒ­ãƒƒã‚­ãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰è¨­å®š
 			unsigned long ulArg = 1;
 			if( ::ioctlsocket( m_SocketData, FIONBIO, &ulArg ) == SOCKET_ERROR ) {
 				DEBUGOUT( "CNetPlay:ioctlsocket failed.\n" );
@@ -622,7 +622,7 @@ HRESULT	CNetPlay::WndProc( HWND hWnd, WPARAM wParam, LPARAM lParam )
 				return	0L;
 			}
 
-			// ”ñ“¯ŠúƒCƒxƒ“ƒg‚Ìİ’è
+			// éåŒæœŸã‚¤ãƒ™ãƒ³ãƒˆã®è¨­å®š
 			if( ::WSAAsyncSelect( m_SocketChat, m_hWnd, WM_NETPLAY, FD_READ ) == SOCKET_ERROR ) {
 				DEBUGOUT( "CNetPlay:WSAAsyncSelect failed.[CONNECT chat]\n" );
 				Disconnect();
@@ -632,7 +632,7 @@ HRESULT	CNetPlay::WndProc( HWND hWnd, WPARAM wParam, LPARAM lParam )
 				return	0L;
 			}
 
-			// ”ñ“¯ŠúƒCƒxƒ“ƒg‚Ìİ’è
+			// éåŒæœŸã‚¤ãƒ™ãƒ³ãƒˆã®è¨­å®š
 			if( ::WSAAsyncSelect( m_SocketData, m_hWnd, WM_NETPLAY, FD_CLOSE ) == SOCKET_ERROR ) {
 				DEBUGOUT( "CNetPlay:WSAAsyncSelect failed.[ACCEPT data]\n" );
 				Disconnect();
@@ -652,7 +652,7 @@ HRESULT	CNetPlay::WndProc( HWND hWnd, WPARAM wParam, LPARAM lParam )
 		case	FD_CONNECT: {
 			DEBUGOUT( "Connection done.\n" );
 
-			// 1ƒoƒCƒg‚¾‚¯ƒ_ƒ~[ƒf[ƒ^‚ğ‘—‚é(‰½‚©ŠÔˆá‚Á‚Ä‚é‹C‚à‚·‚éc)
+			// 1ãƒã‚¤ãƒˆã ã‘ãƒ€ãƒŸãƒ¼ãƒ‡ãƒ¼ã‚¿ã‚’é€ã‚‹(ä½•ã‹é–“é•ã£ã¦ã‚‹æ°—ã‚‚ã™ã‚‹â€¦)
 			if( ::sendto( m_SocketChat, (char*)"", 1, 0, (struct sockaddr *)&m_SAddr_Server, sizeof(m_SAddr_Server) ) == SOCKET_ERROR ) {
 				DEBUGOUT( "CNetPlay:send failed. Client:[%s]\n", SocketErrorDump( ::WSAGetLastError() ) );
 				Disconnect();
@@ -662,7 +662,7 @@ HRESULT	CNetPlay::WndProc( HWND hWnd, WPARAM wParam, LPARAM lParam )
 				return	0L;
 			}
 
-			// ”ñ“¯ŠúƒCƒxƒ“ƒg‚Ìİ’è
+			// éåŒæœŸã‚¤ãƒ™ãƒ³ãƒˆã®è¨­å®š
 			if( ::WSAAsyncSelect( m_SocketChat, m_hWnd, WM_NETPLAY, FD_READ ) == SOCKET_ERROR ) {
 				DEBUGOUT( "CNetPlay:WSAAsyncSelect failed.[CONNECT chat]\n" );
 				Disconnect();
@@ -672,7 +672,7 @@ HRESULT	CNetPlay::WndProc( HWND hWnd, WPARAM wParam, LPARAM lParam )
 				return	0L;
 			}
 
-			// ”ñ“¯ŠúƒCƒxƒ“ƒg‚Ìİ’è
+			// éåŒæœŸã‚¤ãƒ™ãƒ³ãƒˆã®è¨­å®š
 			if( ::WSAAsyncSelect( m_SocketData, m_hWnd, WM_NETPLAY, FD_CLOSE ) == SOCKET_ERROR ) {
 				DEBUGOUT( "CNetPlay:WSAAsyncSelect failed.[CONNECT data]\n" );
 				Disconnect();
@@ -723,8 +723,8 @@ DEBUGOUT( "FD_READ failed. Client [%s]\n", SocketErrorDump( ::WSAGetLastError() 
 					COPYDATASTRUCT	cds;
 					cds.dwData = 0;
 					cds.lpData = (void*)szBuf;
-					cds.cbData = ::strlen(szBuf)+1; //  I’[‚ÌNULL‚à‘—‚é
-					//  •¶š—ñ‘—M
+					cds.cbData = ::strlen(szBuf)+1; //  çµ‚ç«¯ã®NULLã‚‚é€ã‚‹
+					//  æ–‡å­—åˆ—é€ä¿¡
 					::SendMessage( m_hWndChat, WM_COPYDATA, (WPARAM)NULL, (LPARAM)&cds );
 				}
 			}

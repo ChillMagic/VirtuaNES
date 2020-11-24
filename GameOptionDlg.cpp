@@ -1,5 +1,5 @@
-//
-// ƒQ[ƒ€ƒIƒvƒVƒ‡ƒ“ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ã‚²ãƒ¼ãƒ ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -82,13 +82,13 @@ DLGCMD	CGameOptionDlg::OnOK( DLGCMDPARAM )
 	GameOption.bVideoMode = (ret == 0)?FALSE:TRUE;
 	GameOption.bFrameIRQ = !IsBTNCHECK( IDC_OPT_FRAMEIRQ );
 
-	// Ý’è‚µ‚é
+	// è¨­å®šã—ã‚‹
 	Emu.GetNES()->SetRenderMethod( (NES::RENDERMETHOD)GameOption.nRenderMethod );
 	Emu.GetNES()->SetIrqType     ( GameOption.nIRQtype );
 	Emu.GetNES()->SetFrameIRQmode( GameOption.bFrameIRQ );
 	Emu.GetNES()->SetVideoMode   ( GameOption.bVideoMode );
 
-	// ƒZ[ƒu
+	// ã‚»ãƒ¼ãƒ–
 	if( Emu.GetNES()->rom->GetMapperNo() == 20 ) {
 		GameOption.Save( Emu.GetNES()->rom->GetRomName(), Emu.GetNES()->rom->GetGameID(), Emu.GetNES()->rom->GetMakerID() );
 	} else if( Emu.GetNES()->rom->GetMapperNo() < 256 ) {
@@ -129,7 +129,7 @@ DLGCMD	CGameOptionDlg::OnNotSave( DLGCMDPARAM )
 	GameOption.bVideoMode = (ret == 0)?FALSE:TRUE;
 	GameOption.bFrameIRQ = !IsBTNCHECK( IDC_OPT_FRAMEIRQ );
 
-	// Ý’è‚µ‚é
+	// è¨­å®šã—ã‚‹
 	Emu.GetNES()->SetRenderMethod( (NES::RENDERMETHOD)GameOption.nRenderMethod );
 	Emu.GetNES()->SetIrqType     ( GameOption.nIRQtype );
 	Emu.GetNES()->SetFrameIRQmode( GameOption.bFrameIRQ );

@@ -1,5 +1,5 @@
-//
-// �O���t�B�b�N�X�_�C�A���O�N���X
+﻿//
+// グラフィックスダイアログクラス
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -20,13 +20,13 @@ using namespace std;
 #include "DirectDraw.h"
 
 DLG_MESSAGE_BEGIN(CGraphicsDlg)
-// ���b�Z�[�W
+// メッセージ
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
 DLG_ON_MESSAGE( WM_HSCROLL,	OnHScroll )
-// NOTIFY���b�Z�[�W
+// NOTIFYメッセージ
 DLG_NOTIFY_BEGIN()
 DLG_NOTIFY_END()
-// �R�}���h
+// コマンド
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
@@ -62,28 +62,28 @@ void	CGraphicsDlg::OnInitialMember()
 	BTNCHECK( IDC_GRA_NOSQUARELIST,   Config.graphics.bNoSquareList );
 	BTNCHECK( IDC_GRA_SYNCNOSLEEP,    !Config.graphics.bSyncNoSleep );
 
-	// �X���C�_
+	// スライダ
 	::SendDlgItemMessage( m_hWnd, IDC_GRA_SCANLINE_SLIDER, TBM_SETRANGE, TRUE, MAKELONG(0,100) );
 	::SendDlgItemMessage( m_hWnd, IDC_GRA_SCANLINE_SLIDER, TBM_SETPOS, TRUE, (WPARAM)Config.graphics.nScanlineColor );
 	::SendDlgItemMessage( m_hWnd, IDC_GRA_SCANLINE_SLIDER, TBM_SETLINESIZE, 0, 1 );
 	::SendDlgItemMessage( m_hWnd, IDC_GRA_SCANLINE_SLIDER, TBM_SETPAGESIZE, 0, 10 );
 
-	// �X�L�������C���J���[�l
+	// スキャンラインカラー値
 	CHAR	str[64];
 	::wsprintf( str, "%d%%", Config.graphics.nScanlineColor );
 	::SetDlgItemText( m_hWnd, IDC_GRA_SCANLINE_COLOR, str );
 
-	// �p���b�g
+	// パレット
 	BTNCHECK( IDC_GRA_PALETTE_USE,	Config.graphics.bPaletteFile );
 	::SetDlgItemText( m_hWnd, IDC_GRA_PALETTE_EDIT, Config.graphics.szPaletteFile );
 
-	// �𑜓x�R���{�{�b�N�X
+	// 解像度コンボボックス
 	OnUpdateComboBox();
 }
 
 void	CGraphicsDlg::OnUpdateComboBox()
 {
-	// �𑜓x�R���{�{�b�N�X
+	// 解像度コンボボックス
 	::SendDlgItemMessage( m_hWnd, IDC_GRA_RESOLUTION_COMBO, CB_RESETCONTENT, 0, 0 );
 	INT	i, listno, select = 0;
 	CHAR	szMode[64];
@@ -129,12 +129,12 @@ DLGMSG	CGraphicsDlg::OnHScroll( DLGMSGPARAM )
 	::wsprintf( str, "%d%%", pos = ::SendDlgItemMessage( m_hWnd, IDC_GRA_SCANLINE_SLIDER, TBM_GETPOS, 0, 0 ) );
 	::SetDlgItemText( m_hWnd, IDC_GRA_SCANLINE_COLOR, str );
 
-	// �X�L�������C���J���[�̕ύX
+	// スキャンラインカラーの変更
 	DirectDraw.SetScanlineColor( pos );
-	// �p���b�g�e�[�u���̌v�Z
+	// パレットテーブルの計算
 	DirectDraw.CalcPaletteTable();
 
-	// �F���ς�����̂Ńy�C���g���Ă�
+	// 色が変わったのでペイントしてな
 	::PostMessage( CApp::GetHWnd(), WM_PAINT, 0, 0 );
 
 	return	FALSE;
@@ -210,10 +210,10 @@ DLGCMD	CGraphicsDlg::OnPaletteBrowse( DLGCMDPARAM )
 	ZeroMemory( &ofn, sizeof(ofn) );
 
 	if( strlen( szPath ) > 0 ) {
-		// �ݒ�ς݂Ȃ�΃p�X�^�t�@�C���l�[���̐ݒ�
+		// 設定済みならばパス／ファイルネームの設定
 		ofn.lpstrInitialDir = szPath;
 	} else {
-		// ���ݒ�Ȃ�Ύ��s�t�@�C���Ɠ����p�X�̐ݒ�
+		// 未設定ならば実行ファイルと同じパスの設定
 		ofn.lpstrInitialDir = CApp::GetModulePath();
 		szFile[0] = '\0';
 	}
@@ -255,7 +255,7 @@ DLGCMD	CGraphicsDlg::OnNoSquareListClick( DLGCMDPARAM )
 {
 	Config.graphics.bNoSquareList = IsBTNCHECK( IDC_GRA_NOSQUARELIST );
 
-	// �𑜓x�R���{�{�b�N�X�̍X�V
+	// 解像度コンボボックスの更新
 	OnUpdateComboBox();
 }
 

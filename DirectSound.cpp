@@ -1,4 +1,4 @@
-//
+ï»¿//
 // DirectSound class
 //
 #include "DebugOut.h"
@@ -10,7 +10,7 @@ CDirectSound	DirectSound;
 #define	COMUSE	TRUE
 
 //
-// WaveFile‚Ìƒ[ƒh‚Æƒƒ‚ƒŠ‚Ö‚Ì•Û
+// WaveFileã®ãƒ­ãƒ¼ãƒ‰ã¨ãƒ¡ãƒ¢ãƒªã¸ã®ä¿æŒ
 //
 CWaveData::CWaveData()
 {
@@ -59,7 +59,7 @@ BOOL	CWaveData::Load( LPCSTR szFileName )
 	DWORD	*pdw, *pdwEnd;
 	DWORD	dwRiff, dwLength, dwType;
 
-	// WAVEƒf[ƒ^‚Ì‰ğÍ
+	// WAVEãƒ‡ãƒ¼ã‚¿ã®è§£æ
 	pWaveHeader = NULL;
 	pbWaveData  = NULL;
 	cbWaveSize  = 0;
@@ -145,7 +145,7 @@ LPVOID	CWaveData::GetData()
 }
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 //////////////////////////////////////////////////////////////////////
 CDirectSound::SAMPLERATE CDirectSound::m_SampleRateTable[] = {
 	11025, 8,
@@ -207,7 +207,7 @@ CDirectSound::~CDirectSound()
 #endif
 }
 
-// DirectSound‚Ì‰Šú‰»
+// DirectSoundã®åˆæœŸåŒ–
 BOOL	CDirectSound::InitialDSound( HWND hWnd )
 {
 DSBUFFERDESC	dsbdesc;
@@ -215,14 +215,14 @@ DSBUFFERDESC	dsbdesc;
 	m_hWnd = hWnd;
 
 	try {
-		// DirectSoundƒIƒuƒWƒFƒNƒg‚Ìì¬
+		// DirectSoundã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½œæˆ
 #if	!COMUSE
 		if( DirectSoundCreate( NULL, &m_lpDS, NULL ) != DS_OK ) {
 			m_lpDS = NULL;
 			throw	"CDirectSound:DirectSoundCreate failed.";
 		}
 #else
-		// COM“I—˜—p
+		// COMçš„åˆ©ç”¨
 //		COM::AddRef();
 		if( ::CoCreateInstance( CLSID_DirectSound, NULL, CLSCTX_ALL, IID_IDirectSound, (LPVOID*)&m_lpDS) != S_OK ) {
 			m_lpDS = NULL;
@@ -232,14 +232,14 @@ DSBUFFERDESC	dsbdesc;
 			throw	"CDirectSound:IDirectSound->Initialize failed.";
 #endif
 
-		// —Dæ‹¦’²ƒ‚[ƒh‚Ìİ’è
+		// å„ªå…ˆå”èª¿ãƒ¢ãƒ¼ãƒ‰ã®è¨­å®š
 		if( m_lpDS->SetCooperativeLevel( hWnd, DSSCL_PRIORITY ) != DS_OK )
 			throw	"CDirectSound:SetCooperativeLevel failed.";
 
-		// ƒXƒs[ƒJ‚Ìİ’è
+		// ã‚¹ãƒ”ãƒ¼ã‚«ã®è¨­å®š
 //		m_lpDS->SetSpeakerConfig( DSSPEAKER_COMBINED( DSSPEAKER_STEREO, DSSPEAKER_GEOMETRY_WIDE ) );
 
-		// ƒvƒ‰ƒCƒ}ƒŠƒoƒbƒtƒ@‚Ìì¬
+		// ãƒ—ãƒ©ã‚¤ãƒãƒªãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 		ZeroMemory( &dsbdesc, sizeof(DSBUFFERDESC) );
 		dsbdesc.dwSize = sizeof(DSBUFFERDESC);
 //		dsbdesc.dwFlags       = DSBCAPS_CTRLVOLUME
@@ -259,12 +259,12 @@ DSBUFFERDESC	dsbdesc;
 	return	TRUE;
 }
 
-// DirectSound‚ÌŠJ•ú
+// DirectSoundã®é–‹æ”¾
 void	CDirectSound::ReleaseDSound()
 {
 	ReleaseEsfBuffer();
 	ReleaseBuffer();
-	// DirectSoundƒIƒuƒWƒFƒNƒg‚ÌŠJ•ú
+	// DirectSoundã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é–‹æ”¾
 	RELEASE( m_lpDSPrimary );
 	if( m_lpDS ) {
 		RELEASE( m_lpDS );
@@ -276,7 +276,7 @@ void	CDirectSound::ReleaseDSound()
 	m_hWnd = NULL;
 }
 
-// DirectSoundƒoƒbƒtƒ@‚Ìì¬
+// DirectSoundãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 BOOL	CDirectSound::InitialBuffer()
 {
 DSBUFFERDESC	dsbdesc;
@@ -286,7 +286,7 @@ WAVEFORMATEX	pcmwf;
 		if( !m_lpDSPrimary )
 			throw "CDirectSound:DirectSound object uninitialized.";
 
-		// ƒvƒ‰ƒCƒ}ƒŠƒoƒbƒtƒ@‚ÌWaveƒtƒH[ƒ}ƒbƒg‚ğİ’è(í‚Éƒ‚ƒmƒ‰ƒ‹)
+		// ãƒ—ãƒ©ã‚¤ãƒãƒªãƒãƒƒãƒ•ã‚¡ã®Waveãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’è¨­å®š(å¸¸ã«ãƒ¢ãƒãƒ©ãƒ«)
 		ZEROMEMORY( &pcmwf, sizeof(WAVEFORMATEX) );
 		pcmwf.wFormatTag      = WAVE_FORMAT_PCM;
 		pcmwf.nChannels       = 1;
@@ -298,11 +298,11 @@ WAVEFORMATEX	pcmwf;
 		if( m_lpDSPrimary->SetFormat( &pcmwf ) != DS_OK )
 			throw	"CDirectSound:SetFormat failed.";
 
-		// ƒXƒgƒŠ[ƒ€ƒZƒJƒ“ƒ_ƒŠƒoƒbƒtƒ@ì¬
+		// ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚»ã‚«ãƒ³ãƒ€ãƒªãƒãƒƒãƒ•ã‚¡ä½œæˆ
 		if( m_BufferSize < 2 )
 			m_BufferSize = 2;
 
-		// ƒoƒbƒtƒ@ƒTƒCƒY“™‚ÌŒvZ
+		// ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚ºç­‰ã®è¨ˆç®—
 		m_dwDSBlockNum = m_BufferSize * 10;
 		m_dwDSBlockSize = pcmwf.nAvgBytesPerSec * m_BufferSize / 60;
 		m_dwDSBlockSize-= m_dwDSBlockSize % pcmwf.nBlockAlign;
@@ -339,14 +339,14 @@ WAVEFORMATEX	pcmwf;
 	return	TRUE;
 }
 
-// DirectSoundƒoƒbƒtƒ@‚ÌŠJ•ú
+// DirectSoundãƒãƒƒãƒ•ã‚¡ã®é–‹æ”¾
 void	CDirectSound::ReleaseBuffer()
 {
 	StreamStop();
 	RELEASE( m_lpDSStream );
 }
 
-// ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg‚Ìİ’è
+// ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ãƒ¬ãƒ¼ãƒˆã®è¨­å®š
 BOOL	CDirectSound::SetSamplingRate( DWORD rate, DWORD bits )
 {
 INT	i;
@@ -364,14 +364,14 @@ INT	i;
 	return	FALSE;
 }
 
-// ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg‚Ìæ“¾
+// ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ãƒ¬ãƒ¼ãƒˆã®å–å¾—
 void	CDirectSound::GetSamplingRate( DWORD& rate, DWORD& bits )
 {
 	rate = m_SampleRate.Rate;
 	bits = m_SampleRate.Bits;
 }
 
-// ƒXƒgƒŠ[ƒ~ƒ“ƒOÄ¶
+// ã‚¹ãƒˆãƒªãƒ¼ãƒŸãƒ³ã‚°å†ç”Ÿ
 void	CDirectSound::StreamPlay()
 {
 	if( !m_lpDS || !m_lpDSStream )
@@ -396,7 +396,7 @@ void	CDirectSound::StreamPlay()
 	}
 }
 
-// ƒXƒgƒŠ[ƒ~ƒ“ƒO’â~
+// ã‚¹ãƒˆãƒªãƒ¼ãƒŸãƒ³ã‚°åœæ­¢
 void	CDirectSound::StreamStop()
 {
 	if( !m_lpDS || !m_lpDSStream )
@@ -407,7 +407,7 @@ void	CDirectSound::StreamStop()
 		m_bStreamPause = FALSE;
 		m_lpDSStream->Stop();
 
-		// Š®‘S’â~‚Ü‚Å‘Ò‚Â
+		// å®Œå…¨åœæ­¢ã¾ã§å¾…ã¤
 		DWORD	dwStatus;
 		do {
 			m_lpDSStream->GetStatus( &dwStatus );
@@ -417,7 +417,7 @@ void	CDirectSound::StreamStop()
 	}
 }
 
-// ƒXƒgƒŠ[ƒ~ƒ“ƒOƒ|[ƒY
+// ã‚¹ãƒˆãƒªãƒ¼ãƒŸãƒ³ã‚°ãƒãƒ¼ã‚º
 void	CDirectSound::StreamPause()
 {
 //	DEBUGOUT( "CDirectSound::StreamPause\n" );
@@ -433,7 +433,7 @@ void	CDirectSound::StreamPause()
 	}
 }
 
-// ƒXƒgƒŠ[ƒ~ƒ“ƒOƒŒƒWƒ…[ƒ€
+// ã‚¹ãƒˆãƒªãƒ¼ãƒŸãƒ³ã‚°ãƒ¬ã‚¸ãƒ¥ãƒ¼ãƒ 
 void	CDirectSound::StreamResume()
 {
 //	DEBUGOUT( "CDirectSound::StreamResume\n" );
@@ -449,7 +449,7 @@ void	CDirectSound::StreamResume()
 	}
 }
 
-// ƒXƒgƒŠ[ƒ~ƒ“ƒO
+// ã‚¹ãƒˆãƒªãƒ¼ãƒŸãƒ³ã‚°
 BOOL	CDirectSound::GetStreamLockPosition( LPDWORD lpdwStart, LPDWORD lpdwSize )
 {
 static	BOOL	bLockHalf = FALSE;
@@ -459,7 +459,7 @@ DWORD	dwPlayPos, dwWritePos;
 		if( (dwWritePos / m_dwDSBlockSize) != m_dwDSLastBlock ) {
 			m_dwDSLastBlock = dwWritePos / m_dwDSBlockSize;
 			dwWritePos = (((dwWritePos/m_dwDSBlockSize)+1)%m_dwDSBlockNum) * m_dwDSBlockSize;
-			// ƒƒbƒN‚·‚×‚«êŠ
+			// ãƒ­ãƒƒã‚¯ã™ã¹ãå ´æ‰€
 			*lpdwStart = dwWritePos;
 			*lpdwSize = m_dwDSBlockSize;
 			return	TRUE;
@@ -524,7 +524,7 @@ BOOL	CDirectSound::EsfPlayLoop( INT no )
 	if( !m_pEsfDSBuffer[no] )
 		return	FALSE;
 
-	// Šù‚ÉÄ¶’†‚©H
+	// æ—¢ã«å†ç”Ÿä¸­ã‹ï¼Ÿ
 	DWORD	dwStatus;
 	if( m_pEsfDSBuffer[no]->GetStatus( &dwStatus ) == DS_OK ) {
 		if( dwStatus == DSBSTATUS_PLAYING ) {
@@ -573,12 +573,12 @@ DSBUFFERDESC	dsbdesc;
 LPVOID	lpPtr0, lpPtr1;
 DWORD	dwBytes0, dwBytes1;
 
-	// Šù‚Ég‚Á‚Ä‚¢‚½‚çŠJ•ú‚µ‚Ä‚¨‚­
+	// æ—¢ã«ä½¿ã£ã¦ã„ãŸã‚‰é–‹æ”¾ã—ã¦ãŠã
 	if( m_pEsfDSBuffer[no] ) {
 		RELEASE( m_pEsfDSBuffer[no] );
 	}
 
-	// DirectSound ƒZƒJƒ“ƒ_ƒŠƒoƒbƒtƒ@ì¬
+	// DirectSound ã‚»ã‚«ãƒ³ãƒ€ãƒªãƒãƒƒãƒ•ã‚¡ä½œæˆ
 	ZEROMEMORY( &dsbdesc, sizeof(DSBUFFERDESC) );
 	dsbdesc.dwSize        = sizeof(DSBUFFERDESC);
 	dsbdesc.dwFlags       = DSBCAPS_LOCSOFTWARE;
@@ -590,7 +590,7 @@ DWORD	dwBytes0, dwBytes1;
 		return	FALSE;
 	}
 
-	// ì¬‚µ‚½ƒZƒJƒ“ƒ_ƒŠƒoƒbƒtƒ@‚ÉƒEƒF[ƒuƒf[ƒ^‚ğƒRƒs[
+	// ä½œæˆã—ãŸã‚»ã‚«ãƒ³ãƒ€ãƒªãƒãƒƒãƒ•ã‚¡ã«ã‚¦ã‚§ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ã‚’ã‚³ãƒ”ãƒ¼
 	m_pEsfDSBuffer[no]->Lock( 0L, dwSize, &lpPtr0, &dwBytes0, &lpPtr1, &dwBytes1, 0 );
 	::CopyMemory( lpPtr0, pData, dwBytes0 );
 	if( dwBytes1 ) {

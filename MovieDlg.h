@@ -1,5 +1,5 @@
-//
-// ƒ€[ƒr[ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒ ãƒ¼ãƒ“ãƒ¼ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CMOVIEDLG_INCLUDED__
 #define	__CMOVIEDLG_INCLUDED__

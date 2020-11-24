@@ -1,4 +1,4 @@
-//
+﻿//
 // Debug output
 //
 #ifndef	__DEBUGOUT_INCLUDED__

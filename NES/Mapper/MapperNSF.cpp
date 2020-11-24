@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 // MapperNSF  NSF:NES Sound Format                                      //
 //////////////////////////////////////////////////////////////////////////
 #include "math.h"
@@ -213,7 +213,7 @@ BYTE	MapperNSF::KeyBitmapD[] = {
 	0x1A, 0x2A, 0x2A, 0x2A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A,
 };
 
-// ƒlƒIƒ“ŠÇ(‚Ì‚Â‚à‚è)
+// ãƒã‚ªãƒ³ç®¡(ã®ã¤ã‚‚ã‚Š)
 BYTE	MapperNSF::NeonBitmapA[] = {
 	6, 26,
 	0xFF, 0x02, 0x12, 0x12, 0x02, 0xFF, 0x02, 0x12, 0x21, 0x21, 0x12, 0x02,
@@ -391,12 +391,12 @@ INT	i;
 		}
 	}
 
-	// $4700‚Í‘Ò‹@–³ŒÀƒ‹[ƒv
+	// $4700ã¯å¾…æ©Ÿç„¡é™ãƒ«ãƒ¼ãƒ—
 	WRAM[0xA700] = 0x4c;	//jmp
 	WRAM[0xA701] = 0x00;
 	WRAM[0xA702] = 0x47;
 
-	// $4710‚ÍInitƒ‹[ƒ`ƒ“‚ğŒÄ‚ñ‚¾Œã–³ŒÀƒ‹[ƒv‚Ö
+	// $4710ã¯Initãƒ«ãƒ¼ãƒãƒ³ã‚’å‘¼ã‚“ã å¾Œç„¡é™ãƒ«ãƒ¼ãƒ—ã¸
 	WRAM[0xA710] = 0x20;	// jsr
 	WRAM[0xA711] = (BYTE) nsfheader.InitAddress & 0xFF;
 	WRAM[0xA712] = (BYTE)(nsfheader.InitAddress>>8);
@@ -404,7 +404,7 @@ INT	i;
 	WRAM[0xA714] = 0x00;
 	WRAM[0xA715] = 0x47;
 	
-	// $4720‚ÍPlayƒ‹[ƒ`ƒ“‚ğŒÄ‚ñ‚¾Œã–³ŒÀƒ‹[ƒv‚Ö
+	// $4720ã¯Playãƒ«ãƒ¼ãƒãƒ³ã‚’å‘¼ã‚“ã å¾Œç„¡é™ãƒ«ãƒ¼ãƒ—ã¸
 #if	NSF_PROFILE
 	WRAM[0xA720] = 0x8D;	// sta
 	WRAM[0xA721] = 0x1E;	// $401E
@@ -441,12 +441,12 @@ INT	i;
 	// NTSC/PAL tune
 	nes->SetVideoMode( (nsfheader.NTSC_PALbits&0x01)?TRUE:FALSE );
 
-	// ü”g”->Keyƒe[ƒuƒ‹‚Ìì¬
+	// å‘¨æ³¢æ•°->Keyãƒ†ãƒ¼ãƒ–ãƒ«ã®ä½œæˆ
 	for( i = 0; i < 12*8+1; i++ ) {
 		Freq2KeyTbl[i] = (INT)(440.0*256.0*pow(2.0,((double)(i-45)-0.5)/12.0));
 	}
 
-	// ‚¨‚Ü‚¯
+	// ãŠã¾ã‘
 	StarInitial();
 
 	//
@@ -577,7 +577,7 @@ LPBYTE	pPtr;
 
 void	MapperNSF::VSync()
 {
-	// ƒf[ƒ^İ’è
+	// ãƒ‡ãƒ¼ã‚¿è¨­å®š
 	padold = pad;
 	pad = nes->pad->GetNsfController();
 	BYTE	padpush = ~padold & pad;
@@ -630,7 +630,7 @@ void	MapperNSF::VSync()
 		nes->SetNsfStop();
 	}
 
-	// ‚¨‚Ü‚¯
+	// ãŠã¾ã‘
 	Star();
 
 	// Drawing screen
@@ -647,7 +647,7 @@ void	MapperNSF::VSync()
 	DrawString( 28,  76, "Keyboard", 0x30 );
 	DrawString( 32, 152, "Wave View", 0x30 );
 
-	// ƒ^ƒCƒgƒ‹‚È‚Ç
+	// ã‚¿ã‚¤ãƒˆãƒ«ãªã©
 	CHAR	str[64];
 	memcpy( str, nsfheader.SongName, 32 );
 	str[32] = 0;
@@ -671,17 +671,17 @@ void	MapperNSF::VSync()
 //	DrawString( 76+6*24,  61, "FME7", (exchip&0x20)?0x2B:0x2D );
 	DrawString( 76+6*24,  61, "SN5B", (exchip&0x20)?0x2B:0x2D );
 
-	// ƒ^ƒCƒgƒ‹‚È‚Ç‚Ìƒ‰ƒCƒ“
+	// ã‚¿ã‚¤ãƒˆãƒ«ãªã©ã®ãƒ©ã‚¤ãƒ³
 	DrawRect(  52, 24, 243-52,   0, 0x30 );
 	DrawRect(  52, 39, 243-52,   0, 0x30 );
 	DrawRect(  52, 54, 243-52,   0, 0x30 );
 	DrawRect(  52, 69, 12,       0, 0x30 );
 	DrawRect(  75, 69, 243-75,   0, 0x30 );
 
-	// ƒL[ƒ{[ƒh˜g
+	// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰æ 
 	DrawRect(  27,  84, 229-27, 148- 84, 0x30 );
 
-	// WAVEVIEW˜g
+	// WAVEVIEWæ 
 #if	!NSF_PROFILE
 	DrawRect(  31, 160, 224-31, 224-160, 0x30 );
 	DrawRect(  32, 192, 223-32, 0,       0x27 );
@@ -689,18 +689,18 @@ void	MapperNSF::VSync()
 	// Wave
 	DrawWave( 28+4, 192, 0x2A );
 #endif
-	// ƒL[ƒ{[ƒhã’i(O5-O8)
+	// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ä¸Šæ®µ(O5-O8)
 	DrawBitmap( 31+49*0, 88, KeyBoardBitmap );
 	DrawBitmap( 31+49*1, 88, KeyBoardBitmap );
 	DrawBitmap( 31+49*2, 88, KeyBoardBitmap );
 	DrawBitmap( 31+49*3, 88, KeyBoardBitmap );
-	// ƒL[ƒ{[ƒh‰º’i(O1-O4)
+	// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ä¸‹æ®µ(O1-O4)
 	DrawBitmap( 31+49*0, 119, KeyBoardBitmap );
 	DrawBitmap( 31+49*1, 119, KeyBoardBitmap );
 	DrawBitmap( 31+49*2, 119, KeyBoardBitmap );
 	DrawBitmap( 31+49*3, 119, KeyBoardBitmap );
 
-	// ƒL[ƒ{[ƒh‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚Ì‚ğ•`‰æ
+	// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã®ã‚’æç”»
 	// Internal APU
 	DrawKey( GetKeyTable(nes->apu->GetChannelFrequency(0x0000)) );
 	DrawKey( GetKeyTable(nes->apu->GetChannelFrequency(0x0001)) );

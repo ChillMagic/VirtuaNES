@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      Namcot N106                                                     //
 //                                                           Norix      //
@@ -14,10 +14,10 @@
 
 APU_N106::APU_N106()
 {
-	// Å‰‚¾‚¯TONE‚Ì‰Šú‰»‚ðs‚¤
+	// æœ€åˆã ã‘TONEã®åˆæœŸåŒ–ã‚’è¡Œã†
 	::ZeroMemory( tone, sizeof(tone) );
 
-	// ‰¼Ý’è
+	// ä»®è¨­å®š
 	cpu_clock = APU_CLOCK;
 	cycle_rate = (DWORD)(cpu_clock*12.0f*(1<<20)/(45.0f*22050.0f));
 }
@@ -39,7 +39,7 @@ void	APU_N106::Reset( FLOAT fClock, INT nRate )
 
 	Setup( fClock, nRate );
 
-	// TONE‚Ì‰Šú‰»‚Í‚µ‚È‚¢...
+	// TONEã®åˆæœŸåŒ–ã¯ã—ãªã„...
 }
 
 void	APU_N106::Setup( FLOAT fClock, INT nRate )

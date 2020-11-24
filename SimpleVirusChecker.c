@@ -1,4 +1,4 @@
-/*
+﻿/*
 
  SimpleVirusChecker
  version 1.13

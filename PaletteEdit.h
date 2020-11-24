@@ -1,5 +1,5 @@
-//
-// ƒpƒŒƒbƒgƒGƒfƒBƒ^ƒNƒ‰ƒX
+ï»¿//
+// ãƒ‘ãƒ¬ãƒƒãƒˆã‚¨ãƒ‡ã‚£ã‚¿ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CPALETTEEDIT_INCLUDED__
 #define	__CPALETTEEDIT_INCLUDED__

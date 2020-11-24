@@ -1,5 +1,5 @@
-//
-// CRCƒ`ƒFƒbƒN—pƒ‰ƒCƒuƒ‰ƒŠƒNƒ‰ƒX
+ï»¿//
+// CRCãƒã‚§ãƒƒã‚¯ç”¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚¯ãƒ©ã‚¹
 //
 #include "Crclib.h"
 

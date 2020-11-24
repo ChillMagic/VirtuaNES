@@ -1,5 +1,5 @@
-//
-// ƒƒ‚ƒŠƒrƒ…[ƒNƒ‰ƒX
+ï»¿//
+// ãƒ¡ãƒ¢ãƒªãƒ“ãƒ¥ãƒ¼ã‚¯ãƒ©ã‚¹
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -79,7 +79,7 @@ BOOL	CMemoryView::Create( HWND hWndParent )
 			WS_EX_TOOLWINDOW,
 			VIRTUANES_WNDCLASS,
 			"MemoryView",
-			WS_OVERLAPPEDWINDOW|WS_VSCROLL,	// WindowŠg‘åk¬‰Â”\
+			WS_OVERLAPPEDWINDOW|WS_VSCROLL,	// Windowæ‹¡å¤§ç¸®å°å¯èƒ½
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
@@ -87,7 +87,7 @@ BOOL	CMemoryView::Create( HWND hWndParent )
 			hWndParent,
 			NULL,
 			CApp::GetInstance(),
-			(LPVOID)this		// This ‚ğ–„‚ß‚Şˆ×
+			(LPVOID)this		// This ã‚’åŸ‹ã‚è¾¼ã‚€ç‚º
 		);
 	if( !hWnd ) {
 		DEBUGOUT( "CreateWindow faild.\n" );
@@ -102,7 +102,7 @@ BOOL	CMemoryView::Create( HWND hWndParent )
 void	CMemoryView::Destroy()
 {
 	if( m_hWnd && IsWindow(m_hWnd) ) {
-		// ˆÊ’u•Û‘¶
+		// ä½ç½®ä¿å­˜
 		::GetWindowRect( m_hWnd, &Config.general.rcMemoryViewPos );
 
 		::DestroyWindow( m_hWnd );
@@ -119,7 +119,7 @@ WNDMSG	CMemoryView::OnCreate( WNDMSGPARAM )
 {
 //	DEBUGOUT( "CMemoryView::OnCreate\n" );
 
-	// ƒEƒCƒ“ƒhƒEƒTƒCƒY‚Ìİ’è
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã®è¨­å®š
 	if( RCWIDTH(Config.general.rcMemoryViewPos) > 0 && RCHEIGHT(Config.general.rcMemoryViewPos) > 0 ) {
 		::MoveWindow( m_hWnd, Config.general.rcMemoryViewPos.left, Config.general.rcMemoryViewPos.top,
 			 RCWIDTH(Config.general.rcMemoryViewPos), RCHEIGHT(Config.general.rcMemoryViewPos), FALSE );
@@ -135,7 +135,7 @@ WNDMSG	CMemoryView::OnCreate( WNDMSGPARAM )
 	RECT	rc;
 	::GetClientRect( m_hWnd, &rc );
 
-	// ƒXƒNƒ[ƒ‹ƒŒƒ“ƒW‚Ìİ’è
+	// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ¬ãƒ³ã‚¸ã®è¨­å®š
 	m_DispLines = (RCHEIGHT(rc)-(OFFSETV*2+FONTHEIGHT*2))/FONTHEIGHT;
 	if( m_DispLines < 0 )
 		m_DispLines = 0;
@@ -157,10 +157,10 @@ WNDMSG	CMemoryView::OnCreate( WNDMSGPARAM )
 
 	m_CursorX = m_CursorY = 0;
 
-	// •\¦
+	// è¡¨ç¤º
 	::ShowWindow( m_hWnd, SW_SHOW );
 
-	// ƒ^ƒCƒ}[‹N“®
+	// ã‚¿ã‚¤ãƒãƒ¼èµ·å‹•
 	::SetTimer( m_hWnd, 1, 50, NULL );
 	return	TRUE;
 }
@@ -176,7 +176,7 @@ WNDMSG	CMemoryView::OnClose( WNDMSGPARAM )
 WNDMSG	CMemoryView::OnDestroy( WNDMSGPARAM )
 {
 //	DEBUGOUT( "CMemoryView::OnDestroy\n" );
-	// ˆÊ’u•Û‘¶
+	// ä½ç½®ä¿å­˜
 	::GetWindowRect( m_hWnd, &Config.general.rcMemoryViewPos );
 
 	m_hWnd = NULL;
@@ -583,7 +583,7 @@ void	CMemoryView::OnDraw( HDC hDC )
 		::InvertRect( hDC, &rcInv );
 	}
 
-	// Œ³‚É–ß‚µ‚ÄÁ‚·H
+	// å…ƒã«æˆ»ã—ã¦æ¶ˆã™ï¼Ÿ
 	::SelectObject( hDC, hFontOld );
 }
 

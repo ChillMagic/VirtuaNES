@@ -1,5 +1,5 @@
-//
-// ƒWƒ‡ƒCƒXƒeƒBƒbƒNŽ²Ý’èƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯è»¸è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CJOYAXISDLG_INCLUDED__
 #define	__CJOYAXISDLG_INCLUDED__

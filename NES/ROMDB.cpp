@@ -1,4 +1,4 @@
-//
+ï»¿//
 // NES ROMDB class
 //
 #define	WIN32_LEAN_AND_MEAN
@@ -32,22 +32,22 @@ INT	ROMDATABASE::HeaderCheck( NESHEADER& hdr, DWORD crcall, DWORD crc, ROMDB& da
 	}
 
 	if( m_DataBaseList.empty() )
-		return	-2;	// ƒf[ƒ^ƒx[ƒX‚ª–³‚¢
+		return	-2;	// ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ãŒç„¡ã„
 
 	map<DWORD, ROMDB, ROMDBCMP>::iterator it = m_DataBaseList.find( crcall );
 
 	if( it == m_DataBaseList.end() )
-		return	-1;	// ƒf[ƒ^ƒx[ƒX‚É–³‚¢
+		return	-1;	// ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã«ç„¡ã„
 
 	data = (*it).second;
 
-	// ˆê‰ƒ`ƒFƒbƒN
+	// ä¸€å¿œãƒã‚§ãƒƒã‚¯
 	if( data.crcall == crcall || (data.crc == crc && data.crc) ) {
 		if( hdr.control1 == data.control1 && hdr.control2 == data.control2 ) {
-			return	0;	// Š®‘S“K‡
+			return	0;	// å®Œå…¨é©åˆ
 		}
 	}
-	return	1;	// CRC‚Íˆê’v‚µ‚½‚ªƒwƒbƒ_‚ªˆá‚¤
+	return	1;	// CRCã¯ä¸€è‡´ã—ãŸãŒãƒ˜ãƒƒãƒ€ãŒé•ã†
 }
 
 BOOL	ROMDATABASE::HeaderCorrect( NESHEADER& hdr, DWORD crcall, DWORD crc )
@@ -57,16 +57,16 @@ BOOL	ROMDATABASE::HeaderCorrect( NESHEADER& hdr, DWORD crcall, DWORD crc )
 	}
 
 	if( m_DataBaseList.empty() )
-		return	FALSE;	// ƒf[ƒ^ƒx[ƒX‚ª–³‚¢
+		return	FALSE;	// ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ãŒç„¡ã„
 
 	map<DWORD, ROMDB, ROMDBCMP>::iterator it = m_DataBaseList.find( crcall );
 
 	if( it == m_DataBaseList.end() )
-		return	FALSE;	// ƒf[ƒ^ƒx[ƒX‚É–³‚¢
+		return	FALSE;	// ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã«ç„¡ã„
 
 	ROMDB	data = (*it).second;
 
-	// ˆê‰ƒ`ƒFƒbƒN
+	// ä¸€å¿œãƒã‚§ãƒƒã‚¯
 	if( data.crcall == crcall || (data.crc == crc && data.crc) ) {
 		hdr.control1 = data.control1;
 		hdr.control2 = data.control2;
@@ -82,7 +82,7 @@ void	ROMDATABASE::LoadDatabase()
 {
 FILE*	fp = NULL;
 CHAR	buf[512];
-const UCHAR seps[] = ";\n\0";	// ƒZƒpƒŒ[ƒ^
+const UCHAR seps[] = ";\n\0";	// ã‚»ãƒ‘ãƒ¬ãƒ¼ã‚¿
 ROMDB	db;
 
 DEBUGOUT( "Database loading...\n" );
@@ -95,7 +95,7 @@ DEBUGOUT( "File:%s\n", Path.c_str() );
 
 	if( (fp = fopen( Path.c_str(), "r" )) ) {
 		while( fgets( buf, 512, fp ) ) {
-			if( buf[0] == ';' ) {	// ƒRƒƒ“ƒgƒtƒB[ƒ‹ƒh‚Æ‚İ‚È‚·
+			if( buf[0] == ';' ) {	// ã‚³ãƒ¡ãƒ³ãƒˆãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¨ã¿ãªã™
 				continue;
 			}
 

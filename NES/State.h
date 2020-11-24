@@ -1,4 +1,4 @@
-#ifndef	__STATE_INCLUDED__
+ï»¿#ifndef	__STATE_INCLUDED__
 #define	__STATE_INCLUDED__
 
 #pragma pack( push, 1 )
@@ -9,17 +9,17 @@ typedef	struct	tagFILEHDR {	//  0123456789AB
 	WORD	BlockVersion;
 } FILEHDR, *LPFILEHDR;
 
-// VirtuaNES version0.30ˆÈ~—p
+// VirtuaNES version0.30ä»¥é™ç”¨
 typedef	struct	tagFILEHDR2 {	//  0123456789AB
 	BYTE	ID[12];		// "VirtuaNES ST"
 	WORD	Reserved;
-	WORD	BlockVersion;	// 0x0200 / 0x0210(v0.60ˆÈ~)
+	WORD	BlockVersion;	// 0x0200 / 0x0210(v0.60ä»¥é™)
 
-	DWORD	Ext0;		// ROM:ƒvƒƒOƒ‰ƒ€CRC	FDS:ƒvƒƒOƒ‰ƒ€ID
-	WORD	Ext1;		// ROM:‚È‚µ		FDS:ƒ[ƒJ[ID
-	WORD	Ext2;		// ROM:‚È‚µ		FDS:ƒfƒBƒXƒN–‡”
-	LONG	MovieStep;	// ’Ç‹L(æ‚è’¼‚µ)ƒ€[ƒr[‚ÌƒtƒŒ[ƒ€”
-	LONG	MovieOffset;	// ’Ç‹L(æ‚è’¼‚µ)ƒ€[ƒr[‚Ìƒtƒ@ƒCƒ‹ƒIƒtƒZƒbƒg
+	DWORD	Ext0;		// ROM:ãƒ—ãƒ­ã‚°ãƒ©ãƒ CRC	FDS:ãƒ—ãƒ­ã‚°ãƒ©ãƒ ID
+	WORD	Ext1;		// ROM:ãªã—		FDS:ãƒ¡ãƒ¼ã‚«ãƒ¼ID
+	WORD	Ext2;		// ROM:ãªã—		FDS:ãƒ‡ã‚£ã‚¹ã‚¯æšæ•°
+	LONG	MovieStep;	// è¿½è¨˜(å–ã‚Šç›´ã—)ãƒ ãƒ¼ãƒ“ãƒ¼æ™‚ã®ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
+	LONG	MovieOffset;	// è¿½è¨˜(å–ã‚Šç›´ã—)ãƒ ãƒ¼ãƒ“ãƒ¼æ™‚ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 } FILEHDR2, *LPFILEHDR2;
 
 typedef	struct	tagBLOCKHDR {
@@ -29,8 +29,8 @@ typedef	struct	tagBLOCKHDR {
 	DWORD	BlockSize;
 } BLOCKHDR, *LPBLOCKHDR;
 
-// CPU ƒŒƒWƒXƒ^
-// version 0x0110‚Ü‚Å
+// CPU ãƒ¬ã‚¸ã‚¹ã‚¿
+// version 0x0110ã¾ã§
 typedef	struct	tagCPUSTAT_O {
 	WORD	PC;
 	BYTE	A;
@@ -43,7 +43,7 @@ typedef	struct	tagCPUSTAT_O {
 	BYTE	FrameIRQ;
 	BYTE	reserved[3];
 
-	LONG	mod_cycles;	// ƒ€[ƒr[“™‚ÅƒNƒƒbƒN”‚Ì”÷–­‚È‚¸‚ê‚ğ–h‚®ˆ×
+	LONG	mod_cycles;	// ãƒ ãƒ¼ãƒ“ãƒ¼ç­‰ã§ã‚¯ãƒ­ãƒƒã‚¯æ•°ã®å¾®å¦™ãªãšã‚Œã‚’é˜²ãç‚º
 
 	// version 0x0110
 	SQWORD	emul_cycles;
@@ -72,7 +72,7 @@ typedef	struct	tagCPUSTAT {
 	SQWORD	base_cycles;
 } CPUSTAT, *LPCPUSTAT;
 
-// PPU ƒŒƒWƒXƒ^
+// PPU ãƒ¬ã‚¸ã‚¹ã‚¿
 typedef	struct	tagPPUSTAT {
 	BYTE	reg0;
 	BYTE	reg1;
@@ -86,13 +86,13 @@ typedef	struct	tagPPUSTAT {
 	WORD	loopy_x;
 } PPUSTAT, *LPPPUSTAT;
 
-// APU ƒŒƒWƒXƒ^(Šg’£ƒTƒEƒ“ƒhŠÜ‚Ş)
+// APU ãƒ¬ã‚¸ã‚¹ã‚¿(æ‹¡å¼µã‚µã‚¦ãƒ³ãƒ‰å«ã‚€)
 typedef	struct	tagAPUSTAT_O {
 	BYTE	reg[0x0018];
 	BYTE	ext[0x0100];
 } APUSTAT_O, *LPAPUSTAT_O;
 
-// ƒRƒ“ƒgƒ[ƒ‰ƒŒƒWƒXƒ^
+// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¬ã‚¸ã‚¹ã‚¿
 typedef	struct	tagCTRREG {
 	DWORD	pad1bit;
 	DWORD	pad2bit;
@@ -102,9 +102,9 @@ typedef	struct	tagCTRREG {
 } CTRREG, *LPCTRREG;
 
 //
-// ƒŒƒWƒXƒ^ƒf[ƒ^
+// ãƒ¬ã‚¸ã‚¹ã‚¿ãƒ‡ãƒ¼ã‚¿
 // ID "REG DATA"
-// ver 0x0110‚Ü‚Å
+// ver 0x0110ã¾ã§
 typedef	struct	tagREGSTAT_O {
 	union	uniCPUREG {
 		BYTE	cpudata[32];
@@ -117,7 +117,7 @@ typedef	struct	tagREGSTAT_O {
 	APUSTAT_O	apu;
 } REGSTAT_O, *LPREGSTAT_O;
 
-// ver 0x0200ˆÈ~
+// ver 0x0200ä»¥é™
 typedef	struct	tagREGSTAT {
 	union	uniCPUREG {
 		BYTE	cpudata[64];
@@ -131,7 +131,7 @@ typedef	struct	tagREGSTAT {
 
 
 //
-// “à‘ŸRAMƒf[ƒ^
+// å†…è‡“RAMãƒ‡ãƒ¼ã‚¿
 // ID "RAM DATA"
 typedef	struct	tagRAMSTAT {
 	BYTE	RAM[2*1024];	// Internal NES RAM
@@ -141,7 +141,7 @@ typedef	struct	tagRAMSTAT {
 } RAMSTAT, *LPRAMSTAT;
 
 //
-// MMUƒf[ƒ^
+// MMUãƒ‡ãƒ¼ã‚¿
 // ID "MMU DATA"
 typedef	struct	tagMMUSTAT {
 	BYTE	CPU_MEM_TYPE[8];
@@ -152,14 +152,14 @@ typedef	struct	tagMMUSTAT {
 } MMUSTAT, *LPMMUSTAT;
 
 //
-// ƒ}ƒbƒp[ƒf[ƒ^
+// ãƒãƒƒãƒ‘ãƒ¼ãƒ‡ãƒ¼ã‚¿
 // ID "MMC DATA"
 typedef	struct	tagMMCSTAT {
 	BYTE	mmcdata[256];
 } MMCSTAT, *LPMMCSTAT;
 
 //
-// ƒRƒ“ƒgƒ[ƒ‰ƒf[ƒ^
+// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ‡ãƒ¼ã‚¿
 // ID "CTR DATA"
 typedef	struct	tagCTRSTAT {
 	union uniCTRDATA {
@@ -169,28 +169,28 @@ typedef	struct	tagCTRSTAT {
 } CTRSTAT, *LPCTRSTAT;
 
 //
-// SNDƒf[ƒ^
+// SNDãƒ‡ãƒ¼ã‚¿
 // ID "SND DATA"
 typedef	struct	tagSNDSTAT {
 	BYTE	snddata[0x800];	// 2KB
 } SNDSTAT, *LPSNDSTAT;
 
 //
-// ƒfƒBƒXƒNƒCƒ[ƒW
-// Ver0.24‚Ü‚Å
+// ãƒ‡ã‚£ã‚¹ã‚¯ã‚¤ãƒ¡ãƒ¼ã‚¸
+// Ver0.24ã¾ã§
 // ID "DSIDE 0A","DSIDE 0B","DSIDE 1A","DSIDE 1B"
 typedef	struct	tagDISKSTAT {
 	BYTE	DiskTouch[16];
 } DISKSTAT, *LPDISKSTAT;
 
-// Ver0.30ˆÈ~
+// Ver0.30ä»¥é™
 // ID "DISKDATA"
 typedef	struct	tagDISKDATA {
 	LONG	DifferentSize;
 } DISKDATA, *LPDISKDATA;
 
-// ˆÈ‰º‚ÍƒfƒBƒXƒNƒZ[ƒuƒCƒ[ƒWƒtƒ@ƒCƒ‹‚Åg—p‚·‚é
-// Ver0.24‚Ü‚Å
+// ä»¥ä¸‹ã¯ãƒ‡ã‚£ã‚¹ã‚¯ã‚»ãƒ¼ãƒ–ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«ã§ä½¿ç”¨ã™ã‚‹
+// Ver0.24ã¾ã§
 typedef	struct	tagDISKIMGFILEHDR {	//  0123456789AB
 	BYTE	ID[12];		// "VirtuaNES DI"
 	WORD	BlockVersion;
@@ -202,15 +202,15 @@ typedef	struct	tagDISKIMGHDR {
 	BYTE	DiskTouch[16];
 } DISKIMGHDR, *LPDISKIMGHDR;
 
-// VirtuaNES version0.30ˆÈ~—p
+// VirtuaNES version0.30ä»¥é™ç”¨
 typedef	struct	tagDISKFILEHDR {	//  0123456789AB
 	BYTE	ID[12];		// "VirtuaNES DI"
 	WORD	BlockVersion;	// 0x0200:0.30	0x0210:0.31
 	WORD	Reserved;
-	DWORD	ProgID;		// ƒvƒƒOƒ‰ƒ€ID
-	WORD	MakerID;	// ƒ[ƒJ[ID
-	WORD	DiskNo;		// ƒfƒBƒXƒN”
-	DWORD	DifferentSize;	// ‘Šˆá”
+	DWORD	ProgID;		// ãƒ—ãƒ­ã‚°ãƒ©ãƒ ID
+	WORD	MakerID;	// ãƒ¡ãƒ¼ã‚«ãƒ¼ID
+	WORD	DiskNo;		// ãƒ‡ã‚£ã‚¹ã‚¯æ•°
+	DWORD	DifferentSize;	// ç›¸é•æ•°
 } DISKFILEHDR, *LPDISKFILEHDR;
 
 // ID "EXCTRDAT"
@@ -219,41 +219,41 @@ typedef	struct	tagEXCTRSTAT {
 } EXCTRSTAT, *LPEXCTRSTAT;
 
 //
-// ƒ€[ƒr[ƒtƒ@ƒCƒ‹
+// ãƒ ãƒ¼ãƒ“ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«
 //
-// VirtuaNES version0.60ˆÈ~—p
+// VirtuaNES version0.60ä»¥é™ç”¨
 typedef	struct	tagMOVIEFILEHDR {
 	BYTE	ID[12];			// "VirtuaNES MV"
 	WORD	BlockVersion;		// Movie version 0x0300
 	WORD	RecordVersion;		// Record version
-	DWORD	Control;		// ƒRƒ“ƒgƒ[ƒ‹ƒoƒCƒg
+	DWORD	Control;		// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãƒã‚¤ãƒˆ
 					// 76543210(Bit)
 					// E---4321
-					// |   |||+-- 1Pƒf[ƒ^
-					// |   ||+--- 2Pƒf[ƒ^
-					// |   |+---- 3Pƒf[ƒ^
-					// |   +----- 4Pƒf[ƒ^
-					// +--------- ’Ç‹L‹Ö~
-					// ‚»‚Ì‘¼ƒRƒ“ƒgƒ[ƒ‹‚Í1P`4P(‚Ç‚ê‚Å‚à—Ç‚¢)‚Ì•ûŒüƒL[‚ª
-					// ‘S‚ÄON‚ÌCŸ‚Ì‚SƒoƒCƒg‚ªƒRƒ“ƒgƒ[ƒ‹—pƒf[ƒ^‚É‚È‚é
-	DWORD	Ext0;			// ROM:ƒvƒƒOƒ‰ƒ€CRC	FDS:ƒvƒƒOƒ‰ƒ€ID
-	WORD	Ext1;			// ROM:‚È‚µ		FDS:ƒ[ƒJ[ID
-	WORD	Ext2;			// ROM:‚È‚µ		FDS:ƒfƒBƒXƒN–‡”
-	DWORD	RecordTimes;		// ‹L˜^‰ñ”(æ‚è’¼‚µ‰ñ”)
+					// |   |||+-- 1Pãƒ‡ãƒ¼ã‚¿
+					// |   ||+--- 2Pãƒ‡ãƒ¼ã‚¿
+					// |   |+---- 3Pãƒ‡ãƒ¼ã‚¿
+					// |   +----- 4Pãƒ‡ãƒ¼ã‚¿
+					// +--------- è¿½è¨˜ç¦æ­¢
+					// ãã®ä»–ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¯1Pã€œ4P(ã©ã‚Œã§ã‚‚è‰¯ã„)ã®æ–¹å‘ã‚­ãƒ¼ãŒ
+					// å…¨ã¦ONã®æ™‚ï¼Œæ¬¡ã®ï¼”ãƒã‚¤ãƒˆãŒã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ç”¨ãƒ‡ãƒ¼ã‚¿ã«ãªã‚‹
+	DWORD	Ext0;			// ROM:ãƒ—ãƒ­ã‚°ãƒ©ãƒ CRC	FDS:ãƒ—ãƒ­ã‚°ãƒ©ãƒ ID
+	WORD	Ext1;			// ROM:ãªã—		FDS:ãƒ¡ãƒ¼ã‚«ãƒ¼ID
+	WORD	Ext2;			// ROM:ãªã—		FDS:ãƒ‡ã‚£ã‚¹ã‚¯æšæ•°
+	DWORD	RecordTimes;		// è¨˜éŒ²å›æ•°(å–ã‚Šç›´ã—å›æ•°)
 
-	BYTE	RenderMethod;		// ƒŒƒ“ƒ_ƒŠƒ“ƒO•û®
-	BYTE	IRQtype;		// IRQƒ^ƒCƒv
-	BYTE	FrameIRQ;		// FrameIRQ‹Ö~
+	BYTE	RenderMethod;		// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°æ–¹å¼
+	BYTE	IRQtype;		// IRQã‚¿ã‚¤ãƒ—
+	BYTE	FrameIRQ;		// FrameIRQç¦æ­¢
 	BYTE	VideoMode;		// NTSC/PAL
 
-	BYTE	reserved2[8];		// —\–ñ
+	BYTE	reserved2[8];		// äºˆç´„
 
 	LONG	StateStOffset;		// Movie start state offset
 	LONG	StateEdOffset;		// Movie end state offset
 	LONG	MovieOffset;		// Movie data offset
-	LONG	MovieStep;		// Movie steps(Frame”)
+	LONG	MovieStep;		// Movie steps(Frameæ•°)
 
-	DWORD	CRC;			// ‚±‚Ìƒf[ƒ^‚ğœ‚­CRC(ƒCƒ“ƒ`ƒL–h~)
+	DWORD	CRC;			// ã“ã®ãƒ‡ãƒ¼ã‚¿ã‚’é™¤ãCRC(ã‚¤ãƒ³ãƒã‚­é˜²æ­¢)
 } MOVIEFILEHDR, *LPMOVIEFILEHDR;
 
 typedef	struct	tagMOVIEIMGFILEHDRx {
@@ -269,13 +269,13 @@ typedef	struct	tagMOVIEIMGFILEHDRx {
 // Famtasia Movie....
 typedef	struct	tagFMVHDR {
 	BYTE	ID[4];			// "FMV^Z"
-	BYTE	Control1;		// R???????	0:ƒŠƒZƒbƒgŒã‚©‚ç‹L˜^H 1:“r’†‚©‚ç‹L˜^
-	BYTE	Control2;		// OT??????	O:1Pî•ñ T:2Pî•ñ
+	BYTE	Control1;		// R???????	0:ãƒªã‚»ãƒƒãƒˆå¾Œã‹ã‚‰è¨˜éŒ²ï¼Ÿ 1:é€”ä¸­ã‹ã‚‰è¨˜éŒ²
+	BYTE	Control2;		// OT??????	O:1Pæƒ…å ± T:2Pæƒ…å ±
 	DWORD	Unknown1;
-	WORD	RecordTimes;		// ‹L˜^‰ñ”-1
+	WORD	RecordTimes;		// è¨˜éŒ²å›æ•°-1
 	DWORD	Unknown2;
-	BYTE	szEmulators[0x40];	// ‹L˜^‚µ‚½ƒGƒ~ƒ…ƒŒ[ƒ^
-	BYTE	szTitle    [0x40];	// ƒ^ƒCƒgƒ‹
+	BYTE	szEmulators[0x40];	// è¨˜éŒ²ã—ãŸã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚¿
+	BYTE	szTitle    [0x40];	// ã‚¿ã‚¤ãƒˆãƒ«
 } FMVHDR, *LPFMVHDR;
 
 // Nesticle Movie....
@@ -297,7 +297,7 @@ typedef	struct	tagNMVHDR {
 	DWORD	VirtualFPS;
 } NMVHDR, *LPNMVHDR;
 
-// ƒ}ƒNƒ
+// ãƒã‚¯ãƒ­
 #define	SETBYTE(p,v)	{ *p = (v); p++; }
 #define	SETWORD(p,v)	{ *(LPWORD)p = (v); p += sizeof(WORD); }
 #define	SETDWORD(p,v)	{ *(LPDWORD)p = (v); p += sizeof(DWORD); }

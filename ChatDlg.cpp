@@ -1,5 +1,5 @@
-//
-// ƒ`ƒƒƒbƒgƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒãƒ£ãƒƒãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -26,7 +26,7 @@ using namespace std;
 #include "Wnd.h"
 #include "ChatDlg.h"
 
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_MESSAGE_BEGIN(CChatDlg)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
 DLG_ON_MESSAGE( WM_DESTROY,	OnDestroy )
@@ -37,27 +37,27 @@ DLG_ON_MESSAGE( WM_SIZE,	OnSize )
 DLG_ON_MESSAGE( WM_CTLCOLORSTATIC, OnControlColorStatic )
 DLG_ON_MESSAGE( WM_COPYDATA,	OnCopyData )
 
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND_NOTIFY( IDC_NCT_MESSAGE, EN_SETFOCUS, OnMessageFocus )
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
 DLG_ON_COMMAND( IDC_NCT_SEND, OnSend )
 DLG_COMMAND_END()
-// Notify ƒƒbƒZ[ƒW
+// Notify ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_NOTIFY_END()
 DLG_MESSAGE_END()
 
 BOOL	CChatDlg::Create( HWND hWndParent )
 {
-	// e‚ÍƒfƒXƒNƒgƒbƒv‚É‚·‚é
+	// è¦ªã¯ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ã«ã™ã‚‹
 	m_hWnd = ::CreateDialogParam( CApp::GetPlugin(), MAKEINTRESOURCE(IDD_NETPLAY_CHAT),
 				NULL, g_DlgProc, (LPARAM)this );
 	if( !m_hWnd )
 		return	FALSE;
 
-	// ƒ‚[ƒhƒŒƒXƒ_ƒCƒAƒƒOƒŠƒXƒg‚É‰Á‚¦‚é
+	// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒªã‚¹ãƒˆã«åŠ ãˆã‚‹
 	CWndList::Add( this );
 
 	return	TRUE;
@@ -66,7 +66,7 @@ BOOL	CChatDlg::Create( HWND hWndParent )
 void	CChatDlg::Destroy()
 {
 	if( m_hWnd ) {
-		// ƒ‚[ƒhƒŒƒXƒ_ƒCƒAƒƒOƒŠƒXƒg‚©‚çíœ
+		// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 		CWndList::Del( this );
 
 		::GetWindowRect( m_hWnd, &Config.netplay.rcChatPos );
@@ -102,12 +102,12 @@ void	CChatDlg::SetEditText()
 		str = str + szText;
 		str = str + "\r\n";
 
-		// ‘Šè‚É‘—M
+		// ç›¸æ‰‹ã«é€ä¿¡
 		if( NetPlay.IsConnect() ) {
 			NetPlay.ChatSend( (LPSTR)str.c_str() );
 		}
 
-		// ©•ª©g‚ÌƒƒbƒZ[ƒW‚ğ•\¦
+		// è‡ªåˆ†è‡ªèº«ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤º
 		INT n = GetWindowTextLength( GetDlgItem( m_hWnd, IDC_NCT_MESSAGE ) );
 		::SendDlgItemMessage( m_hWnd, IDC_NCT_MESSAGE, EM_SETSEL, (WPARAM)n, (LPARAM)n );
 		::SendDlgItemMessage( m_hWnd, IDC_NCT_MESSAGE, EM_REPLACESEL, (WPARAM)TRUE, (LPARAM)str.c_str() );
@@ -128,7 +128,7 @@ DLGMSG	CChatDlg::OnCopyData( DLGMSGPARAM )
 //		::PlaySound( "MailBeep", NULL, SND_ALIAS|SND_ASYNC );
 	}
 
-	// ƒƒbƒZ[ƒW‚ª—ˆ‚½‚çƒ|ƒbƒvƒAƒbƒv‚³‚¹‚é‚½‚ß
+	// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒæ¥ãŸã‚‰ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã•ã›ã‚‹ãŸã‚
 	::SendMessage( CApp::GetHWnd(), WM_VNS_CHATPOPUP, 0, 0 );
 
 	return	TRUE;
@@ -140,13 +140,13 @@ DLGMSG	CChatDlg::OnInitDialog( DLGMSGPARAM )
 
 	NetPlay.SetChatWnd( m_hWnd );
 
-	// ˆÊ’uî•ñ‚ğ•Û‘¶
+	// ä½ç½®æƒ…å ±ã‚’ä¿å­˜
 	::GetClientRect( m_hWnd, &m_rcClient );
 	::GetWindowRect( ::GetDlgItem(m_hWnd, IDC_NCT_MESSAGE), &m_rcMessage );
 	::GetWindowRect( ::GetDlgItem(m_hWnd, IDC_NCT_EDIT), &m_rcEdit );
 	::GetWindowRect( ::GetDlgItem(m_hWnd, IDC_NCT_SEND), &m_rcButton );
 
-	// ƒNƒ‰ƒCƒAƒ“ƒgÀ•W‚Ö‚Ì•ÏŠ·
+	// ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆåº§æ¨™ã¸ã®å¤‰æ›
 	::ScreenToClient( m_hWnd, (POINT*)&m_rcMessage.left );
 	::ScreenToClient( m_hWnd, (POINT*)&m_rcMessage.right );
 	::ScreenToClient( m_hWnd, (POINT*)&m_rcEdit.left );
@@ -154,19 +154,19 @@ DLGMSG	CChatDlg::OnInitDialog( DLGMSGPARAM )
 	::ScreenToClient( m_hWnd, (POINT*)&m_rcButton.left );
 	::ScreenToClient( m_hWnd, (POINT*)&m_rcButton.right );
 
-	// ƒEƒCƒ“ƒhƒEˆÊ’u/ƒTƒCƒY‚Ìİ’è
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ä½ç½®/ã‚µã‚¤ã‚ºã®è¨­å®š
 //	RECT	rc = Config.launcher.rcWindowPos;
 //	if( (rc.right-rc.left) && (rc.bottom-rc.top) ) {
 //		::SetWindowPos( m_hWnd, NULL, rc.left, rc.top, RCWIDTH(rc), RCHEIGHT(rc), SWP_NOZORDER );
 //	}
 
-	// ƒEƒCƒ“ƒhƒEˆÊ’u/ƒTƒCƒY‚Ìİ’è
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ä½ç½®/ã‚µã‚¤ã‚ºã®è¨­å®š
 	RECT	rc = Config.netplay.rcChatPos;
 	if( (rc.right-rc.left) && (rc.bottom-rc.top) ) {
 		::SetWindowPos( m_hWnd, NULL, rc.left, rc.top, RCWIDTH(rc), RCHEIGHT(rc), SWP_NOZORDER );
 	}
 
-	// •\¦
+	// è¡¨ç¤º
 	::ShowWindow( m_hWnd, SW_SHOW );
 
 	return	TRUE;
@@ -179,7 +179,7 @@ DLGMSG	CChatDlg::OnDestroy( DLGMSGPARAM )
 
 DLGMSG	CChatDlg::OnClose( DLGMSGPARAM )
 {
-	::ShowWindow( m_hWnd, SW_HIDE ); // ”ñ•\¦‚É‚·‚é‚¾‚¯
+	::ShowWindow( m_hWnd, SW_HIDE ); // éè¡¨ç¤ºã«ã™ã‚‹ã ã‘
 	return	TRUE;
 }
 
@@ -212,7 +212,7 @@ DLGMSG	CChatDlg::OnSize( DLGMSGPARAM )
 	RECT	rcC, rcT;
 	::GetClientRect( m_hWnd, &rcC );
 
-	// ƒƒbƒZ[ƒW˜g
+	// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸æ 
 	if( (hWndCtrl = ::GetDlgItem( m_hWnd, IDC_NCT_MESSAGE )) ) {
 		rcT.left   = rcC.left;
 		rcT.right  = rcC.right;
@@ -264,7 +264,7 @@ DLGCMD	CChatDlg::OnOK( DLGCMDPARAM )
 DLGCMD	CChatDlg::OnCancel( DLGCMDPARAM )
 {
 //	DEBUGOUT( "CChatDlg::OnCancel\n" );
-	::ShowWindow( m_hWnd, SW_HIDE ); // ”ñ•\¦‚É‚·‚é‚¾‚¯
+	::ShowWindow( m_hWnd, SW_HIDE ); // éè¡¨ç¤ºã«ã™ã‚‹ã ã‘
 }
 
 DLGCMD	CChatDlg::OnSend( DLGCMDPARAM )

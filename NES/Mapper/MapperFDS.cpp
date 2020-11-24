@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 // Mapper020  Nintendo Disk System(FDS)                                 //
 //////////////////////////////////////////////////////////////////////////
 void	Mapper020::Reset()
@@ -41,41 +41,41 @@ void	Mapper020::Reset()
 	SetPROM_Bank( 7, nes->rom->GetDISKBIOS(), BANKTYPE_ROM );
 	SetCRAM_8K_Bank( 0 );
 
-	// ƒfƒtƒHƒ‹ƒg
+	// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ
 //	nes->SetIrqType( NES::IRQ_HSYNC );
 
-	// ‹A‚Á‚Ä‚«‚½ƒ}ƒŠƒIƒuƒ‰ƒU[ƒY
+	// å¸°ã£ã¦ããŸãƒžãƒªã‚ªãƒ–ãƒ©ã‚¶ãƒ¼ã‚º
 	if( nes->rom->GetMakerID() == 0x01 && nes->rom->GetGameID() == 0x4b4d4152 ) {
 		nes->SetRenderMethod( NES::PRE_ALL_RENDER );
 	}
 
-	// ƒKƒ‹ƒtƒH[ƒX
+	// ã‚¬ãƒ«ãƒ•ã‚©ãƒ¼ã‚¹
 	if( nes->rom->GetMakerID() == 0xB6 && nes->rom->GetGameID() == 0x47414C20 ) {
 		nes->SetRenderMethod( NES::PRE_ALL_RENDER );
 	}
-	// ƒtƒ@ƒCƒA[ƒoƒ€
+	// ãƒ•ã‚¡ã‚¤ã‚¢ãƒ¼ãƒãƒ 
 	if( nes->rom->GetMakerID() == 0xB6 && nes->rom->GetGameID() == 0x46424D20 ) {
 		nes->SetRenderMethod( NES::PRE_ALL_RENDER );
 	}
-	// ‚R‚cƒzƒbƒgƒ‰ƒŠ[
+	// ï¼“ï¼¤ãƒ›ãƒƒãƒˆãƒ©ãƒªãƒ¼
 	if( nes->rom->GetMakerID() == 0x01 && nes->rom->GetGameID() == 0x54445245 ) {
 		nes->SetRenderMethod( NES::PRE_ALL_RENDER );
-		irq_type = 1;	// ƒCƒ“ƒ`ƒL
+		irq_type = 1;	// ã‚¤ãƒ³ãƒã‚­
 	}
-	// ƒ^ƒCƒ€ƒcƒCƒXƒg
+	// ã‚¿ã‚¤ãƒ ãƒ„ã‚¤ã‚¹ãƒˆ
 	if( nes->rom->GetMakerID() == 0x01 && nes->rom->GetGameID() == 0x54540120 ) {
 		nes->SetRenderMethod( NES::PRE_ALL_RENDER );
 	}
-	// ƒoƒCƒIƒ~ƒ‰ƒNƒ‹‚Ú‚­‚Á‚ÄƒEƒp
+	// ãƒã‚¤ã‚ªãƒŸãƒ©ã‚¯ãƒ«ã¼ãã£ã¦ã‚¦ãƒ‘
 	if( nes->rom->GetMakerID() == 0xA4 && nes->rom->GetGameID() == 0x424F4B20 ) {
 		nes->SetRenderMethod( NES::PRE_ALL_RENDER );
 	}
-	// ƒpƒbƒgƒpƒbƒgƒSƒ‹ƒt
+	// ãƒ‘ãƒƒãƒˆãƒ‘ãƒƒãƒˆã‚´ãƒ«ãƒ•
 	if( nes->rom->GetMakerID() == 0x99 && nes->rom->GetGameID() == 0x50504720 ) {
 		irq_type = 99;
 	}
 
-	// ƒpƒ`‚à‚ñ
+	// ãƒ‘ãƒã‚‚ã‚“
 	if( nes->rom->GetMakerID() == 0x00 && nes->rom->GetGameID() == 0x00000000 ) {
 		::memset( RAM+0x100, 0xFF, 0x100 );
 	}
@@ -86,7 +86,7 @@ DEBUGOUT( "GAME  ID=%08X\n", nes->rom->GetGameID() );
 	nes->apu->SelectExSound( 4 );
 
 //	ExCmdWrite( EXCMDWR_DISKINSERT, 0 );
-	// Disk 0, Side A‚ðƒZƒbƒg
+	// Disk 0, Side Aã‚’ã‚»ãƒƒãƒˆ
 	disk = nes->rom->GetPROM()+16+65500*0;
 	disk_w = nes->rom->GetDISK()+16+65500*0;
 
@@ -274,7 +274,7 @@ void	Mapper020::ExWrite( WORD addr, BYTE data )
 			break;
 
 		case	0x4025:	// Disk I/O control
-			// Š„‚èž‚Ý“]‘—
+			// å‰²ã‚Šè¾¼ã¿è»¢é€
 			irq_transfer = data & 0x80;
 			if( !irq_transfer ) {
 				nes->cpu->ClrIRQ( IRQ_MAPPER2 );
@@ -305,17 +305,17 @@ void	Mapper020::ExWrite( WORD addr, BYTE data )
 						break;
 				}
 
-				// Å‰‚Ì‚P‰ñ–Ú‚Ì‘‚«ž‚Ý‚ð–³Ž‹‚·‚é‚½‚ß
+				// æœ€åˆã®ï¼‘å›žç›®ã®æ›¸ãè¾¼ã¿ã‚’ç„¡è¦–ã™ã‚‹ãŸã‚
 				first_access = 0xFF;
 			}
 
-			// “Ç‚Ý‘‚«ƒXƒ^[ƒg
+			// èª­ã¿æ›¸ãã‚¹ã‚¿ãƒ¼ãƒˆ
 			RW_start = data & 0x40;
 
-			// “Ç‚Ý‘‚«ƒ‚[ƒh
+			// èª­ã¿æ›¸ããƒ¢ãƒ¼ãƒ‰
 			RW_mode = data & 0x04;
 
-			// “Ç‚Ý‘‚«‚ÌƒŠƒZƒbƒg
+			// èª­ã¿æ›¸ãã®ãƒªã‚»ãƒƒãƒˆ
 			if( data&0x02 ) {
 				point = 0;
 				block_point = 0;
@@ -336,7 +336,7 @@ void	Mapper020::ExWrite( WORD addr, BYTE data )
 				}
 			}
 
-			// ƒfƒBƒXƒNƒ‚[ƒ^[‚ÌƒRƒ“ƒgƒ[ƒ‹
+			// ãƒ‡ã‚£ã‚¹ã‚¯ãƒ¢ãƒ¼ã‚¿ãƒ¼ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 			disk_motor_mode = data & 0x01;
 			if( !(data & 0x01) ) {
 				if( sound_seekend_timer >= 0 ) {
@@ -481,7 +481,7 @@ void	Mapper020::ExCmdWrite( EXCMDWR cmd, BYTE data )
 			disk_mount_count = 0;
 			break;
 		case	EXCMDWR_DISKEJECT:
-			disk = NULL;	// ‚Æ‚è‚ ‚¦‚¸
+			disk = NULL;	// ã¨ã‚Šã‚ãˆãš
 			disk_w = NULL;
 			disk_side = 0xFF;
 			disk_eject = 0xFF;
@@ -597,6 +597,6 @@ void	Mapper020::LoadState( LPBYTE p )
 		disk_w = NULL;
 	}
 
-	// DiskBios Setup(ƒXƒe[ƒg‚Åã‘‚«‚³‚ê‚Ä‚¢‚éˆ×)
+	// DiskBios Setup(ã‚¹ãƒ†ãƒ¼ãƒˆã§ä¸Šæ›¸ãã•ã‚Œã¦ã„ã‚‹ç‚º)
 	SetPROM_Bank( 7, nes->rom->GetDISKBIOS(), BANKTYPE_ROM );
 }

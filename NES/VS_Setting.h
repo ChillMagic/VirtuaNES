@@ -1,4 +1,4 @@
-	{
+﻿	{
 	switch( rom->GetPROM_CRC() ) {
 		case	0xeb2dba63:	// VS TKO Boxing
 		case	0x9818f656:

@@ -1,5 +1,5 @@
-//
-// ƒpƒ^[ƒ“ƒrƒ…[ƒNƒ‰ƒX
+ï»¿//
+// ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ“ãƒ¥ãƒ¼ã‚¯ãƒ©ã‚¹
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -49,7 +49,7 @@ BOOL	CNameTableView::Create( HWND hWndParent )
 			WS_EX_TOOLWINDOW,
 			VIRTUANES_WNDCLASS,
 			"NameTableView",
-			WS_OVERLAPPEDWINDOW,	// WindowŠg‘åk¬‰Â”\
+			WS_OVERLAPPEDWINDOW,	// Windowæ‹¡å¤§ç¸®å°å¯èƒ½
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
@@ -58,7 +58,7 @@ BOOL	CNameTableView::Create( HWND hWndParent )
 			HWND_DESKTOP,
 			NULL,
 			CApp::GetInstance(),
-			(LPVOID)this		// This ‚ğ–„‚ß‚Şˆ×
+			(LPVOID)this		// This ã‚’åŸ‹ã‚è¾¼ã‚€ç‚º
 		);
 	if( !hWnd ) {
 		DEBUGOUT( "CreateWindow faild.\n" );
@@ -123,7 +123,7 @@ WNDMSG	CNameTableView::OnClose( WNDMSGPARAM )
 WNDMSG	CNameTableView::OnDestroy( WNDMSGPARAM )
 {
 	DEBUGOUT( "CNameTableView::OnDestroy\n" );
-	// ˆÊ’u•Û‘¶
+	// ä½ç½®ä¿å­˜
 	::GetWindowRect( m_hWnd, &Config.general.rcNameTableViewPos );
 
 	m_hWnd = NULL;
@@ -135,12 +135,12 @@ WNDMSG	CNameTableView::OnTimer( WNDMSGPARAM )
 	if( !Emu.IsRunning() )
 		return	TRUE;
 
-	// ƒpƒŒƒbƒgXV
+	// ãƒ‘ãƒ¬ãƒƒãƒˆæ›´æ–°
 	for( INT i = 0; i < 16; i++ ) {
 		m_BitmapHdr.rgb[i] = m_Palette[BGPAL[i]];
 	}
 
-	// ƒLƒƒƒ‰ƒNƒ^ƒf[ƒ^XV
+	// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ‡ãƒ¼ã‚¿æ›´æ–°
 	for( INT n = 0; n < 4; n++ ) {
 		LPBYTE	lpVRAM = PPU_MEM_BANK[8+n];
 		LPBYTE	lpScnv = &m_lpPattern[(n>>1)*512*240+(n&1)*256];

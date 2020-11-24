@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------*
+﻿/*---------------------------------------------------------------------*
  * The following (piece of) code, (part of) the 2xSaI engine,          *
  * copyright (c) 2001 by Derek Liauw Kie Fa.                           *
  * Non-Commercial use of the engine is allowed and is encouraged,      *

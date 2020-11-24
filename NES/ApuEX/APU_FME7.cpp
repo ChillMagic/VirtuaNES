@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+Ôªø//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      SunSoft FME7                                                    //
 //                                                           Norix      //
@@ -108,7 +108,7 @@ LPSBYTE	APU_FME7::envstep_table[16] = {
 
 APU_FME7::APU_FME7()
 {
-	// âºê›íË
+	// ‰ªÆË®≠ÂÆö
 	Reset( APU_CLOCK, 22050 );
 }
 
@@ -209,7 +209,7 @@ INT	APU_FME7::Process( INT channel )
 	if( channel < 3 ) {
 		return	ChannelRender( op[channel] );
 	} else if( channel == 3 ) {
-		// ïKÇ∏ch3Ç1âÒåƒÇÒÇ≈Ç©ÇÁch0-2ÇåƒÇ‘éñ
+		// ÂøÖ„Åöch3„Çí1ÂõûÂëº„Çì„Åß„Åã„Çâch0-2„ÇíÂëº„Å∂‰∫ã
 		EnvelopeRender();
 		NoiseRender();
 	}

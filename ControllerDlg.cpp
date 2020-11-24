@@ -1,5 +1,5 @@
-//
-// ƒRƒ“ƒgƒ[ƒ‰ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -22,12 +22,12 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////////////////
 
 DLG_MESSAGE_BEGIN(CControllerPageDlg)
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
-// NOTIFYƒƒbƒZ[ƒW
+// NOTIFYãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_NOTIFY_END()
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND_NOTIFY_RANGE( IDC_CTR_UP, IDC_CTR_END, STN_CLICKED, OnClicked )
 DLG_COMMAND_END()
@@ -51,7 +51,7 @@ DLGCMD	CControllerPageDlg::OnClicked( DLGCMDPARAM )
 {
 //	DEBUGOUT( "CControllerPageDlg::OnClicked uID=%d\n", uID );
 
-	// e‚Ìƒ^ƒuƒRƒ“ƒgƒ[ƒ‹‚ğƒpƒX‚µ‚ÄƒƒbƒZ[ƒW‚ğ’Ê’m:p
+	// è¦ªã®ã‚¿ãƒ–ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ãƒ‘ã‚¹ã—ã¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€šçŸ¥:p
 	HWND	hWndParent, hWndOwner;
 	hWndParent = ::GetParent( m_hWnd );
 	hWndOwner = ::GetParent( hWndParent );
@@ -82,15 +82,15 @@ UINT	CControllerDlg::ControllerPageID[] = {
 };
 
 DLG_MESSAGE_BEGIN(CControllerDlg)
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
 DLG_ON_MESSAGE( WM_DESTROY,	OnDestroy )
 DLG_ON_MESSAGE( WM_TIMER,	OnTimer )
-// NOTIFYƒƒbƒZ[ƒW
+// NOTIFYãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_ON_NOTIFY( IDC_CTR_TAB, TCN_SELCHANGE, OnSelectChange )
 DLG_NOTIFY_END()
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
@@ -130,41 +130,41 @@ void	CControllerDlg::OnInitialMember()
 	for( page = 0; ControllerPageID[page]; page++ ) {
 		m_Page[page].Create( ControllerPageID[page], hWndCtrl );
 
-		// –¼‘O‚Ìæ“¾
+		// åå‰ã®å–å¾—
 		CHAR	szTitle[256];
 		::GetWindowText( m_Page[page].m_hWnd, szTitle, sizeof(szTitle) );
 
-		// –¼‘O‚ğæ“¾‚µ‚½‚çƒLƒƒƒvƒVƒ‡ƒ“‚ğÁ‚·
+		// åå‰ã‚’å–å¾—ã—ãŸã‚‰ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã‚’æ¶ˆã™
 		LONG	style;
 		style = ::GetWindowLong( m_Page[page].m_hWnd, GWL_STYLE );
 		style &= ~(WS_CAPTION|WS_BORDER|WS_OVERLAPPED);
 		::SetWindowLong( m_Page[page].m_hWnd, GWL_STYLE, style );
 
-		// ƒTƒCƒY•ÏX
+		// ã‚µã‚¤ã‚ºå¤‰æ›´
 		::GetWindowRect( m_Page[page].m_hWnd, &rcW );
 		rcW.right  -= ::GetSystemMetrics( SM_CXSIZEFRAME );
 		rcW.bottom -= ::GetSystemMetrics( SM_CYCAPTION )+::GetSystemMetrics( SM_CYSIZEFRAME )*2;
 		::SetWindowPos( m_Page[page].m_hWnd, NULL, 0, 0, RCWIDTH(rcW), RCHEIGHT(rcW), SWP_NOMOVE|SWP_NOZORDER );
 
-		// ƒ^ƒu‚É–¼‘O‚ğİ’è‚·‚é
+		// ã‚¿ãƒ–ã«åå‰ã‚’è¨­å®šã™ã‚‹
 		TCITEM	tcitem;
 		tcitem.mask = TCIF_TEXT;
 		tcitem.pszText = szTitle;
 		TabCtrl_InsertItem( hWndCtrl, page, &tcitem );
 
-//		// ƒy[ƒWˆÊ’u‚Ì•â³
+//		// ãƒšãƒ¼ã‚¸ä½ç½®ã®è£œæ­£
 //		::GetClientRect( hWndCtrl, &rcT );
 //		TabCtrl_AdjustRect( hWndCtrl, FALSE, &rcT );
 //		::GetWindowRect( m_Page[page].m_hWnd, &rcP );
 
-		// ŒvZ
+		// è¨ˆç®—
 //		rcW.left   = rcT.left + (RCWIDTH(rcT)-RCWIDTH(rcP))/2;
 //		rcW.top    = rcT.top  + (RCHEIGHT(rcT)-RCHEIGHT(rcP))/2;
 //		rcW.right  = rcW.left + RCWIDTH(rcP);
 //		rcW.bottom = rcW.top  + RCHEIGHT(rcP);
 //		::SetWindowPos( m_Page[page].m_hWnd, NULL, rcW.left, rcW.top, RCWIDTH(rcW), RCHEIGHT(rcW), SWP_NOZORDER|SWP_NOACTIVATE );
 
-		// Šeƒy[ƒW‚ÌƒŠƒXƒgƒ{ƒbƒNƒX‚Ìİ’è
+		// å„ãƒšãƒ¼ã‚¸ã®ãƒªã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã®è¨­å®š
 		if( page < 4 ) {
 			HWND	hWndList;
 			hWndList = ::GetDlgItem( m_Page[page].m_hWnd, IDC_CTR_A_RAPID_LIST );
@@ -179,20 +179,20 @@ void	CControllerDlg::OnInitialMember()
 			::SendMessage( hWndList, LB_INSERTSTRING, 3, (LPARAM)" 30FPS" );
 		}
 
-		// ƒ{ƒ^ƒ“–¼“™‚Ìİ’è
+		// ãƒœã‚¿ãƒ³åç­‰ã®è¨­å®š
 		OnPageSetup( page );
 
 		::ShowWindow( m_Page[page].m_hWnd, (page==0)?SW_SHOW:SW_HIDE );
 	}
 
-	// ƒy[ƒWˆÊ’uÄ’²®
+	// ãƒšãƒ¼ã‚¸ä½ç½®å†èª¿æ•´
 	for( page = 0; ControllerPageID[page]; page++ ) {
-		// ƒy[ƒWˆÊ’u‚Ì•â³
+		// ãƒšãƒ¼ã‚¸ä½ç½®ã®è£œæ­£
 		::GetClientRect( hWndCtrl, &rcT );
 		TabCtrl_AdjustRect( hWndCtrl, FALSE, &rcT );
 		::GetWindowRect( m_Page[page].m_hWnd, &rcP );
 
-		// ŒvZ
+		// è¨ˆç®—
 		rcW.left   = rcT.left + (RCWIDTH(rcT)-RCWIDTH(rcP))/2;
 		rcW.top    = rcT.top  + (RCHEIGHT(rcT)-RCHEIGHT(rcP))/2;
 		rcW.right  = rcW.left + RCWIDTH(rcP);
@@ -205,7 +205,7 @@ void	CControllerDlg::OnInitialMember()
 
 	m_PageNum = page;
 
-	// İ’èƒRƒ“ƒ{ƒ{ƒbƒNƒX
+	// è¨­å®šã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹
 	::SendDlgItemMessage( m_hWnd, IDC_CTR_SELECT_COMBO, CB_RESETCONTENT, 0, 0 );
 	CHAR	szStr[64];
 	for( INT i = IDS_CTR_SELECT1; i <= IDS_CTR_SELECT2; i++ ) {
@@ -271,7 +271,7 @@ DLGMSG	CControllerDlg::OnDestroy( DLGMSGPARAM )
 {
 //	DEBUGOUT( "CControllerDlg::OnDestroy\n" );
 
-	// ƒ`ƒƒƒCƒ‹ƒhƒEƒCƒ“ƒhƒE‚ğ”jŠü
+	// ãƒãƒ£ã‚¤ãƒ«ãƒ‰ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ç ´æ£„
 	for( INT i = 0; i < m_PageNum; i++ ) {
 		::DestroyWindow( m_Page[i].m_hWnd );
 	}

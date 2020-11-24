@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      NES Memory Management Unit                                      //
 //                                                           Norix      //
@@ -13,64 +13,64 @@
 
 #include "mmu.h"
 
-// CPU ƒƒ‚ƒŠƒoƒ“ƒN
-LPBYTE	CPU_MEM_BANK[8];	// 8K’PˆÊ
+// CPU ãƒ¡ãƒ¢ãƒªãƒãƒ³ã‚¯
+LPBYTE	CPU_MEM_BANK[8];	// 8Kå˜ä½
 BYTE	CPU_MEM_TYPE[8];
-INT	CPU_MEM_PAGE[8];	// ƒXƒe[ƒgƒZ[ƒu—p
+INT	CPU_MEM_PAGE[8];	// ã‚¹ãƒ†ãƒ¼ãƒˆã‚»ãƒ¼ãƒ–ç”¨
 
-// PPU ƒƒ‚ƒŠƒoƒ“ƒN
-LPBYTE	PPU_MEM_BANK[12];	// 1K’PˆÊ
+// PPU ãƒ¡ãƒ¢ãƒªãƒãƒ³ã‚¯
+LPBYTE	PPU_MEM_BANK[12];	// 1Kå˜ä½
 BYTE	PPU_MEM_TYPE[12];
-INT	PPU_MEM_PAGE[12];	// ƒXƒe[ƒgƒZ[ƒu—p
-BYTE	CRAM_USED[16];		// ƒXƒe[ƒgƒZ[ƒu—p
+INT	PPU_MEM_PAGE[12];	// ã‚¹ãƒ†ãƒ¼ãƒˆã‚»ãƒ¼ãƒ–ç”¨
+BYTE	CRAM_USED[16];		// ã‚¹ãƒ†ãƒ¼ãƒˆã‚»ãƒ¼ãƒ–ç”¨
 
-// NESƒƒ‚ƒŠ
-BYTE	RAM [  8*1024];		// NES“à‘ŸRAM
-BYTE	WRAM[128*1024];		// ƒ[ƒN/ƒoƒbƒNƒAƒbƒvRAM
-BYTE	DRAM[ 40*1024];		// ƒfƒBƒXƒNƒVƒXƒeƒ€RAM
-BYTE	XRAM[  8*1024];		// ƒ_ƒ~[ƒoƒ“ƒN
-BYTE	ERAM[ 32*1024];		// Šg’£‹@Ší—pRAM
+// NESãƒ¡ãƒ¢ãƒª
+BYTE	RAM [  8*1024];		// NESå†…è‡“RAM
+BYTE	WRAM[128*1024];		// ãƒ¯ãƒ¼ã‚¯/ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—RAM
+BYTE	DRAM[ 40*1024];		// ãƒ‡ã‚£ã‚¹ã‚¯ã‚·ã‚¹ãƒ†ãƒ RAM
+BYTE	XRAM[  8*1024];		// ãƒ€ãƒŸãƒ¼ãƒãƒ³ã‚¯
+BYTE	ERAM[ 32*1024];		// æ‹¡å¼µæ©Ÿå™¨ç”¨RAM
 
-BYTE	CRAM[ 32*1024];		// ƒLƒƒƒ‰ƒNƒ^ƒpƒ^[ƒ“RAM
-BYTE	VRAM[  4*1024];		// ƒl[ƒ€ƒe[ƒuƒ‹/ƒAƒgƒŠƒrƒ…[ƒgRAM
+BYTE	CRAM[ 32*1024];		// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ‘ã‚¿ãƒ¼ãƒ³RAM
+BYTE	VRAM[  4*1024];		// ãƒãƒ¼ãƒ ãƒ†ãƒ¼ãƒ–ãƒ«/ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆRAM
 
-BYTE	SPRAM[0x100];		// ƒXƒvƒ‰ƒCƒgRAM
-BYTE	BGPAL[0x10];		// BGƒpƒŒƒbƒg
-BYTE	SPPAL[0x10];		// SPƒpƒŒƒbƒg
+BYTE	SPRAM[0x100];		// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆRAM
+BYTE	BGPAL[0x10];		// BGãƒ‘ãƒ¬ãƒƒãƒˆ
+BYTE	SPPAL[0x10];		// SPãƒ‘ãƒ¬ãƒƒãƒˆ
 
-// ƒŒƒWƒXƒ^
+// ãƒ¬ã‚¸ã‚¹ã‚¿
 BYTE	CPUREG[0x18];		// Nes $4000-$4017
 BYTE	PPUREG[0x04];		// Nes $2000-$2003
 
-// Frame-IRQƒŒƒWƒXƒ^($4017)
+// Frame-IRQãƒ¬ã‚¸ã‚¹ã‚¿($4017)
 BYTE	FrameIRQ;
 
-// PPU“à•”ƒŒƒWƒXƒ^
+// PPUå†…éƒ¨ãƒ¬ã‚¸ã‚¹ã‚¿
 BYTE	PPU56Toggle;		// $2005-$2006 Toggle
 BYTE	PPU7_Temp;		// $2007 read buffer
 WORD	loopy_t;		// same as $2005/$2006
 WORD	loopy_v;		// same as $2005/$2006
 WORD	loopy_x;		// tile x offset
 
-// ROMƒf[ƒ^ƒ|ƒCƒ“ƒ^
+// ROMãƒ‡ãƒ¼ã‚¿ãƒã‚¤ãƒ³ã‚¿
 LPBYTE	PROM;		// PROM ptr
 LPBYTE	VROM;		// VROM ptr
 
 // For dis...
 LPBYTE	PROM_ACCESS = NULL;
 
-// ROM ƒoƒ“ƒNƒTƒCƒY
+// ROM ãƒãƒ³ã‚¯ã‚µã‚¤ã‚º
 INT	PROM_8K_SIZE, PROM_16K_SIZE, PROM_32K_SIZE;
 INT	VROM_1K_SIZE, VROM_2K_SIZE, VROM_4K_SIZE,  VROM_8K_SIZE;
 
 //
-// ‘Sƒƒ‚ƒŠ/ƒŒƒWƒXƒ^“™‚Ì‰Šú‰»
+// å…¨ãƒ¡ãƒ¢ãƒª/ãƒ¬ã‚¸ã‚¹ã‚¿ç­‰ã®åˆæœŸåŒ–
 //
 void	NesSub_MemoryInitial()
 {
 INT	i;
 
-	// ƒƒ‚ƒŠƒNƒŠƒA
+	// ãƒ¡ãƒ¢ãƒªã‚¯ãƒªã‚¢
 	ZEROMEMORY( RAM,  sizeof(RAM) );
 	ZEROMEMORY( WRAM, sizeof(WRAM) );
 	ZEROMEMORY( DRAM, sizeof(DRAM) );
@@ -90,22 +90,22 @@ INT	i;
 
 	PROM = VROM = NULL;
 
-	// 0 œŽZ–hŽ~‘Îô
+	// 0 é™¤ç®—é˜²æ­¢å¯¾ç­–
 	PROM_8K_SIZE = PROM_16K_SIZE = PROM_32K_SIZE = 1;
 	VROM_1K_SIZE = VROM_2K_SIZE = VROM_4K_SIZE = VROM_8K_SIZE = 1;
 
-	// ƒfƒtƒHƒ‹ƒgƒoƒ“ƒNÝ’è
+	// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒãƒ³ã‚¯è¨­å®š
 	for( i = 0; i < 8; i++ ) {
 		CPU_MEM_BANK[i] = NULL;
 		CPU_MEM_TYPE[i] = BANKTYPE_ROM;
 		CPU_MEM_PAGE[i] = 0;
 	}
 
-	// “à‘ŸRAM/WRAM
+	// å†…è‡“RAM/WRAM
 	SetPROM_Bank( 0, RAM,  BANKTYPE_RAM );
 	SetPROM_Bank( 3, WRAM, BANKTYPE_RAM );
 
-	// ƒ_ƒ~[
+	// ãƒ€ãƒŸãƒ¼
 	SetPROM_Bank( 1, XRAM, BANKTYPE_ROM );
 	SetPROM_Bank( 2, XRAM, BANKTYPE_ROM );
 
@@ -113,7 +113,7 @@ INT	i;
 		CRAM_USED[i] = 0;
 	}
 
-	// PPU VROMƒoƒ“ƒNÝ’è
+	// PPU VROMãƒãƒ³ã‚¯è¨­å®š
 //	SetVRAM_Mirror( VRAM_MIRROR4 );
 }
 
@@ -212,7 +212,7 @@ void	SetCRAM_1K_Bank( BYTE page, INT bank )
 	PPU_MEM_TYPE[page] = BANKTYPE_CRAM;
 	PPU_MEM_PAGE[page] = bank;
 
-	CRAM_USED[bank>>2] = 0xFF;	// CRAMŽg—pƒtƒ‰ƒO
+	CRAM_USED[bank>>2] = 0xFF;	// CRAMä½¿ç”¨ãƒ•ãƒ©ã‚°
 }
 
 void	SetCRAM_2K_Bank( BYTE page, INT bank )

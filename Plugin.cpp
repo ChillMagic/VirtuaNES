@@ -1,4 +1,4 @@
-//
+﻿//
 // Language plugin support
 //
 #include "VirtuaNESres.h"

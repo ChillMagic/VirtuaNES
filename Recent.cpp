@@ -1,5 +1,5 @@
-//
-// Recent File ƒNƒ‰ƒX
+ï»¿//
+// Recent File ã‚¯ãƒ©ã‚¹
 //
 #include <TCHAR.h>
 
@@ -15,7 +15,7 @@ CHAR	CRecent::m_TempPath[_MAX_PATH];
 
 LPCSTR	CRecent::GetName( INT nID )
 {
-	// CRecent::Add ‚Å“¯‚¶ƒ|ƒCƒ“ƒ^‚ğw‚µ‚Ä–ß‚Á‚Ä‚­‚é–‚ª‚ ‚é‚Ì‚Åˆê’Uƒeƒ“ƒ|ƒ‰ƒŠ‚ÉƒRƒs[
+	// CRecent::Add ã§åŒã˜ãƒã‚¤ãƒ³ã‚¿ã‚’æŒ‡ã—ã¦æˆ»ã£ã¦ãã‚‹äº‹ãŒã‚ã‚‹ã®ã§ä¸€æ—¦ãƒ†ãƒ³ãƒãƒ©ãƒªã«ã‚³ãƒ”ãƒ¼
 	::strcpy( m_TempPath, m_RecentName[nID] );
 	return	(LPCSTR)m_TempPath;
 }
@@ -30,11 +30,11 @@ void	CRecent::MakeManuPath( LPSTR lpszPath )
 	string	FullPath = lpszPath;
 	string	FileName = CPathlib::SplitFnameExt( lpszPath );
 
-	// 30•¶šˆÈ‰º‚Í‚»‚Ì‚Ü‚Ü
+	// 30æ–‡å­—ä»¥ä¸‹ã¯ãã®ã¾ã¾
 	if( FullPath.size() <= 30 )
 		return;
 
-	// ƒtƒ@ƒCƒ‹–¼‚ª30•¶šˆÈã‚Ìê‡
+	// ãƒ•ã‚¡ã‚¤ãƒ«åãŒ30æ–‡å­—ä»¥ä¸Šã®å ´åˆ
 	if( ::strlen( FileName.c_str() ) >= 30 ) {
 		::strcpy( lpszPath, FileName.c_str() );
 		return;
@@ -74,25 +74,25 @@ void	CRecent::MakeManuPath( LPSTR lpszPath )
 
 void	CRecent::UpdateMenu( HMENU hMenu )
 {
-	// ƒƒjƒ…[‚È‚µH
+	// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãªã—ï¼Ÿ
 	if( !hMenu )
 		return;
 
-	// Ì§²Ù(&F)ƒƒjƒ…[‚Ìæ“¾
+	// ï¾Œï½§ï½²ï¾™(&F)ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å–å¾—
 	HMENU hSubMenu = ::GetSubMenu( hMenu, 0 );
 
-	// Å‹ßg‚Á‚½Ì«ÙÀŞ(&P)ƒ|ƒbƒvƒAƒbƒvƒƒjƒ…[‚Ìæ“¾
+	// æœ€è¿‘ä½¿ã£ãŸï¾Œï½«ï¾™ï¾€ï¾(&P)ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å–å¾—
 	HMENU hPathMenu = ::GetSubMenu( hSubMenu, 12 );
-	// Å‹ßg‚Á‚½Ì§²Ù(&F)ƒ|ƒbƒvƒAƒbƒvƒƒjƒ…[‚Ìæ“¾
+	// æœ€è¿‘ä½¿ã£ãŸï¾Œï½§ï½²ï¾™(&F)ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å–å¾—
 	HMENU hFileMenu = ::GetSubMenu( hSubMenu, 13 );
 
-	// €–Ú‚ª–³‚¢ê‡
+	// é …ç›®ãŒç„¡ã„å ´åˆ
 	if( ::strlen(m_RecentPath[0]) <= 0 ) {
-		// ƒfƒBƒZ[ƒuƒ‹‚É‚·‚é
+		// ãƒ‡ã‚£ã‚»ãƒ¼ãƒ–ãƒ«ã«ã™ã‚‹
 		::EnableMenuItem( hPathMenu, ID_MRU_PATH0, MF_BYCOMMAND|MF_GRAYED );
 	} else {
 		INT	i;
-		// ƒƒjƒ…[ƒAƒCƒeƒ€‚Ìíœ
+		// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¢ã‚¤ãƒ†ãƒ ã®å‰Šé™¤
 		for( i = 0; i < RECENT_MAX; i++ ) {
 			::DeleteMenu( hPathMenu, ID_MRU_PATH0+i, MF_BYCOMMAND );
 		}
@@ -101,10 +101,10 @@ void	CRecent::UpdateMenu( HMENU hMenu )
 		CHAR	szTemp[_MAX_PATH];
 		for( i = 0; i < RECENT_MAX; i++ ) {
 			if( ::strlen(m_RecentPath[i]) > 0 ) {
-				// ƒpƒX‚ğƒƒjƒ…[—p‚É’Z‚­‚µ‚½‚è‚·‚é
+				// ãƒ‘ã‚¹ã‚’ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”¨ã«çŸ­ãã—ãŸã‚Šã™ã‚‹
 				::strcpy( szRecent, m_RecentPath[i] );
 
-				// '&'•t‚«‚Ìƒtƒ@ƒCƒ‹‚Ì'&'‚ğ'&&'‚É•ÏŠ·‚·‚é
+				// '&'ä»˜ãã®ãƒ•ã‚¡ã‚¤ãƒ«ã®'&'ã‚’'&&'ã«å¤‰æ›ã™ã‚‹
 				LPCSTR	pSrc = szRecent;
 				LPSTR	pDst = szTemp;
 				while( *pSrc != 0 ) {
@@ -118,7 +118,7 @@ void	CRecent::UpdateMenu( HMENU hMenu )
 				::wsprintf( szRecent, "&%d ", (i+1)%10 );
 				::strcat( szRecent, szTemp );
 
-				// ƒƒjƒ…[‚É’Ç‰Á
+				// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«è¿½åŠ 
 				::InsertMenu( hPathMenu, i, MF_BYPOSITION, ID_MRU_PATH0+i, szRecent );
 			} else {
 				break;
@@ -126,13 +126,13 @@ void	CRecent::UpdateMenu( HMENU hMenu )
 		}
 	}
 
-	// €–Ú‚ª–³‚¢ê‡
+	// é …ç›®ãŒç„¡ã„å ´åˆ
 	if( ::strlen(m_RecentName[0]) <= 0 ) {
-		// ƒfƒBƒZ[ƒuƒ‹‚É‚·‚é
+		// ãƒ‡ã‚£ã‚»ãƒ¼ãƒ–ãƒ«ã«ã™ã‚‹
 		::EnableMenuItem( hFileMenu, ID_MRU_FILE0, MF_BYCOMMAND|MF_GRAYED );
 	} else {
 		INT	i;
-		// ƒƒjƒ…[ƒAƒCƒeƒ€‚Ìíœ
+		// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¢ã‚¤ãƒ†ãƒ ã®å‰Šé™¤
 		for( i = 0; i < RECENT_MAX; i++ ) {
 			::DeleteMenu( hFileMenu, ID_MRU_FILE0+i, MF_BYCOMMAND );
 		}
@@ -141,11 +141,11 @@ void	CRecent::UpdateMenu( HMENU hMenu )
 		CHAR	szTemp[_MAX_PATH];
 		for( i = 0; i < RECENT_MAX; i++ ) {
 			if( ::strlen(m_RecentName[i]) > 0 ) {
-				// ƒpƒX‚ğƒƒjƒ…[—p‚É’Z‚­‚µ‚½‚è‚·‚é
+				// ãƒ‘ã‚¹ã‚’ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”¨ã«çŸ­ãã—ãŸã‚Šã™ã‚‹
 				::strcpy( szRecent, m_RecentName[i] );
 				MakeManuPath( szRecent );
 
-				// '&'•t‚«‚Ìƒtƒ@ƒCƒ‹‚Ì'&'‚ğ'&&'‚É•ÏŠ·‚·‚é
+				// '&'ä»˜ãã®ãƒ•ã‚¡ã‚¤ãƒ«ã®'&'ã‚’'&&'ã«å¤‰æ›ã™ã‚‹
 				LPCSTR	pSrc = szRecent;
 				LPSTR	pDst = szTemp;
 				while( *pSrc != 0 ) {
@@ -159,7 +159,7 @@ void	CRecent::UpdateMenu( HMENU hMenu )
 				::wsprintf( szRecent, "&%d ", (i+1)%10 );
 				::strcat( szRecent, szTemp );
 
-				// ƒƒjƒ…[‚É’Ç‰Á
+				// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«è¿½åŠ 
 				::InsertMenu( hFileMenu, i, MF_BYPOSITION, ID_MRU_FILE0+i, szRecent );
 			} else {
 				break;

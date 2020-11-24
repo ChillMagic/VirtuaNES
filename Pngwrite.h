@@ -1,4 +1,4 @@
-#ifndef	__PNGWRITE_INCLUDED__
+﻿#ifndef	__PNGWRITE_INCLUDED__
 #define	__PNGWRITE_INCLUDED__
 
 #include <stdio.h>

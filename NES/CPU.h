@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      6502 CPU core                                                   //
 //                                                           Norix      //
@@ -33,8 +33,8 @@ class	Mapper;
 #define	IRQ_DPCM	0x08
 #define	IRQ_MAPPER	0x10
 #define	IRQ_MAPPER2	0x20
-#define	IRQ_TRIGGER	0x40		// one shot(‹ŒIRQ())
-#define	IRQ_TRIGGER2	0x80		// one shot(‹ŒIRQ_NotPending())
+#define	IRQ_TRIGGER	0x40		// one shot(æ—§IRQ())
+#define	IRQ_TRIGGER2	0x80		// one shot(æ—§IRQ_NotPending())
 
 #define	IRQ_MASK	(~(NMI_FLAG|IRQ_FLAG))
 
@@ -52,7 +52,7 @@ typedef	struct	{
 	BYTE	Y;
 	BYTE	S;
 
-	BYTE	INT_pending;	// Š„‚è‚İƒyƒ“ƒfƒBƒ“ƒOƒtƒ‰ƒO
+	BYTE	INT_pending;	// å‰²ã‚Šè¾¼ã¿ãƒšãƒ³ãƒ‡ã‚£ãƒ³ã‚°ãƒ•ãƒ©ã‚°
 } R6502;
 
 
@@ -93,8 +93,8 @@ protected:
 
 	R6502	R;
 
-	INT	TOTAL_cycles;	// CPUƒg[ƒ^ƒ‹ƒTƒCƒNƒ‹”
-	INT	DMA_cycles;	// DMAƒTƒCƒNƒ‹”
+	INT	TOTAL_cycles;	// CPUãƒˆãƒ¼ã‚¿ãƒ«ã‚µã‚¤ã‚¯ãƒ«æ•°
+	INT	DMA_cycles;	// DMAã‚µã‚¤ã‚¯ãƒ«æ•°
 
 	// PTR
 	LPBYTE	STACK;

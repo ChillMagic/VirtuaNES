@@ -1,5 +1,5 @@
-//
-// ƒlƒbƒgƒvƒŒƒCƒNƒ‰ƒX
+ï»¿//
+// ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CNETPLAY_INCLUDED__
 #define	__CNETPLAY_INCLUDED__
@@ -48,73 +48,73 @@ public:
 	CNetPlay();
 	~CNetPlay();
 
-	// ‰Šú‰»/ŠJ•ú
+	// åˆæœŸåŒ–/é–‹æ”¾
 	BOOL	Initialize( HWND hWnd );
 	void	Release();
 
-	// ƒlƒbƒgƒvƒŒƒC’†H
+	// ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤ä¸­ï¼Ÿ
 	BOOL	IsNetPlay() { return m_hWnd?TRUE:FALSE; }
-	// Ú‘±’†H
+	// æŽ¥ç¶šä¸­ï¼Ÿ
 	BOOL	IsConnect() { return m_hWnd?m_bConnect:FALSE; }
-	// Ú‘±’†H
+	// æŽ¥ç¶šä¸­ï¼Ÿ
 	BOOL	IsServer() { return m_bServer; }
 
-	// ’ÊMƒŒƒCƒeƒ“ƒV
+	// é€šä¿¡ãƒ¬ã‚¤ãƒ†ãƒ³ã‚·
 	void	SetLatency( INT nLatency ) { m_nLatency = nLatency; }
 	INT	GetLatency() { return m_nLatency; }
 
-	// ”ñ“¯Šúˆ—ƒƒbƒZ[ƒW•Ô‘—ƒEƒCƒ“ƒhƒE‚ÌÝ’è
+	// éžåŒæœŸå‡¦ç†ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¿”é€ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®è¨­å®š
 	void	SetMsgWnd( HWND hWnd ) { m_hWndMsg = hWnd; }
 
-	// ƒ`ƒƒƒbƒgƒƒbƒZ[ƒWŽó‚¯Žæ‚èƒEƒCƒ“ƒhƒE‚ÌÝ’è
+	// ãƒãƒ£ãƒƒãƒˆãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å—ã‘å–ã‚Šã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®è¨­å®š
 	void	SetChatWnd( HWND hWnd ) { m_hWndChat = hWnd; }
 
-	// ƒzƒXƒg–¼‚ªIP‚©‚Ç‚¤‚©‚ðƒ`ƒFƒbƒN‚·‚é(0:IP -:Error +:Host search)
+	// ãƒ›ã‚¹ãƒˆåãŒIPã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹(0:IP -:Error +:Host search)
 	INT	ASyncHostCheck( HWND hWnd, const char* lpszHost );
 	HRESULT	ASyncWndProc( HWND hWnd, WPARAM wParam, LPARAM lParam );
 
-	// Ú‘±‚ÆØ’f
+	// æŽ¥ç¶šã¨åˆ‡æ–­
 	BOOL	Connect( BOOL bServer, const char* lpszIP, unsigned short Port );
 	void	Disconnect();
 
-	// ƒf[ƒ^‘—M 0:ŽóMƒf[ƒ^‘Ò‚¿ 1ˆÈã:ŽóMƒf[ƒ^‚ ‚è 0–¢–ž:Ú‘±Ø‚ê‚âƒGƒ‰[
+	// ãƒ‡ãƒ¼ã‚¿é€ä¿¡ 0:å—ä¿¡ãƒ‡ãƒ¼ã‚¿å¾…ã¡ 1ä»¥ä¸Š:å—ä¿¡ãƒ‡ãƒ¼ã‚¿ã‚ã‚Š 0æœªæº€:æŽ¥ç¶šåˆ‡ã‚Œã‚„ã‚¨ãƒ©ãƒ¼
 	INT	Send( BYTE data );
-	// ƒf[ƒ^ŽóM
-	// 0:ŽóMƒf[ƒ^‘Ò‚¿ 1ˆÈã:ŽóMƒf[ƒ^‚ ‚è 0–¢–ž:Ú‘±Ø‚ê‚âƒGƒ‰[
-	// ƒ^ƒCƒ€ƒAƒEƒg–³‚µ
+	// ãƒ‡ãƒ¼ã‚¿å—ä¿¡
+	// 0:å—ä¿¡ãƒ‡ãƒ¼ã‚¿å¾…ã¡ 1ä»¥ä¸Š:å—ä¿¡ãƒ‡ãƒ¼ã‚¿ã‚ã‚Š 0æœªæº€:æŽ¥ç¶šåˆ‡ã‚Œã‚„ã‚¨ãƒ©ãƒ¼
+	// ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆç„¡ã—
 	INT	Recv( BYTE& data );
-	// ƒ^ƒCƒ€ƒAƒEƒg—L‚è
+	// ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæœ‰ã‚Š
 	INT	RecvTime( BYTE& data, unsigned long timeout );
 
-	// ƒŠƒ“ƒOƒoƒbƒtƒ@‚Ö‚ÌŽæ‚èž‚Ý
+	// ãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡ã¸ã®å–ã‚Šè¾¼ã¿
 	BOOL	RecvBuffer();
-	// ƒoƒbƒtƒ@ƒ`ƒFƒbƒN(0:No change  +:frame add  -:no frame)
+	// ãƒãƒƒãƒ•ã‚¡ãƒã‚§ãƒƒã‚¯(0:No change  +:frame add  -:no frame)
 	INT	BufferCheck();
-	// ƒŠƒ“ƒOƒoƒbƒtƒ@‚Ìƒoƒbƒtƒ@ƒŠƒ“ƒOƒoƒCƒg”Žæ“¾
+	// ãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡ã®ãƒãƒƒãƒ•ã‚¡ãƒªãƒ³ã‚°ãƒã‚¤ãƒˆæ•°å–å¾—
 	INT	GetRecvBufferSize();
 
-	// “¯Šúˆ—
+	// åŒæœŸå‡¦ç†
 	INT	Sync();
-	// ƒvƒŒƒCƒ„[ó‘Ô‚ÌXV
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼çŠ¶æ…‹ã®æ›´æ–°
 	INT	ModifyPlayer( LPBYTE p1, LPBYTE p2 );
 
-	// ƒ`ƒƒƒbƒgƒƒbƒZ[ƒW‘—M
+	// ãƒãƒ£ãƒƒãƒˆãƒ¡ãƒƒã‚»ãƒ¼ã‚¸é€ä¿¡
 	void	ChatSend( LPCSTR lpStr );
 
-	// WindowsƒƒbƒZ[ƒWƒvƒƒV[ƒWƒƒ
+	// Windowsãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
 	HRESULT	WndProc( HWND hWnd, WPARAM wParam, LPARAM lParam );
 
-	// ’ÊMƒoƒbƒtƒ@
+	// é€šä¿¡ãƒãƒƒãƒ•ã‚¡
 	enum {
-		// ƒf[ƒ^ƒuƒƒbƒNƒTƒCƒY
+		// ãƒ‡ãƒ¼ã‚¿ãƒ–ãƒ­ãƒƒã‚¯ã‚µã‚¤ã‚º
 		SOCKET_BLOCK_SIZE = 8,
-		// ƒoƒbƒtƒ@ƒTƒCƒY
+		// ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º
 		SOCKET_BUFFER_SIZE = (SOCKET_BLOCK_SIZE*32),
-		// ŽóMŽžƒoƒbƒtƒ@ƒTƒCƒY
+		// å—ä¿¡æ™‚ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º
 		SOCKET_RECEIVE_SIZE = (SOCKET_BLOCK_SIZE*8)
 	};
 protected:
-	// ƒƒ“ƒo•Ï”
+	// ãƒ¡ãƒ³ãƒå¤‰æ•°
 	HWND	m_hWnd;
 	HWND	m_hWndMsg;
 	HWND	m_hWndASync;
@@ -124,10 +124,10 @@ protected:
 	CHAR	m_HostEntry[MAXGETHOSTSTRUCT];
 
 	BOOL	m_bServer;
-	BOOL	m_bConnect;	// Ú‘±’†H
-	INT	m_nLatency;	// ƒŒƒCƒeƒ“ƒV(ƒoƒbƒtƒ@ƒTƒCƒY)
-	INT	m_nFrameStep;	// ’ÊMƒtƒŒ[ƒ€ƒŒ[ƒg
-	INT	m_nFrameCount;	// ƒJƒEƒ“ƒ^
+	BOOL	m_bConnect;	// æŽ¥ç¶šä¸­ï¼Ÿ
+	INT	m_nLatency;	// ãƒ¬ã‚¤ãƒ†ãƒ³ã‚·(ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º)
+	INT	m_nFrameStep;	// é€šä¿¡ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆ
+	INT	m_nFrameCount;	// ã‚«ã‚¦ãƒ³ã‚¿
 
 	// Ring buffer
 	INT	m_nRingPtr;

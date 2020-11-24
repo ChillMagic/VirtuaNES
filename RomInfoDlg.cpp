@@ -1,5 +1,5 @@
-//
-// ROMî•ñƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ROMæƒ…å ±ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>

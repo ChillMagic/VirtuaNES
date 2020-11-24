@@ -1,4 +1,4 @@
-//
+﻿//
 // Wave record class
 //
 #ifndef	__CWAVEREC_INCLUDED__

@@ -1,5 +1,5 @@
-//
-// ƒGƒ~ƒ…ƒŒ[ƒ^ƒXƒŒƒbƒhƒNƒ‰ƒX
+ï»¿//
+// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚¿ã‚¹ãƒ¬ãƒƒãƒ‰ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CEMUTHREAD_INCLUDED__
 #define	__CEMUTHREAD_INCLUDED__
@@ -44,15 +44,15 @@ public:
 	CEmuThread();
 	~CEmuThread();
 
-	// ƒCƒxƒ“ƒg
+	// ã‚¤ãƒ™ãƒ³ãƒˆ
 	enum EMUEVENT {
 		EV_EXIT = -1,
 		EV_NONE = 0,
 		EV_INITIAL,
 		EV_PAUSE,
 		EV_RESUME,
-		// ˆÈ‰º‚ÍEvent‚Åg—p‚·‚é
-		EV_MESSAGE_OUT,		// ƒƒbƒZ[ƒW‚¾‚¯o—Í‚µ‚½‚¢‚Ég—p
+		// ä»¥ä¸‹ã¯Eventã§ä½¿ç”¨ã™ã‚‹
+		EV_MESSAGE_OUT,		// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã ã‘å‡ºåŠ›ã—ãŸã„æ™‚ã«ä½¿ç”¨
 
 		EV_FULLSCREEN_GDI,	// EventParam
 
@@ -108,14 +108,14 @@ public:
 		EV_DEBUG_COMMAND,	// EventParam
 	};
 
-	// “®ìƒ‚[ƒh
+	// å‹•ä½œãƒ¢ãƒ¼ãƒ‰
 	enum {
 		STATUS_NONE = 0,
 		STATUS_RUN,
 		STATUS_PAUSE,
 	};
 
-	// ƒfƒoƒbƒKƒRƒ}ƒ“ƒh
+	// ãƒ‡ãƒãƒƒã‚¬ã‚³ãƒãƒ³ãƒ‰
 
 	//
 	void	SetPriority( INT nPriority );
@@ -145,43 +145,43 @@ protected:
 	static	BOOL	FrameInput();
 
 	static	DWORD WINAPI	ThreadProc( LPVOID lpVoid );
-	// ƒTƒEƒ“ƒhƒXƒgƒŠ[ƒ~ƒ“ƒO—p
+	// ã‚µã‚¦ãƒ³ãƒ‰ã‚¹ãƒˆãƒªãƒ¼ãƒŸãƒ³ã‚°ç”¨
 	static	void	StreamProcess( BOOL bPause );
 
-	// ƒXƒŒƒbƒhƒnƒ“ƒhƒ‹‚ÆID
+	// ã‚¹ãƒ¬ãƒƒãƒ‰ãƒãƒ³ãƒ‰ãƒ«ã¨ID
 		HANDLE	m_hThread;
 		DWORD	m_dwThreadID;
 
-	// Thisƒ|ƒCƒ“ƒ^
+	// Thisãƒã‚¤ãƒ³ã‚¿
 	static	CEmuThread*	g_pThis;
-	// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 	static	HWND	g_hWnd;
-	// ƒGƒ~ƒ…ƒŒ[ƒ^ƒIƒuƒWƒFƒNƒgƒ|ƒCƒ“ƒ^
+	// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚¿ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒã‚¤ãƒ³ã‚¿
 	static	NES*	g_nes;
 
-	// WaveƒŒƒR[ƒ_
+	// Waveãƒ¬ã‚³ãƒ¼ãƒ€
 	static	CWaveRec g_WaveRec;
 
-	// ƒ|[ƒYƒJƒEƒ“ƒg
+	// ãƒãƒ¼ã‚ºã‚«ã‚¦ãƒ³ãƒˆ
 		INT	m_nPauseCount;
-	// ƒXƒe[ƒ^ƒX
+	// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
 	static	INT	g_Status;
 
-	// ƒXƒŒƒbƒhƒCƒxƒ“ƒg‚ÆƒCƒxƒ“ƒgƒnƒ“ƒhƒ‹
+	// ã‚¹ãƒ¬ãƒƒãƒ‰ã‚¤ãƒ™ãƒ³ãƒˆã¨ã‚¤ãƒ™ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ«
 	static	INT	g_Event;
 	static	LONG	g_EventParam;
 	static	LONG	g_EventParam2;
 	static	HANDLE	g_hEvent;
 	static	HANDLE	g_hEventAccept;
 
-	// ƒXƒŒƒbƒhƒvƒ‰ƒCƒIƒŠƒeƒB
+	// ã‚¹ãƒ¬ãƒƒãƒ‰ãƒ—ãƒ©ã‚¤ã‚ªãƒªãƒ†ã‚£
 		INT	m_nPriority;
 	static	INT	g_PriorityTable[];
 
-	// ƒGƒ‰[ƒƒbƒZ[ƒW
+	// ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 	static	CHAR	g_szErrorMessage[512];
 
-	// ƒXƒgƒŠƒ“ƒOƒe[ƒuƒ‹
+	// ã‚¹ãƒˆãƒªãƒ³ã‚°ãƒ†ãƒ¼ãƒ–ãƒ«
 	static	LPCSTR	g_lpSoundMuteStringTable[];
 
 	// NetPlay Event

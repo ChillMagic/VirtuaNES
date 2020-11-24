@@ -1,5 +1,5 @@
-//
-// ƒtƒHƒ‹ƒ_ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒ•ã‚©ãƒ«ãƒ€ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -16,9 +16,9 @@ using namespace std;
 #include "FolderDlg.h"
 
 DLG_MESSAGE_BEGIN(CFolderDlg)
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
@@ -75,7 +75,7 @@ void	CFolderDlg::PathCheck( LPSTR lpszPath )
 
 	if( len > 3 ) {
 		if( isleadbyte( (UINT)lpszPath[len-2] ) ) {
-			// MBCS‚Å‚ª–³‚¢ê‡
+			// MBCSã§ï¿¥ãŒç„¡ã„å ´åˆ
 				::strcat( lpszPath, "\\" );
 		} else {
 			if( lpszPath[ len-1 ] != '\\' ) {

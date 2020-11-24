@@ -1,8 +1,8 @@
-#ifndef	__CHYPERLINK_INCLUDED__
+ï»¿#ifndef	__CHYPERLINK_INCLUDED__
 #define	__CHYPERLINK_INCLUDED__
 
 //
-// ƒXƒ^ƒeƒBƒbƒNƒRƒ“ƒgƒ[ƒ‹‚ðSubclass‰»‚µ‚ÄƒnƒCƒp[ƒŠƒ“ƒN‚ðƒTƒ|[ƒg
+// ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’SubclassåŒ–ã—ã¦ãƒã‚¤ãƒ‘ãƒ¼ãƒªãƒ³ã‚¯ã‚’ã‚µãƒãƒ¼ãƒˆ
 //
 // Usage: CHyperLink	hyperlink;
 // hyperlink.Attach( GetDlgItem( hWnd, IDC_URL ) );
@@ -20,56 +20,56 @@ public:
 		Detach();
 	}
 
-	// ƒRƒ“ƒgƒ[ƒ‹‚ÉƒAƒ^ƒbƒ`‚·‚é
+	// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ã‚¢ã‚¿ãƒƒãƒã™ã‚‹
 	BOOL	Attach( HWND hWnd, LPCSTR lpLabel = NULL, LPCSTR lpHyperLink = NULL )
 	{
 		if( m_hWnd )
-			return	FALSE;	// Šù‚ÉAttachÏ‚Ý
+			return	FALSE;	// æ—¢ã«Attachæ¸ˆã¿
 
 		m_hWnd = hWnd;
 
-		// •¶Žš—ñ‚ðƒRƒs[
+		// æ–‡å­—åˆ—ã‚’ã‚³ãƒ”ãƒ¼
 		if( lpLabel ) {
 			m_lpLabel = new CHAR[::lstrlen(lpLabel)+1];
 			::lstrcpy( m_lpLabel, lpLabel );
 			::SendMessage( m_hWnd, WM_SETTEXT, 0, (LPARAM)m_lpLabel );
 		}
-		// •\Ž¦‚ÆƒnƒCƒp[ƒŠƒ“ƒN‚ª“¯‚¶ê‡‚ÍƒnƒCƒp[ƒŠƒ“ƒN‚Íƒ‰ƒxƒ‹‚Æ“¯‚¶‚É
+		// è¡¨ç¤ºã¨ãƒã‚¤ãƒ‘ãƒ¼ãƒªãƒ³ã‚¯ãŒåŒã˜å ´åˆã¯ãƒã‚¤ãƒ‘ãƒ¼ãƒªãƒ³ã‚¯ã¯ãƒ©ãƒ™ãƒ«ã¨åŒã˜ã«
 		if( lpLabel && !lpHyperLink ) {
 			m_lpHyperLink = new CHAR[::lstrlen(lpLabel)+1];
 			::lstrcpy( m_lpHyperLink, lpLabel );
 		}
-		// ƒnƒCƒp[ƒŠƒ“ƒN‚ª•Ê‚Ìê‡
+		// ãƒã‚¤ãƒ‘ãƒ¼ãƒªãƒ³ã‚¯ãŒåˆ¥ã®å ´åˆ
 		if( lpHyperLink ) {
 			m_lpHyperLink = new CHAR[::lstrlen(lpHyperLink)+1];
 			::lstrcpy( m_lpHyperLink, lpHyperLink );
 		}
 
-		// ƒ|ƒCƒ“ƒgƒJ[ƒ\ƒ‹(–³‚¯‚ê‚ÎƒfƒtƒHƒ‹ƒg)
+		// ãƒã‚¤ãƒ³ãƒˆã‚«ãƒ¼ã‚½ãƒ«(ç„¡ã‘ã‚Œã°ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ)
 #ifndef	IDC_HAND
 #define	IDC_HAND	MAKEINTRESOURCE(32649)
 #endif
 		m_hCursor = ::LoadCursor( NULL, IDC_HAND );
 
-		// ƒAƒ“ƒ_[ƒ‰ƒCƒ“ƒtƒHƒ“ƒg‚Ìì¬
+		// ã‚¢ãƒ³ãƒ€ãƒ¼ãƒ©ã‚¤ãƒ³ãƒ•ã‚©ãƒ³ãƒˆã®ä½œæˆ
 		HFONT	m_hOldFont = (HFONT)::SendMessage( hWnd, WM_GETFONT, 0, 0 );
 		LOGFONT	lFont;
 		::GetObject( m_hOldFont, sizeof(LOGFONT), &lFont );
 		lFont.lfUnderline = TRUE;
 		m_hFont = ::CreateFontIndirect( &lFont );
 
-		// ƒ‰ƒxƒ‹‚Ì•\Ž¦—Ìˆæ‚ðŒvŽZ
+		// ãƒ©ãƒ™ãƒ«ã®è¡¨ç¤ºé ˜åŸŸã‚’è¨ˆç®—
 		CalcLabelRectangle();
 
-		// ƒXƒ^ƒCƒ‹‚Ì•ÏX(’Ê’m‚ðƒCƒl[ƒuƒ‹‚É‚·‚é)
+		// ã‚¹ã‚¿ã‚¤ãƒ«ã®å¤‰æ›´(é€šçŸ¥ã‚’ã‚¤ãƒãƒ¼ãƒ–ãƒ«ã«ã™ã‚‹)
 		DWORD	dwStyle = ::GetWindowLong( hWnd, GWL_STYLE );
 		dwStyle |= SS_NOTIFY;
 		::SetWindowLong( hWnd, GWL_STYLE, (LONG)dwStyle );
 
-		// ƒRƒ“ƒgƒ[ƒ‹‚ÌƒTƒuƒNƒ‰ƒX‰»
+		// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®ã‚µãƒ–ã‚¯ãƒ©ã‚¹åŒ–
 		m_lpfnOldWndProc = (WNDPROC)::SetWindowLong( hWnd, GWL_WNDPROC, (LONG)HyperLinkProc );
 
-		// This‚ð–„‚ßž‚Þ
+		// Thisã‚’åŸ‹ã‚è¾¼ã‚€
 		::SetWindowLong( hWnd, GWL_USERDATA, (LONG)this );
 
 		return	TRUE;
@@ -78,19 +78,19 @@ public:
 	BOOL	Detach()
 	{
 		if( m_hWnd ) {
-			// ƒTƒuƒNƒ‰ƒX‰»‚ð‰ðœ
+			// ã‚µãƒ–ã‚¯ãƒ©ã‚¹åŒ–ã‚’è§£é™¤
 			if( m_lpfnOldWndProc ) {
 				::SetWindowLong( m_hWnd, GWL_WNDPROC, (LONG)m_lpfnOldWndProc );
 				m_lpfnOldWndProc = NULL;
 			}
 
-			// ƒtƒHƒ“ƒg‚ðíœ
+			// ãƒ•ã‚©ãƒ³ãƒˆã‚’å‰Šé™¤
 			if( m_hFont ) {
 				::DeleteObject( (HGDIOBJ)m_hFont );
 				m_hFont = NULL;
 			}
 
-			// •¶Žš—ñ‚ðíœ
+			// æ–‡å­—åˆ—ã‚’å‰Šé™¤
 			if( m_lpLabel ) {
 				delete[] m_lpLabel;
 				m_lpLabel = NULL;
@@ -115,10 +115,10 @@ public:
 		m_lpLabel = new CHAR[::lstrlen(lpLabel)+1];
 		::lstrcpy( m_lpLabel, lpLabel );
 
-		// ƒRƒ“ƒgƒ[ƒ‹‚É•¶Žš—ñ‚ðÝ’è
+		// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«æ–‡å­—åˆ—ã‚’è¨­å®š
 		::SendMessage( m_hWnd, WM_SETTEXT, 0, (LPARAM)m_lpLabel );
 
-		// ƒ‰ƒxƒ‹‚Ì•\Ž¦—Ìˆæ‚ðŒvŽZ
+		// ãƒ©ãƒ™ãƒ«ã®è¡¨ç¤ºé ˜åŸŸã‚’è¨ˆç®—
 		CalcLabelRectangle();
 	}
 
@@ -148,7 +148,7 @@ protected:
 		HDC	hDC = ::GetDC( m_hWnd );
 		HFONT	hOldFont = (HFONT)::SelectObject( hDC, m_hFont );
 
-		// ƒXƒ^ƒCƒ‹
+		// ã‚¹ã‚¿ã‚¤ãƒ«
 		DWORD	dwStyle = ::GetWindowLong( m_hWnd, GWL_STYLE );
 		INT	nDrawStyle = DT_LEFT;
 		if( dwStyle && SS_CENTER ) {
@@ -157,12 +157,12 @@ protected:
 			nDrawStyle = DT_RIGHT;
 		}
 
-		// •¶Žš—ñ•\Ž¦‚Æ•`‰æ—Ìˆæ‚ÌŒvŽZ
+		// æ–‡å­—åˆ—è¡¨ç¤ºã¨æç”»é ˜åŸŸã®è¨ˆç®—
 		::DrawText( hDC, m_lpLabel, -1, &m_rcLabel, nDrawStyle | DT_WORDBREAK | DT_CALCRECT );
 
 		::SelectObject( hDC, hOldFont );
 
-		// ƒXƒ^ƒCƒ‹‚É‚æ‚Á‚ÄƒIƒtƒZƒbƒg‚ðŒvŽZ
+		// ã‚¹ã‚¿ã‚¤ãƒ«ã«ã‚ˆã£ã¦ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’è¨ˆç®—
 		if( dwStyle & SS_CENTER ) {
 			::OffsetRect( &m_rcLabel, (rcClient.right - m_rcLabel.right) / 2, 0 );
 		} else if (dwStyle & SS_RIGHT) {
@@ -179,7 +179,7 @@ protected:
 		switch( msg ) {
 			case	WM_DESTROY:
 				{
-				// 2003/10/11 ƒŠƒŠ[ƒXŒã‚Éfix...
+				// 2003/10/11 ãƒªãƒªãƒ¼ã‚¹å¾Œã«fix...
 				WNDPROC	pWndProcOld = pHyperLink->m_lpfnOldWndProc;
 				pHyperLink->Detach();
 				return	CallWindowProc( pWndProcOld, hWnd, msg, wParam, lParam );
@@ -216,11 +216,11 @@ protected:
 					nDrawStyle = DT_RIGHT;
 				}
 
-				// ƒAƒgƒŠƒrƒ…[ƒg
+				// ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆ
 				::SetBkMode( hDC, TRANSPARENT );
 				::SetTextColor( hDC, 0x00FF0000 );
 
-				// •¶Žš—ñ•\Ž¦
+				// æ–‡å­—åˆ—è¡¨ç¤º
 				if( pHyperLink->m_lpLabel ) {
 					HFONT	hOldFont = (HFONT)::SelectObject( hDC, pHyperLink->m_hFont );
 					::DrawText( hDC, pHyperLink->m_lpLabel, -1, &pHyperLink->m_rcLabel, nDrawStyle | DT_WORDBREAK );

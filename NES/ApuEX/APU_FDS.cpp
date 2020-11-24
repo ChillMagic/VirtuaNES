@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      FDS sound                                                       //
 //                                                           Norix      //
@@ -54,12 +54,12 @@ void	APU_FDS::WriteSub( WORD addr, BYTE data, FDSSOUND& ch, double rate )
 				if( data&0x80 ) {
 					ch.volenv_gain = data&0x3F;
 
-					// ‘¦”½‰f
+					// å³æ™‚åæ˜ 
 					if( !ch.main_addr ) {
 						ch.now_volume = (ch.volenv_gain<0x21)?ch.volenv_gain:0x20;
 					}
 				}
-				// ƒGƒ“ƒxƒ[ƒv1’iŠK‚Ì‰‰Z
+				// ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—1æ®µéšã®æ¼”ç®—
 				ch.volenv_decay    = data&0x3F;
 				ch.volenv_phaseacc = (double)ch.envelope_speed * (double)(ch.volenv_decay+1) * rate / (232.0*960.0);
 				break;
@@ -83,7 +83,7 @@ void	APU_FDS::WriteSub( WORD addr, BYTE data, FDSSOUND& ch, double rate )
 				if( data&0x80 ) {
 					ch.swpenv_gain = data&0x3F;
 				}
-				// ƒGƒ“ƒxƒ[ƒv1’iŠK‚Ì‰‰Z
+				// ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—1æ®µéšã®æ¼”ç®—
 				ch.swpenv_decay    = data&0x3F;
 				ch.swpenv_phaseacc = (double)ch.envelope_speed * (double)(ch.swpenv_decay+1) * rate / (232.0*960.0);
 				break;
@@ -132,10 +132,10 @@ void	APU_FDS::WriteSub( WORD addr, BYTE data, FDSSOUND& ch, double rate )
 	}
 }
 
-// APUƒŒƒ“ƒ_ƒ‰‘¤‚©‚çŒÄ‚Î‚ê‚é
+// APUãƒ¬ãƒ³ãƒ€ãƒ©å´ã‹ã‚‰å‘¼ã°ã‚Œã‚‹
 void	APU_FDS::Write( WORD addr, BYTE data )
 {
-	// ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒgŠî€
+	// ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ãƒ¬ãƒ¼ãƒˆåŸºæº–
 	WriteSub( addr, data, fds, (double)sampling_rate );
 }
 
@@ -168,7 +168,7 @@ INT	APU_FDS::Process( INT channel )
 				fds.volenv_phaseacc += decay;
 
 				if( fds.volenv_mode == 0 ) {
-				// Œ¸­ƒ‚[ƒh
+				// æ¸›å°‘ãƒ¢ãƒ¼ãƒ‰
 					if( fds.volenv_gain )
 						fds.volenv_gain--;
 				} else
@@ -187,7 +187,7 @@ INT	APU_FDS::Process( INT channel )
 				fds.swpenv_phaseacc += decay;
 
 				if( fds.swpenv_mode == 0 ) {
-				// Œ¸­ƒ‚[ƒh
+				// æ¸›å°‘ãƒ¢ãƒ¼ãƒ‰
 					if( fds.swpenv_gain )
 						fds.swpenv_gain--;
 				} else
@@ -228,20 +228,20 @@ INT	APU_FDS::Process( INT channel )
 		INT	sub_multi = fds.sweep_bias * fds.swpenv_gain;
 
 		if( sub_multi & 0x0F ) {
-			// 16‚ÅŠ„‚èØ‚ê‚È‚¢ê‡
+			// 16ã§å‰²ã‚Šåˆ‡ã‚Œãªã„å ´åˆ
 			sub_multi = (sub_multi / 16);
 			if( fds.sweep_bias >= 0 )
-				sub_multi += 2;    // ³‚Ìê‡
+				sub_multi += 2;    // æ­£ã®å ´åˆ
 			else
-				sub_multi -= 1;    // •‰‚Ìê‡
+				sub_multi -= 1;    // è² ã®å ´åˆ
 		} else {
-			// 16‚ÅŠ„‚èØ‚ê‚éê‡
+			// 16ã§å‰²ã‚Šåˆ‡ã‚Œã‚‹å ´åˆ
 			sub_multi = (sub_multi / 16);
 		}
-		// 193‚ğ’´‚¦‚é‚Æ-258‚·‚é(-64‚Öƒ‰ƒbƒv)
+		// 193ã‚’è¶…ãˆã‚‹ã¨-258ã™ã‚‹(-64ã¸ãƒ©ãƒƒãƒ—)
 		if( sub_multi > 193 )
 			sub_multi -= 258;
-		// -64‚ğ‰º‰ñ‚é‚Æ+256‚·‚é(192‚Öƒ‰ƒbƒv)
+		// -64ã‚’ä¸‹å›ã‚‹ã¨+256ã™ã‚‹(192ã¸ãƒ©ãƒƒãƒ—)
 	        if( sub_multi < -64 )
 			sub_multi += 256;
 
@@ -258,7 +258,7 @@ INT	APU_FDS::Process( INT channel )
 
 		fds.main_addr = (fds.main_addr+freq+64*sampling_rate)%(64*sampling_rate);
 
-		// 1üŠú‚ğ’´‚¦‚½‚çƒ{ƒŠƒ…[ƒ€XV
+		// 1å‘¨æœŸã‚’è¶…ãˆãŸã‚‰ãƒœãƒªãƒ¥ãƒ¼ãƒ æ›´æ–°
 		if( main_addr_old > fds.main_addr )
 			fds.now_volume = (fds.volenv_gain<0x21)?fds.volenv_gain:0x20;
 
@@ -287,10 +287,10 @@ INT	APU_FDS::Process( INT channel )
 	return	fds.output;
 }
 
-// CPU‘¤‚©‚çŒÄ‚Î‚ê‚é
+// CPUå´ã‹ã‚‰å‘¼ã°ã‚Œã‚‹
 void	APU_FDS::SyncWrite( WORD addr, BYTE data )
 {
-	// ƒNƒƒbƒNŠî€
+	// ã‚¯ãƒ­ãƒƒã‚¯åŸºæº–
 	WriteSub( addr, data, fds_sync, 1789772.5 );
 }
 
@@ -324,12 +324,12 @@ BOOL	APU_FDS::Sync( INT cycles )
 				fds_sync.volenv_phaseacc += decay;
 
 				if( fds_sync.volenv_mode == 0 ) {
-				// Œ¸­ƒ‚[ƒh
+				// æ¸›å°‘ãƒ¢ãƒ¼ãƒ‰
 					if( fds_sync.volenv_gain )
 						fds_sync.volenv_gain--;
 				} else
 				if( fds_sync.volenv_mode == 1 ) {
-				// ‘‰Áƒ‚[ƒh
+				// å¢—åŠ ãƒ¢ãƒ¼ãƒ‰
 					if( fds_sync.volenv_gain < 0x20 )
 						fds_sync.volenv_gain++;
 				}
@@ -344,12 +344,12 @@ BOOL	APU_FDS::Sync( INT cycles )
 				fds_sync.swpenv_phaseacc += decay;
 
 				if( fds_sync.swpenv_mode == 0 ) {
-				// Œ¸­ƒ‚[ƒh
+				// æ¸›å°‘ãƒ¢ãƒ¼ãƒ‰
 					if( fds_sync.swpenv_gain )
 						fds_sync.swpenv_gain--;
 				} else
 				if( fds_sync.swpenv_mode == 1 ) {
-				// ‘‰Áƒ‚[ƒh
+				// å¢—åŠ ãƒ¢ãƒ¼ãƒ‰
 					if( fds_sync.swpenv_gain < 0x20 )
 						fds_sync.swpenv_gain++;
 				}

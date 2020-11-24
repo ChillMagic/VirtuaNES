@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      NES Emulation core                                              //
 //                                                           Norix      //
@@ -25,7 +25,7 @@ using namespace std;
 
 #define	NES_PROFILER	0
 
-// ƒRƒ“ƒtƒBƒO
+// ã‚³ãƒ³ãƒ•ã‚£ã‚°
 #define	FETCH_CYCLES	8
 
 typedef struct tagNESCONFIG {
@@ -59,12 +59,12 @@ class	PAD;
 class	Mapper;
 
 //
-// NES ƒNƒ‰ƒX
+// NES ã‚¯ãƒ©ã‚¹
 //
 class NES
 {
 public:
-// ƒƒ“ƒo•Ï”
+// ãƒ¡ãƒ³ãƒå¤‰æ•°
 	CPU*	cpu;
 	PPU*	ppu;
 	APU*	apu;
@@ -77,8 +77,8 @@ public:
 	NES( const char* fname );
 	virtual	~NES();
 
-// ƒƒ“ƒoŠÖ”
-	// ƒGƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“
+// ãƒ¡ãƒ³ãƒé–¢æ•°
+	// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³
 	void	Reset();
 	void	SoftReset();
 
@@ -123,7 +123,7 @@ public:
 	void	GetZapperPos( LONG&x, LONG&y )	{ x = ZapperX; y = ZapperY; }
 	void	SetZapperPos( LONG x, LONG y )	{ ZapperX = x; ZapperY = y; }
 
-	// ƒXƒe[ƒgƒtƒ@ƒCƒ‹
+	// ã‚¹ãƒ†ãƒ¼ãƒˆãƒ•ã‚¡ã‚¤ãƒ«
 	// 0:ERROR 1:CRC OK -1:CRC ERR
 	static	INT	IsStateFile( const char* fname, ROM* rom );
 	BOOL	LoadState( const char* fname );
@@ -137,7 +137,7 @@ public:
 	void	SetVSDipSwitch( BYTE v )	{ m_VSDipValue = v; }
 	VSDIPSWITCH*	GetVSDipSwitchTable()	{ return m_VSDipTable; }
 
-	// ƒXƒiƒbƒvƒVƒ‡ƒbƒg
+	// ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆ
 	BOOL	Snapshot();
 
 	// For Movie
@@ -151,22 +151,22 @@ public:
 	BOOL	MovieRecAppend( const char* fname );
 	BOOL	MovieStop();
 
-	// ‚»‚Ì‘¼ƒRƒ“ƒgƒ[ƒ‹
+	// ãã®ä»–ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 	BOOL	IsDiskThrottle() { return m_bDiskThrottle; }
 //	BOOL	IsBraking() { return m_bBrake; }	// Debugger
 
-	// •`‰æ•û®
+	// æç”»æ–¹å¼
 	enum RENDERMETHOD { 
-		POST_ALL_RENDER = 0, // ƒXƒLƒƒƒ“ƒ‰ƒCƒ“•ª‚Ì–½—ßÀsŒãCƒŒƒ“ƒ_ƒŠƒ“ƒO
-		PRE_ALL_RENDER  = 1, // ƒŒƒ“ƒ_ƒŠƒ“ƒO‚ÌÀsŒãCƒXƒLƒƒƒ“ƒ‰ƒCƒ“•ª‚Ì–½—ßÀs
-		POST_RENDER     = 2, // •\¦ŠúŠÔ•ª‚Ì–½—ßÀsŒãCƒŒƒ“ƒ_ƒŠƒ“ƒO
-		PRE_RENDER      = 3, // ƒŒƒ“ƒ_ƒŠƒ“ƒOÀsŒãC•\¦ŠúŠÔ•ª‚Ì–½—ßÀs
-		TILE_RENDER     = 4  // ƒ^ƒCƒ‹ƒx[ƒXƒŒƒ“ƒ_ƒŠƒ“ƒO
+		POST_ALL_RENDER = 0, // ã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³åˆ†ã®å‘½ä»¤å®Ÿè¡Œå¾Œï¼Œãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+		PRE_ALL_RENDER  = 1, // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã®å®Ÿè¡Œå¾Œï¼Œã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³åˆ†ã®å‘½ä»¤å®Ÿè¡Œ
+		POST_RENDER     = 2, // è¡¨ç¤ºæœŸé–“åˆ†ã®å‘½ä»¤å®Ÿè¡Œå¾Œï¼Œãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+		PRE_RENDER      = 3, // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°å®Ÿè¡Œå¾Œï¼Œè¡¨ç¤ºæœŸé–“åˆ†ã®å‘½ä»¤å®Ÿè¡Œ
+		TILE_RENDER     = 4  // ã‚¿ã‚¤ãƒ«ãƒ™ãƒ¼ã‚¹ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	};
 	void		SetRenderMethod( RENDERMETHOD type )	{ RenderMethod = type; }
 	RENDERMETHOD	GetRenderMethod()			{ return RenderMethod; }
 
-	// ƒRƒ}ƒ“ƒh
+	// ã‚³ãƒãƒ³ãƒ‰
 	enum NESCOMMAND {
 		NESCMD_NONE = 0,
 		NESCMD_HWRESET,
@@ -256,12 +256,12 @@ public:
 	}
 #endif
 protected:
-// ƒƒ“ƒoŠÖ”
-	// ƒGƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“
+// ãƒ¡ãƒ³ãƒé–¢æ•°
+	// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³
 	BYTE	ReadReg ( WORD addr );
 	void	WriteReg( WORD addr, BYTE data );
 
-	// ƒXƒe[ƒgƒTƒu
+	// ã‚¹ãƒ†ãƒ¼ãƒˆã‚µãƒ–
 	BOOL	ReadState( FILE* fp );
 	void	WriteState( FILE* fp );
 
@@ -275,7 +275,7 @@ protected:
 	void	SaveTurboFile();
 
 protected:
-// ƒƒ“ƒo•Ï”
+// ãƒ¡ãƒ³ãƒå¤‰æ•°
 	INT	nIRQtype;
 	BOOL	bVideoMode;
 	BOOL	bFrameIRQ;

@@ -1,5 +1,5 @@
-//
-// ƒo[ƒWƒ‡ƒ“ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 //
 #define WIN32_LEAN_AND_MEAN

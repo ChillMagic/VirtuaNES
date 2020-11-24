@@ -1,5 +1,5 @@
-//
-// ƒpƒ^[ƒ“ƒrƒ…[ƒNƒ‰ƒX
+ï»¿//
+// ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ“ãƒ¥ãƒ¼ã‚¯ãƒ©ã‚¹
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -49,7 +49,7 @@ BOOL	CPaletteView::Create( HWND hWndParent )
 			WS_EX_TOOLWINDOW,
 			VIRTUANES_WNDCLASS,
 			"PaletteView",
-			WS_OVERLAPPEDWINDOW,	// WindowŠg‘åk¬‰Â”\
+			WS_OVERLAPPEDWINDOW,	// Windowæ‹¡å¤§ç¸®å°å¯èƒ½
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
@@ -57,7 +57,7 @@ BOOL	CPaletteView::Create( HWND hWndParent )
 			hWndParent,
 			NULL,
 			CApp::GetInstance(),
-			(LPVOID)this		// This ‚ğ–„‚ß‚Şˆ×
+			(LPVOID)this		// This ã‚’åŸ‹ã‚è¾¼ã‚€ç‚º
 		);
 	if( !hWnd ) {
 		DEBUGOUT( "CreateWindow faild.\n" );
@@ -100,7 +100,7 @@ WNDMSG	CPaletteView::OnCreate( WNDMSGPARAM )
 {
 	DEBUGOUT( "CPaletteView::OnCreate\n" );
 
-	// ˆÊ’uC³
+	// ä½ç½®ä¿®æ­£
 	RECT	rw, rc;
 	::GetWindowRect( m_hWnd, &rw );
 	::GetClientRect( m_hWnd, &rc );
@@ -125,7 +125,7 @@ WNDMSG	CPaletteView::OnClose( WNDMSGPARAM )
 WNDMSG	CPaletteView::OnDestroy( WNDMSGPARAM )
 {
 	DEBUGOUT( "CPaletteView::OnDestroy\n" );
-	// ˆÊ’u•Û‘¶
+	// ä½ç½®ä¿å­˜
 	::GetWindowRect( m_hWnd, &Config.general.rcPaletteViewPos );
 
 	m_hWnd = NULL;
@@ -137,7 +137,7 @@ WNDMSG	CPaletteView::OnTimer( WNDMSGPARAM )
 	if( !Emu.IsRunning() )
 		return	TRUE;
 
-	// ƒpƒŒƒbƒg
+	// ãƒ‘ãƒ¬ãƒƒãƒˆ
 	for( INT i = 0; i < 16; i++ ) {
 		m_BitmapHdr.rgb[i]    = m_Palette[BGPAL[i]];
 		m_BitmapHdr.rgb[i+16] = m_Palette[SPPAL[i]];

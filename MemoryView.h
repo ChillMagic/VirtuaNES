@@ -1,5 +1,5 @@
-//
-// ƒƒ‚ƒŠƒrƒ…[ƒNƒ‰ƒX
+ï»¿//
+// ãƒ¡ãƒ¢ãƒªãƒ“ãƒ¥ãƒ¼ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CMEMORYVIEW_INCLUDED__
 #define	__CMEMORYVIEW_INCLUDED__

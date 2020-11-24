@@ -1,5 +1,5 @@
-//
-// ƒ‰ƒ“ƒQ[ƒWƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒ©ãƒ³ã‚²ãƒ¼ã‚¸ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CLANGUAGEDLG_INCLUDED__
 #define	__CLANGUAGEDLG_INCLUDED__

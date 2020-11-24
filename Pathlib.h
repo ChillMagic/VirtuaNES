@@ -1,5 +1,5 @@
-//
-// �p�X���C�u�����N���X
+﻿//
+// パスライブラリクラス
 //
 #ifndef	__CPATHLIB_INCLUDED__
 #define	__CPATHLIB_INCLUDED__
@@ -17,25 +17,25 @@ using namespace std;
 class	CPathlib
 {
 public:
-	// �p�X�{�t�@�C���l�[������̃p�X�擾
+	// パス＋ファイルネームからのパス取得
 	static	string	SplitPath( LPCSTR lpszPath );
-	// �p�X�{�t�@�C���l�[������̃t�@�C�����擾(�g���q�Ȃ�)
+	// パス＋ファイルネームからのファイル名取得(拡張子なし)
 	static	string	SplitFname( LPCSTR lpszPath );
-	// �p�X�{�t�@�C���l�[������̃t�@�C�����擾(�g���q����)
+	// パス＋ファイルネームからのファイル名取得(拡張子あり)
 	static	string	SplitFnameExt( LPCSTR lpszPath );
-	// �p�X�{�t�@�C���l�[������̊g���q�擾
+	// パス＋ファイルネームからの拡張子取得
 	static	string	SplitExt( LPCSTR lpszPath );
 
-	// �p�X�C�t�@�C��������̃p�X�쐬(�g���q����/�Ȃ����p)
+	// パス，ファイル名からのパス作成(拡張子あり/なし共用)
 	static	string	MakePath( LPCSTR lpszPath, LPCSTR lpszFname );
-	// �p�X�C�t�@�C�����C�g���q����̃p�X�쐬(�g���q��ʂɎw��)
+	// パス，ファイル名，拡張子からのパス作成(拡張子を別に指定)
 	static	string	MakePathExt( LPCSTR lpszPath, LPCSTR lpszFname, LPCSTR lpszExt );
 
-	// �x�[�X�p�X����ǉ��p�X�̎�ނ𒲂ׂăp�X���쐬����
-	// �ǉ��p�X����΃p�X�Ȃ�΂��̂܂܁C���΃p�X�Ȃ�΃x�[�X�p�X�ɒǉ�
+	// ベースパスから追加パスの種類を調べてパスを作成する
+	// 追加パスが絶対パスならばそのまま，相対パスならばベースパスに追加
 	static	string	CreatePath( LPCSTR lpszBasePath, LPCSTR lpszPath );
 
-	// �t�H���_�I��
+	// フォルダ選択
 	static	BOOL	SelectFolder( HWND hWnd, LPCSTR lpszTitle, LPSTR lpszFolder );
 
 protected:

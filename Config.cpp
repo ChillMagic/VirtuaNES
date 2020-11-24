@@ -1,5 +1,5 @@
-//
-// İ’è•Û‘¶ƒNƒ‰ƒX
+ï»¿//
+// è¨­å®šä¿å­˜ã‚¯ãƒ©ã‚¹
 //
 #include "VirtuaNESres.h"
 #include "DebugOut.h"
@@ -214,7 +214,7 @@ WORD	szKeyTemp[64];
 	general.nJoyAxisDisable = CRegistry::GetProfileInt( section.c_str(), "JoyAxisDisable", general.nJoyAxisDisable );
 
 	if( general.nJoyAxisDisable ) {
-		// ˆÈ‘O‚Ìİ’è‚ğˆø‚«Œp‚®ˆ×
+		// ä»¥å‰ã®è¨­å®šã‚’å¼•ãç¶™ãç‚º
 		WORD	bits = 0;
 		switch( general.nJoyAxisDisable ) {
 			case	1:
@@ -360,15 +360,15 @@ WORD	szKeyTemp[64];
 		if( CRegistry::GetProfileBinary( keys, "Keys", szKeyTemp, 64*sizeof(WORD) ) ) {
 			::memcpy( controller.nButton[i], szKeyTemp, 64*sizeof(WORD) );
 		} else if( CRegistry::GetProfileBinary( keys, "Keys", szKeyTemp, 32*sizeof(WORD) ) ) {
-			// ŒÃ‚¢İ’è‚ğˆø‚«Œp‚®ˆ×‚Ì‘[’u
+			// å¤ã„è¨­å®šã‚’å¼•ãç¶™ãç‚ºã®æªç½®
 			::memcpy( &controller.nButton[i][ 0], &szKeyTemp[ 0], 16*sizeof(WORD) );
 			::memcpy( &controller.nButton[i][32], &szKeyTemp[16], 16*sizeof(WORD) );
 			::memcpy( controller.nButton[i], szKeyTemp, 32*sizeof(WORD) );
 		} else if( CRegistry::GetProfileBinary( keys, "Keys", szKeyTemp, 20*sizeof(WORD) ) ) {
-			// ŒÃ‚¢İ’è‚ğˆø‚«Œp‚®ˆ×‚Ì‘[’u
+			// å¤ã„è¨­å®šã‚’å¼•ãç¶™ãç‚ºã®æªç½®
 			::memcpy( &controller.nButton[i][ 0], &szKeyTemp[ 0], 10*sizeof(WORD) );
 			::memcpy( &controller.nButton[i][32], &szKeyTemp[10], 10*sizeof(WORD) );
-			// Mic‚Ì•ÏX
+			// Micã®å¤‰æ›´
 			if( i == 1 ) {
 				controller.nButton[i][10] = szKeyTemp[ 8];
 				controller.nButton[i][ 8] = 0;
@@ -376,9 +376,9 @@ WORD	szKeyTemp[64];
 				controller.nButton[i][40] = 0;
 			}
 		} else if( CRegistry::GetProfileBinary( keys, "Keys", szKeyTemp, 10*sizeof(WORD) ) ) {
-			// ŒÃ‚¢İ’è‚ğˆø‚«Œp‚®ˆ×‚Ì‘[’u
+			// å¤ã„è¨­å®šã‚’å¼•ãç¶™ãç‚ºã®æªç½®
 			::memcpy( controller.nButton[i], szKeyTemp, 10*sizeof(WORD) );
-			// Mic‚Ì•ÏX
+			// Micã®å¤‰æ›´
 			if( i == 1 ) {
 				controller.nButton[i][10] = szKeyTemp[ 8];
 				controller.nButton[i][ 8] = 0;
@@ -401,11 +401,11 @@ WORD	szKeyTemp[64];
 			::memcpy( &controller.nExButton[i][ 0], &szKeyTemp[ 0], 16*sizeof(WORD) );
 			::memcpy( &controller.nExButton[i][32], &szKeyTemp[16], 16*sizeof(WORD) );
 		} else if( CRegistry::GetProfileBinary( section.c_str(), "Keys", szKeyTemp, 20*sizeof(WORD) ) ) {
-			// ŒÃ‚¢İ’è‚ğˆø‚«Œp‚®ˆ×‚Ì‘[’u
+			// å¤ã„è¨­å®šã‚’å¼•ãç¶™ãç‚ºã®æªç½®
 			::memcpy( &controller.nExButton[i][ 0], &szKeyTemp[ 0], 10*sizeof(WORD) );
 			::memcpy( &controller.nExButton[i][32], &szKeyTemp[10], 10*sizeof(WORD) );
 		} else if( CRegistry::GetProfileBinary( section.c_str(), "Keys", szKeyTemp, 10*sizeof(WORD) ) ) {
-			// ŒÃ‚¢İ’è‚ğˆø‚«Œp‚®ˆ×‚Ì‘[’u
+			// å¤ã„è¨­å®šã‚’å¼•ãç¶™ãç‚ºã®æªç½®
 			::memcpy( controller.nExButton[i], szKeyTemp, 10*sizeof(WORD) );
 		}
 	}
@@ -418,7 +418,7 @@ WORD	szKeyTemp[64];
 		::memcpy( &controller.nNsfButton[ 0], &szKeyTemp[ 0], 16*sizeof(WORD) );
 		::memcpy( &controller.nNsfButton[32], &szKeyTemp[16], 16*sizeof(WORD) );
 	} else if( CRegistry::GetProfileBinary( section.c_str(), "Keys", szKeyTemp, 20*sizeof(WORD) ) ) {
-		// ŒÃ‚¢İ’è‚ğˆø‚«Œp‚®ˆ×‚Ì‘[’u
+		// å¤ã„è¨­å®šã‚’å¼•ãç¶™ãç‚ºã®æªç½®
 		::memcpy( &controller.nNsfButton[ 0], &szKeyTemp[ 0], 10*sizeof(WORD) );
 		::memcpy( &controller.nNsfButton[32], &szKeyTemp[10], 10*sizeof(WORD) );
 	}

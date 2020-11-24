@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+﻿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      NES PPU core                                                    //
 //                                                           Norix      //
@@ -16,7 +16,7 @@ class	NES;
 
 // PPU Control Register #1	PPU #0
 #define	PPU_VBLANK_BIT		0x80
-#define	PPU_SPHIT_BIT		0x40		// �Ⴄ�H
+#define	PPU_SPHIT_BIT		0x40		// 違う？
 #define	PPU_SP16_BIT		0x20
 #define	PPU_BGTBL_BIT		0x10
 #define	PPU_SPTBL_BIT		0x08

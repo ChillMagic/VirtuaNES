@@ -1,10 +1,10 @@
-//
+ï»¿//
 // Multimedia timer support
 //
 #include "DebugOut.h"
 #include "MMTimer.h"
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^/ƒfƒXƒgƒ‰ƒNƒ^‚Ìˆ×‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿/ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã®ç‚ºã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 static	CMMTimer	MMTimer;
 
 BOOL	CMMTimer::m_bInitialize = FALSE;
@@ -14,13 +14,13 @@ SQWORD	CMMTimer::m_hpFrequency = 0;
 
 CMMTimer::CMMTimer()
 {
-	// 1ms’PˆÊ‚ğ•ÛØ‚·‚éˆ×‚¾‚¯‚ÉŒÄ‚Ôc‚È‚ñ‚¿‚ã‚¤d—l‚¶‚á
+	// 1mså˜ä½ã‚’ä¿è¨¼ã™ã‚‹ç‚ºã ã‘ã«å‘¼ã¶â€¦ãªã‚“ã¡ã‚…ã†ä»•æ§˜ã˜ã‚ƒ
 	if( !m_bInitialize ) {
 		if( ::timeBeginPeriod( 1 ) == TIMERR_NOERROR )
 			m_bInitialize = TRUE;
 	}
 
-	// ƒnƒCƒpƒtƒH[ƒ}ƒ“ƒXƒJƒEƒ“ƒ^‚Å‚ÌŠÔŒv‘ª—p
+	// ãƒã‚¤ãƒ‘ãƒ•ã‚©ãƒ¼ãƒãƒ³ã‚¹ã‚«ã‚¦ãƒ³ã‚¿ã§ã®æ™‚é–“è¨ˆæ¸¬ç”¨
 	if( ::QueryPerformanceFrequency( (LARGE_INTEGER*)&m_hpFrequency ) ) {
 		DEBUGOUT( "CMMTimer:Use high performance counter.(QueryPerformanceCounter)\n" );
 		m_bHigh = TRUE;

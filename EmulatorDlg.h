@@ -1,5 +1,5 @@
-//
-// ƒGƒ~ƒ…ƒŒ[ƒ^ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚¿ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CEMULATORDLG_INCLUDED__
 #define	__CEMULATORDLG_INCLUDED__

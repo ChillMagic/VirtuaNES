@@ -1,5 +1,5 @@
-//
-// ƒGƒ~ƒ…ƒŒ[ƒ^ƒXƒŒƒbƒhƒNƒ‰ƒX
+ï»¿//
+// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚¿ã‚¹ãƒ¬ãƒƒãƒ‰ã‚¯ãƒ©ã‚¹
 //
 #include "DebugOut.h"
 
@@ -14,35 +14,35 @@
 #include "DirectSound.h"
 #include "DirectInput.h"
 
-// ©•ª©g
+// è‡ªåˆ†è‡ªèº«
 CEmuThread	Emu;
 
-// Thisƒ|ƒCƒ“ƒ^
+// Thisãƒã‚¤ãƒ³ã‚¿
 CEmuThread*	CEmuThread::g_pThis = NULL;
-// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 HWND	CEmuThread::g_hWnd = NULL;
-// ƒGƒ~ƒ…ƒŒ[ƒ^ƒIƒuƒWƒFƒNƒgƒ|ƒCƒ“ƒ^
+// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚¿ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒã‚¤ãƒ³ã‚¿
 NES*	CEmuThread::g_nes = NULL;
-// WAVEƒŒƒR[ƒ_
+// WAVEãƒ¬ã‚³ãƒ¼ãƒ€
 CWaveRec CEmuThread::g_WaveRec;
 
 // NetEvent Queue
 deque<NETEV>	CEmuThread::NetEventQueue;
 string		CEmuThread::strNetStateName;
 
-// ƒXƒe[ƒ^ƒX
+// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
 INT	CEmuThread::g_Status = CEmuThread::STATUS_NONE;
-// ƒXƒŒƒbƒhƒCƒxƒ“ƒg‚ÆƒCƒxƒ“ƒgƒnƒ“ƒhƒ‹
+// ã‚¹ãƒ¬ãƒƒãƒ‰ã‚¤ãƒ™ãƒ³ãƒˆã¨ã‚¤ãƒ™ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ«
 INT	CEmuThread::g_Event = CEmuThread::EV_NONE;
 LONG	CEmuThread::g_EventParam = 0;
 LONG	CEmuThread::g_EventParam2 = 0;
 HANDLE	CEmuThread::g_hEvent = NULL;
 HANDLE	CEmuThread::g_hEventAccept = NULL;
 
-// ƒGƒ‰[ƒƒbƒZ[ƒW
+// ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 CHAR	CEmuThread::g_szErrorMessage[512];
 
-// ƒXƒgƒŠƒ“ƒOƒe[ƒuƒ‹
+// ã‚¹ãƒˆãƒªãƒ³ã‚°ãƒ†ãƒ¼ãƒ–ãƒ«
 LPCSTR	CEmuThread::g_lpSoundMuteStringTable[] = {
 	"Master ",
 	"Rectangle 1",
@@ -62,7 +62,7 @@ LPCSTR	CEmuThread::g_lpSoundMuteStringTable[] = {
 	NULL,
 };
 
-// ƒXƒŒƒbƒhƒvƒ‰ƒCƒIƒŠƒeƒBƒe[ƒuƒ‹
+// ã‚¹ãƒ¬ãƒƒãƒ‰ãƒ—ãƒ©ã‚¤ã‚ªãƒªãƒ†ã‚£ãƒ†ãƒ¼ãƒ–ãƒ«
 INT	CEmuThread::g_PriorityTable[] = {
 	THREAD_PRIORITY_IDLE,
 	THREAD_PRIORITY_LOWEST,
@@ -129,10 +129,10 @@ BOOL	CEmuThread::Start( HWND hWnd, NES* nes )
 		goto	_Start_Failed;
 	}
 
-	// ƒXƒŒƒbƒhƒvƒ‰ƒCƒIƒŠƒeƒB‚Ìİ’è
+	// ã‚¹ãƒ¬ãƒƒãƒ‰ãƒ—ãƒ©ã‚¤ã‚ªãƒªãƒ†ã‚£ã®è¨­å®š
 	::SetThreadPriority( m_hThread, g_PriorityTable[m_nPriority] );
 
-	// ‚¿‚á‚ñ‚Æ‹N“®‚Å‚«‚½‚©Šm”F‚Ìˆ×ƒCƒxƒ“ƒg‚ğ‘Ò‚Â
+	// ã¡ã‚ƒã‚“ã¨èµ·å‹•ã§ããŸã‹ç¢ºèªã®ç‚ºã‚¤ãƒ™ãƒ³ãƒˆã‚’å¾…ã¤
 	::WaitForSingleObject( g_hEventAccept, INFINITE );
 	g_Status = STATUS_RUN;
 
@@ -163,7 +163,7 @@ void	CEmuThread::Stop()
 		CLOSEHANDLE( g_hEvent );
 		CLOSEHANDLE( g_hEventAccept );
 
-		// ƒlƒbƒgƒvƒŒƒC‚ÌØ’fˆ—
+		// ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤æ™‚ã®åˆ‡æ–­å‡¦ç†
 		NetPlay.Disconnect();
 
 //		DEBUGOUT( "CEmuThread::Stop() Thread stoped.\n" );
@@ -356,12 +356,12 @@ static	CHAR	szMes[256];
 			NetPlay.Disconnect();
 			return	FALSE;
 		} else if( ret == 0 ) {
-			// Queue‚Ì•ª‚Í‘—M‚µ‚½‚Ì‚ÅFIFO‚©‚çæ‚èœ‚­
+			// Queueã®åˆ†ã¯é€ä¿¡ã—ãŸã®ã§FIFOã‹ã‚‰å–ã‚Šé™¤ã
 			if( !NetEventQueue.empty() ) {
 				NetEventQueue.pop_front();
 			}
 
-			// Command check(“¯‚ÍP1—Dæ)
+			// Command check(åŒæ™‚ã¯P1å„ªå…ˆ)
 			BYTE	event = 0;
 			BYTE	param = 0;
 			if( player1[0] ) {
@@ -526,7 +526,7 @@ INT	nNetTimeoutCount = 0;
 
 				case	EV_NETPLAY_START:
 					if( g_nes ) {
-						// ˆê‰
+						// ä¸€å¿œ
 						g_nes->MovieStop();
 
 						string	pathstr;
@@ -545,9 +545,9 @@ INT	nNetTimeoutCount = 0;
 					}
 					bThrottle = FALSE;
 
-					// Queue‚ğƒNƒŠƒA
+					// Queueã‚’ã‚¯ãƒªã‚¢
 					NetEventQueue.clear();
-					// Å‰‚ÍSync
+					// æœ€åˆã¯Sync
 					NetPlay.Sync();
 
 					::SetEvent( g_hEventAccept );
@@ -829,13 +829,13 @@ INT	nNetTimeoutCount = 0;
 		}
 
 		if( bPause ) {
-			// ƒCƒxƒ“ƒg”­¶‚Ìˆ×
+			// ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿã®ç‚º
 			DirectInput.Poll();
 
-			// ‚©‚Á‚±ˆ«‚¢c
+			// ã‹ã£ã“æ‚ªã„â€¦
 			CMainFrame::OnKeyControl();
 
-			// ŒÄ‚Î‚È‚¢‚ÆWindows‚ªd‚­‚È‚é‚Ì‚Å(NTŒnˆÈŠO‚Í“Á‚É)
+			// å‘¼ã°ãªã„ã¨WindowsãŒé‡ããªã‚‹ã®ã§(NTç³»ä»¥å¤–ã¯ç‰¹ã«)
 			::Sleep( 20 );
 		} else {
 			try {
@@ -846,9 +846,9 @@ INT	nNetTimeoutCount = 0;
 				bSleep = TRUE;
 
 				if( !NetPlay.IsConnect() ) {
-					// ’Êí
+					// é€šå¸¸
 					BOOL	bKeyThrottle = FALSE;
-					// ƒL[ƒ`ƒFƒbƒN
+					// ã‚­ãƒ¼ãƒã‚§ãƒƒã‚¯
 					{
 						BYTE*	pKey = (BYTE*)DirectInput.m_Sw;
 						WORD*	pShortCutKey = Config.shortcut.nShortCut;
@@ -888,7 +888,7 @@ INT	nNetTimeoutCount = 0;
 
 					frame_period = 1000.0/g_nes->nescfg->FrameRate;
 
-					// ƒtƒŒ[ƒ€ƒXƒLƒbƒv”‚ÌŒvZ
+					// ãƒ•ãƒ¬ãƒ¼ãƒ ã‚¹ã‚­ãƒƒãƒ—æ•°ã®è¨ˆç®—
 					current_time = ::timeGetTime();
 					now_time     = current_time - start_time;
 
@@ -934,7 +934,7 @@ INT	nNetTimeoutCount = 0;
 						if( bThrottle||bKeyThrottle ) {
 							frameskipno = (INT)(((double)Config.emulator.nThrottleFPS+30)/60.0);
 						} else {
-							// ƒI[ƒg‚ğŠO‚µ‚ÄVSYNC“¯Šú‚Ì‚É‚àƒtƒŒ[ƒ€ƒXƒLƒbƒv‚ğ‚·‚éˆ×‚Ì‘[’u
+							// ã‚ªãƒ¼ãƒˆã‚’å¤–ã—ã¦VSYNCåŒæœŸã®æ™‚ã«ã‚‚ãƒ•ãƒ¬ãƒ¼ãƒ ã‚¹ã‚­ãƒƒãƒ—ã‚’ã™ã‚‹ç‚ºã®æªç½®
 							if( nFrameSkip < 0 ) {
 								frameskipno = 1;
 							} else {
@@ -945,10 +945,10 @@ INT	nNetTimeoutCount = 0;
 				} else {
 					bSleep = TRUE;
 
-					// ƒlƒbƒgƒvƒŒƒC’†‚ÍƒtƒŒ[ƒ€ƒXƒLƒbƒv•s‰Â
+					// ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤ä¸­ã¯ãƒ•ãƒ¬ãƒ¼ãƒ ã‚¹ã‚­ãƒƒãƒ—ä¸å¯
 					frame_period = 1000.0/g_nes->nescfg->FrameRate;
 
-					// ƒtƒŒ[ƒ€ƒXƒLƒbƒv”‚ÌŒvZ
+					// ãƒ•ãƒ¬ãƒ¼ãƒ ã‚¹ã‚­ãƒƒãƒ—æ•°ã®è¨ˆç®—
 					current_time = ::timeGetTime();
 					now_time     = current_time - start_time;
 
@@ -964,7 +964,7 @@ INT	nNetTimeoutCount = 0;
 						goto	_emulate_error;
 					}
 
-					// ƒoƒbƒtƒ@•s‘«‚Å­‚µ’x‚ç‚¹‚é‚×‚«‚©‚Ç‚¤‚©‚Ìƒ`ƒFƒbƒN
+					// ãƒãƒƒãƒ•ã‚¡ä¸è¶³ã§å°‘ã—é…ã‚‰ã›ã‚‹ã¹ãã‹ã©ã†ã‹ã®ãƒã‚§ãƒƒã‚¯
 					INT	ret = NetPlay.BufferCheck();
 					if( ret > 0 ) {
 						bAddFrame = TRUE;
@@ -1025,7 +1025,7 @@ INT	nNetTimeoutCount = 0;
 					}
 					frame_time += frame_period;
 				} else {
-					// ƒCƒxƒ“ƒg”­¶‚Ìˆ×
+					// ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿã®ç‚º
 					DirectInput.Poll();
 
 					for( i = 0; i < frameskipno-1; i++ ) {
@@ -1034,16 +1034,16 @@ INT	nNetTimeoutCount = 0;
 					frame_time += frame_period;
 				}
 
-				// ‚©‚Á‚±ˆ«‚¢c
+				// ã‹ã£ã“æ‚ªã„â€¦
 				CMainFrame::OnKeyControl();
 
-//				// •`‰æ
+//				// æç”»
 //				if( g_nes->ppu->GetExtMonoMode() ) {
 //					DirectDraw.SetPaletteMode( (PPUREG[1]&PPU_BGCOLOR_BIT)>>5, 0 );
 //				} else {
 //					DirectDraw.SetPaletteMode( (PPUREG[1]&PPU_BGCOLOR_BIT)>>5, PPUREG[1]&PPU_COLORMODE_BIT );
 //				}
-				// ƒfƒBƒXƒNƒAƒNƒZƒXƒ‰ƒ“ƒv
+				// ãƒ‡ã‚£ã‚¹ã‚¯ã‚¢ã‚¯ã‚»ã‚¹ãƒ©ãƒ³ãƒ—
 				DirectDraw.SetDiskAccessLamp( (Config.graphics.bDiskAccessLamp && g_nes->mapper->ExCmdRead( Mapper::EXCMDRD_DISKACCESS ))?TRUE:FALSE );
 				// blit
 				DirectDraw.Blt();
@@ -1051,7 +1051,7 @@ INT	nNetTimeoutCount = 0;
 				// Sound streaming
 				StreamProcess( bEmuPause );
 
-				// ‰É‚ÈŠÔ‘Ò‚¿
+				// æš‡ãªæ™‚é–“å¾…ã¡
 				sleep_time = (frame_time+frame_period) - (LONG)(::timeGetTime() - start_time);
 				if( bSleep && (sleep_time > 0) ) {
 					::Sleep( sleep_time-1 );
@@ -1086,7 +1086,7 @@ static	BOOL	bPalettePut = FALSE;
 }
 #endif
 
-				// FPS•\¦
+				// FPSè¡¨ç¤º
 				dwFrameTime[nFrameCount] = ::timeGetTime();
 				if( ++nFrameCount > 32-1 ) {
 					nFrameCount = 0;

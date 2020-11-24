@@ -1,4 +1,4 @@
-//
+﻿//
 // NES ROMDB class
 //
 #ifndef	__ROMDB_INCLUDED__

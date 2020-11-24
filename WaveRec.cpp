@@ -1,4 +1,4 @@
-//
+﻿//
 // Wave record class
 //
 #include "WaveRec.h"

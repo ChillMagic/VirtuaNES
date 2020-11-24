@@ -1,5 +1,5 @@
-//
-// ROMî•ñƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ROMæƒ…å ±ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CROMINFODLG_INCLUDED__
 #define	__CROMINFODLG_INCLUDED__

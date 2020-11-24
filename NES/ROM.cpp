@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      NES ROM Cartridge class                                         //
 //                                                           Norix      //
@@ -32,7 +32,7 @@
 #include "ips.h"
 
 //
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //
 ROM::ROM( const char* fname )
 {
@@ -57,59 +57,59 @@ LONG	FileSize;
 
 	try {
 		if( !(fp = ::fopen( fname, "rb" )) ) {
-			// xxx ƒtƒ@ƒCƒ‹‚ðŠJ‚¯‚Ü‚¹‚ñ
+			// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 			::wsprintf( szErrorString, szErrStr, fname );
 			throw	szErrorString;
 		}
 
-		// ƒtƒ@ƒCƒ‹ƒTƒCƒYŽæ“¾
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºå–å¾—
 		::fseek( fp, 0, SEEK_END );
 		FileSize = ::ftell( fp );
 		::fseek( fp, 0, SEEK_SET );
-		// ƒtƒ@ƒCƒ‹ƒTƒCƒYƒ`ƒFƒbƒN(NESƒwƒbƒ_+1ƒoƒCƒgˆÈã‚©H)
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºãƒã‚§ãƒƒã‚¯(NESãƒ˜ãƒƒãƒ€+1ãƒã‚¤ãƒˆä»¥ä¸Šã‹ï¼Ÿ)
 		if( FileSize < 17 ) {
-			// ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ª¬‚³‚·‚¬‚Ü‚·
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºãŒå°ã•ã™ãŽã¾ã™
 			throw	CApp::GetErrorString( IDS_ERROR_SMALLFILE );
 		}
 
-		// ƒeƒ“ƒ|ƒ‰ƒŠƒƒ‚ƒŠŠm•Û
+		// ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ¡ãƒ¢ãƒªç¢ºä¿
 		if( !(temp = (LPBYTE)::malloc( FileSize )) ) {
-			// ƒƒ‚ƒŠ‚ðŠm•Ûo—ˆ‚Ü‚¹‚ñ
+			// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 			throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 		}
 
-		// ƒTƒCƒY•ª“Ç‚Ýž‚Ý
+		// ã‚µã‚¤ã‚ºåˆ†èª­ã¿è¾¼ã¿
 		if( ::fread( temp, FileSize, 1, fp ) != 1 ) {
-			// ƒtƒ@ƒCƒ‹‚Ì“Ç‚Ýž‚Ý‚ÉŽ¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_READ );
 		}
 
 		FCLOSE( fp );
 
-		// ƒwƒbƒ_ƒRƒs[
+		// ãƒ˜ãƒƒãƒ€ã‚³ãƒ”ãƒ¼
 		::memcpy( &header, temp, sizeof(NESHEADER) );
 
 		if( header.ID[0] == 'N' && header.ID[1] == 'E'
 		 && header.ID[2] == 'S' && header.ID[3] == 0x1A ) {
-			// ƒwƒbƒ_ƒRƒs[
+			// ãƒ˜ãƒƒãƒ€ã‚³ãƒ”ãƒ¼
 			memcpy( &header, temp, sizeof(NESHEADER) );
 		} else if( header.ID[0] == 'F' && header.ID[1] == 'D'
 			&& header.ID[2] == 'S' && header.ID[3] == 0x1A ) {
-			// ƒwƒbƒ_ƒRƒs[
+			// ãƒ˜ãƒƒãƒ€ã‚³ãƒ”ãƒ¼
 			memcpy( &header, temp, sizeof(NESHEADER) );
 		} else if( header.ID[0] == 'N' && header.ID[1] == 'E'
 			&& header.ID[2] == 'S' && header.ID[3] == 'M') {
-			// ƒwƒbƒ_ƒRƒs[
+			// ãƒ˜ãƒƒãƒ€ã‚³ãƒ”ãƒ¼
 			memcpy( &header, temp, sizeof(NESHEADER) );
 		} else {
 			FREE( temp );
 
 			if( !UnCompress( fname, &temp, (LPDWORD)&FileSize ) ) {
-				// –¢‘Î‰žŒ`Ž®‚Å‚·
+				// æœªå¯¾å¿œå½¢å¼ã§ã™
 				throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 			}
-			// ƒwƒbƒ_ƒRƒs[
+			// ãƒ˜ãƒƒãƒ€ã‚³ãƒ”ãƒ¼
 			::memcpy( &header, temp, sizeof(NESHEADER) );
 		}
 
@@ -117,7 +117,7 @@ LONG	FileSize;
 		if( Config.emulator.bAutoIPS ) {
 			LPBYTE	ipstemp = NULL;
 			if( !(ipstemp = (LPBYTE)::malloc( FileSize )) ) {
-				// ƒƒ‚ƒŠ‚ðŠm•Ûo—ˆ‚Ü‚¹‚ñ
+				// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
 			::memcpy( ipstemp, temp, FileSize );
@@ -134,7 +134,7 @@ LONG	FileSize;
 
 		if( header.ID[0] == 'N' && header.ID[1] == 'E'
 		 && header.ID[2] == 'S' && header.ID[3] == 0x1A ) {
-		// •’Ê‚ÌNESƒtƒ@ƒCƒ‹
+		// æ™®é€šã®NESãƒ•ã‚¡ã‚¤ãƒ«
 			PRGsize = (LONG)header.PRG_PAGE_SIZE*0x4000;
 			CHRsize = (LONG)header.CHR_PAGE_SIZE*0x2000;
 			PRGoffset = sizeof(NESHEADER);
@@ -146,13 +146,13 @@ LONG	FileSize;
 			}
 
 			if( PRGsize <= 0 || (PRGsize+CHRsize) > FileSize ) {
-				// NESƒwƒbƒ_‚ªˆÙí‚Å‚·
+				// NESãƒ˜ãƒƒãƒ€ãŒç•°å¸¸ã§ã™
 				throw	CApp::GetErrorString( IDS_ERROR_INVALIDNESHEADER );
 			}
 
 			// PRG BANK
 			if( !(lpPRG = (LPBYTE)malloc( PRGsize )) ) {
-				// ƒƒ‚ƒŠ‚ðŠm•Ûo—ˆ‚Ü‚¹‚ñ
+				// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
 
@@ -161,14 +161,14 @@ LONG	FileSize;
 			// CHR BANK
 			if( CHRsize > 0 ) {
 				if( !(lpCHR = (LPBYTE)malloc( CHRsize )) ) {
-					// ƒƒ‚ƒŠ‚ðŠm•Ûo—ˆ‚Ü‚¹‚ñ
+					// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 					throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 				}
 
 				if( FileSize >= CHRoffset+CHRsize ) {
 					memcpy( lpCHR, temp+CHRoffset, CHRsize );
 				} else {
-					// CHRƒoƒ“ƒN­‚È‚¢c
+					// CHRãƒãƒ³ã‚¯å°‘ãªã„â€¦
 					CHRsize -= (CHRoffset+CHRsize - FileSize);
 					memcpy( lpCHR, temp+CHRoffset, CHRsize );
 				}
@@ -179,7 +179,7 @@ LONG	FileSize;
 			// Trainer
 			if( IsTRAINER() ) {
 				if( !(lpTrainer = (LPBYTE)malloc( 512 )) ) {
-					// ƒƒ‚ƒŠ‚ðŠm•Ûo—ˆ‚Ü‚¹‚ñ
+					// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 					throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 				}
 
@@ -190,21 +190,21 @@ LONG	FileSize;
 		} else if( header.ID[0] == 'F' && header.ID[1] == 'D'
 			&& header.ID[2] == 'S' && header.ID[3] == 0x1A ) {
 		// FDS(Nintendo Disk System)
-			// ƒfƒBƒXƒNƒTƒCƒY
+			// ãƒ‡ã‚£ã‚¹ã‚¯ã‚µã‚¤ã‚º
 			diskno = header.PRG_PAGE_SIZE;
 
 			if( FileSize < (16+65500*diskno) ) {
-				// ƒfƒBƒXƒNƒTƒCƒY‚ªˆÙí‚Å‚·
+				// ãƒ‡ã‚£ã‚¹ã‚¯ã‚µã‚¤ã‚ºãŒç•°å¸¸ã§ã™
 				throw	CApp::GetErrorString( IDS_ERROR_ILLEGALDISKSIZE );
 			}
 			if( diskno > 8 ) {
-				// 8–Ê‚æ‚è‘½‚¢ƒfƒBƒXƒN‚Í‘Î‰ž‚µ‚Ä‚¢‚Ü‚¹‚ñ
+				// 8é¢ã‚ˆã‚Šå¤šã„ãƒ‡ã‚£ã‚¹ã‚¯ã¯å¯¾å¿œã—ã¦ã„ã¾ã›ã‚“
 				throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTDISK );
 			}
 
 			ZEROMEMORY( &header, sizeof(NESHEADER) );
 
-			// ƒ_ƒ~[ƒwƒbƒ_‚ðì‚é
+			// ãƒ€ãƒŸãƒ¼ãƒ˜ãƒƒãƒ€ã‚’ä½œã‚‹
 			header.ID[0] = 'N';
 			header.ID[1] = 'E';
 			header.ID[2] = 'S';
@@ -217,12 +217,12 @@ LONG	FileSize;
 			PRGsize = sizeof(NESHEADER)+65500*(LONG)diskno;
 			// PRG BANK
 			if( !(lpPRG = (LPBYTE)malloc( PRGsize )) ) {
-				// ƒƒ‚ƒŠ‚ðŠm•Ûo—ˆ‚Ü‚¹‚ñ
+				// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
-			// ƒf[ƒ^‚ÌƒoƒbƒNƒAƒbƒv—p
+			// ãƒ‡ãƒ¼ã‚¿ã®ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ç”¨
 			if( !(lpDisk = (LPBYTE)malloc( PRGsize )) ) {
-				// ƒƒ‚ƒŠ‚ðŠm•Ûo—ˆ‚Ü‚¹‚ñ
+				// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
 			// CHR BANK
@@ -230,7 +230,7 @@ LONG	FileSize;
 
 			::memcpy( lpPRG, &header, sizeof(NESHEADER) );
 			::memcpy( lpPRG+sizeof(NESHEADER), temp+sizeof(NESHEADER), 65500*(LONG)diskno );
-			// ƒf[ƒ^‚Ì‘‚«Š·‚¦êŠ“Á’è—p
+			// ãƒ‡ãƒ¼ã‚¿ã®æ›¸ãæ›ãˆå ´æ‰€ç‰¹å®šç”¨
 			ZEROMEMORY( lpDisk, PRGsize );
 //			memcpy( lpDisk, &header, sizeof(NESHEADER) );
 //			memcpy( lpDisk+sizeof(NESHEADER), temp+sizeof(NESHEADER), PRGsize-sizeof(NESHEADER) );
@@ -241,11 +241,11 @@ LONG	FileSize;
 			lpPRG[3] = 0x1A;
 			lpPRG[4] = (BYTE)diskno;
 
-			// DISKSYSTEM BIOS‚Ìƒ[ƒh
+			// DISKSYSTEM BIOSã®ãƒ­ãƒ¼ãƒ‰
 			string	Path = CPathlib::MakePathExt( CApp::GetModulePath(), "DISKSYS", "ROM" );
 
 			if( !(fp = fopen( Path.c_str(), "rb" )) ) {
-				// DISKSYS.ROM‚ª‚ ‚è‚Ü‚¹‚ñ
+				// DISKSYS.ROMãŒã‚ã‚Šã¾ã›ã‚“
 				throw	CApp::GetErrorString( IDS_ERROR_NODISKBIOS );
 			}
 
@@ -253,29 +253,29 @@ LONG	FileSize;
 			FileSize = ::ftell( fp );
 			::fseek( fp, 0, SEEK_SET );
 			if( FileSize < 17 ) {
-				// ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ª¬‚³‚·‚¬‚Ü‚·
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºãŒå°ã•ã™ãŽã¾ã™
 				throw	CApp::GetErrorString( IDS_ERROR_SMALLFILE );
 			}
 			if( !(bios = (LPBYTE)malloc( FileSize )) ) {
-				// ƒƒ‚ƒŠ‚ðŠm•Ûo—ˆ‚Ü‚¹‚ñ
+				// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
 			if( fread( bios, FileSize, 1, fp ) != 1 ) {
-				// ƒtƒ@ƒCƒ‹‚Ì“Ç‚Ýž‚Ý‚ÉŽ¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_READ );
 			}
 			FCLOSE( fp );
 
 			if( !(lpDiskBios = (LPBYTE)malloc( 8*1024 )) ) {
-				// ƒƒ‚ƒŠ‚ðŠm•Ûo—ˆ‚Ü‚¹‚ñ
+				// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
 
 			if( bios[0] == 'N' && bios[1] == 'E' && bios[2] == 'S' && bios[3] == 0x1A ) {
-			// NESŒ`Ž®BIOS
+			// NESå½¢å¼BIOS
 				::memcpy( lpDiskBios, bios+0x6010, 8*1024 );
 			} else {
-			// ¶BIOS
+			// ç”ŸBIOS
 				::memcpy( lpDiskBios, bios, 8*1024 );
 			}
 			FREE( bios );
@@ -285,7 +285,7 @@ LONG	FileSize;
 			bNSF = TRUE;
 			ZEROMEMORY( &header, sizeof(NESHEADER) );
 
-			// ƒwƒbƒ_ƒRƒs[
+			// ãƒ˜ãƒƒãƒ€ã‚³ãƒ”ãƒ¼
 			memcpy( &nsfheader, temp, sizeof(NSFHEADER) );
 
 			PRGsize = FileSize-sizeof(NSFHEADER);
@@ -293,7 +293,7 @@ DEBUGOUT( "PRGSIZE:%d\n", PRGsize );
 			PRGsize = (PRGsize+0x0FFF)&~0x0FFF;
 DEBUGOUT( "PRGSIZE:%d\n", PRGsize );
 			if( !(lpPRG = (LPBYTE)malloc( PRGsize )) ) {
-				// ƒƒ‚ƒŠ‚ðŠm•Ûo—ˆ‚Ü‚¹‚ñ
+				// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 				throw	szErrorString;
 			}
@@ -303,28 +303,28 @@ DEBUGOUT( "PRGSIZE:%d\n", PRGsize );
 			NSF_PAGE_SIZE = PRGsize>>12;
 DEBUGOUT( "PAGESIZE:%d\n", NSF_PAGE_SIZE );
 		} else {
-			// –¢‘Î‰žŒ`Ž®‚Å‚·
+			// æœªå¯¾å¿œå½¢å¼ã§ã™
 			throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 		}
 
-		// ƒpƒX/ƒtƒ@ƒCƒ‹–¼Žæ“¾
+		// ãƒ‘ã‚¹/ãƒ•ã‚¡ã‚¤ãƒ«åå–å¾—
 		{
 		string	tempstr;
 		tempstr = CPathlib::SplitPath( fname );
 		::strcpy( path, tempstr.c_str() );
 		tempstr = CPathlib::SplitFname( fname );
 		::strcpy( name, tempstr.c_str() );
-		// ƒIƒŠƒWƒiƒ‹ƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)
+		// ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)
 		::strcpy( fullpath, fname );
 		}
 
-		// ƒ}ƒbƒpÝ’è
+		// ãƒžãƒƒãƒ‘è¨­å®š
 		if( !bNSF ) {
 			mapper = (header.control1>>4)|(header.control2&0xF0);
 			crc = crcall = crcvrom = 0;
 
 			if( mapper != 20 ) {
-				// PRG crc‚ÌŒvŽZ(NesToy‚ÌPRG CRC‚Æ“¯‚¶)
+				// PRG crcã®è¨ˆç®—(NesToyã®PRG CRCã¨åŒã˜)
 				if( IsTRAINER() ) {
 					crcall  = CRC::CrcRev( 512+PRGsize+CHRsize, temp+sizeof(NESHEADER) );
 					crc     = CRC::CrcRev( 512+PRGsize, temp+sizeof(NESHEADER) );
@@ -358,7 +358,7 @@ DEBUGOUT( "PAGESIZE:%d\n", NSF_PAGE_SIZE );
 
 		FREE( temp );
 	} catch( CHAR* str ) {
-		// Œ´ˆö‚ª‚í‚©‚Á‚Ä‚¢‚éƒGƒ‰[ˆ—
+		// åŽŸå› ãŒã‚ã‹ã£ã¦ã„ã‚‹ã‚¨ãƒ©ãƒ¼å‡¦ç†
 		FCLOSE( fp );
 		FREE( temp );
 		FREE( bios );
@@ -372,7 +372,7 @@ DEBUGOUT( "PAGESIZE:%d\n", NSF_PAGE_SIZE );
 		throw	str;
 #ifndef	_DEBUG
 	} catch(...) {
-		// ˆê”Ê•ÛŒìƒGƒ‰[‚Æ‚©o‚µ‚½‚­–³‚¢‚Ì‚Å...(^^;
+		// ä¸€èˆ¬ä¿è­·ã‚¨ãƒ©ãƒ¼ã¨ã‹å‡ºã—ãŸãç„¡ã„ã®ã§...(^^;
 		FCLOSE( fp );
 		FREE( temp );
 		FREE( bios );
@@ -388,14 +388,14 @@ DEBUGOUT( "PAGESIZE:%d\n", NSF_PAGE_SIZE );
 		FREE( PROM_ACCESS );
 #endif
 
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜Žãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif	// !_DEBUG
 	}
 }
 
 //
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //
 ROM::~ROM()
 {
@@ -407,7 +407,7 @@ ROM::~ROM()
 }
 
 //
-// ROMƒtƒ@ƒCƒ‹ƒ`ƒFƒbƒN
+// ROMãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚§ãƒƒã‚¯
 //
 INT	ROM::IsRomFile( const char* fname )
 {
@@ -417,7 +417,7 @@ NESHEADER	header;
 	if( !(fp = fopen( fname, "rb" )) )
 		return	IDS_ERROR_OPEN;
 
-	// ƒTƒCƒY•ª“Ç‚Ýž‚Ý
+	// ã‚µã‚¤ã‚ºåˆ†èª­ã¿è¾¼ã¿
 	if( fread( &header, sizeof(header), 1, fp ) != 1 ) {
 		FCLOSE( fp );
 		return	IDS_ERROR_READ;
@@ -465,7 +465,7 @@ NESHEADER	header;
 }
 
 //
-// ROMƒtƒ@ƒCƒ‹–¼‚Ìƒ`ƒFƒbƒN(PAL‚ðŽ©“®”»•Ê)
+// ROMãƒ•ã‚¡ã‚¤ãƒ«åã®ãƒã‚§ãƒƒã‚¯(PALã‚’è‡ªå‹•åˆ¤åˆ¥)
 //
 void	ROM::FilenameCheck( const char* fname )
 {

@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      NES Memory Management Unit                                      //
 //                                                           Norix      //
@@ -12,46 +12,46 @@
 #include "typedef.h"
 #include "macro.h"
 
-// CPU ƒƒ‚ƒŠƒoƒ“ƒN
-extern	LPBYTE	CPU_MEM_BANK[8];	// 8K’PˆÊ
+// CPU ãƒ¡ãƒ¢ãƒªãƒãƒ³ã‚¯
+extern	LPBYTE	CPU_MEM_BANK[8];	// 8Kå˜ä½
 extern	BYTE	CPU_MEM_TYPE[8];
-extern	INT	CPU_MEM_PAGE[8];	// ƒXƒe[ƒgƒZ[ƒu—p
+extern	INT	CPU_MEM_PAGE[8];	// ã‚¹ãƒ†ãƒ¼ãƒˆã‚»ãƒ¼ãƒ–ç”¨
 
-// PPU ƒƒ‚ƒŠƒoƒ“ƒN
-extern	LPBYTE	PPU_MEM_BANK[12];	// 1K’PˆÊ
+// PPU ãƒ¡ãƒ¢ãƒªãƒãƒ³ã‚¯
+extern	LPBYTE	PPU_MEM_BANK[12];	// 1Kå˜ä½
 extern	BYTE	PPU_MEM_TYPE[12];
-extern	INT	PPU_MEM_PAGE[12];	// ƒXƒe[ƒgƒZ[ƒu—p
-extern	BYTE	CRAM_USED[16];		// ƒXƒe[ƒgƒZ[ƒu—p
+extern	INT	PPU_MEM_PAGE[12];	// ã‚¹ãƒ†ãƒ¼ãƒˆã‚»ãƒ¼ãƒ–ç”¨
+extern	BYTE	CRAM_USED[16];		// ã‚¹ãƒ†ãƒ¼ãƒˆã‚»ãƒ¼ãƒ–ç”¨
 
-// NESƒƒ‚ƒŠ
-extern	BYTE	RAM [  8*1024];		// NES“à‘ŸRAM
-extern	BYTE	WRAM[128*1024];		// ƒ[ƒN/ƒoƒbƒNƒAƒbƒvRAM
-extern	BYTE	DRAM[ 40*1024];		// ƒfƒBƒXƒNƒVƒXƒeƒ€RAM
-extern	BYTE	XRAM[  8*1024];		// ƒ_ƒ~[ƒoƒ“ƒN
-extern	BYTE	ERAM[ 32*1024];		// Šg’£‹@Ší—pRAM
+// NESãƒ¡ãƒ¢ãƒª
+extern	BYTE	RAM [  8*1024];		// NESå†…è‡“RAM
+extern	BYTE	WRAM[128*1024];		// ãƒ¯ãƒ¼ã‚¯/ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—RAM
+extern	BYTE	DRAM[ 40*1024];		// ãƒ‡ã‚£ã‚¹ã‚¯ã‚·ã‚¹ãƒ†ãƒ RAM
+extern	BYTE	XRAM[  8*1024];		// ãƒ€ãƒŸãƒ¼ãƒãƒ³ã‚¯
+extern	BYTE	ERAM[ 32*1024];		// æ‹¡å¼µæ©Ÿå™¨ç”¨RAM
 
-extern	BYTE	CRAM[ 32*1024];		// ƒLƒƒƒ‰ƒNƒ^ƒpƒ^[ƒ“RAM
-extern	BYTE	VRAM[  4*1024];		// ƒl[ƒ€ƒe[ƒuƒ‹/ƒAƒgƒŠƒrƒ…[ƒgRAM
+extern	BYTE	CRAM[ 32*1024];		// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ‘ã‚¿ãƒ¼ãƒ³RAM
+extern	BYTE	VRAM[  4*1024];		// ãƒãƒ¼ãƒ ãƒ†ãƒ¼ãƒ–ãƒ«/ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆRAM
 
-extern	BYTE	SPRAM[0x100];		// ƒXƒvƒ‰ƒCƒgRAM
-extern	BYTE	BGPAL[0x10];		// BGƒpƒŒƒbƒg
-extern	BYTE	SPPAL[0x10];		// SPƒpƒŒƒbƒg
+extern	BYTE	SPRAM[0x100];		// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆRAM
+extern	BYTE	BGPAL[0x10];		// BGãƒ‘ãƒ¬ãƒƒãƒˆ
+extern	BYTE	SPPAL[0x10];		// SPãƒ‘ãƒ¬ãƒƒãƒˆ
 
-// ƒŒƒWƒXƒ^
+// ãƒ¬ã‚¸ã‚¹ã‚¿
 extern	BYTE	CPUREG[0x18];		// Nes $4000-$4017
 extern	BYTE	PPUREG[0x04];		// Nes $2000-$2003
 
-// Frame-IRQƒŒƒWƒXƒ^($4017)
+// Frame-IRQãƒ¬ã‚¸ã‚¹ã‚¿($4017)
 extern	BYTE	FrameIRQ;
 
-// PPU“à•”ƒŒƒWƒXƒ^
+// PPUå†…éƒ¨ãƒ¬ã‚¸ã‚¹ã‚¿
 extern	BYTE	PPU56Toggle;		// $2005-$2006 Toggle
 extern	BYTE	PPU7_Temp;		// $2007 read buffer
 extern	WORD	loopy_t;		// same as $2005/$2006
 extern	WORD	loopy_v;		// same as $2005/$2006
 extern	WORD	loopy_x;		// tile x offset
 
-// ROMƒf[ƒ^ƒ|ƒCƒ“ƒ^
+// ROMãƒ‡ãƒ¼ã‚¿ãƒã‚¤ãƒ³ã‚¿
 extern	LPBYTE	PROM;		// PROM ptr
 extern	LPBYTE	VROM;		// VROM ptr
 
@@ -60,12 +60,12 @@ extern	LPBYTE	VROM;		// VROM ptr
 extern	LPBYTE	PROM_ACCESS;
 #endif
 
-// ROM ƒoƒ“ƒNƒTƒCƒY
+// ROM ãƒãƒ³ã‚¯ã‚µã‚¤ã‚º
 extern	INT	PROM_8K_SIZE, PROM_16K_SIZE, PROM_32K_SIZE;
 extern	INT	VROM_1K_SIZE, VROM_2K_SIZE, VROM_4K_SIZE,  VROM_8K_SIZE;
 
 
-// ŠÖ”
+// é–¢æ•°
 extern	void	NesSub_MemoryInitial();
 
 extern	void	SetPROM_Bank( BYTE page, LPBYTE ptr, BYTE type );
@@ -93,7 +93,7 @@ extern	void	SetVRAM_Mirror( INT type );
 extern	void	SetVRAM_Mirror( INT bank0, INT bank1, INT bank2, INT bank3 );
 
 
-// ƒƒ‚ƒŠƒ^ƒCƒv
+// ãƒ¡ãƒ¢ãƒªã‚¿ã‚¤ãƒ—
 // For PROM (CPU)
 #define	BANKTYPE_ROM	0x00
 #define	BANKTYPE_RAM	0xFF
@@ -104,12 +104,12 @@ extern	void	SetVRAM_Mirror( INT bank0, INT bank1, INT bank2, INT bank3 );
 #define	BANKTYPE_CRAM	0x01
 #define	BANKTYPE_VRAM	0x80
 
-// ƒ~ƒ‰[ƒ^ƒCƒv
+// ãƒŸãƒ©ãƒ¼ã‚¿ã‚¤ãƒ—
 #define	VRAM_HMIRROR	0x00	// Horizontal
 #define	VRAM_VMIRROR	0x01	// Virtical
 #define	VRAM_MIRROR4	0x02	// All screen
-#define	VRAM_MIRROR4L	0x03	// PA10 LŒÅ’è $2000-$23FF‚Ìƒ~ƒ‰[
-#define	VRAM_MIRROR4H	0x04	// PA10 HŒÅ’è $2400-$27FF‚Ìƒ~ƒ‰[
+#define	VRAM_MIRROR4L	0x03	// PA10 Lå›ºå®š $2000-$23FFã®ãƒŸãƒ©ãƒ¼
+#define	VRAM_MIRROR4H	0x04	// PA10 Hå›ºå®š $2400-$27FFã®ãƒŸãƒ©ãƒ¼
 
 #endif	// !__MMU_INCLUDED__
 

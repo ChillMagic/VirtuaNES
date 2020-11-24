@@ -1,5 +1,5 @@
-//
-// ÉâÉìÉQÅ[ÉWÉ_ÉCÉAÉçÉOÉNÉâÉX
+Ôªø//
+// „É©„É≥„Ç≤„Éº„Ç∏„ÉÄ„Ç§„Ç¢„É≠„Ç∞„ÇØ„É©„Çπ
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -18,9 +18,9 @@ using namespace std;
 #include "LanguageDlg.h"
 
 DLG_MESSAGE_BEGIN(CLanguageDlg)
-// ÉÅÉbÉZÅ[ÉW
+// „É°„ÉÉ„Çª„Éº„Ç∏
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
-// ÉRÉ}ÉìÉh
+// „Ç≥„Éû„É≥„Éâ
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
@@ -43,7 +43,7 @@ DLGMSG	CLanguageDlg::OnInitDialog( DLGMSGPARAM )
 	for( INT i = 0; i < CPlugin::GetPluginNum(); i++ ) {
 		::SendDlgItemMessage( m_hWnd, IDC_LNG_LIST, LB_INSERTSTRING, (WPARAM)i, (LPARAM)CPlugin::GetPluginLanguage(i) );
 	}
-	// ÉfÉtÉHÉãÉgëIë
+	// „Éá„Éï„Ç©„É´„ÉàÈÅ∏Êäû
 	::SendDlgItemMessage( m_hWnd, IDC_LNG_LIST, LB_SETCURSEL, (WPARAM)m_nPluginID, 0 );
 
 	return	TRUE;
@@ -71,7 +71,7 @@ DLGCMD	CLanguageDlg::OnDefault( DLGCMDPARAM )
 {
 //	DEBUGOUT( "CLanguageDlg::OnDefault\n" );
 
-	// ÉfÉtÉHÉãÉgëIë
+	// „Éá„Éï„Ç©„É´„ÉàÈÅ∏Êäû
 	SendDlgItemMessage( m_hWnd, IDC_LNG_LIST, LB_SETCURSEL, (WPARAM)CPlugin::GetPluginID(), 0 );
 }
 

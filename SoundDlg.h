@@ -1,5 +1,5 @@
-//
-// ƒTƒEƒ“ƒhƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ã‚µã‚¦ãƒ³ãƒ‰ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CSOUNDDLG_INCLUDED__
 #define	__CSOUNDDLG_INCLUDED__

@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+Ôªø//////////////////////////////////////////////////////////////////////////
 // Mapper016  Bandai Standard                                           //
 //////////////////////////////////////////////////////////////////////////
 void	Mapper016::Reset()
@@ -24,7 +24,7 @@ void	Mapper016::Reset()
 		patch = 1;
 		eeprom_type = 0xFF;
 
-		WRAM[0x0BBC] = 0xFF;	// SRAMëŒçÙ
+		WRAM[0x0BBC] = 0xFF;	// SRAMÂØæÁ≠ñ
 	}
 
 	if( crc == 0x1d6f27f7 ) {	// Dragon Ball Z 2(Korean Hack)
@@ -69,7 +69,7 @@ void	Mapper016::Reset()
 		eeprom_type = 1;
 	}
 
-	// DATACHån
+	// DATACHÁ≥ª
 	if( crc == 0x0be0a328 		// Datach - SD Gundam - Gundam Wars(J)
 	 || crc == 0x19e81461		// Datach - Dragon Ball Z - Gekitou Tenkaichi Budou Kai(J)
 	 || crc == 0x5b457641		// Datach - Ultraman Club - Supokon Fight!(J)

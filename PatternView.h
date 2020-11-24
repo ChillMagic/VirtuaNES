@@ -1,5 +1,5 @@
-//
-// ƒpƒ^[ƒ“ƒrƒ…[ƒNƒ‰ƒX
+ï»¿//
+// ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ“ãƒ¥ãƒ¼ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CPATTERNVIEW_INCLUDED__
 #define	__CPATTERNVIEW_INCLUDED__

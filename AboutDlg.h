@@ -1,5 +1,5 @@
-//
-// ƒo[ƒWƒ‡ƒ“ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CABOUTDLG_INCLUDED__
 #define	__CABOUTDLG_INCLUDED__

@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 // Mapper086  Jaleco Early Mapper #2                                    //
 //////////////////////////////////////////////////////////////////////////
 void	Mapper086::Reset()
@@ -22,10 +22,10 @@ void	Mapper086::WriteLow( WORD addr, BYTE data )
 //DEBUGOUT( "WR:$%02X\n", data );
 			if( (data&0x0F) == 0		// Strike
 			 || (data&0x0F) == 5 ) {	// Foul
-				cnt = 60;		// Ÿ‚Ì”­º‚ğ1•b’ö‹Ö~‚·‚é
+				cnt = 60;		// æ¬¡ã®ç™ºå£°ã‚’1ç§’ç¨‹ç¦æ­¢ã™ã‚‹
 			}
 
-			// OSD‚É‚·‚é‚×‚«‚©c
+			// OSDã«ã™ã‚‹ã¹ãã‹â€¦
 			if( Config.sound.bExtraSoundEnable ) {
 				DirectSound.EsfAllStop();
 				DirectSound.EsfPlay( ESF_MOEPRO_STRIKE+(data&0x0F) );

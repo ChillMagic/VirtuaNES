@@ -1,5 +1,5 @@
-//
-// �ݒ�ۑ��N���X
+﻿//
+// 設定保存クラス
 //
 #ifndef	__CCONFIG_INCLUDED__
 #define	__CCONFIG_INCLUDED__
@@ -45,14 +45,14 @@ public:
 
 	WORD	JoyAxisSetting[16];
 
-	// �W���C�p�b�h�̎��̖�����
+	// ジョイパッドの軸の無効化
 	//  0 : All enable
-	//  1 : X���ȍ~�S��
-	//  2 : Y���ȍ~�S��
-	//  3 : Z���ȍ~�S��
-	//  4 : RX���ȍ~�S��
-	//  5 : RY���ȍ~�S��
-	//  6 : RZ���ȍ~�S��
+	//  1 : X軸以降全て
+	//  2 : Y軸以降全て
+	//  3 : Z軸以降全て
+	//  4 : RX軸以降全て
+	//  5 : RY軸以降全て
+	//  6 : RZ軸以降全て
 	INT	nJoyAxisDisable;
 
 	void	Default() {
@@ -521,7 +521,7 @@ public:
 	}
 
 	void	DefaultExController0() {
-		// Crazy Climber���۰�(���ۂɂ͑��݂��Ȃ�)
+		// Crazy Climberｺﾝﾄﾛｰﾗ(実際には存在しない)
 		for( INT i = 0; i < 64; i++ )
 			nExButton[0][i] = 0;
 //		nExButton[0][ 0] = 0;	// L up
@@ -535,19 +535,19 @@ public:
 	}
 
 	void	DefaultExController1() {
-		// Famly Trainer���۰�
+		// Famly Trainerｺﾝﾄﾛｰﾗ
 		for( INT i = 0; i < 64; i++ )
 			nExButton[1][i] = 0;
 	}
 
 	void	DefaultExController2() {
-		// Exciting Boxing���۰�
+		// Exciting Boxingｺﾝﾄﾛｰﾗ
 		for( INT i = 0; i < 64; i++ )
 			nExButton[2][i] = 0;
 	}
 
 	void	DefaultExController3() {
-		// Mahjang���۰�
+		// Mahjangｺﾝﾄﾛｰﾗ
 		for( INT i = 0; i < 64; i++ )
 			nExButton[3][i] = 0;
 	}
@@ -744,7 +744,7 @@ protected:
 private:
 };
 
-// �ʃQ�[���I�v�V����
+// 個別ゲームオプション
 class	CGameOption
 {
 public:
@@ -755,13 +755,13 @@ public:
 	void	Load( DWORD gid, DWORD mid );
 	void	Save( LPCSTR name, DWORD gid, DWORD mid );
 
-	// Default�ۑ�
+	// Default保存
 	INT	defRenderMethod;
 	INT	defIRQtype;
 	BOOL	defFrameIRQ;
 	BOOL	defVideoMode;
 
-	// �f�[�^
+	// データ
 	INT	nRenderMethod;
 	INT	nIRQtype;
 	BOOL	bFrameIRQ;

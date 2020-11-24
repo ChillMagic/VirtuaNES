@@ -1,4 +1,4 @@
-/*----------------------------------------------------------------------*/
+Ôªø/*----------------------------------------------------------------------*/
 /*                                                                      */
 /*      6502 CPU Core v0.00                                             */
 /*                                                           Norix      */
@@ -34,11 +34,11 @@
 /*--------------[ CONST                 ]-------------------------------*/
 /*--------------[ PROTOTYPE             ]-------------------------------*/
 /*--------------[ PROGRAM               ]-------------------------------*/
-// ÉIÉyÉRÅ[Éh
+// „Ç™„Éö„Ç≥„Éº„Éâ
 //#define	OP6502(A)	RD6502((A))
 //#define	OP6502W(A)	RD6502W((A))
 
-// É[ÉçÉyÅ[ÉWÉäÅ[Éh
+// „Çº„É≠„Éö„Éº„Ç∏„É™„Éº„Éâ
 #define	ZPRD(A)		(RAM[(BYTE)(A)])
 //#define	ZPRDW(A)	(*((LPWORD)&RAM[(BYTE)(A)]))
 #define	ZPRDW(A)	((WORD)RAM[(BYTE)(A)]+((WORD)RAM[(BYTE)((A)+1)]<<8))
@@ -46,26 +46,26 @@
 #define	ZPWR(A,V)	{ RAM[(BYTE)(A)]=(V); }
 #define	ZPWRW(A,V)	{ *((LPWORD)&RAM[(BYTE)(A)])=(WORD)(V); }
 
-// ÉTÉCÉNÉãÉJÉEÉìÉ^
+// „Çµ„Ç§„ÇØ„É´„Ç´„Ç¶„É≥„Çø
 #define	ADD_CYCLE(V)	{ exec_cycles += (V); }
 //#define	ADD_CYCLE(V)	{}
 
-// EFFECTIVE ADDRESSÉyÅ[ÉWã´äEí¥Ç¶É`ÉFÉbÉN
+// EFFECTIVE ADDRESS„Éö„Éº„Ç∏Â¢ÉÁïåË∂Ö„Åà„ÉÅ„Çß„ÉÉ„ÇØ
 #define	CHECK_EA()	{ if( (ET&0xFF00) != (EA&0xFF00) ) ADD_CYCLE(1); }
 //#define	CHECK_EA()	{ if( (R.PC&0xFF00) != (EA&0xFF00) ) ADD_CYCLE(1); }
 //#define	CHECK_EA()	{}
 
-// ÉtÉâÉOëÄçÏ
-// É[ÉçÅ^ÉlÉKÉeÉBÉuÉtÉâÉOÇÃÉ`ÉFÉbÉNÇ∆ê›íË
+// „Éï„É©„Ç∞Êìç‰Ωú
+// „Çº„É≠Ôºè„Éç„Ç¨„ÉÜ„Ç£„Éñ„Éï„É©„Ç∞„ÅÆ„ÉÅ„Çß„ÉÉ„ÇØ„Å®Ë®≠ÂÆö
 #define	SET_ZN_FLAG(A)	{ R.P &= ~(Z_FLAG|N_FLAG); R.P |= ZN_Table[(BYTE)(A)]; }
 
-// ÉtÉâÉOÉZÉbÉg
+// „Éï„É©„Ç∞„Çª„ÉÉ„Éà
 #define	SET_FLAG(V)	{ R.P |=  (V); }
-// ÉtÉâÉOÉNÉäÉA
+// „Éï„É©„Ç∞„ÇØ„É™„Ç¢
 #define	CLR_FLAG(V)	{ R.P &= ~(V); }
-// ÉtÉâÉOÉeÉXÉgÅïÉZÉbÉgÅ^ÉNÉäÉA
+// „Éï„É©„Ç∞„ÉÜ„Çπ„ÉàÔºÜ„Çª„ÉÉ„ÉàÔºè„ÇØ„É™„Ç¢
 #define	TST_FLAG(F,V)	{ R.P &= ~(V); if((F)) R.P |= (V); }
-// ÉtÉâÉOÉ`ÉFÉbÉN
+// „Éï„É©„Ç∞„ÉÅ„Çß„ÉÉ„ÇØ
 #define	CHK_FLAG(V)	(R.P&(V))
 
 // WT .... WORD TEMP
@@ -155,15 +155,15 @@
 	EA = ET + (WORD)R.Y;	\
 }
 
-// ÉÅÉÇÉäÉâÉCÉg
+// „É°„É¢„É™„É©„Ç§„Éà
 #define	MW_ZP()		ZPWR(EA,DT)
 #define	MW_EA()		WR6502(EA,DT)
 
-// STACKëÄçÏ
+// STACKÊìç‰Ωú
 #define	PUSH(V)		{ STACK[(R.S--)&0xFF]=(V); }
 #define	POP()		STACK[(++R.S)&0xFF]
 
-// éZèpââéZån
+// ÁÆóË°ìÊºîÁÆóÁ≥ª
 /* ADC (NV----ZC) */
 #define	ADC() {							\
 	WT = R.A+DT+(R.P&C_FLAG);				\
@@ -214,7 +214,7 @@
 	SET_ZN_FLAG(R.Y);	\
 }
 
-// ò_óùââéZån
+// Ë´ñÁêÜÊºîÁÆóÁ≥ª
 /* AND (N-----Z-) */
 #define	AND() {			\
 	R.A &= DT;		\
@@ -313,7 +313,7 @@
 	TST_FLAG( DT&0x40, V_FLAG );		\
 }
 
-// ÉçÅ[ÉhÅ^ÉXÉgÉAån
+// „É≠„Éº„ÉâÔºè„Çπ„Éà„Ç¢Á≥ª
 /* LDA (N-----Z-) */
 #define	LDA()	{ R.A = DT; SET_ZN_FLAG(R.A); }
 /* LDX (N-----Z-) */
@@ -341,7 +341,7 @@
 /* TXS (--------) */
 #define	TXS()	{ R.S = R.X; }
 
-// î‰ärån
+// ÊØîËºÉÁ≥ª
 /* CMP (N-----ZC) */
 #define	CMP_() {				\
 	WT = (WORD)R.A - (WORD)DT;		\
@@ -361,7 +361,7 @@
 	SET_ZN_FLAG( (BYTE)WT );		\
 }
 
-// ÉWÉÉÉìÉvÅ^ÉäÉ^Å[Éìån
+// „Ç∏„É£„É≥„ÉóÔºè„É™„Çø„Éº„É≥Á≥ª
 #if	1
 #define	JMP_ID() {				\
 	WT = OP6502W(R.PC);			\
@@ -448,7 +448,7 @@
 #define	BVC()	{ if( !(R.P & V_FLAG) ) REL_JUMP(); }
 #define	BVS()	{ if(  (R.P & V_FLAG) ) REL_JUMP(); }
 
-// ÉtÉâÉOêßå‰ån
+// „Éï„É©„Ç∞Âà∂Âæ°Á≥ª
 #define	CLC()	{ R.P &= ~C_FLAG; }
 #define	CLD()	{ R.P &= ~D_FLAG; }
 #define	CLI()	{ R.P &= ~I_FLAG; }
@@ -457,7 +457,7 @@
 #define	SED()	{ R.P |= D_FLAG; }
 #define	SEI()	{ R.P |= I_FLAG; }
 
-// UnofficialñΩóﬂ
+// UnofficialÂëΩ‰ª§
 #define	ANC()	{			\
 	R.A &= DT;			\
 	SET_ZN_FLAG( R.A );		\
@@ -584,7 +584,7 @@
 }
 
 //
-// ÉRÉìÉXÉgÉâÉNÉ^/ÉfÉXÉgÉâÉNÉ^
+// „Ç≥„É≥„Çπ„Éà„É©„ÇØ„Çø/„Éá„Çπ„Éà„É©„ÇØ„Çø
 //
 //CPU::CPU( NES* parent )
 CPU::CPU( NES* parent ) : nes(parent)
@@ -597,7 +597,7 @@ CPU::~CPU()
 {
 }
 
-// ÉÅÉÇÉäÉAÉNÉZÉX
+// „É°„É¢„É™„Ç¢„ÇØ„Çª„Çπ
 //#define	OP6502(A)	(CPU_MEM_BANK[(A)>>13][(A)&0x1FFF])
 //#define	OP6502W(A)	(*((WORD*)&CPU_MEM_BANK[(A)>>13][(A)&0x1FFF]))
 
@@ -661,7 +661,7 @@ inline	WORD	CPU::RD6502W( WORD addr )
 #endif
 }
 
-// ÉÅÉÇÉäÉâÉCÉg
+// „É°„É¢„É™„É©„Ç§„Éà
 inline	void	CPU::WR6502( WORD addr, BYTE data )
 {
 	if( addr < 0x2000 ) {
@@ -674,7 +674,7 @@ inline	void	CPU::WR6502( WORD addr, BYTE data )
 }
 
 //
-// ÉäÉZÉbÉg
+// „É™„Çª„ÉÉ„Éà
 //
 void	CPU::Reset()
 {
@@ -723,7 +723,7 @@ void	CPU::SetTotalCycles( INT cycles )
 }
 
 //
-// DMAÉyÉìÉfÉBÉìÉOÉTÉCÉNÉãê›íË
+// DMA„Éö„É≥„Éá„Ç£„É≥„Ç∞„Çµ„Ç§„ÇØ„É´Ë®≠ÂÆö
 //
 void	CPU::DMA( INT cycles )
 {
@@ -733,7 +733,7 @@ void	CPU::DMA( INT cycles )
 static	int	nmicount;
 
 //
-// äÑÇËçûÇ›
+// Ââ≤„ÇäËæº„Åø
 //
 void	CPU::NMI()
 {
@@ -752,11 +752,11 @@ void	CPU::ClrIRQ( BYTE mask )
 }
 
 //
-// ñΩóﬂé¿çs
+// ÂëΩ‰ª§ÂÆüË°å
 //
 INT	CPU::EXEC( INT request_cycles )
 {
-BYTE	opcode;		// ÉIÉyÉRÅ[Éh
+BYTE	opcode;		// „Ç™„Éö„Ç≥„Éº„Éâ
 INT	OLD_cycles = TOTAL_cycles;
 INT	exec_cycles;
 BYTE	nmi_request, irq_request;
@@ -776,7 +776,7 @@ register BYTE	DT;
 				DMA_cycles -= request_cycles;
 				TOTAL_cycles += request_cycles;
 
-				// ÉNÉçÉbÉNìØä˙èàóù
+				// „ÇØ„É≠„ÉÉ„ÇØÂêåÊúüÂá¶ÁêÜ
 				mapper->Clock( request_cycles );
 #if	DPCM_SYNCCLOCK
 				apu->SyncDPCM( request_cycles );
@@ -1391,7 +1391,7 @@ register BYTE	DT;
 				ADD_CYCLE(6);
 				break;
 
-	// ÉtÉâÉOêßå‰ån
+	// „Éï„É©„Ç∞Âà∂Âæ°Á≥ª
 			case	0x18: // CLC
 				CLC();
 				ADD_CYCLE(2);
@@ -1422,7 +1422,7 @@ register BYTE	DT;
 				ADD_CYCLE(2);
 				break;
 
-	// ÉXÉ^ÉbÉNån
+	// „Çπ„Çø„ÉÉ„ÇØÁ≥ª
 			case	0x48: // PHA
 				PUSH( R.A );
 				ADD_CYCLE(3);
@@ -1441,7 +1441,7 @@ register BYTE	DT;
 				ADD_CYCLE(4);
 				break;
 
-	// ÇªÇÃëº
+	// „Åù„ÅÆ‰ªñ
 			case	0x00: // BRK
 				BRK();
 				ADD_CYCLE(7);
@@ -1451,7 +1451,7 @@ register BYTE	DT;
 				ADD_CYCLE(2);
 				break;
 
-	// ñ¢åˆäJñΩóﬂåQ
+	// Êú™ÂÖ¨ÈñãÂëΩ‰ª§Áæ§
 			case	0x0B: // ANC #$??
 			case	0x2B: // ANC #$??
 				MR_IM(); ANC();
@@ -1811,7 +1811,7 @@ register BYTE	DT;
 		request_cycles -= exec_cycles;
 		TOTAL_cycles += exec_cycles;
 
-		// ÉNÉçÉbÉNìØä˙èàóù
+		// „ÇØ„É≠„ÉÉ„ÇØÂêåÊúüÂá¶ÁêÜ
 		mapper->Clock( exec_cycles );
 #if	DPCM_SYNCCLOCK
 		apu->SyncDPCM( exec_cycles );

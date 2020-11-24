@@ -1,5 +1,5 @@
-//
-// DATACHƒo[ƒR[ƒhƒoƒgƒ‰[ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// DATACHãƒãƒ¼ã‚³ãƒ¼ãƒ‰ãƒãƒˆãƒ©ãƒ¼ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -29,13 +29,13 @@ using namespace std;
 #include "nes.h"
 #include "mapper.h"
 
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_MESSAGE_BEGIN(CDatachBarcodeDlg)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
 DLG_ON_MESSAGE( WM_ACTIVATE,	OnActivate )
 DLG_ON_MESSAGE( WM_DESTROY,	OnDestroy )
 DLG_ON_MESSAGE( WM_CLOSE,	OnClose )
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
 //DLG_ON_COMMAND( IDC_EBB_CODE, OnCodeinput )
@@ -45,7 +45,7 @@ DLG_ON_COMMAND( IDC_EBB_RANDOM, OnCodeCreate )
 DLG_ON_COMMAND_NOTIFY( IDC_EBB_CODE, EN_CHANGE, OnCodeinput )
 
 DLG_COMMAND_END()
-// Notify ƒƒbƒZ[ƒW
+// Notify ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 //DLG_ON_NOTIFY( IDC_LCH_LIST, LVN_KEYDOWN, OnKeyDownListView )
 DLG_NOTIFY_END()
@@ -53,13 +53,13 @@ DLG_MESSAGE_END()
 
 BOOL	CDatachBarcodeDlg::Create( HWND hWndParent )
 {
-	// e‚ÍƒfƒXƒNƒgƒbƒv‚É‚·‚é
+	// è¦ªã¯ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ã«ã™ã‚‹
 	m_hWnd = ::CreateDialogParam( CApp::GetPlugin(), MAKEINTRESOURCE(IDD_EXT_BARCODEBATTLER),
 				NULL, g_DlgProc, (LPARAM)this );
 	if( !m_hWnd )
 		return	FALSE;
 
-	// ƒ‚[ƒhƒŒƒXƒ_ƒCƒAƒƒOƒŠƒXƒg‚É‰Á‚¦‚é
+	// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒªã‚¹ãƒˆã«åŠ ãˆã‚‹
 	CWndList::Add( this );
 
 	return	TRUE;
@@ -68,10 +68,10 @@ BOOL	CDatachBarcodeDlg::Create( HWND hWndParent )
 void	CDatachBarcodeDlg::Destroy()
 {
 	if( m_hWnd ) {
-		// ˆÊ’u•Û‘¶
+		// ä½ç½®ä¿å­˜
 		::GetWindowRect( m_hWnd, &Config.general.rcBarcodePos );
 
-		// ƒ‚[ƒhƒŒƒXƒ_ƒCƒAƒƒOƒŠƒXƒg‚©‚çíœ
+		// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 		CWndList::Del( this );
 		::DestroyWindow( m_hWnd );
 		m_hWnd = NULL;
@@ -82,7 +82,7 @@ DLGMSG	CDatachBarcodeDlg::OnInitDialog( DLGMSGPARAM )
 {
 	DEBUGOUT( "CDatachBarcodeDlg::OnInitDialog\n" );
 
-	// ˆÊ’uC³
+	// ä½ç½®ä¿®æ­£
 	if( Config.general.rcBarcodePos.right-Config.general.rcBarcodePos.left != 0
 	 && Config.general.rcBarcodePos.bottom-Config.general.rcBarcodePos.top != 0 ) {
 		::SetWindowPos( m_hWnd, HWND_NOTOPMOST, Config.general.rcBarcodePos.left, Config.general.rcBarcodePos.top,
@@ -120,14 +120,14 @@ DLGMSG	CDatachBarcodeDlg::OnDestroy( DLGMSGPARAM )
 DLGMSG	CDatachBarcodeDlg::OnClose( DLGMSGPARAM )
 {
 	DEBUGOUT( "CDatachBarcodeDlg::OnClose\n" );
-	::ShowWindow( m_hWnd, SW_HIDE ); // ”ñ•\¦‚É‚·‚é‚¾‚¯
+	::ShowWindow( m_hWnd, SW_HIDE ); // éè¡¨ç¤ºã«ã™ã‚‹ã ã‘
 	return	TRUE;
 }
 
 DLGCMD	CDatachBarcodeDlg::OnCancel( DLGCMDPARAM )
 {
 	DEBUGOUT( "CDatachBarcodeDlg::OnCancel\n" );
-	::ShowWindow( m_hWnd, SW_HIDE ); // ”ñ•\¦‚É‚·‚é‚¾‚¯
+	::ShowWindow( m_hWnd, SW_HIDE ); // éè¡¨ç¤ºã«ã™ã‚‹ã ã‘
 }
 
 DLGCMD	CDatachBarcodeDlg::OnCodeinput( DLGCMDPARAM )

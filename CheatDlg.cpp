@@ -1,5 +1,5 @@
-//
-// ƒ`[ƒgƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒãƒ¼ãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -23,7 +23,7 @@ using namespace std;
 #include "EmuThread.h"
 
 //
-// ƒT[ƒ`ƒ_ƒCƒAƒƒO
+// ã‚µãƒ¼ãƒãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 //
 DLG_MESSAGE_BEGIN(CSearchDlg)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
@@ -51,7 +51,7 @@ DLG_ON_COMMAND( ID_SCH_APPEND, OnCodeAppend )
 //DLG_ON_COMMAND( IDC_VER_WEBSITE, OnWebsite )
 DLG_COMMAND_END()
 
-// Notify ƒƒbƒZ[ƒW
+// Notify ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_ON_NOTIFY( IDC_SCH_RESULT_LIST, NM_DBLCLK, OnDoubleClickListView )
 DLG_NOTIFY_END()
@@ -67,7 +67,7 @@ BOOL	CSearchDlg::Create( HWND hWndParent )
 	if( !m_hWnd )
 		return	FALSE;
 
-	// ƒ‚[ƒhƒŒƒXƒ_ƒCƒAƒƒOƒŠƒXƒg‚É‰Á‚¦‚é
+	// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒªã‚¹ãƒˆã«åŠ ãˆã‚‹
 	CWndList::Add( this );
 
 	return	TRUE;
@@ -76,15 +76,15 @@ BOOL	CSearchDlg::Create( HWND hWndParent )
 void	CSearchDlg::Destroy()
 {
 	if( m_hWnd ) {
-		// ˆÊ’u•Û‘¶
+		// ä½ç½®ä¿å­˜
 		::GetWindowRect( m_hWnd, &Config.general.rcSearchDlgPos );
 
-		// ƒƒjƒ…[íœ
+		// ãƒ¡ãƒ‹ãƒ¥ãƒ¼å‰Šé™¤
 		if( m_hMenu )
 			::DestroyMenu( m_hMenu );
 		m_hMenu = NULL;
 
-		// ƒ‚[ƒhƒŒƒXƒ_ƒCƒAƒƒOƒŠƒXƒg‚©‚çíœ
+		// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 		CWndList::Del( this );
 
 		::DestroyWindow( m_hWnd );
@@ -327,40 +327,40 @@ DLGMSG	CSearchDlg::OnInitDialog( DLGMSGPARAM )
 	INT	i, j;
 	CHAR	szStr[256];
 
-	// ˆÊ’uC³
+	// ä½ç½®ä¿®æ­£
 	if( Config.general.rcSearchDlgPos.right-Config.general.rcSearchDlgPos.left != 0
 	 && Config.general.rcSearchDlgPos.bottom-Config.general.rcSearchDlgPos.top != 0 ) {
 		::SetWindowPos( m_hWnd, HWND_NOTOPMOST, Config.general.rcSearchDlgPos.left, Config.general.rcSearchDlgPos.top,
 				0, 0, SWP_NOSIZE | SWP_NOZORDER );
 	}
 
-	// ƒT[ƒ`Œ‹‰Ê‰Šú‰»
+	// ã‚µãƒ¼ãƒçµæœåˆæœŸåŒ–
 	::memset( &m_Result, 0, sizeof(m_Result) );
 	::memset( &m_ResultOld, 0, sizeof(m_ResultOld) );
 
-	// Šî”ƒ‰ƒWƒIƒ{ƒ^ƒ“
+	// åŸºæ•°ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³
 	BTNCHECK( IDC_SCH_RADIX_DEC, TRUE );
 //	BTNCHECK( IDC_SCH_RADIX_HEX, FALSE );
 
-	// ƒf[ƒ^’·ƒ‰ƒWƒIƒ{ƒ^ƒ“
+	// ãƒ‡ãƒ¼ã‚¿é•·ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³
 	BTNCHECK( IDC_SCH_LENGTH_1BYTE, TRUE );
 //	BTNCHECK( IDC_SCH_LENGTH_2BYTE, FALSE );
 //	BTNCHECK( IDC_SCH_LENGTH_3BYTE, FALSE );
 //	BTNCHECK( IDC_SCH_LENGTH_4BYTE, FALSE );
 
-	// ŒŸõ”ÍˆÍƒ`ƒFƒbƒNƒ{ƒbƒNƒX
+	// æ¤œç´¢ç¯„å›²ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹
 	BTNCHECK( IDC_SCH_AREA_RAM, TRUE );
 	BTNCHECK( IDC_SCH_AREA_SRAM, FALSE );
 	BTNCHECK( IDC_SCH_AREA_EXRAM, FALSE );
 
-	// ƒŠƒXƒgƒrƒ…[
+	// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
 	hWndCtrl = ::GetDlgItem( m_hWnd, IDC_SCH_RESULT_LIST );
 	ListView_SetExtendedListViewStyle( hWndCtrl, LVS_EX_FULLROWSELECT|LVS_EX_GRIDLINES );
 
 	ListView_DeleteAllItems( hWndCtrl );
 	ListView_SetItemCount( hWndCtrl, 16384 );
 
-	// ƒwƒbƒ_ƒRƒ“ƒgƒ[ƒ‹‚Ìİ’è
+	// ãƒ˜ãƒƒãƒ€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®è¨­å®š
 	LVCOLUMN	lvColumn;
 	lvColumn.mask = LVCF_FMT|LVCF_TEXT|LVCF_SUBITEM|LVCF_WIDTH;
 	lvColumn.fmt = LVCFMT_RIGHT;
@@ -385,16 +385,16 @@ DLGMSG	CSearchDlg::OnInitDialog( DLGMSGPARAM )
 	lvColumn.cx = nWidth*3/8;
 	ListView_InsertColumn( hWndCtrl, 2, &lvColumn );
 
-	// ƒf[ƒ^“™İ’è
+	// ãƒ‡ãƒ¼ã‚¿ç­‰è¨­å®š
 	::SetDlgItemText( m_hWnd, IDC_SCH_DATA_EDIT, "0" );
 
 	::SetDlgItemText( m_hWnd, IDC_SCH_WADDR_EDIT, "0000" );
 	::SetDlgItemText( m_hWnd, IDC_SCH_WDATA_EDIT, "0" );
 
-	// Undoƒ{ƒ^ƒ“‚ğƒfƒBƒZ[ƒuƒ‹
+	// Undoãƒœã‚¿ãƒ³ã‚’ãƒ‡ã‚£ã‚»ãƒ¼ãƒ–ãƒ«
 	::EnableWindow( ::GetDlgItem( m_hWnd, IDC_SCH_UNDO ), FALSE );
 
-	// ‰Šúƒf[ƒ^İ’è
+	// åˆæœŸãƒ‡ãƒ¼ã‚¿è¨­å®š
 	for( i = 0; i < 0x0800; i++ ) {
 		m_Result.RAM_N[i] = m_Result.RAM_O[i] = Emu.GetNES()->Read( (WORD)i );
 		m_Result.RAM_F[i] = 1;
@@ -410,12 +410,12 @@ DLGMSG	CSearchDlg::OnInitDialog( DLGMSGPARAM )
 			j = 1;
 	}
 
-	// SRAM‚ªg—p‚³‚ê‚Ä‚¢‚½‚ç©“®‚ÅON‚É
+	// SRAMãŒä½¿ç”¨ã•ã‚Œã¦ã„ãŸã‚‰è‡ªå‹•ã§ONã«
 	if( j ) {
 		BTNCHECK( IDC_SCH_AREA_SRAM, TRUE );
 	}
 
-	// ƒƒjƒ…[
+	// ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 	m_hMenu = CApp::LoadMenu( IDR_SCH_MENU );
 	m_hSubMenu = ::GetSubMenu( m_hMenu, 0 );
 
@@ -449,7 +449,7 @@ DLGMSG	CSearchDlg::OnActivate( DLGMSGPARAM )
 DLGMSG	CSearchDlg::OnClose( DLGMSGPARAM )
 {
 //	DEBUGOUT( "CSearchDlg::OnClose\n" );
-	::ShowWindow( m_hWnd, SW_HIDE ); // ”ñ•\¦‚É‚·‚é‚¾‚¯
+	::ShowWindow( m_hWnd, SW_HIDE ); // éè¡¨ç¤ºã«ã™ã‚‹ã ã‘
 	return	TRUE;
 }
 
@@ -491,7 +491,7 @@ DLGCMD	CSearchDlg::OnOK( DLGCMDPARAM )
 DLGCMD	CSearchDlg::OnCancel( DLGCMDPARAM )
 {
 //	DEBUGOUT( "CSearchDlg::OnCancel\n" );
-	::ShowWindow( m_hWnd, SW_HIDE ); // ”ñ•\¦‚É‚·‚é‚¾‚¯
+	::ShowWindow( m_hWnd, SW_HIDE ); // éè¡¨ç¤ºã«ã™ã‚‹ã ã‘
 }
 
 DLGCMD	CSearchDlg::OnRadixCommand( DLGCMDPARAM )
@@ -517,13 +517,13 @@ DLGCMD	CSearchDlg::OnStart( DLGCMDPARAM )
 
 	INT	i;
 
-	// Undoƒoƒbƒtƒ@‚ÉƒZ[ƒu
+	// Undoãƒãƒƒãƒ•ã‚¡ã«ã‚»ãƒ¼ãƒ–
 	m_ResultOld = m_Result;
 
-	// ¡‰ñƒf[ƒ^‚Ì‰Šú‰»
+	// ä»Šå›ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–
 	::memset( &m_Result, 0, sizeof(m_Result) );
 
-	// ƒf[ƒ^ŒŸõŒó•â‚Ìİ’è
+	// ãƒ‡ãƒ¼ã‚¿æ¤œç´¢å€™è£œã®è¨­å®š
 	if( IsBTNCHECK( IDC_SCH_AREA_RAM ) ) {
 		for( i = 0; i < 0x0800; i++ ) {
 			m_Result.RAM_N[i] = m_Result.RAM_O[i] = Emu.GetNES()->Read( (WORD)i );
@@ -540,7 +540,7 @@ DLGCMD	CSearchDlg::OnStart( DLGCMDPARAM )
 
 	OnListUpdate();
 
-	// Undoƒ{ƒ^ƒ“‚ğƒCƒl[ƒuƒ‹
+	// Undoãƒœã‚¿ãƒ³ã‚’ã‚¤ãƒãƒ¼ãƒ–ãƒ«
 	::EnableWindow( ::GetDlgItem( m_hWnd, IDC_SCH_UNDO ), TRUE );
 }
 
@@ -550,10 +550,10 @@ DLGCMD	CSearchDlg::OnUpdate( DLGCMDPARAM )
 
 	INT	i;
 
-	// Undoƒoƒbƒtƒ@‚ÉƒZ[ƒu
+	// Undoãƒãƒƒãƒ•ã‚¡ã«ã‚»ãƒ¼ãƒ–
 	m_ResultOld = m_Result;
 
-	// ƒf[ƒ^‚ÌXV
+	// ãƒ‡ãƒ¼ã‚¿ã®æ›´æ–°
 	if( IsBTNCHECK( IDC_SCH_AREA_RAM ) ) {
 		for( i = 0; i < 0x0800; i++ ) {
 			m_Result.RAM_O[i] = m_Result.RAM_N[i];
@@ -570,7 +570,7 @@ DLGCMD	CSearchDlg::OnUpdate( DLGCMDPARAM )
 
 	OnListUpdate();
 
-	// Undoƒ{ƒ^ƒ“‚ğƒCƒl[ƒuƒ‹
+	// Undoãƒœã‚¿ãƒ³ã‚’ã‚¤ãƒãƒ¼ãƒ–ãƒ«
 	::EnableWindow( ::GetDlgItem( m_hWnd, IDC_SCH_UNDO ), TRUE );
 }
 
@@ -583,7 +583,7 @@ DLGCMD	CSearchDlg::OnUndo( DLGCMDPARAM )
 
 	OnListUpdate();
 
-	// Undoƒ{ƒ^ƒ“‚ğƒfƒBƒZ[ƒuƒ‹
+	// Undoãƒœã‚¿ãƒ³ã‚’ãƒ‡ã‚£ã‚»ãƒ¼ãƒ–ãƒ«
 	::EnableWindow( ::GetDlgItem( m_hWnd, IDC_SCH_UNDO ), FALSE );
 }
 
@@ -594,14 +594,14 @@ DLGCMD	CSearchDlg::OnSearchCommand( DLGCMDPARAM )
 	INT	i;
 	INT	type = (INT)uID - IDC_SCH_EQUAL;
 
-	// Undoƒoƒbƒtƒ@‚ÉƒZ[ƒu
+	// Undoãƒãƒƒãƒ•ã‚¡ã«ã‚»ãƒ¼ãƒ–
 	m_ResultOld = m_Result;
 
-	// ƒeƒ“ƒ|ƒ‰ƒŠ
+	// ãƒ†ãƒ³ãƒãƒ©ãƒª
 	struct	RESULT	ResultTemp;
 	::memset( &ResultTemp, 0, sizeof(ResultTemp) );
 
-	// Œó•â‚Ì’†‚©‚çğŒ‚ÅŒŸõ‚·‚é
+	// å€™è£œã®ä¸­ã‹ã‚‰æ¡ä»¶ã§æ¤œç´¢ã™ã‚‹
 	if( IsBTNCHECK( IDC_SCH_AREA_RAM ) ) {
 		for( i = 0; i < 0x0800-m_nLength; i++ ) {
 			if( m_Result.RAM_F[i] ) {
@@ -610,7 +610,7 @@ DLGCMD	CSearchDlg::OnSearchCommand( DLGCMDPARAM )
 				}
 			}
 		}
-		// RAM‚Ìó‘Ô‚ğƒRƒs[
+		// RAMã®çŠ¶æ…‹ã‚’ã‚³ãƒ”ãƒ¼
 		for( i = 0; i < 0x0800; i++ ) {
 			ResultTemp.RAM_O[i] = m_Result.RAM_N[i];
 			ResultTemp.RAM_N[i] = Emu.GetNES()->Read( (WORD)i );
@@ -624,19 +624,19 @@ DLGCMD	CSearchDlg::OnSearchCommand( DLGCMDPARAM )
 				}
 			}
 		}
-		// RAM‚Ìó‘Ô‚ğƒRƒs[
+		// RAMã®çŠ¶æ…‹ã‚’ã‚³ãƒ”ãƒ¼
 		for( i = 0; i < 0x2000; i++ ) {
 			ResultTemp.SRAM_O[i] = m_Result.SRAM_N[i];
 			ResultTemp.SRAM_N[i] = Emu.GetNES()->Read( (WORD)i+0x6000 );
 		}
 	}
 
-	// ƒeƒ“ƒ|ƒ‰ƒŠƒf[ƒ^‚ğƒRƒs[
+	// ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ‡ãƒ¼ã‚¿ã‚’ã‚³ãƒ”ãƒ¼
 	m_Result = ResultTemp;
 
 	OnListUpdate();
 
-	// Undoƒ{ƒ^ƒ“‚ğƒCƒl[ƒuƒ‹
+	// Undoãƒœã‚¿ãƒ³ã‚’ã‚¤ãƒãƒ¼ãƒ–ãƒ«
 	::EnableWindow( ::GetDlgItem( m_hWnd, IDC_SCH_UNDO ), TRUE );
 }
 
@@ -648,10 +648,10 @@ DLGCMD	CSearchDlg::OnSearchData( DLGCMDPARAM )
 	DWORD	data;
 	CHAR	szStr[256];
 
-	// Undoƒoƒbƒtƒ@‚ÉƒZ[ƒu
+	// Undoãƒãƒƒãƒ•ã‚¡ã«ã‚»ãƒ¼ãƒ–
 	m_ResultOld = m_Result;
 
-	// ƒf[ƒ^/ƒŒƒ“ƒW‚Ìæ“¾
+	// ãƒ‡ãƒ¼ã‚¿/ãƒ¬ãƒ³ã‚¸ã®å–å¾—
 	::GetDlgItemText( m_hWnd, IDC_SCH_DATA_EDIT, szStr, sizeof(szStr) );
 	if( m_nRadix == 10 ) {
 		::GetDlgItemText( m_hWnd, IDC_SCH_DATA_EDIT, szStr, sizeof(szStr) );
@@ -661,11 +661,11 @@ DLGCMD	CSearchDlg::OnSearchData( DLGCMDPARAM )
 		data = (DWORD)::strtoul( szStr, NULL, 16 );
 	}
 
-	// ƒeƒ“ƒ|ƒ‰ƒŠ
+	// ãƒ†ãƒ³ãƒãƒ©ãƒª
 	struct	RESULT	ResultTemp;
 	::memset( &ResultTemp, 0, sizeof(ResultTemp) );
 
-	// Œó•â‚Ì’†‚©‚çƒf[ƒ^‚Æ”ÍˆÍ‚ÅŒŸõ‚·‚é
+	// å€™è£œã®ä¸­ã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã¨ç¯„å›²ã§æ¤œç´¢ã™ã‚‹
 	if( IsBTNCHECK( IDC_SCH_AREA_RAM ) ) {
 		for( i = 0; i < 0x0800-m_nLength; i++ ) {
 			if( m_Result.RAM_F[i] ) {
@@ -674,7 +674,7 @@ DLGCMD	CSearchDlg::OnSearchData( DLGCMDPARAM )
 				}
 			}
 		}
-		// RAM‚Ìó‘Ô‚ğƒRƒs[
+		// RAMã®çŠ¶æ…‹ã‚’ã‚³ãƒ”ãƒ¼
 		for( i = 0; i < 0x0800; i++ ) {
 			ResultTemp.RAM_O[i] = m_Result.RAM_O[i];
 			ResultTemp.RAM_N[i] = Emu.GetNES()->Read( (WORD)i );
@@ -688,19 +688,19 @@ DLGCMD	CSearchDlg::OnSearchData( DLGCMDPARAM )
 				}
 			}
 		}
-		// RAM‚Ìó‘Ô‚ğƒRƒs[
+		// RAMã®çŠ¶æ…‹ã‚’ã‚³ãƒ”ãƒ¼
 		for( i = 0; i < 0x2000; i++ ) {
 			ResultTemp.SRAM_O[i] = m_Result.SRAM_O[i];
 			ResultTemp.SRAM_N[i] = Emu.GetNES()->Read( (WORD)i+0x6000 );
 		}
 	}
 
-	// ƒeƒ“ƒ|ƒ‰ƒŠƒf[ƒ^‚ğƒRƒs[
+	// ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ‡ãƒ¼ã‚¿ã‚’ã‚³ãƒ”ãƒ¼
 	m_Result = ResultTemp;
 
 	OnListUpdate();
 
-	// Undoƒ{ƒ^ƒ“‚ğƒCƒl[ƒuƒ‹
+	// Undoãƒœã‚¿ãƒ³ã‚’ã‚¤ãƒãƒ¼ãƒ–ãƒ«
 	::EnableWindow( ::GetDlgItem( m_hWnd, IDC_SCH_UNDO ), TRUE );
 }
 
@@ -711,7 +711,7 @@ DLGCMD	CSearchDlg::OnWriteData( DLGCMDPARAM )
 	DWORD	addr, data;
 	CHAR	szStr[256];
 
-	// ƒAƒhƒŒƒX/ƒf[ƒ^‚Ìæ“¾
+	// ã‚¢ãƒ‰ãƒ¬ã‚¹/ãƒ‡ãƒ¼ã‚¿ã®å–å¾—
 	::GetDlgItemText( m_hWnd, IDC_SCH_WADDR_EDIT, szStr, sizeof(szStr) );
 	addr = (DWORD)::strtoul( szStr, NULL, 16 );
 
@@ -769,7 +769,7 @@ DLGNOTIFY CSearchDlg::OnDoubleClickListView( DLGNOTIFYPARAM )
 }
 
 //
-// ƒ`[ƒgƒR[ƒh•ÒWƒ_ƒCƒAƒƒO
+// ãƒãƒ¼ãƒˆã‚³ãƒ¼ãƒ‰ç·¨é›†ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 //
 DLG_MESSAGE_BEGIN(CCheatCodeEditDlg)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
@@ -792,11 +792,11 @@ DLGMSG	CCheatCodeEditDlg::OnInitDialog( DLGMSGPARAM )
 
 	CHAR	szStr[256], szTemp[256];
 
-	// ƒAƒhƒŒƒX
+	// ã‚¢ãƒ‰ãƒ¬ã‚¹
 	::wsprintf( szStr, "%04X", m_Code.address );
 	::SetDlgItemText( m_hWnd, IDC_CED_ADDR, szStr );
 
-	// ƒf[ƒ^
+	// ãƒ‡ãƒ¼ã‚¿
 	if( m_nRadix == 10 ) {
 		::wsprintf( szStr, "%d", m_Code.data );
 	} else {
@@ -805,10 +805,10 @@ DLGMSG	CCheatCodeEditDlg::OnInitDialog( DLGMSGPARAM )
 	}
 	::SetDlgItemText( m_hWnd, IDC_CED_DATA, szStr );
 
-	// ƒRƒƒ“ƒg
+	// ã‚³ãƒ¡ãƒ³ãƒˆ
 	::SetDlgItemText( m_hWnd, IDC_CED_COMMENT, m_Code.comment.c_str() );
 
-	// ƒ‰ƒWƒIƒ{ƒ^ƒ“
+	// ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³
 	BTNCHECK( (m_nRadix==10)?IDC_CED_RADIX_DEC:IDC_CED_RADIX_HEX, TRUE );
 	BTNCHECK( (IDC_CED_LENGTH_1BYTE+m_Code.length), TRUE );
 
@@ -888,7 +888,7 @@ DLGCMD	CCheatCodeEditDlg::OnCancel( DLGCMDPARAM )
 }
 
 //
-// ƒ`[ƒgƒR[ƒh“ü—Íƒ_ƒCƒAƒƒO
+// ãƒãƒ¼ãƒˆã‚³ãƒ¼ãƒ‰å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 //
 DLG_MESSAGE_BEGIN(CCheatCodeInputDlg)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
@@ -938,15 +938,15 @@ DLGCMD	CCheatCodeInputDlg::OnCancel( DLGCMDPARAM )
 }
 
 //
-// ƒ`[ƒgƒR[ƒhƒ_ƒCƒAƒƒO
+// ãƒãƒ¼ãƒˆã‚³ãƒ¼ãƒ‰ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 //
 
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_MESSAGE_BEGIN(CCheatCodeDlg)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
 DLG_ON_MESSAGE( WM_DESTROY,	OnDestroy )
 DLG_ON_MESSAGE( WM_TIMER,	OnTimer )
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
@@ -959,7 +959,7 @@ DLG_ON_COMMAND( IDC_CHT_EDIT, OnEdit )
 DLG_ON_COMMAND( IDC_CHT_LOAD, OnLoad )
 DLG_ON_COMMAND( IDC_CHT_SAVE, OnSave )
 DLG_COMMAND_END()
-// Notify ƒƒbƒZ[ƒW
+// Notify ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_ON_NOTIFY( IDC_CHT_CODE_LIST, LVN_KEYDOWN, OnKeyDownListView )
 DLG_ON_NOTIFY( IDC_CHT_CODE_LIST, NM_CLICK, OnClickListView )
@@ -1017,21 +1017,21 @@ DLGMSG	CCheatCodeDlg::OnInitDialog( DLGMSGPARAM )
 	HWND	hWndCtrl;
 	CHAR	szStr[256];
 
-	// ƒŠƒXƒgƒrƒ…[
+	// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
 	hWndCtrl = ::GetDlgItem( m_hWnd, IDC_CHT_CODE_LIST );
 //	ListView_SetExtendedListViewStyle( hWndCtrl, LVS_EX_CHECKBOXES|LVS_EX_FULLROWSELECT|LVS_EX_GRIDLINES );
 	ListView_SetExtendedListViewStyle( hWndCtrl, LVS_EX_FULLROWSELECT|LVS_EX_GRIDLINES );
 	ListView_DeleteAllItems( hWndCtrl );
 
-	// ƒCƒ[ƒWƒŠƒXƒg‚Ìì¬
+	// ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆã®ä½œæˆ
 	m_hImageList = ImageList_LoadBitmap(
 		CApp::GetInstance(), MAKEINTRESOURCE(IDB_CHEATIMAGELIST),
 		16, 4, RGB(255,0,255) );
 
-	// ƒCƒ[ƒWƒŠƒXƒg‚ğƒŠƒXƒgƒrƒ…[‚ÉŠ„‚è“–‚Ä
+	// ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆã‚’ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã«å‰²ã‚Šå½“ã¦
 	ListView_SetImageList( hWndCtrl, m_hImageList, LVSIL_STATE );
 
-	// ƒwƒbƒ_ƒRƒ“ƒgƒ[ƒ‹‚Ìİ’è
+	// ãƒ˜ãƒƒãƒ€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®è¨­å®š
 	LVCOLUMN	lvColumn;
 	lvColumn.mask = LVCF_FMT|LVCF_TEXT|LVCF_SUBITEM|LVCF_WIDTH;
 	lvColumn.fmt = LVCFMT_LEFT;
@@ -1051,7 +1051,7 @@ DLGMSG	CCheatCodeDlg::OnInitDialog( DLGMSGPARAM )
 	lvColumn.cx = nWidth*3/5;
 	ListView_InsertColumn( hWndCtrl, 1, &lvColumn );
 
-	// ƒ`[ƒgƒR[ƒh‚ğƒoƒbƒNƒAƒbƒv‚·‚é(Cancel—p)
+	// ãƒãƒ¼ãƒˆã‚³ãƒ¼ãƒ‰ã‚’ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã™ã‚‹(Cancelç”¨)
 	INT	codenum = Emu.GetNES()->GetCheatCodeNum();
 	if( codenum > 0 ) {
 		CHEATCODE	code;
@@ -1116,7 +1116,7 @@ DLGNOTIFY CCheatCodeDlg::OnKeyDownListView( DLGNOTIFYPARAM )
 				state = 0x1000;
 			ListView_SetItemState( pNMKeyDown->hdr.hwndFrom, i, state, LVIS_STATEIMAGEMASK );
 
-			// ƒR[ƒhXV
+			// ã‚³ãƒ¼ãƒ‰æ›´æ–°
 			CHEATCODE	code;
 			if( Emu.GetNES()->GetCheatCode( i, code ) ) {
 				code.enable = (state>>12)-1;
@@ -1138,18 +1138,18 @@ DLGNOTIFY CCheatCodeDlg::OnClickListView( DLGNOTIFYPARAM )
 	lvht.pt = pNMListView->ptAction;
 	ListView_HitTest( pNMListView->hdr.hwndFrom, &lvht );
 
-	// ƒXƒe[ƒgƒCƒ[ƒWˆÈŠO‚Í‹A‚é
+	// ã‚¹ãƒ†ãƒ¼ãƒˆã‚¤ãƒ¡ãƒ¼ã‚¸ä»¥å¤–ã¯å¸°ã‚‹
 	if( (lvht.flags&LVHT_NOWHERE) || (lvht.flags&LVHT_ONITEMLABEL) || lvht.iItem < 0 )
 		return;
 
-	// ƒXƒe[ƒgƒAƒCƒRƒ“‚È‚ç‚ÎXV
+	// ã‚¹ãƒ†ãƒ¼ãƒˆã‚¢ã‚¤ã‚³ãƒ³ãªã‚‰ã°æ›´æ–°
 	if( lvht.flags & LVHT_ONITEMSTATEICON ) {
 		UINT	state = ListView_GetItemState( pNMListView->hdr.hwndFrom, lvht.iItem, LVIS_STATEIMAGEMASK );
 		if( (state+=0x1000) > 0x4000 )
 			state = 0x1000;
 		ListView_SetItemState( pNMListView->hdr.hwndFrom, lvht.iItem, state, LVIS_STATEIMAGEMASK );
 
-		// ƒR[ƒhXV
+		// ã‚³ãƒ¼ãƒ‰æ›´æ–°
 		CHEATCODE	code;
 		if( Emu.GetNES()->GetCheatCode( lvht.iItem, code ) ) {
 			code.enable = (state>>12)-1;
@@ -1169,11 +1169,11 @@ DLGNOTIFY CCheatCodeDlg::OnDblClkListView( DLGNOTIFYPARAM )
 	lvht.pt = pNMListView->ptAction;
 	ListView_HitTest( pNMListView->hdr.hwndFrom, &lvht );
 
-	// ƒ‰ƒxƒ‹ˆÈŠO‚Í‹A‚é
+	// ãƒ©ãƒ™ãƒ«ä»¥å¤–ã¯å¸°ã‚‹
 	if( (lvht.flags&LVHT_NOWHERE) || !(lvht.flags&LVHT_ONITEMLABEL) || lvht.iItem < 0 )
 		return;
 
-	// ƒGƒfƒBƒbƒg‚µ‚Ä‚Ëc‚ÆB
+	// ã‚¨ãƒ‡ã‚£ãƒƒãƒˆã—ã¦ã­â€¦ã¨ã€‚
 	::PostMessage( m_hWnd, WM_COMMAND, (WPARAM)IDC_CHT_EDIT, (LPARAM)0 );
 }
 
@@ -1181,7 +1181,7 @@ DLGCMD	CCheatCodeDlg::OnOK( DLGCMDPARAM )
 {
 //	DEBUGOUT( "CCheatCodeDlg::OnOK\n" );
 
-	// ”O‚Ì‚½‚ß
+	// å¿µã®ãŸã‚
 	m_CheatCode.clear();
 	::EndDialog( m_hWnd, IDOK );
 }
@@ -1190,13 +1190,13 @@ DLGCMD	CCheatCodeDlg::OnCancel( DLGCMDPARAM )
 {
 //	DEBUGOUT( "CCheatCodeDlg::OnCancel\n" );
 
-	// ƒoƒbƒNƒAƒbƒv‚µ‚Ä‚¢‚½ƒ`[ƒgƒR[ƒh‚ğ–ß‚·
+	// ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã—ã¦ã„ãŸãƒãƒ¼ãƒˆã‚³ãƒ¼ãƒ‰ã‚’æˆ»ã™
 	Emu.GetNES()->CheatInitial();
 	for( INT i = 0; i < m_CheatCode.size(); i++ ) {
 		Emu.GetNES()->AddCheatCode( m_CheatCode[i] );
 	}
 
-	// ”O‚Ì‚½‚ß
+	// å¿µã®ãŸã‚
 	m_CheatCode.clear();
 	::EndDialog( m_hWnd, IDCANCEL );
 }
@@ -1235,7 +1235,7 @@ DLGCMD	CCheatCodeDlg::OnRemove( DLGCMDPARAM )
 	for( INT i = 0; i < nCount; i++ ) {
 		if( ListView_GetItemState( hWndCtrl, i, LVIS_SELECTED ) ) {
 			ListView_DeleteItem( hWndCtrl, i );
-			// Á‚·
+			// æ¶ˆã™
 			Emu.GetNES()->DelCheatCode( i );
 			break;
 		}
@@ -1254,14 +1254,14 @@ DLGCMD	CCheatCodeDlg::OnInput( DLGCMDPARAM )
 		if( ::strlen( dlg.m_Codes.c_str() ) < 10 )
 			return;
 
-		const UCHAR seps[] = " -\t\n\0";	// ƒZƒpƒŒ[ƒ^
+		const UCHAR seps[] = " -\t\n\0";	// ã‚»ãƒ‘ãƒ¬ãƒ¼ã‚¿
 		CHAR	szStr[256];
 
 		::wsprintf( szStr, "%s", dlg.m_Codes.c_str() );
 
 		CHAR*	pToken;
 
-		// ‰Šúó‘Ô‚ÅƒCƒl[ƒuƒ‹‚É‚·‚é
+		// åˆæœŸçŠ¶æ…‹ã§ã‚¤ãƒãƒ¼ãƒ–ãƒ«ã«ã™ã‚‹
 		code.enable = CHEAT_ENABLE;
 
 		// Initial state
@@ -1308,12 +1308,12 @@ DLGCMD	CCheatCodeDlg::OnInput( DLGCMDPARAM )
 		// Comment
 		code.comment = dlg.m_Comment;
 
-		// ’Ç‰Á
+		// è¿½åŠ 
 		Emu.GetNES()->AddCheatCode( code );
-		// ƒ^ƒCƒ}[‚ÅŒŸ’m‚µ‚È‚¢‚æ‚¤‚Éƒtƒ‰ƒOÁ‚µ
+		// ã‚¿ã‚¤ãƒãƒ¼ã§æ¤œçŸ¥ã—ãªã„ã‚ˆã†ã«ãƒ•ãƒ©ã‚°æ¶ˆã—
 		(void)Emu.GetNES()->IsCheatCodeAdd();
 
-		// ƒŠƒXƒgXV
+		// ãƒªã‚¹ãƒˆæ›´æ–°
 		OnListUpdate();
 	}
 }
@@ -1379,7 +1379,7 @@ DLGCMD	CCheatCodeDlg::OnLoad( DLGCMDPARAM )
 		FILE*	fp = NULL;
 
 		if( (fp = ::fopen( szFile, "r" )) ) {
-			// ˆê’UÁ‚·
+			// ä¸€æ—¦æ¶ˆã™
 			Emu.GetNES()->CheatInitial();
 
 			while( ::fgets( szTemp, sizeof(szTemp), fp ) ) {
@@ -1391,9 +1391,9 @@ DLGCMD	CCheatCodeDlg::OnLoad( DLGCMDPARAM )
 				if( ::strlen( szTemp ) < 10 )
 					continue;
 
-				const UCHAR seps[] = " -\t\n\0";	// ƒZƒpƒŒ[ƒ^
-				const UCHAR seps2[] = "\t\n\0";		// ƒZƒpƒŒ[ƒ^
-				const UCHAR seps3[] = "-\t\n\0";	// ƒZƒpƒŒ[ƒ^
+				const UCHAR seps[] = " -\t\n\0";	// ã‚»ãƒ‘ãƒ¬ãƒ¼ã‚¿
+				const UCHAR seps2[] = "\t\n\0";		// ã‚»ãƒ‘ãƒ¬ãƒ¼ã‚¿
+				const UCHAR seps3[] = "-\t\n\0";	// ã‚»ãƒ‘ãƒ¬ãƒ¼ã‚¿
 
 				CHAR*	pToken;
 
@@ -1488,12 +1488,12 @@ DLGCMD	CCheatCodeDlg::OnLoad( DLGCMDPARAM )
 					}
 				}
 
-				// ’Ç‰Á
+				// è¿½åŠ 
 				Emu.GetNES()->AddCheatCode( code );
-				// ƒ^ƒCƒ}[‚ÅŒŸ’m‚µ‚È‚¢‚æ‚¤‚Éƒtƒ‰ƒOÁ‚µ
+				// ã‚¿ã‚¤ãƒãƒ¼ã§æ¤œçŸ¥ã—ãªã„ã‚ˆã†ã«ãƒ•ãƒ©ã‚°æ¶ˆã—
 				(void)Emu.GetNES()->IsCheatCodeAdd();
 			}
-			// ƒŠƒXƒgXV
+			// ãƒªã‚¹ãƒˆæ›´æ–°
 			OnListUpdate();
 		}
 		FCLOSE( fp );
@@ -1545,7 +1545,7 @@ DLGCMD	CCheatCodeDlg::OnSave( DLGCMDPARAM )
 		if( (fp = ::fopen( szFile, "w" )) ) {
 			::fprintf( fp, "; %s\n", Emu.GetNES()->rom->GetRomName() );
 
-			// ƒR[ƒh‚ğƒtƒ@ƒCƒ‹‚É•Û‘¶
+			// ã‚³ãƒ¼ãƒ‰ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜
 			CHEATCODE	code;
 			for( INT i = 0; i < codenum; i++ ) {
 				Emu.GetNES()->GetCheatCode( i, code );

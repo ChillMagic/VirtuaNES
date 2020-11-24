@@ -1,5 +1,5 @@
-//
-// ƒ‰ƒ“ƒ`ƒƒ[ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒ©ãƒ³ãƒãƒ£ãƒ¼ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CLAUNCHERDLG_INCLUDED__
 #define	__CLAUNCHERDLG_INCLUDED__
@@ -119,7 +119,7 @@ protected:
 	//
 	BOOL	m_bFileLoaded;
 
-	// ƒ‰ƒ“ƒ`ƒƒ[ƒŠƒXƒg”Ô†
+	// ãƒ©ãƒ³ãƒãƒ£ãƒ¼ãƒªã‚¹ãƒˆç•ªå·
 	INT	m_nListSelect;
 
 	INT	m_nSortType;

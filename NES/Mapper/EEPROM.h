@@ -1,4 +1,4 @@
-class	X24C01
+ï»¿class	X24C01
 {
 public:
 	X24C01() {
@@ -60,7 +60,7 @@ public:
 			switch( now_state ) {
 				case	X24C01_ADDRESS:
 					if( bitcnt < 7 ) {
-						// –{—ˆ‚ÍMSB->LSB
+						// æœ¬æ¥ã¯MSB->LSB
 						addr &= ~(1<<bitcnt);
 						addr |= (sda_in?1:0)<<bitcnt;
 					} else {
@@ -78,14 +78,14 @@ public:
 					break;
 				case	X24C01_READ:
 					if( bitcnt < 8 ) {
-						// –{—ˆ‚ÍMSB->LSB
+						// æœ¬æ¥ã¯MSB->LSB
 						sda = (data&(1<<bitcnt))?1:0;
 					}
 					bitcnt++;
 					break;
 				case	X24C01_WRITE:
 					if( bitcnt < 8 ) {
-						// –{—ˆ‚ÍMSB->LSB
+						// æœ¬æ¥ã¯MSB->LSB
 						data &= ~(1<<bitcnt);
 						data |= (sda_in?1:0)<<bitcnt;
 					}
@@ -313,7 +313,7 @@ public:
 						now_state = X24C02_ACK;
 						sda       = 0xFF;
 						if( rw ) {
-							// Read‚Å‚Íâ‘Î—ˆ‚È‚¢‚ª”O‚Ìˆ×
+							// Readã§ã¯çµ¶å¯¾æ¥ãªã„ãŒå¿µã®ç‚º
 							next_state = X24C02_IDLE;
 						} else {
 							// to Data Write

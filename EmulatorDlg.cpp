@@ -1,5 +1,5 @@
-//
-// ÉGÉ~ÉÖÉåÅ[É^É_ÉCÉAÉçÉOÉNÉâÉX
+Ôªø//
+// „Ç®„Éü„É•„É¨„Éº„Çø„ÉÄ„Ç§„Ç¢„É≠„Ç∞„ÇØ„É©„Çπ
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -16,10 +16,10 @@ using namespace std;
 #include "EmulatorDlg.h"
 
 DLG_MESSAGE_BEGIN(CEmulatorDlg)
-// ÉÅÉbÉZÅ[ÉW
+// „É°„ÉÉ„Çª„Éº„Ç∏
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
 DLG_ON_MESSAGE( WM_HSCROLL,	OnHScroll )
-// ÉRÉ}ÉìÉh
+// „Ç≥„Éû„É≥„Éâ
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
@@ -53,19 +53,19 @@ void	CEmulatorDlg::OnInitialMember()
 	BTNCHECK( IDC_EMU_NOJOYSTICKID,   !Config.general.bNoJoystickID );
 	BTNCHECK( IDC_EMU_PAUSELAUNCHER,  Config.launcher.bActivePause );
 
-	// ÉXÉâÉCÉ_
+	// „Çπ„É©„Ç§„ÉÄ
 	::SendDlgItemMessage( m_hWnd, IDC_EMU_THROTTLE_SLIDER, TBM_SETRANGE, TRUE, MAKELONG(1,60) );
 	::SendDlgItemMessage( m_hWnd, IDC_EMU_THROTTLE_SLIDER, TBM_SETPOS, TRUE, (WPARAM)Config.emulator.nThrottleFPS/10 );
 	::SendDlgItemMessage( m_hWnd, IDC_EMU_THROTTLE_SLIDER, TBM_SETTICFREQ, 2, 0 );
 	::SendDlgItemMessage( m_hWnd, IDC_EMU_THROTTLE_SLIDER, TBM_SETLINESIZE, 0, 1 );
 	::SendDlgItemMessage( m_hWnd, IDC_EMU_THROTTLE_SLIDER, TBM_SETPAGESIZE, 0, 1 );
 
-	// FPSíl
+	// FPSÂÄ§
 	CHAR	str[64];
 	::wsprintf( str, "%d", Config.emulator.nThrottleFPS );
 	::SetDlgItemText( m_hWnd, IDC_EMU_FPS, str );
 
-	// ÉvÉâÉCÉIÉäÉeÉBÉRÉìÉ{É{ÉbÉNÉX
+	// „Éó„É©„Ç§„Ç™„É™„ÉÜ„Ç£„Ç≥„É≥„Éú„Éú„ÉÉ„ÇØ„Çπ
 	::SendDlgItemMessage( m_hWnd, IDC_EMU_PRIORITY_COMBO, CB_RESETCONTENT, 0, 0 );
 	INT	i, j;
 	for( i = IDS_EMU_PRIORITY_IDLE, j = 0; i <= IDS_EMU_PRIORITY_REALTIME; i++, j++ ) {

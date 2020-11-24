@@ -1,5 +1,5 @@
-//
-// ƒ`ƒƒƒbƒgƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒãƒ£ãƒƒãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CDIPSWITCHDLG_INCLUDED__
 #define	__CDIPSWITCHDLG_INCLUDED__

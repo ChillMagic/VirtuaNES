@@ -1,4 +1,4 @@
-#define	INITGUID
+ï»¿#define	INITGUID
 #define	WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <windowsx.h>
@@ -32,19 +32,19 @@ using namespace std;
 INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT nCmdShow )
 {
 #if	_DEBUG
-	// ƒƒ‚ƒŠƒŠ[ƒNŒŸo
+	// ãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯æ¤œå‡º
 	int	Flag = _CrtSetDbgFlag( _CRTDBG_REPORT_FLAG );
 	Flag |= _CRTDBG_LEAK_CHECK_DF;
 	Flag &= ~_CRTDBG_CHECK_ALWAYS_DF;
 	_CrtSetDbgFlag( Flag );
 #endif
 
-	// ŠÈˆÕƒEƒBƒ‹ƒXƒ`ƒFƒbƒN
+	// ç°¡æ˜“ã‚¦ã‚£ãƒ«ã‚¹ãƒã‚§ãƒƒã‚¯
 	if( SimpleVirusChecker() > 0 ) {
 		if( ::GetUserDefaultLCID() == 0x0411 ) {
-			if( ::MessageBox( NULL, "‚±‚ÌPC‚ÍƒEƒBƒ‹ƒXƒvƒƒOƒ‰ƒ€‚ÉŠ´õ‚µ‚Ä‚¢‚é‰Â”\«‚ª‚ ‚è‚Ü‚·B\n"
-						"ŠëŒ¯‚Å‚·‚Ì‚Å‚È‚é‚×‚­‘‹}‚ÉƒEƒBƒ‹ƒXƒ`ƒFƒbƒN‚ğs‚Á‚Ä‰º‚³‚¢B\n\n"
-						"‚»‚ê‚Å‚àÀs‚µ‚Ü‚·‚©H", "VirtuaNES ŠÈˆÕƒEƒBƒ‹ƒXƒ`ƒFƒbƒJ[", MB_ICONWARNING|MB_YESNO|MB_DEFBUTTON2 ) == IDNO )
+			if( ::MessageBox( NULL, "ã“ã®PCã¯ã‚¦ã‚£ãƒ«ã‚¹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã«æ„ŸæŸ“ã—ã¦ã„ã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚\n"
+						"å±é™ºã§ã™ã®ã§ãªã‚‹ã¹ãæ—©æ€¥ã«ã‚¦ã‚£ãƒ«ã‚¹ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã£ã¦ä¸‹ã•ã„ã€‚\n\n"
+						"ãã‚Œã§ã‚‚å®Ÿè¡Œã—ã¾ã™ã‹ï¼Ÿ", "VirtuaNES ç°¡æ˜“ã‚¦ã‚£ãƒ«ã‚¹ãƒã‚§ãƒƒã‚«ãƒ¼", MB_ICONWARNING|MB_YESNO|MB_DEFBUTTON2 ) == IDNO )
 				return	-1L;
 		} else {
 			if( ::MessageBox( NULL, "This PC may be infected with a virus program!!!\n"
@@ -54,13 +54,13 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		}
 	}
 
-	// ƒƒCƒ“ƒtƒŒ[ƒ€ƒEƒCƒ“ƒhƒEƒIƒuƒWƒFƒNƒg
+	// ãƒ¡ã‚¤ãƒ³ãƒ•ãƒ¬ãƒ¼ãƒ ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	CMainFrame	MainFrame;
 
 	// Mutex
 	HANDLE	hMutex = NULL;
 
-	// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒCƒ“ƒXƒ^ƒ“ƒX“™‚Ìİ’è
+	// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç­‰ã®è¨­å®š
 	CHAR	szPath[ _MAX_PATH ];
 	GetModuleFileName( hInstance, szPath, sizeof(szPath) );
 	string	ModulePath = CPathlib::SplitPath( szPath );
@@ -94,12 +94,12 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 	::InitCommonControls();
 
-	// İ’è‚Ìƒ[ƒh
+	// è¨­å®šã®ãƒ­ãƒ¼ãƒ‰
 	CRegistry::SetRegistryKey( "VirtuaNES.ini" );
 	Config.Load();
 	CRecent::Load();
 
-	// “ñd‹N“®‚Ì–h~
+	// äºŒé‡èµ·å‹•ã®é˜²æ­¢
 	hMutex = ::CreateMutex( NULL, FALSE, VIRTUANES_MUTEX );
 	if( ::GetLastError() == ERROR_ALREADY_EXISTS ) {
 		::CloseHandle( hMutex );
@@ -110,14 +110,14 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			CHAR	szTitle[256];
 			::GetWindowText( hWnd, szTitle, sizeof(szTitle)-1 );
 
-			// ƒ^ƒCƒgƒ‹ƒo[‚ª“¯‚¶‚©‚Ç‚¤‚©ƒ`ƒFƒbƒN
+			// ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ãŒåŒã˜ã‹ã©ã†ã‹ãƒã‚§ãƒƒã‚¯
 			if( ::strncmp( szTitle, VIRTUANES_CAPTION, ::strlen(VIRTUANES_CAPTION) ) == 0 ) {
-				// ‹N“®‚µ‚Ä‚¢‚½•û‚ğƒtƒHƒAƒOƒ‰ƒEƒ“ƒh‚É‚·‚é
+				// èµ·å‹•ã—ã¦ã„ãŸæ–¹ã‚’ãƒ•ã‚©ã‚¢ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ã«ã™ã‚‹
 				::SetForegroundWindow( hWnd );
 
-				// ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”‚ª‚ ‚é‚È‚ç“®ì’†‚ÌVirtuaNES‚ÌƒEƒCƒ“ƒhƒE‚Éƒtƒ@ƒCƒ‹–¼
-				// ƒƒbƒZ[ƒW‚ğ‘—‚è‚Â‚¯‚Ä‚»‚¿‚ç‚Å“®ì‚³‚¹‚é
-				// (“–‘R‚Ì—l‚É‘Î‰ƒo[ƒWƒ‡ƒ“‚Å‚È‚¢‚Æƒ_ƒ)
+				// ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³å¼•æ•°ãŒã‚ã‚‹ãªã‚‰å‹•ä½œä¸­ã®VirtuaNESã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«ãƒ•ã‚¡ã‚¤ãƒ«å
+				// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã‚Šã¤ã‘ã¦ãã¡ã‚‰ã§å‹•ä½œã•ã›ã‚‹
+				// (å½“ç„¶ã®æ§˜ã«å¯¾å¿œãƒãƒ¼ã‚¸ãƒ§ãƒ³ã§ãªã„ã¨ãƒ€ãƒ¡)
 				if( ::strlen( lpCmdLine ) > 0 ) {
 					CHAR	szCmdLine[_MAX_PATH];
 					::strcpy( szCmdLine, lpCmdLine );
@@ -126,12 +126,12 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 					COPYDATASTRUCT	cds;
 					cds.dwData = 0;
 					cds.lpData = (void*)szCmdLine;
-					cds.cbData = ::strlen(szCmdLine)+1; //  I’[‚ÌNULL‚à‘—‚é
-					//  •¶š—ñ‘—M
+					cds.cbData = ::strlen(szCmdLine)+1; //  çµ‚ç«¯ã®NULLã‚‚é€ã‚‹
+					//  æ–‡å­—åˆ—é€ä¿¡
 					::SendMessage( hWnd, WM_COPYDATA, (WPARAM)NULL, (LPARAM)&cds );
 				}
 
-				// I—¹
+				// çµ‚äº†
 				goto	_DoubleExecute_Exit;
 			}
 		}
@@ -141,19 +141,19 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		goto	_Error_Exit;
 	DEBUGOUT( "CreateWindow ok.\n" );
 
-	// ƒƒCƒ“ƒEƒCƒ“ƒhƒE‚Ì•\¦
+	// ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®è¡¨ç¤º
 	::ShowWindow( CApp::GetHWnd(), CApp::GetCmdShow() );
 	::UpdateWindow( CApp::GetHWnd() );
 
-	// ƒtƒbƒN
+	// ãƒ•ãƒƒã‚¯
 	CWndHook::Initialize();
 
-	// ƒ‰ƒ“ƒ`ƒƒ[“¯‹N“®
+	// ãƒ©ãƒ³ãƒãƒ£ãƒ¼åŒæ™‚èµ·å‹•
 	if( Config.general.bStartupLauncher ) {
 		::PostMessage( CApp::GetHWnd(), WM_COMMAND, ID_LAUNCHER, 0 );
 	}
 
-	// ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“
+	// ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³
 	if( ::strlen( lpCmdLine ) > 0 ) {
 		LPSTR	pCmd = lpCmdLine;
 		if( lpCmdLine[0] == '"' ) {	// Shell execute!!
@@ -171,10 +171,10 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	MSG	msg;
 	BOOL	bRet;
 	while( (bRet = ::GetMessage( &msg, NULL, 0, 0 )) != 0 ) {
-		// ƒGƒ‰[H
+		// ã‚¨ãƒ©ãƒ¼ï¼Ÿ
 		if( bRet == -1 )
 			break;
-		// ƒƒCƒ“ƒEƒCƒ“ƒhƒE‚ÌƒƒbƒZ[ƒWƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
+		// ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
 		if( CApp::GetHWnd() == msg.hwnd ) {
 			CWnd* pWnd = (CWnd*)::GetWindowLong( msg.hwnd, GWL_USERDATA );
 			if( pWnd ) {
@@ -187,15 +187,15 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		::TranslateMessage( &msg );
 		::DispatchMessage( &msg );
 	}
-	// ƒtƒbƒN
+	// ãƒ•ãƒƒã‚¯
 	CWndHook::Release();
 
-	// İ’è‚Ì•Û‘¶
+	// è¨­å®šã®ä¿å­˜
 	CRegistry::SetRegistryKey( "VirtuaNES.ini" );
 	Config.Save();
 	CRecent::Save();
 
-	// DirectXŒn”jŠü
+	// DirectXç³»ç ´æ£„
 	DirectDraw.ReleaseDDraw();
 	DirectSound.ReleaseDSound();
 	DirectInput.ReleaseDInput();
@@ -210,7 +210,7 @@ _DoubleExecute_Exit:
 	return	msg.wParam;
 
 _Error_Exit:
-	// DirectXŒn”jŠü
+	// DirectXç³»ç ´æ£„
 	DirectDraw.ReleaseDDraw();
 	DirectSound.ReleaseDSound();
 	DirectInput.ReleaseDInput();

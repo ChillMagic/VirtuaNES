@@ -1,5 +1,5 @@
-//
-// ƒOƒ‰ƒtƒBƒbƒNƒXƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CGRAPHICSDLG_INCLUDED__
 #define	__CGRAPHICSDLG_INCLUDED__

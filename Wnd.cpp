@@ -1,5 +1,5 @@
-//
-// ‚Ö‚È‚¿‚å‚±ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX
+ï»¿//
+// ã¸ãªã¡ã‚‡ã“ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹
 //
 #include "DebugOut.h"
 #include "Wnd.h"
@@ -9,7 +9,7 @@ CWndList	WndList;
 
 list<CWnd*>	CWndList::m_WndPtrList;
 
-// “DL‚¢c
+// æ³¥è‡­ã„â€¦
 CWndList::CWndList()
 {
 //	m_WndPtrList.clear();
@@ -65,7 +65,7 @@ CWnd::~CWnd()
 
 void	CWnd::SetThis()
 {
-	// Dispatcho—ˆ‚é‚æ‚¤‚ÉCWnd*‚ğ–„‚ß‚Ş
+	// Dispatchå‡ºæ¥ã‚‹ã‚ˆã†ã«CWnd*ã‚’åŸ‹ã‚è¾¼ã‚€
 	if( m_hWnd ) {
 		::SetWindowLong( m_hWnd, GWL_USERDATA, (LONG)this );
 	}
@@ -73,19 +73,19 @@ void	CWnd::SetThis()
 
 LRESULT	CALLBACK CWnd::g_WndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
-	// ƒEƒCƒ“ƒhƒE‚ªŠJ‚­‘O‚É‚±‚Á‚»‚èˆ—‚·‚é
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒé–‹ãå‰ã«ã“ã£ãã‚Šå‡¦ç†ã™ã‚‹
 	if( msg == WM_CREATE ) {
 		LPCREATESTRUCT	lpcs = (LPCREATESTRUCT)lParam;
 		CWnd* pWnd = (CWnd*)::GetWindowLong( hWnd, GWL_USERDATA );
 		if( !pWnd ) {
-			// CWnd* this‚ğ–„‚ß‚Ş
+			// CWnd* thisã‚’åŸ‹ã‚è¾¼ã‚€
 			::SetWindowLong( hWnd, GWL_USERDATA, (LONG)lpcs->lpCreateParams );
-			// ©•ª‚ÌƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+			// è‡ªåˆ†ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 			pWnd = (CWnd*)lpcs->lpCreateParams;
 			pWnd->m_hWnd = hWnd;
 		}
 	}
-	// CWnd* this‚ğ–„‚ß‚ñ‚Å‚ ‚é
+	// CWnd* thisã‚’åŸ‹ã‚è¾¼ã‚“ã§ã‚ã‚‹
 	CWnd* pWnd = (CWnd*)::GetWindowLong( hWnd, GWL_USERDATA );
 
 	if( pWnd ) {
@@ -97,20 +97,20 @@ LRESULT	CALLBACK CWnd::g_WndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPa
 
 BOOL	CALLBACK CWnd::g_DlgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
-	// ƒfƒBƒXƒpƒbƒ`‘O‚É‚±‚Á‚»‚èˆ—‚·‚é
+	// ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‰ã«ã“ã£ãã‚Šå‡¦ç†ã™ã‚‹
 	if( msg == WM_INITDIALOG ) {
-		// Dispatcho—ˆ‚é‚æ‚¤‚ÉCWnd*‚ğ–„‚ß‚Ş(ƒ‚[ƒ_ƒ‹‚Í•K‚¸DialogBoxParam‚Å‹N“®‚·‚é–)
-		// CWnd* this‚ğ–„‚ß‚ñ‚Å‚ ‚é‚ªCƒ‚[ƒ_ƒ‹‚Å‚Í“ü‚Á‚Ä‚¢‚È‚¢
+		// Dispatchå‡ºæ¥ã‚‹ã‚ˆã†ã«CWnd*ã‚’åŸ‹ã‚è¾¼ã‚€(ãƒ¢ãƒ¼ãƒ€ãƒ«ã¯å¿…ãšDialogBoxParamã§èµ·å‹•ã™ã‚‹äº‹)
+		// CWnd* thisã‚’åŸ‹ã‚è¾¼ã‚“ã§ã‚ã‚‹ãŒï¼Œãƒ¢ãƒ¼ãƒ€ãƒ«ã§ã¯å…¥ã£ã¦ã„ãªã„
 		CWnd* pWnd = (CWnd*)::GetWindowLong( hWnd, GWL_USERDATA );
 
 		if( !pWnd ) {
 			::SetWindowLong( hWnd, GWL_USERDATA, (LONG)lParam );
 			pWnd = (CWnd*)lParam;
 		}
-		// ©•ª‚ÌƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+		// è‡ªåˆ†ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 		pWnd->m_hWnd = hWnd;
 
-		// ƒ_ƒCƒAƒƒO‚ğ’†‰›‚ÉˆÚ“®‚·‚é:)
+		// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ä¸­å¤®ã«ç§»å‹•ã™ã‚‹:)
 		HWND hWndParent = ::GetParent( hWnd );
 		if( hWndParent ) {
 			RECT	rcParent, rc;
@@ -123,7 +123,7 @@ BOOL	CALLBACK CWnd::g_DlgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		}
 	}
 
-	// CWnd* this‚ğ–„‚ß‚ñ‚Å‚ ‚é
+	// CWnd* thisã‚’åŸ‹ã‚è¾¼ã‚“ã§ã‚ã‚‹
 	CWnd* pWnd = (CWnd*)::GetWindowLong( hWnd, GWL_USERDATA );
 
 	if( pWnd ) {

@@ -1,15 +1,15 @@
-//
-// ROMƒwƒbƒ_‚ÌC³(NESToy‚Å‚ÌŠÔˆá‚¢C³‚È‚Ç)‹y‚ÑROMƒpƒbƒ`
+ï»¿//
+// ROMãƒ˜ãƒƒãƒ€ã®ä¿®æ­£(NESToyã§ã®é–“é•ã„ä¿®æ­£ãªã©)åŠã³ROMãƒ‘ãƒƒãƒ
 //
 
 // Mapper 000
-if( crc == 0x57970078 ) {	// F-1 Race(J) –³—–î—ƒpƒbƒ`(^^;
+if( crc == 0x57970078 ) {	// F-1 Race(J) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
 	lpPRG[0x078C] = 0x6C;
 	lpPRG[0x3FE1] = 0xFF;
 	lpPRG[0x3FE6] = 0x00;
 }
 if( crc == 0xaf2bbcbc		// Mach Rider(JU)
- || crc == 0x3acd4bf1		// Mach Rider(Alt)(JU) –³—–î—ƒpƒbƒ`(^^;
+ || crc == 0x3acd4bf1		// Mach Rider(Alt)(JU) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
  || crc == 0x8bbe9bec ) {
 	lpPRG[0x090D] = 0x6E;
 	lpPRG[0x7FDF] = 0xFF;
@@ -22,7 +22,7 @@ if( crc == 0xe16bb5fe ) {	// Zippy Race(J)
 	header.control1 &= 0xf6;
 }
 if( crc == 0x85534474 ) {	// Lode Runner(J)
-	lpPRG[0x29E9] = 0xEA;	// ƒZ[ƒuƒƒjƒ…[‚ğo‚·ƒpƒbƒ`
+	lpPRG[0x29E9] = 0xEA;	// ã‚»ãƒ¼ãƒ–ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’å‡ºã™ãƒ‘ãƒƒãƒ
 	lpPRG[0x29EA] = 0xEA;
 	lpPRG[0x29F8] = 0xEA;
 	lpPRG[0x29F9] = 0xEA;
@@ -43,21 +43,21 @@ if( crc == 0x7831b2ff		// America Daitouryou Senkyo(J)
  || crc == 0x1e0c7ea3 ) {	// AD&D Dragons of Flame(J)
 	header.control1 |= ROM_SAVERAM;
 }
-if( crc == 0x1995ac4e ) {	// Ferrari Grand Prix Challenge(J) –³—–î—ƒpƒbƒ`(^^;
+if( crc == 0x1995ac4e ) {	// Ferrari Grand Prix Challenge(J) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
 	lpPRG[0x1F7AD] = 0xFF;
 	lpPRG[0x1F7BC] = 0x00;
 }
 
-if( crc == 0x20d22251 ) {	// Top rider(J) –³—–î—ƒpƒbƒ`(^^;
+if( crc == 0x20d22251 ) {	// Top rider(J) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
 	lpPRG[0x1F17E] = 0xEA;
 	lpPRG[0x1F17F] = 0xEA;
 }
 
-if( crc == 0x11469ce3 ) {	// Viva! Las Vegas(J) –³—–î—ƒpƒbƒ`(^^;
+if( crc == 0x11469ce3 ) {	// Viva! Las Vegas(J) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
 	lpCHR[0x0000] = 0x01;
 }
 
-if( crc == 0x3fccdc7b ) {	// Baseball Star - Mezase Sankanou!!(J) –³—–î—ƒpƒbƒ`(^^;
+if( crc == 0x3fccdc7b ) {	// Baseball Star - Mezase Sankanou!!(J) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
 	lpPRG[0x0F666] = 0x9D;
 }
 

@@ -1,4 +1,4 @@
-//
+﻿//
 // AVI File Writer
 //
 #ifndef	__AVIFILEWRITER_INCLUDED__

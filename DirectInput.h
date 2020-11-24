@@ -1,4 +1,4 @@
-//
+ï»¿//
 // DirectInput class
 //
 #ifndef	__DIRECTINPUT_INCLUDED__
@@ -20,7 +20,7 @@ using namespace std;
 class	CDirectInput
 {
 public:
-	// ƒpƒuƒŠƒbƒNƒƒ“ƒo•Ï”
+	// ãƒ‘ãƒ–ãƒªãƒƒã‚¯ãƒ¡ãƒ³ãƒå¤‰æ•°
 	typedef	struct	tagDIKEYTBL {
 		WORD	key;
 		LPCSTR	name;
@@ -51,7 +51,7 @@ public:
 	static	LPSTR	DIKeyDirTable[];
 	static	LPSTR	DIKeyDirTable2[];
 
-	// ƒpƒuƒŠƒbƒNƒƒ“ƒoŠÖ”
+	// ãƒ‘ãƒ–ãƒªãƒƒã‚¯ãƒ¡ãƒ³ãƒé–¢æ•°
 	CDirectInput();
 	virtual ~CDirectInput();
 
@@ -71,14 +71,14 @@ public:
 
 	LPCSTR	SearchKeyName( INT key );
 protected:
-	// ƒvƒƒeƒNƒgƒƒ“ƒo•Ï”
+	// ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆãƒ¡ãƒ³ãƒå¤‰æ•°
 	LPDIRECTINPUT7		m_lpDI;
 	LPDIRECTINPUTDEVICE	m_lpKeyboard;
 	LPDIRECTINPUTDEVICE7	m_lpJoystick[DIJOYSTICK_MAX];
 
 	WORD	m_JoyAxisMode[DIJOYSTICK_MAX];
 
-	// ƒvƒƒeƒNƒgƒƒ“ƒoŠÖ”
+	// ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆãƒ¡ãƒ³ãƒé–¢æ•°
 	static	BOOL CALLBACK DIEnumDevicesCallback( LPDIDEVICEINSTANCE lpddi, LPVOID pvRef );
 };
 

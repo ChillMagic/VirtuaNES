@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      NES APU core                                                    //
 //                                                           Norix      //
@@ -172,7 +172,7 @@ BYTE	APU::Read( WORD addr )
 
 void	APU::Write( WORD addr, BYTE data )
 {
-	// $4018‚ÍVirtuaNESŒÅ—Lƒ|[ƒg
+	// $4018ã¯VirtuaNESå›ºæœ‰ãƒãƒ¼ãƒˆ
 	if( addr >= 0x4000 && addr <= 0x401F ) {
 		internal.SyncWrite( addr, data );
 		SetQueue( nes->cpu->GetTotalCycles(), addr, data );
@@ -237,7 +237,7 @@ void	APU::SyncDPCM( INT cycles )
 
 void	APU::WriteProcess( WORD addr, BYTE data )
 {
-	// $4018‚ÍVirtuaNESŒÅ—Lƒ|[ƒg
+	// $4018ã¯VirtuaNESå›ºæœ‰ãƒãƒ¼ãƒˆ
 	if( addr >= 0x4000 && addr <= 0x401F ) {
 		internal.Write( addr, data );
 	}
@@ -347,7 +347,7 @@ INT	nFilterType = Config.sound.nFilterType;
 //	double	cycle_rate = ((double)FRAME_CYCLES*60.0/12.0)/(double)Config.sound.nRate;
 	double	cycle_rate = ((double)nes->nescfg->FrameCycles*60.0/12.0)/(double)Config.sound.nRate;
 
-	// CPUƒTƒCƒNƒ‹”‚ªƒ‹[ƒv‚µ‚Ä‚µ‚Ü‚Á‚½‚Ì‘Îôˆ—
+	// CPUã‚µã‚¤ã‚¯ãƒ«æ•°ãŒãƒ«ãƒ¼ãƒ—ã—ã¦ã—ã¾ã£ãŸæ™‚ã®å¯¾ç­–å‡¦ç†
 	if( elapsed_time > nes->cpu->GetTotalCycles() ) {
 		QueueFlush();
 	}
@@ -407,29 +407,29 @@ INT	nFilterType = Config.sound.nFilterType;
 		output >>= 8;
 
 		if( nFilterType == 1 ) {
-			//ƒ[ƒpƒXƒtƒBƒ‹ƒ^[TYPE 1(Simple)
+			//ãƒ­ãƒ¼ãƒ‘ã‚¹ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼TYPE 1(Simple)
 			output = (lowpass_filter[0]+output)/2;
 			lowpass_filter[0] = output;
 		} else if( nFilterType == 2 ) {
-			//ƒ[ƒpƒXƒtƒBƒ‹ƒ^[TYPE 2(Weighted type 1)
+			//ãƒ­ãƒ¼ãƒ‘ã‚¹ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼TYPE 2(Weighted type 1)
 			output = (lowpass_filter[1]+lowpass_filter[0]+output)/3;
 			lowpass_filter[1] = lowpass_filter[0];
 			lowpass_filter[0] = output;
 		} else if( nFilterType == 3 ) {
-			//ƒ[ƒpƒXƒtƒBƒ‹ƒ^[TYPE 3(Weighted type 2)
+			//ãƒ­ãƒ¼ãƒ‘ã‚¹ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼TYPE 3(Weighted type 2)
 			output = (lowpass_filter[2]+lowpass_filter[1]+lowpass_filter[0]+output)/4;
 			lowpass_filter[2] = lowpass_filter[1];
 			lowpass_filter[1] = lowpass_filter[0];
 			lowpass_filter[0] = output;
 		} else if( nFilterType == 4 ) {
-			//ƒ[ƒpƒXƒtƒBƒ‹ƒ^[TYPE 4(Weighted type 3)
+			//ãƒ­ãƒ¼ãƒ‘ã‚¹ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼TYPE 4(Weighted type 3)
 			output = (lowpass_filter[1]+lowpass_filter[0]*2+output)/4;
 			lowpass_filter[1] = lowpass_filter[0];
 			lowpass_filter[0] = output;
 		}
 
 #if	0
-		// DC¬•ª‚ÌƒJƒbƒg
+		// DCæˆåˆ†ã®ã‚«ãƒƒãƒˆ
 		{
 		static double ave = 0.0, max=0.0, min=0.0;
 		double delta;
@@ -444,7 +444,7 @@ INT	nFilterType = Config.sound.nFilterType;
 		}
 #endif
 #if	1
-		// DC¬•ª‚ÌƒJƒbƒg(HPF TEST)
+		// DCæˆåˆ†ã®ã‚«ãƒƒãƒˆ(HPF TEST)
 		{
 //		static	double	cutoff = (2.0*3.141592653579*40.0/44100.0);
 		static	double	cutofftemp = (2.0*3.141592653579*40.0);
@@ -460,7 +460,7 @@ INT	nFilterType = Config.sound.nFilterType;
 		}
 #endif
 #if	0
-		// ƒXƒpƒCƒNƒmƒCƒY‚Ìœ‹(AGC TEST)
+		// ã‚¹ãƒ‘ã‚¤ã‚¯ãƒã‚¤ã‚ºã®é™¤å»(AGC TEST)
 		{
 		INT	diff = abs(output-last_data);
 		if( diff > 0x4000 ) {
@@ -508,7 +508,7 @@ INT	nFilterType = Config.sound.nFilterType;
 #endif
 }
 
-// ƒ`ƒƒƒ“ƒlƒ‹‚Ìü”g”æ“¾ƒTƒuƒ‹[ƒ`ƒ“(NSF—p)
+// ãƒãƒ£ãƒ³ãƒãƒ«ã®å‘¨æ³¢æ•°å–å¾—ã‚µãƒ–ãƒ«ãƒ¼ãƒãƒ³(NSFç”¨)
 INT	APU::GetChannelFrequency( INT no )
 {
 	if( !m_bMute[0] )
@@ -552,7 +552,7 @@ void	APU::SaveState( LPBYTE p )
 LPBYTE	pold = p;
 #endif
 
-	// ŠÔ²‚ğ“¯Šú‚³‚¹‚éˆ×Flush‚·‚é
+	// æ™‚é–“è»¸ã‚’åŒæœŸã•ã›ã‚‹ç‚ºFlushã™ã‚‹
 	QueueFlush();
 
 	internal.SaveState( p );
@@ -596,7 +596,7 @@ DEBUGOUT( "SAVE APU SIZE:%d\n", p-pold );
 
 void	APU::LoadState( LPBYTE p )
 {
-	// ŠÔ²‚ğ“¯Šú‚³‚¹‚éˆ×‚ÉÁ‚·
+	// æ™‚é–“è»¸ã‚’åŒæœŸã•ã›ã‚‹ç‚ºã«æ¶ˆã™
 	QueueClear();
 
 	internal.LoadState( p );

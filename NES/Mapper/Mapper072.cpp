@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+Ôªø//////////////////////////////////////////////////////////////////////////
 // Mapper072  Jaleco/Type1 lower bank switch                            //
 //////////////////////////////////////////////////////////////////////////
 void	Mapper072::Reset()
@@ -21,7 +21,7 @@ void	Mapper072::Write( WORD addr, BYTE data )
 //DEBUGOUT( "ADDR:%04X DATA:%02X\n", addr, data );
 DEBUGOUT( "SOUND CODE:%02X\n", addr & 0x1F );
 
-			// OSDÇ…Ç∑ÇÈÇ◊Ç´Ç©Åc
+			// OSD„Å´„Åô„Çã„Åπ„Åç„Åã‚Ä¶
 			if( Config.sound.bExtraSoundEnable ) {
 				DirectSound.EsfAllStop();
 				DirectSound.EsfPlay( ESF_MOETENNIS_00+(addr&0x1F) );

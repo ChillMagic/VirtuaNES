@@ -1,5 +1,5 @@
+ï»¿
+<ã‚½ãƒ¼ã‚¹ãƒªã‚¹ãƒˆã«ä»˜ã„ã¦>
 
-<ƒ\[ƒXƒŠƒXƒg‚É•t‚¢‚Ä>
-
-GNU Public License Version 2‚É]‚Á‚Ä‰º‚³‚¢B(Copying.txtQÆB‰pŒê‚Å‚·)
+GNU Public License Version 2ã«å¾“ã£ã¦ä¸‹ã•ã„ã€‚(Copying.txtå‚ç…§ã€‚è‹±èªã§ã™)
 

@@ -1,5 +1,5 @@
-//
-// ƒpƒ^[ƒ“ƒrƒ…[ƒNƒ‰ƒX
+ï»¿//
+// ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ“ãƒ¥ãƒ¼ã‚¯ãƒ©ã‚¹
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -21,7 +21,7 @@ using namespace std;
 
 #include "DirectDraw.h"
 
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_MESSAGE_BEGIN(CPaletteEdit)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
 DLG_ON_MESSAGE( WM_DESTROY,	OnDestroy )
@@ -32,7 +32,7 @@ DLG_ON_MESSAGE( WM_HSCROLL,	OnHScroll )
 DLG_ON_MESSAGE( WM_PAINT,	OnPaint )
 DLG_ON_MESSAGE( WM_TIMER,	OnTimer )
 
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
@@ -44,7 +44,7 @@ DLG_ON_COMMAND( IDC_PAL_LOAD, OnLoad )
 DLG_ON_COMMAND( IDC_PAL_SAVE, OnSave )
 
 DLG_COMMAND_END()
-// Notify ƒƒbƒZ[ƒW
+// Notify ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_NOTIFY_END()
 DLG_MESSAGE_END()
@@ -66,7 +66,7 @@ BOOL	CPaletteEdit::Create( HWND hWndParent )
 	if( !m_hWnd )
 		return	FALSE;
 
-	// ƒ‚[ƒhƒŒƒXƒ_ƒCƒAƒƒOƒŠƒXƒg‚É‰Á‚¦‚é
+	// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒªã‚¹ãƒˆã«åŠ ãˆã‚‹
 	CWndList::Add( this );
 
 	DirectDraw.GetPaletteTable( m_Palette );
@@ -80,10 +80,10 @@ BOOL	CPaletteEdit::Create( HWND hWndParent )
 void	CPaletteEdit::Destroy()
 {
 	if( m_hWnd ) {
-		// ˆÊ’u•Û‘¶
+		// ä½ç½®ä¿å­˜
 		::GetWindowRect( m_hWnd, &Config.general.rcPaletteEditPos );
 
-		// ƒ‚[ƒhƒŒƒXƒ_ƒCƒAƒƒOƒŠƒXƒg‚©‚çíœ
+		// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 		CWndList::Del( this );
 
 		::KillTimer( m_hWnd, 1 );
@@ -97,7 +97,7 @@ DLGMSG	CPaletteEdit::OnInitDialog( DLGMSGPARAM )
 {
 //	DEBUGOUT( "CPaletteEdit::OnInitDialog\n" );
 
-	// ˆÊ’uC³
+	// ä½ç½®ä¿®æ­£
 	if( Config.general.rcPaletteEditPos.right-Config.general.rcPaletteEditPos.left != 0
 	 && Config.general.rcPaletteEditPos.bottom-Config.general.rcPaletteEditPos.top != 0 ) {
 		::SetWindowPos( m_hWnd, HWND_NOTOPMOST, Config.general.rcPaletteEditPos.left, Config.general.rcPaletteEditPos.top,
@@ -109,7 +109,7 @@ DLGMSG	CPaletteEdit::OnInitDialog( DLGMSGPARAM )
 	::SendDlgItemMessage( m_hWnd, IDC_PAL_G_UPDOWN, UDM_SETRANGE, 0, (LPARAM)MAKELONG(255, 0) ); 
 	::SendDlgItemMessage( m_hWnd, IDC_PAL_B_UPDOWN, UDM_SETRANGE, 0, (LPARAM)MAKELONG(255, 0) ); 
 
-	// ƒXƒ‰ƒCƒ_
+	// ã‚¹ãƒ©ã‚¤ãƒ€
 	::SendDlgItemMessage( m_hWnd, IDC_PAL_R_SLIDER, TBM_SETRANGE, 0, MAKELONG(0,255) );
 	::SendDlgItemMessage( m_hWnd, IDC_PAL_G_SLIDER, TBM_SETRANGE, 0, MAKELONG(0,255) );
 	::SendDlgItemMessage( m_hWnd, IDC_PAL_B_SLIDER, TBM_SETRANGE, 0, MAKELONG(0,255) );
@@ -139,10 +139,10 @@ DLGMSG	CPaletteEdit::OnInitDialog( DLGMSGPARAM )
 DLGMSG	CPaletteEdit::OnDestroy( DLGMSGPARAM )
 {
 //	DEBUGOUT( "CPaletteEdit::OnDestroy\n" );
-	// ˆÊ’u•Û‘¶
+	// ä½ç½®ä¿å­˜
 	::GetWindowRect( m_hWnd, &Config.general.rcPaletteEditPos );
 
-	// ƒ‚[ƒhƒŒƒXƒ_ƒCƒAƒƒOƒŠƒXƒg‚©‚çíœ
+	// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 	CWndList::Del( this );
 
 	m_hWnd = NULL;

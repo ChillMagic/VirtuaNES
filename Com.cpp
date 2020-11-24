@@ -1,5 +1,5 @@
-//
-// COM—˜—pƒTƒ|[ƒgƒNƒ‰ƒX
+ï»¿//
+// COMåˆ©ç”¨ã‚µãƒãƒ¼ãƒˆã‚¯ãƒ©ã‚¹
 //
 #include <objbase.h>
 #include "DebugOut.h"

@@ -1,5 +1,5 @@
-//
-// ƒVƒ‡[ƒgƒJƒbƒgƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -21,15 +21,15 @@ using namespace std;
 #include "DirectInput.h"
 
 DLG_MESSAGE_BEGIN(CShortcutDlg)
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
 DLG_ON_MESSAGE( WM_TIMER,	OnTimer )
-// NOTIFYƒƒbƒZ[ƒW
+// NOTIFYãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_ON_NOTIFY( IDC_CUT_LIST, NM_DBLCLK, OnListDblClick )
 DLG_ON_NOTIFY( IDC_CUT_LIST, LVN_ITEMCHANGED, OnListItemChanged )
 DLG_NOTIFY_END()
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
@@ -59,7 +59,7 @@ BOOL	CShortcutDlg::PreTranslateMessage( MSG* pMsg )
 
 void	CShortcutDlg::OnInitialMember()
 {
-	// ƒŠƒXƒgƒrƒ…[‚ÌƒAƒCƒeƒ€“™‚Ìíœ
+	// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®ã‚¢ã‚¤ãƒ†ãƒ ç­‰ã®å‰Šé™¤
 	CHAR	szStr[256];
 	HWND	hWndCtrl = ::GetDlgItem( m_hWnd, IDC_CUT_LIST );
 	ListView_DeleteColumn( hWndCtrl, 0 );
@@ -68,7 +68,7 @@ void	CShortcutDlg::OnInitialMember()
 	ListView_DeleteAllItems( hWndCtrl );
 	ListView_SetItemCount( hWndCtrl, 100 );
 
-	// ƒwƒbƒ_ƒRƒ“ƒgƒ[ƒ‹‚Ìİ’è
+	// ãƒ˜ãƒƒãƒ€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®è¨­å®š
 	LVCOLUMN	lvColumn;
 	lvColumn.mask = LVCF_FMT|LVCF_TEXT|LVCF_SUBITEM;
 	lvColumn.fmt = LVCFMT_LEFT;
@@ -89,26 +89,26 @@ void	CShortcutDlg::OnInitialMember()
 	ListView_InsertColumn( hWndCtrl, 2, &lvColumn );
 
 
-	// ƒŠƒXƒgƒrƒ…[“à—eİ’è
+	// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼å†…å®¹è¨­å®š
 	LVITEM	lvItem;
 	ZeroMemory( &lvItem, sizeof(lvItem) );
 	lvItem.mask = LVIF_TEXT;
 
 	for( INT i = 0; CConfig::ShortcutKeyID[i*3+0]; i++ ) {
 		lvItem.iItem = i;
-		// í—Ş
+		// ç¨®é¡
 		CApp::LoadString( CConfig::ShortcutKeyID[i*3+1], szStr, sizeof(szStr) );
 		lvItem.pszText = szStr;
 		ListView_InsertItem( hWndCtrl, &lvItem );
 
-		// İ’è·°
+		// è¨­å®šï½·ï½°
 		if( m_ControlBuf[i] == 0 ) {
 			ListView_SetItemText( hWndCtrl, i, 1, "----" );
 		} else {
 			string	str = Config.ShortcutToKeyName( m_ControlBuf[i] );
 			ListView_SetItemText( hWndCtrl, i, 1, (LPSTR)str.c_str() );
 		}
-		// İ’è·°2
+		// è¨­å®šï½·ï½°2
 		if( m_ControlBuf2[i] == 0 ) {
 			ListView_SetItemText( hWndCtrl, i, 2, "----" );
 		} else {
@@ -117,7 +117,7 @@ void	CShortcutDlg::OnInitialMember()
 		}
 	}
 
-	// ƒJƒ‰ƒ€‚ğİ’è‚µ‚Ä‚©‚ç‰¡••ÏX‚µ‚È‚¢‚Æ‰¡ƒXƒNƒ[ƒ‹ƒo[‚ªo‚Ä×–‚‚È‚Ì‚Å...
+	// ã‚«ãƒ©ãƒ ã‚’è¨­å®šã—ã¦ã‹ã‚‰æ¨ªå¹…å¤‰æ›´ã—ãªã„ã¨æ¨ªã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ãŒå‡ºã¦é‚ªé­”ãªã®ã§...
 	RECT	rc;
 	::GetClientRect( hWndCtrl, &rc );
 
@@ -131,20 +131,20 @@ DLGMSG	CShortcutDlg::OnInitDialog( DLGMSGPARAM )
 {
 //	DEBUGOUT( "CShortcutDlg::OnInitDialog\n" );
 
-	// İ’è‚Ì•Û‘¶
+	// è¨­å®šã®ä¿å­˜
 	m_ConfigSave = Config.shortcut;
 
-	// ƒRƒs[
+	// ã‚³ãƒ”ãƒ¼
 	for( INT i = 0; CConfig::ShortcutKeyID[i*3+0]; i++ ) {
 		m_ControlBuf [i] = Config.shortcut.nShortCut[CConfig::ShortcutKeyID[i*3+2]];
 		m_ControlBuf2[i] = Config.shortcut.nShortCut[CConfig::ShortcutKeyID[i*3+2]+128];
 	}
-	// ƒEƒCƒ“ƒhƒEƒ^ƒCƒgƒ‹‚Ì•Û‘¶
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¿ã‚¤ãƒˆãƒ«ã®ä¿å­˜
 	::GetWindowText( m_hWnd, m_szWindowTitle, sizeof(m_szWindowTitle) );
-	// İ’è’†ƒƒbƒZ[ƒW‚Ì•Û‘¶
+	// è¨­å®šä¸­ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ä¿å­˜
 	CApp::LoadString( IDS_CUT_TITLE, m_szMessage, sizeof(m_szMessage) );
 
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	OnInitialMember();
 
 	m_bCancelMode = FALSE;
@@ -172,7 +172,7 @@ DLGMSG	CShortcutDlg::OnTimer( DLGMSGPARAM )
 		}
 
 		if( m_TimerCount > 60 ) {
-		// ƒ^ƒCƒ€ƒAƒEƒg
+		// ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆ
 			if( m_TimerID ) {
 				::KillTimer( m_hWnd, m_TimerID );
 				m_TimerID  = 0;
@@ -268,7 +268,7 @@ DLGNOTIFY CShortcutDlg::OnListDblClick( DLGNOTIFYPARAM )
 
 //	DEBUGOUT( "CShortcutDlg::OnListDblClick\n" );
 
-	// ‚Ü‚¾‘I‘ğ‚µ‚Ä‚È‚¢‚æ
+	// ã¾ã é¸æŠã—ã¦ãªã„ã‚ˆ
 	if( m_SelectPos == -1 )
 		return;
 
@@ -283,7 +283,7 @@ DLGNOTIFY CShortcutDlg::OnListDblClick( DLGNOTIFYPARAM )
 	htInfo.pt.y = pNMListView->ptAction.y;
 	ListView_HitTest( ::GetDlgItem( m_hWnd, IDC_CUT_LIST ), &htInfo );
 
-	// ƒZƒŒƒNƒg‚³‚ê‚½êŠ‚Éƒqƒbƒg‚µ‚Ä‚È‚¢H
+	// ã‚»ãƒ¬ã‚¯ãƒˆã•ã‚ŒãŸå ´æ‰€ã«ãƒ’ãƒƒãƒˆã—ã¦ãªã„ï¼Ÿ
 	if( htInfo.flags & LVHT_NOWHERE ) {
 		return;
 	}
@@ -309,7 +309,7 @@ DLGCMD	CShortcutDlg::OnOK( DLGCMDPARAM )
 		m_bCancelMode = FALSE;
 	}
 
-	// İ’è‚ğƒRƒs[
+	// è¨­å®šã‚’ã‚³ãƒ”ãƒ¼
 	for( INT i = 0; CConfig::ShortcutKeyID[i*3+0]; i++ ) {
 		Config.shortcut.nShortCut[CConfig::ShortcutKeyID[i*3+2]    ] = m_ControlBuf [i];
 		Config.shortcut.nShortCut[CConfig::ShortcutKeyID[i*3+2]+128] = m_ControlBuf2[i];
@@ -329,7 +329,7 @@ DLGCMD	CShortcutDlg::OnCancel( DLGCMDPARAM )
 		m_bCancelMode = FALSE;
 	}
 
-	// İ’è‚ğ–ß‚·
+	// è¨­å®šã‚’æˆ»ã™
 	Config.shortcut = m_ConfigSave;
 
 	::EndDialog( m_hWnd, IDCANCEL );
@@ -347,7 +347,7 @@ DLGCMD	CShortcutDlg::OnDefault( DLGCMDPARAM )
 	}
 
 	Config.shortcut.Default();
-	// ƒRƒs[
+	// ã‚³ãƒ”ãƒ¼
 	for( INT i = 0; CConfig::ShortcutKeyID[i*3+0]; i++ ) {
 		m_ControlBuf [i] = Config.shortcut.nShortCut[CConfig::ShortcutKeyID[i*3+2]    ];
 		m_ControlBuf2[i] = Config.shortcut.nShortCut[CConfig::ShortcutKeyID[i*3+2]+128];

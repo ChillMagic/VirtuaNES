@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+Ôªø//////////////////////////////////////////////////////////////////////////
 // Mapper005  Nintendo MMC5                                             //
 //////////////////////////////////////////////////////////////////////////
 class	Mapper005 : public Mapper
@@ -46,14 +46,14 @@ protected:
 	BYTE	chr_type;
 	BYTE	chr_mode;		// $5120-$512B use
 	BYTE	chr_page[2][8];		// $5120-$512B
-	LPBYTE	BG_MEM_BANK[8];		// BGÉpÉ^Å[ÉìópÉoÉìÉN
+	LPBYTE	BG_MEM_BANK[8];		// BG„Éë„Çø„Éº„É≥Áî®„Éê„É≥„ÇØ
 	BYTE	BG_MEM_PAGE[8];
 
 	BYTE	irq_status;		// $5204(R)
 	BYTE	irq_enable;		// $5204(W)
 	BYTE	irq_line;		// $5203
 	BYTE	irq_scanline;
-	BYTE	irq_clear;		// HSyncÇ≈égóp
+	BYTE	irq_clear;		// HSync„Åß‰ΩøÁî®
 	BYTE	irq_type;
 
 	BYTE	mult_a, mult_b;		// $5205-$5206

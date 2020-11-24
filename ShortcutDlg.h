@@ -1,5 +1,5 @@
-//
-// ƒVƒ‡[ƒgƒJƒbƒgƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CSHORTCUTDLG_INCLUDED__
 #define	__CSHORTCUTDLG_INCLUDED__

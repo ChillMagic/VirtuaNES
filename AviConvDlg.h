@@ -1,5 +1,5 @@
-//
-// AVI•ÏŠ·ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// AVIå¤‰æ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CAVICONVDLG_INCLUDED__
 #define	__CAVICONVDLG_INCLUDED__

@@ -1,4 +1,4 @@
-//
+ï»¿//
 // DirectSound class
 //
 #ifndef	__DIRECTSOUND_INCLUDED__
@@ -42,18 +42,18 @@ private:
 class	CDirectSound
 {
 public:
-	// ƒpƒuƒŠƒbƒNƒƒ“ƒo•Ï”
+	// ãƒ‘ãƒ–ãƒªãƒƒã‚¯ãƒ¡ãƒ³ãƒå¤‰æ•°
 	typedef	struct	tagSAMPLERATE {
 		DWORD	Rate;
 		DWORD	Bits;
 	} SAMPLERATE, *LPSAMPLERATE;
 
-	SAMPLERATE		m_SampleRate;		// Œ»ÝƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg
-	INT			m_BufferSize;		// ƒoƒbƒtƒ@ƒTƒCƒY(ƒtƒŒ[ƒ€”)
-	static	SAMPLERATE	m_SampleRateTable[];	// ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒgƒe[ƒuƒ‹
-	static	INT		m_BufferSizeTable[];	// ƒoƒbƒtƒ@ƒTƒCƒYƒe[ƒuƒ‹
+	SAMPLERATE		m_SampleRate;		// ç¾åœ¨ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ãƒ¬ãƒ¼ãƒˆ
+	INT			m_BufferSize;		// ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º(ãƒ•ãƒ¬ãƒ¼ãƒ æ•°)
+	static	SAMPLERATE	m_SampleRateTable[];	// ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ãƒ¬ãƒ¼ãƒˆãƒ†ãƒ¼ãƒ–ãƒ«
+	static	INT		m_BufferSizeTable[];	// ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚ºãƒ†ãƒ¼ãƒ–ãƒ«
 
-	// ƒpƒuƒŠƒbƒNƒƒ“ƒoŠÖ”
+	// ãƒ‘ãƒ–ãƒªãƒƒã‚¯ãƒ¡ãƒ³ãƒé–¢æ•°
 	CDirectSound();
 	virtual ~CDirectSound();
 
@@ -82,7 +82,7 @@ public:
 	BOOL	IsStreamPlay() { return m_bStreamPlay; }
 	BOOL	IsStreamPause() { return m_bStreamPause; }
 
-	// ŠO•”‰¹ºƒtƒ@ƒCƒ‹‘Î‰ž
+	// å¤–éƒ¨éŸ³å£°ãƒ•ã‚¡ã‚¤ãƒ«å¯¾å¿œ
 	BOOL	LoadEsf( LPCSTR szFileName, INT no );
 	BOOL	EsfPlay( INT no );
 	BOOL	EsfPlayLoop( INT no );
@@ -92,30 +92,30 @@ public:
 	void	ReleaseEsfBuffer();
 
 protected:
-	// ƒvƒƒeƒNƒgƒƒ“ƒo•Ï”
+	// ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆãƒ¡ãƒ³ãƒå¤‰æ•°
 	HWND	m_hWnd;		// Window handle
 
-	LPDIRECTSOUND		m_lpDS;		// DirectSoundƒIƒuƒWƒFƒNƒg
-	LPDIRECTSOUNDBUFFER	m_lpDSPrimary;	// ƒvƒ‰ƒCƒ}ƒŠƒIƒuƒWƒFƒNƒg
+	LPDIRECTSOUND		m_lpDS;		// DirectSoundã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	LPDIRECTSOUNDBUFFER	m_lpDSPrimary;	// ãƒ—ãƒ©ã‚¤ãƒžãƒªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
-	LPDIRECTSOUNDBUFFER	m_lpDSStream;		// ƒXƒgƒŠ[ƒ~ƒ“ƒOƒIƒuƒWƒFƒNƒg
+	LPDIRECTSOUNDBUFFER	m_lpDSStream;		// ã‚¹ãƒˆãƒªãƒ¼ãƒŸãƒ³ã‚°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
 	DWORD			m_dwDSBufferSize;
-	DWORD			m_dwDSBlockSize;	// 1ƒuƒƒbƒN‚ÌƒTƒCƒY
-	DWORD			m_dwDSBlockNum;		// ƒuƒƒbƒN‚Ì”
-	DWORD			m_dwDSLastBlock;	// ÅŒã‚É‘‚«ž‚ñ‚¾ƒuƒƒbƒNˆÊ’u
+	DWORD			m_dwDSBlockSize;	// 1ãƒ–ãƒ­ãƒƒã‚¯ã®ã‚µã‚¤ã‚º
+	DWORD			m_dwDSBlockNum;		// ãƒ–ãƒ­ãƒƒã‚¯ã®æ•°
+	DWORD			m_dwDSLastBlock;	// æœ€å¾Œã«æ›¸ãè¾¼ã‚“ã ãƒ–ãƒ­ãƒƒã‚¯ä½ç½®
 
-	volatile BOOL		m_bStreamPlay;	// ƒXƒgƒŠ[ƒ€Ä¶’†ƒtƒ‰ƒO
-	volatile BOOL		m_bStreamPause;	// ƒXƒgƒŠ[ƒ€ƒ|[ƒYƒtƒ‰ƒO
+	volatile BOOL		m_bStreamPlay;	// ã‚¹ãƒˆãƒªãƒ¼ãƒ å†ç”Ÿä¸­ãƒ•ãƒ©ã‚°
+	volatile BOOL		m_bStreamPause;	// ã‚¹ãƒˆãƒªãƒ¼ãƒ ãƒãƒ¼ã‚ºãƒ•ãƒ©ã‚°
 
-	// ŠO•”‰¹ºƒtƒ@ƒCƒ‹‘Î‰ž
+	// å¤–éƒ¨éŸ³å£°ãƒ•ã‚¡ã‚¤ãƒ«å¯¾å¿œ
 	CWaveData		m_EsfWaveFile[ ESF_FILE_MAX ];
 	LPDIRECTSOUNDBUFFER	m_pEsfDSBuffer[ ESF_FILE_MAX ];
 
-	// ƒvƒƒeƒNƒgƒƒ“ƒoŠÖ”
+	// ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆãƒ¡ãƒ³ãƒé–¢æ•°
 private:
-	// ƒvƒ‰ƒCƒx[ƒgƒƒ“ƒo•Ï”
-	// ƒvƒ‰ƒCƒx[ƒgƒƒ“ƒoŠÖ”
+	// ãƒ—ãƒ©ã‚¤ãƒ™ãƒ¼ãƒˆãƒ¡ãƒ³ãƒå¤‰æ•°
+	// ãƒ—ãƒ©ã‚¤ãƒ™ãƒ¼ãƒˆãƒ¡ãƒ³ãƒé–¢æ•°
 };
 
 extern	CDirectSound	DirectSound;

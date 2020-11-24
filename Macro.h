@@ -1,10 +1,10 @@
-//
-// ï÷óòÇ©Ç‡ímÇÍÇ»Ç¢É}ÉNÉçÇΩÇø
+Ôªø//
+// ‰æøÂà©„Åã„ÇÇÁü•„Çå„Å™„ÅÑ„Éû„ÇØ„É≠„Åü„Å°
 //
 #ifndef	__MACRO_INCLUDED__
 #define	__MACRO_INCLUDED__
 
-// ëΩèdåƒÇ—èoÇµëŒâûÉ}ÉNÉçÇøÇ·ÇÒ
+// Â§öÈáçÂëº„Å≥Âá∫„ÅóÂØæÂøú„Éû„ÇØ„É≠„Å°„ÇÉ„Çì
 #define	DELETEPTR(x)	if(x) { delete x; x = NULL; }
 #define	DELETEARR(x)	if(x) { delete[] x; x = NULL; }
 #define	RELEASE(x)	if(x) { x->Release(); x=NULL; }
@@ -13,10 +13,10 @@
 #define	GDIDELETE(x)	if(x) { ::DeleteObject(x); x=NULL; }
 #define	CLOSEHANDLE(x)	if(x) { ::CloseHandle(x); x = NULL; }
 
-// ÇªÇÃëº
+// „Åù„ÅÆ‰ªñ
 #define	ZEROMEMORY(p,s)	::memset( (p), 0, (s) )
 
-// RECTç\ë¢ëÃóp
+// RECTÊßãÈÄ†‰ΩìÁî®
 #define	RCWIDTH(rc)	((rc).right-(rc).left)
 #define	RCHEIGHT(rc)	((rc).bottom-(rc).top)
 

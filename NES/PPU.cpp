@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      NES PPU core                                                    //
 //                                                           Norix      //
@@ -110,7 +110,7 @@ PPU::PPU( NES* parent ) : nes(parent)
 	nVSColorMap = -1;
 	VSSecurityData = 0;
 
-	// ¶‰E”½“]ƒ}ƒXƒNƒe[ƒuƒ‹
+	// å·¦å³åè»¢ãƒžã‚¹ã‚¯ãƒ†ãƒ¼ãƒ–ãƒ«
 	for( INT i = 0; i < 256; i++ ) {
 		BYTE	m = 0x80;
 		BYTE	c = 0;
@@ -139,7 +139,7 @@ void	PPU::Reset()
 
 	PPU56Toggle = 0;
 
-	PPU7_Temp = 0xFF;	// VS Excitebike‚Å‚¨‚©‚µ‚­‚È‚é($2006‚ð“Ç‚Ý‚És‚­ƒoƒO‚ª‚ ‚é)
+	PPU7_Temp = 0xFF;	// VS Excitebikeã§ãŠã‹ã—ããªã‚‹($2006ã‚’èª­ã¿ã«è¡Œããƒã‚°ãŒã‚ã‚‹)
 //	PPU7_Temp = 0;
 
 	loopy_v = loopy_t = 0;
@@ -164,7 +164,7 @@ BYTE	data = 0x00;
 		case	0x2003: // SPR-RAM Address Register(W)
 		case	0x2005: // PPU Scroll Register(W2)
 		case	0x2006: // VRAM Address Register(W2)
-			data = PPU7_Temp;	// ‘½•ª
+			data = PPU7_Temp;	// å¤šåˆ†
 			break;
 		// Read/Write Register
 		case	0x2002: // PPU Status Register(R)
@@ -318,14 +318,14 @@ WORD	addr = data<<8;
 void	PPU::VBlankStart()
 {
 	PPUREG[2] |= PPU_VBLANK_FLAG;
-//	PPUREG[2] |= PPU_SPHIT_FLAG;	// VBlank“Ë“üŽž‚É•K‚¸ONH
+//	PPUREG[2] |= PPU_SPHIT_FLAG;	// VBlankçªå…¥æ™‚ã«å¿…ãšONï¼Ÿ
 }
 
 void	PPU::VBlankEnd()
 {
 	PPUREG[2] &= ~PPU_VBLANK_FLAG;
-	// VBlank’EoŽž‚ÉƒNƒŠƒA‚³‚ê‚é
-	// ƒGƒLƒTƒCƒgƒoƒCƒN‚Åd—v
+	// VBlankè„±å‡ºæ™‚ã«ã‚¯ãƒªã‚¢ã•ã‚Œã‚‹
+	// ã‚¨ã‚­ã‚µã‚¤ãƒˆãƒã‚¤ã‚¯ã§é‡è¦
 	PPUREG[2] &= ~PPU_SPHIT_FLAG;
 }
 
@@ -730,7 +730,7 @@ BYTE	BGmono[33+1];
 	// Render sprites
 	PPUREG[2] &= ~PPU_SPMAX_FLAG;
 
-	// •\Ž¦ŠúŠÔŠO‚Å‚ ‚ê‚ÎƒLƒƒƒ“ƒZƒ‹
+	// è¡¨ç¤ºæœŸé–“å¤–ã§ã‚ã‚Œã°ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 	if( scanline > 239 )
 		return;
 
@@ -761,7 +761,7 @@ BYTE	BGmono[33+1];
 
 	for( INT i = 0; i < 64; i++, sp++ ) {
 		sp_y = scanline - (sp->y+1);
-		// ƒXƒLƒƒƒ“ƒ‰ƒCƒ““à‚ÉSPRITE‚ª‘¶Ý‚·‚é‚©‚ðƒ`ƒFƒbƒN
+		// ã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³å†…ã«SPRITEãŒå­˜åœ¨ã™ã‚‹ã‹ã‚’ãƒã‚§ãƒƒã‚¯
 		if( sp_y != (sp_y & sp_h) )
 			continue;
 
@@ -867,14 +867,14 @@ BYTE	BGmono[33+1];
 	}
 }
 
-// ƒXƒvƒ‰ƒCƒg‚O‚ªƒqƒbƒg‚·‚é‚©‚à’m‚ê‚È‚¢ƒ‰ƒCƒ“H
+// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆï¼ãŒãƒ’ãƒƒãƒˆã™ã‚‹ã‹ã‚‚çŸ¥ã‚Œãªã„ãƒ©ã‚¤ãƒ³ï¼Ÿ
 BOOL	PPU::IsSprite0( INT scanline )
 {
-	// ƒXƒvƒ‰ƒCƒgorBG”ñ•\Ž¦‚ÍƒLƒƒƒ“ƒZƒ‹(ƒqƒbƒg‚µ‚È‚¢)
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆorBGéžè¡¨ç¤ºã¯ã‚­ãƒ£ãƒ³ã‚»ãƒ«(ãƒ’ãƒƒãƒˆã—ãªã„)
 	if( (PPUREG[1]&(PPU_SPDISP_BIT|PPU_BGDISP_BIT)) != (PPU_SPDISP_BIT|PPU_BGDISP_BIT) )
 		return	FALSE;
 
-	// Šù‚Éƒqƒbƒg‚µ‚Ä‚¢‚½‚çƒLƒƒƒ“ƒZƒ‹
+	// æ—¢ã«ãƒ’ãƒƒãƒˆã—ã¦ã„ãŸã‚‰ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 	if( PPUREG[2]&PPU_SPHIT_FLAG )
 		return	FALSE;
 
@@ -900,11 +900,11 @@ LPSPRITE sp;
 
 	PPUREG[2] &= ~PPU_SPMAX_FLAG;
 
-	// ƒXƒvƒ‰ƒCƒg”ñ•\Ž¦‚ÍƒLƒƒƒ“ƒZƒ‹
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆéžè¡¨ç¤ºã¯ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 	if( !(PPUREG[1]&PPU_SPDISP_BIT) )
 		return;
 
-	// •\Ž¦ŠúŠÔŠO‚Å‚ ‚ê‚ÎƒLƒƒƒ“ƒZƒ‹
+	// è¡¨ç¤ºæœŸé–“å¤–ã§ã‚ã‚Œã°ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 	if( scanline < 0 || scanline > 239 )
 		return;
 
@@ -914,7 +914,7 @@ LPSPRITE sp;
 	spmax = 0;
 	// Sprite Max check
 	for( i = 0; i < 64; i++, sp++ ) {
-		// ƒXƒLƒƒƒ“ƒ‰ƒCƒ““à‚ÉSPRITE‚ª‘¶Ý‚·‚é‚©‚ðƒ`ƒFƒbƒN
+		// ã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³å†…ã«SPRITEãŒå­˜åœ¨ã™ã‚‹ã‹ã‚’ãƒã‚§ãƒƒã‚¯
 		if( (scanline < (INT)sp->y+1) || (scanline > ((INT)sp->y+sp_h+1)) ) {
 			continue;
 		}

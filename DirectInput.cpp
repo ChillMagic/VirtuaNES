@@ -1,4 +1,4 @@
-//
+ï»¿//
 // DirectInput class
 //
 #include "DebugOut.h"
@@ -58,8 +58,8 @@ CDirectInput::DIKEYTBL	CDirectInput::DIKeyTable[] = {
 	DIK_DECIMAL,	"Num .",	DIK_F11,	"F11",
 	DIK_F12,	"F12",		DIK_F13,	"F13",
 	DIK_F14,	"F14",		DIK_F15,	"F15",
-	DIK_CONVERT,	"•ÏŠ·",
-	DIK_NOCONVERT,	"–³•ÏŠ·",	DIK_YEN,	"\\",
+	DIK_CONVERT,	"å¤‰æ›",
+	DIK_NOCONVERT,	"ç„¡å¤‰æ›",	DIK_YEN,	"\\",
 	DIK_NUMPADEQUALS,"Num =",	DIK_CIRCUMFLEX,	"^",
 	DIK_AT,		"@",		DIK_COLON,	":",
 	DIK_UNDERLINE,	"_",
@@ -76,12 +76,12 @@ CDirectInput::DIKEYTBL	CDirectInput::DIKeyTable[] = {
 	DIK_APPS,	"AppMenu",
 
 #if	0
-// ƒgƒOƒ‹ŒnƒL[‚È‚Ì‚Åg‚¦‚È‚¢
+// ãƒˆã‚°ãƒ«ç³»ã‚­ãƒ¼ãªã®ã§ä½¿ãˆãªã„
 	DIK_CAPITAL,	"Caps Lock",
 	DIK_NUMLOCK,	"NumLock",
 	DIK_SCROLL,	"ScrollLock",
-	DIK_KANA,	"ƒJƒi",	
-	DIK_KANJI,	"Š¿š",
+	DIK_KANA,	"ã‚«ãƒŠ",	
+	DIK_KANJI,	"æ¼¢å­—",
 #endif
 	0x00,		NULL
 };
@@ -100,7 +100,7 @@ LPSTR	CDirectInput::DIKeyDirTable2[] = {
 };
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 //////////////////////////////////////////////////////////////////////
 
 CDirectInput::CDirectInput()
@@ -130,9 +130,9 @@ CDirectInput::~CDirectInput()
 }
 
 //////////////////////////////////////////////////////////////////////
-// ƒƒ“ƒoŠÖ”
+// ãƒ¡ãƒ³ãƒé–¢æ•°
 //////////////////////////////////////////////////////////////////////
-// ƒfƒoƒCƒXƒIƒuƒWƒFƒNƒg—ñ‹“ƒR[ƒ‹ƒoƒbƒN
+// ãƒ‡ãƒã‚¤ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåˆ—æŒ™ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 BOOL CALLBACK CDirectInput::DIEnumDevicesCallback( LPDIDEVICEINSTANCE lpddi, LPVOID pvRef )
 {
 	CDirectInput* pCDi = (CDirectInput*)pvRef;
@@ -145,7 +145,7 @@ BOOL CALLBACK CDirectInput::DIEnumDevicesCallback( LPDIDEVICEINSTANCE lpddi, LPV
 	return	DIENUM_STOP;
 }
 
-// ƒWƒ‡ƒCƒXƒeƒBƒbƒNƒfƒoƒCƒXƒIƒuƒWƒFƒNƒg‚Ìì¬
+// ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãƒ‡ãƒã‚¤ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½œæˆ
 BOOL	CDirectInput::AddJoystickDevice( GUID deviceguid )
 {
 	LPDIRECTINPUTDEVICE7	lpDIDev;
@@ -164,7 +164,7 @@ BOOL	CDirectInput::AddJoystickDevice( GUID deviceguid )
 	INT	nID = m_nJoystickNum;
 
 	if( !Config.general.bNoJoystickID ) {
-		// DX7‚Å‚Í‰B‚µ—v‘f‚ÌƒWƒ‡ƒCƒXƒeƒBƒbƒNID‚Ìæ“¾(DX8‚©‚ç‚Íƒ}ƒjƒ…ƒAƒ‹‚É‹LÚ‚³‚ê‚Ä‚¢‚é)
+		// DX7ã§ã¯éš ã—è¦ç´ ã®ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯IDã®å–å¾—(DX8ã‹ã‚‰ã¯ãƒãƒ‹ãƒ¥ã‚¢ãƒ«ã«è¨˜è¼‰ã•ã‚Œã¦ã„ã‚‹)
 		DIPROPDWORD	diprp_dw;
 		ZEROMEMORY( &diprp_dw, sizeof(diprp_dw) );
 		diprp_dw.diph.dwSize       = sizeof(DIPROPDWORD);
@@ -185,7 +185,7 @@ DEBUGOUT( "ID:%d\n", diprp_dw.dwData );
 	if( nID < DIJOYSTICK_MAX ) {
 		m_lpJoystick[ nID ] = lpDIDev;
 
-		// Še²‚ÌƒŒƒ“ƒW‚ğİ’è
+		// å„è»¸ã®ãƒ¬ãƒ³ã‚¸ã‚’è¨­å®š
 		DIPROPRANGE	diprg; 
 		diprg.diph.dwSize       = sizeof(DIPROPRANGE);
 		diprg.diph.dwHeaderSize = sizeof(DIPROPHEADER);
@@ -210,7 +210,7 @@ DEBUGOUT( "ID:%d\n", diprp_dw.dwData );
 		diprg.diph.dwObj        = DIJOFS_SLIDER(1);
 		lpDIDev->SetProperty( DIPROP_RANGE, &diprg.diph );
 
-		// –¼Ì‚Ìæ“¾
+		// åç§°ã®å–å¾—
 		DIDEVICEINSTANCE didins;
 		ZEROMEMORY( &didins, sizeof(didins) );
 		didins.dwSize = sizeof( didins );
@@ -229,18 +229,18 @@ DEBUGOUT( "Instance Name:%s\n", didins.tszInstanceName );
 	return	TRUE;
 }
 
-// DirectInputƒIƒuƒWƒFƒNƒg^ƒfƒoƒCƒXƒIƒuƒWƒFƒNƒg‚Ì\’z
+// DirectInputã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ãƒ‡ãƒã‚¤ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ§‹ç¯‰
 BOOL	CDirectInput::InitialDInput(HWND hWnd, HINSTANCE hInst)
 {
 	try {
-		// CDirectInputƒIƒuƒWƒFƒNƒg‚Ìì¬
+		// CDirectInputã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½œæˆ
 #if	!COMUSE
 		if( DirectInputCreateEx( hInst, DIRECTINPUT_VERSION, IID_IDirectInput7, (LPVOID*)&m_lpDI, NULL ) != DI_OK ) {
 			m_lpDI = NULL;
 			throw "CDirectInput:DirectInputCreateEx failed.";
 		}
 #else
-		// COM“I—˜—p
+		// COMçš„åˆ©ç”¨
 //		COM::AddRef();
 		if( FAILED(CoCreateInstance( CLSID_DirectInput, NULL, CLSCTX_INPROC_SERVER, IID_IDirectInput7, (VOID**)&m_lpDI )) ) {
 			m_lpDI = NULL;
@@ -313,7 +313,7 @@ void	CDirectInput::ReleaseDInput()
 	}
 }
 
-// “ü—ÍƒtƒH[ƒJƒX‚ğæ“¾
+// å…¥åŠ›ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’å–å¾—
 void	CDirectInput::Acquire()
 {
 	if( !m_lpDI )
@@ -327,7 +327,7 @@ void	CDirectInput::Acquire()
 	}
 }
 
-// “ü—ÍƒtƒH[ƒJƒX‚ğŠJ•ú
+// å…¥åŠ›ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’é–‹æ”¾
 void	CDirectInput::Unacquire()
 {
 	if( !m_lpDI )
@@ -341,7 +341,7 @@ void	CDirectInput::Unacquire()
 	}
 }
 
-// ƒf[ƒ^ƒ|[ƒŠƒ“ƒO
+// ãƒ‡ãƒ¼ã‚¿ãƒãƒ¼ãƒªãƒ³ã‚°
 void	CDirectInput::Poll()
 {
 DIJOYSTATE	js;
@@ -410,7 +410,7 @@ DIJOYSTATE	js;
 		}
 
 #if	0
-// 2003/11/3 ‚Æ‚è‚ ‚¦‚¸–³Œø‰»
+// 2003/11/3 ã¨ã‚Šã‚ãˆãšç„¡åŠ¹åŒ–
 		if( js.rglSlider[0] >  8000 ) m_Sw[idx + DI_SLIDER0+0] = 0x80;
 		if( js.rglSlider[0] < -8000 ) m_Sw[idx + DI_SLIDER0+1] = 0x80;
 		if( js.rglSlider[1] >  8000 ) m_Sw[idx + DI_SLIDER1+0] = 0x80;

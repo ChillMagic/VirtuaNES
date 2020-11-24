@@ -1,5 +1,5 @@
-//
-// ƒ‰ƒ“ƒ`ƒƒ[ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒ©ãƒ³ãƒãƒ£ãƒ¼ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -33,7 +33,7 @@ using namespace std;
 
 #include "EmuThread.h"
 
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_MESSAGE_BEGIN(CLauncherDlg)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
 DLG_ON_MESSAGE( WM_DESTROY,	OnDestroy )
@@ -43,7 +43,7 @@ DLG_ON_MESSAGE( WM_SETCURSOR,	OnSetCursor )
 DLG_ON_MESSAGE( WM_SIZE,	OnSize )
 DLG_ON_MESSAGE( WM_TIMER,	OnTimer )
 DLG_ON_MESSAGE( WM_INITMENUPOPUP, OnInitMenuPopup )
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
@@ -53,7 +53,7 @@ DLG_ON_COMMAND( ID_LCH_HEADEREDIT, OnHeaderEdit )
 DLG_ON_COMMAND( ID_LCH_FOLDER, OnFolder )
 DLG_ON_COMMAND_RANGE( ID_LCH_LIST0, ID_LCH_LIST9, OnListSelect )
 DLG_COMMAND_END()
-// Notify ƒƒbƒZ[ƒW
+// Notify ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_ON_NOTIFY( IDC_LCH_LIST, LVN_KEYDOWN, OnKeyDownListView )
 DLG_ON_NOTIFY( IDC_LCH_LIST, NM_RETURN, OnReturnListView )
@@ -63,7 +63,7 @@ DLG_ON_NOTIFY( IDC_LCH_LIST, LVN_ITEMCHANGED, OnItemChangedListView )
 DLG_NOTIFY_END()
 DLG_MESSAGE_END()
 
-// ƒXƒ^ƒeƒBƒbƒNƒƒ“ƒo
+// ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒ¡ãƒ³ãƒ
 BOOL	CLauncherDlg::m_bSortDir = FALSE;
 
 INT		CLauncherDlg::m_FileListNum = 0;
@@ -95,13 +95,13 @@ BOOL	CLauncherDlg::Create( HWND hWndParent )
 	m_hImageList = NULL;
 	m_hImageListHdr = NULL;
 
-	// e‚ÍƒfƒXƒNƒgƒbƒv‚É‚·‚é
+	// è¦ªã¯ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ã«ã™ã‚‹
 	m_hWnd = ::CreateDialogParam( CApp::GetPlugin(), MAKEINTRESOURCE(IDD_LAUNCHER),
 				NULL, g_DlgProc, (LPARAM)this );
 	if( !m_hWnd )
 		return	FALSE;
 
-	// ƒ‚[ƒhƒŒƒXƒ_ƒCƒAƒƒOƒŠƒXƒg‚É‰Á‚¦‚é
+	// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒªã‚¹ãƒˆã«åŠ ãˆã‚‹
 	CWndList::Add( this );
 
 	return	TRUE;
@@ -110,7 +110,7 @@ BOOL	CLauncherDlg::Create( HWND hWndParent )
 void	CLauncherDlg::Destroy()
 {
 	if( m_hWnd ) {
-		// ƒ‚[ƒhƒŒƒXƒ_ƒCƒAƒƒOƒŠƒXƒg‚©‚çíœ
+		// ãƒ¢ãƒ¼ãƒ‰ãƒ¬ã‚¹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 		CWndList::Del( this );
 
 		HWND	hWndCtrl = ::GetDlgItem( m_hWnd, IDC_LCH_LIST );
@@ -351,7 +351,7 @@ void	CLauncherDlg::ResetListView()
 		ListView_InsertItem( hWndCtrl, &lvitem );
 		fl = m_FileList[index];
 
-		// ƒŠƒXƒgƒrƒ…[‚Ö‚Ìƒtƒ@ƒCƒ‹î•ñ‚Ìİ’è
+		// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã¸ã®ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±ã®è¨­å®š
 		SetListView( index, fl );
 	}
 
@@ -491,7 +491,7 @@ void	CLauncherDlg::SortListView()
 	if( ListView_GetItemCount( hWndCtrl ) <= 0 )
 		return;
 
-	// ƒwƒbƒ_•”
+	// ãƒ˜ãƒƒãƒ€éƒ¨
 	HWND	hWndHdr = ListView_GetHeader( hWndCtrl );
 	HD_ITEM	hdi;
 	hdi.mask = HDI_FORMAT;
@@ -510,7 +510,7 @@ void	CLauncherDlg::SortListView()
 
 	Header_SetItem( hWndHdr, RealOrder[Config.launcher.nSortType], &hdi );
 
-	// ƒ\[ƒg–{‘Ì
+	// ã‚½ãƒ¼ãƒˆæœ¬ä½“
 	ListView_SortItems( hWndCtrl, (PFNLVCOMPARE)ListViewCompare, Config.launcher.nSortType );
 
 	if( m_SelectPos >= 0 ) {
@@ -634,7 +634,7 @@ void	CLauncherDlg::UpdateListView()
 //	::InvalidateRect( hWndCtrl, NULL, TRUE );
 
 	if( m_nUpdateIndex < nListCount ) {
-		// ƒXƒe[ƒ^ƒXƒo[‚Ö‚Ì•\¦
+		// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼ã¸ã®è¡¨ç¤º
 		CHAR	szTemp[256], szText[256];
 		CApp::LoadString( IDS_LCH_LISTUPDATE, szTemp, sizeof(szTemp) );
 		::wsprintf( szText, szTemp, m_nUpdateIndex, nListCount );
@@ -656,38 +656,38 @@ string	path;
 	if( (fp = ::fopen( path.c_str(), "rb" )) ) {
 		NESHEADER	header;
 
-		// ƒtƒ@ƒCƒ‹ƒTƒCƒYæ“¾
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºå–å¾—
 		::fseek( fp, 0, SEEK_END );
 		FileSize = ::ftell( fp );
 		::fseek( fp, 0, SEEK_SET );
-		// ƒtƒ@ƒCƒ‹ƒTƒCƒYƒ`ƒFƒbƒN(NESƒwƒbƒ_+1ƒoƒCƒgˆÈã‚©H)
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºãƒã‚§ãƒƒã‚¯(NESãƒ˜ãƒƒãƒ€+1ãƒã‚¤ãƒˆä»¥ä¸Šã‹ï¼Ÿ)
 		if( FileSize < 17 )
 			goto	_error_return;
 
-		// ƒeƒ“ƒ|ƒ‰ƒŠƒƒ‚ƒŠŠm•Û
+		// ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ¡ãƒ¢ãƒªç¢ºä¿
 		if( !(temp = (LPBYTE)::malloc( FileSize )) )
 			goto	_error_return;
 
-		// ƒTƒCƒY•ª“Ç‚İ‚İ
+		// ã‚µã‚¤ã‚ºåˆ†èª­ã¿è¾¼ã¿
 		if( ::fread( temp, FileSize, 1, fp ) != 1 )
 			goto	_error_return;
 
 		FCLOSE( fp );
 
-		// ƒwƒbƒ_ƒRƒs[
+		// ãƒ˜ãƒƒãƒ€ã‚³ãƒ”ãƒ¼
 		memcpy( &header, temp, sizeof(NESHEADER) );
 
 		if( header.ID[0] == 'N' && header.ID[1] == 'E'
 		 && header.ID[2] == 'S' && header.ID[3] == 0x1A ) {
-			// ƒwƒbƒ_ƒRƒs[
+			// ãƒ˜ãƒƒãƒ€ã‚³ãƒ”ãƒ¼
 //			memcpy( &header, temp, sizeof(NESHEADER) );
 		} else if( header.ID[0] == 'F' && header.ID[1] == 'D'
 			&& header.ID[2] == 'S' && header.ID[3] == 0x1A ) {
-			// ƒwƒbƒ_ƒRƒs[
+			// ãƒ˜ãƒƒãƒ€ã‚³ãƒ”ãƒ¼
 //			memcpy( &header, temp, sizeof(NESHEADER) );
 		} else if( header.ID[0] == 'N' && header.ID[1] == 'E'
 			&& header.ID[2] == 'S' && header.ID[3] == 'M') {
-			// ƒwƒbƒ_ƒRƒs[
+			// ãƒ˜ãƒƒãƒ€ã‚³ãƒ”ãƒ¼
 //			memcpy( &header, temp, sizeof(NESHEADER) );
 		} else {
 			FREE( temp );
@@ -768,7 +768,7 @@ string	path;
 			fl.prg_size = header.PRG_PAGE_SIZE;
 
 			if( FileSize < (16+65500*(LONG)header.PRG_PAGE_SIZE) ) {
-				// ƒfƒBƒXƒNƒTƒCƒY‚ªˆÙí‚Å‚·
+				// ãƒ‡ã‚£ã‚¹ã‚¯ã‚µã‚¤ã‚ºãŒç•°å¸¸ã§ã™
 				fl.mapper |= 0x1000;
 				fl.info = "Bad FDS size";
 			}
@@ -824,7 +824,7 @@ LPSTR	pszExt[] = {
 
 	m_bFileLoaded = FALSE;
 
-	// ƒtƒ@ƒCƒ‹ƒŠƒXƒg‚ÌƒNƒŠƒA
+	// ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆã®ã‚¯ãƒªã‚¢
 	m_FileList.clear();
 	m_FileListNum = 0;
 
@@ -841,7 +841,7 @@ LPSTR	pszExt[] = {
 	HANDLE	hFind;
 	WIN32_FIND_DATA	fdat;
 
-	// Šg’£q•ÊŒŸõ
+	// æ‹¡å¼µå­åˆ¥æ¤œç´¢
 	for( i = 0; i < 16; i++ ) {
 		if( ::strlen( Config.launcher.szFolder[i] ) && Config.launcher.bFolderUse[i] ) {
 			pExt = pszExt;
@@ -870,7 +870,7 @@ LPSTR	pszExt[] = {
 DLGMSG	CLauncherDlg::OnInitDialog( DLGMSGPARAM )
 {
 //	DEBUGOUT( "CLauncherDlg::OnInitDialog\n" );
-	// ƒXƒe[ƒ^ƒXƒo[‚Ì’Ç‰Á
+	// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼ã®è¿½åŠ 
 	HWND	hWndCtrl = ::CreateStatusWindow( WS_CHILD|WS_VISIBLE|CCS_BOTTOM|SBARS_SIZEGRIP,
 						"", m_hWnd, IDC_LCH_STATUS );
 	if( !hWndCtrl ) {
@@ -879,34 +879,34 @@ DLGMSG	CLauncherDlg::OnInitDialog( DLGMSGPARAM )
 	}
 	::SendMessage( hWndCtrl, SB_SETTEXT, SBT_NOBORDERS, (LPARAM)"" );
 
-	// ƒŠƒXƒgƒrƒ…[‚ÌƒXƒ^ƒCƒ‹“™‚Ìİ’è
+	// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®ã‚¹ã‚¿ã‚¤ãƒ«ç­‰ã®è¨­å®š
 	hWndCtrl = ::GetDlgItem( m_hWnd, IDC_LCH_LIST );
 	ListView_SetExtendedListViewStyle( hWndCtrl, LVS_EX_FULLROWSELECT|LVS_EX_GRIDLINES|LVS_EX_HEADERDRAGDROP );
 	ListView_SetItemCount( hWndCtrl, 2000 );
 
-	// ƒCƒ[ƒWƒŠƒXƒg‚Ìì¬
+	// ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆã®ä½œæˆ
 	m_hImageList = ImageList_LoadBitmap(
 		CApp::GetInstance(), MAKEINTRESOURCE(IDB_LAUNCHERIMAGELIST),
 		16, 6, RGB(255,0,255) );
 
-	// ƒCƒ[ƒWƒŠƒXƒg‚ğƒŠƒXƒgƒrƒ…[‚ÉŠ„‚è“–‚Ä
+	// ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆã‚’ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã«å‰²ã‚Šå½“ã¦
 	ListView_SetImageList( hWndCtrl, m_hImageList, LVSIL_STATE );
 
-	// ƒ\[ƒg—pƒCƒ[ƒWƒŠƒXƒg
+	// ã‚½ãƒ¼ãƒˆç”¨ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆ
 	m_hImageListHdr = ImageList_Create( 16, 16, ILC_COLORDDB|ILC_MASK, 2, 2 );
 	ImageList_AddIcon( m_hImageListHdr, CApp::LoadIcon(IDI_SORT_DOWN) );
 	ImageList_AddIcon( m_hImageListHdr, CApp::LoadIcon(IDI_SORT_UP) );
 
-	// ƒCƒ[ƒWƒŠƒXƒg‚ğƒwƒbƒ_‚ÉŠ„‚è“–‚Ä
+	// ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆã‚’ãƒ˜ãƒƒãƒ€ã«å‰²ã‚Šå½“ã¦
 	Header_SetImageList( ListView_GetHeader( hWndCtrl ), m_hImageListHdr );
 
-	// ƒEƒCƒ“ƒhƒEˆÊ’u/ƒTƒCƒY‚Ìİ’è
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ä½ç½®/ã‚µã‚¤ã‚ºã®è¨­å®š
 	RECT	rc = Config.launcher.rcWindowPos;
 	if( (rc.right-rc.left) && (rc.bottom-rc.top) ) {
 		::SetWindowPos( m_hWnd, NULL, rc.left, rc.top, RCWIDTH(rc), RCHEIGHT(rc), SWP_NOZORDER );
 	}
 
-	// ƒŠƒXƒgƒrƒ…[‚Ìƒwƒbƒ_€–Ú‚Ìİ’è
+	// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®ãƒ˜ãƒƒãƒ€é …ç›®ã®è¨­å®š
 	ResetListViewHeader();
 
 	m_bUpdating = FALSE;
@@ -918,10 +918,10 @@ DLGMSG	CLauncherDlg::OnInitDialog( DLGMSGPARAM )
 //	m_nSortType = COLUMN_FILENAME;
 //	m_bSortDir  = FALSE;
 
-	// ƒ‰ƒ“ƒ`ƒƒ[ƒŠƒXƒgƒiƒ“ƒo[
+	// ãƒ©ãƒ³ãƒãƒ£ãƒ¼ãƒªã‚¹ãƒˆãƒŠãƒ³ãƒãƒ¼
 	m_nListSelect = Config.launcher.nListSelect;
 
-	// ƒtƒ@ƒCƒ‹ƒŠƒXƒg”
+	// ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆæ•°
 	m_FileListNum = 0;
 
 	//
@@ -939,7 +939,7 @@ DLGMSG	CLauncherDlg::OnInitDialog( DLGMSGPARAM )
 		::PostMessage( m_hWnd, WM_COMMAND, ID_LCH_REFRESH, 0 );
 	}
 
-//	// •\¦
+//	// è¡¨ç¤º
 //	::ShowWindow( m_hWnd, SW_SHOW );
 
 	return	TRUE;
@@ -961,7 +961,7 @@ DLGMSG	CLauncherDlg::OnDestroy( DLGMSGPARAM )
 
 DLGMSG	CLauncherDlg::OnClose( DLGMSGPARAM )
 {
-	::ShowWindow( m_hWnd, SW_HIDE ); // ”ñ•\¦‚É‚·‚é‚¾‚¯
+	::ShowWindow( m_hWnd, SW_HIDE ); // éè¡¨ç¤ºã«ã™ã‚‹ã ã‘
 	return	TRUE;
 }
 
@@ -1072,7 +1072,7 @@ DLGNOTIFY CLauncherDlg::OnDoubleClickListView( DLGNOTIFYPARAM )
 		string	path = CPathlib::MakePath( fl.path.c_str(), fl.fname.c_str() );
 		::strcpy( m_LaunchPath, path.c_str() );
 
-		// ƒƒCƒ“ƒEƒCƒ“ƒhƒE‚Éƒ|ƒXƒg
+		// ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«ãƒã‚¹ãƒˆ
 		::PostMessage( CApp::GetHWnd(), WM_VNS_LAUNCHERCMD, 0, (LPARAM)m_LaunchPath );
 	}
 }
@@ -1111,7 +1111,7 @@ DLGCMD	CLauncherDlg::OnOK( DLGCMDPARAM )
 		string	path = CPathlib::MakePath( fl.path.c_str(), fl.fname.c_str() );
 		::strcpy( m_LaunchPath, path.c_str() );
 
-		// ƒƒCƒ“ƒEƒCƒ“ƒhƒE‚Éƒ|ƒXƒg
+		// ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«ãƒã‚¹ãƒˆ
 		::PostMessage( CApp::GetHWnd(), WM_VNS_LAUNCHERCMD, 0, (LPARAM)m_LaunchPath );
 	}
 }
@@ -1119,7 +1119,7 @@ DLGCMD	CLauncherDlg::OnOK( DLGCMDPARAM )
 DLGCMD	CLauncherDlg::OnCancel( DLGCMDPARAM )
 {
 //	DEBUGOUT( "CLauncherDlg::OnCancel\n" );
-	::ShowWindow( m_hWnd, SW_HIDE ); // ”ñ•\¦‚É‚·‚é‚¾‚¯
+	::ShowWindow( m_hWnd, SW_HIDE ); // éè¡¨ç¤ºã«ã™ã‚‹ã ã‘
 }
 
 DLGCMD	CLauncherDlg::OnListSelect( DLGCMDPARAM )
@@ -1127,12 +1127,12 @@ DLGCMD	CLauncherDlg::OnListSelect( DLGCMDPARAM )
 //	DEBUGOUT( "CLauncherDlg::OnListSelect uID:%d\n", uID );
 	INT	nSel = uID-ID_LCH_LIST0;
 
-	// ˆá‚¤ƒŠƒXƒg‚É‚µ‚½‚¢H
+	// é•ã†ãƒªã‚¹ãƒˆã«ã—ãŸã„ï¼Ÿ
 	if( m_nListSelect != nSel ) {
-		// ‚µ‚½‚¢‚Å‚·
+		// ã—ãŸã„ã§ã™
 //		DEBUGOUT( "LISTSEL=%d\n", nSel );
 
-		// ’¼‘O‚Ì‚à‚Ì‚ğƒZ[ƒu
+		// ç›´å‰ã®ã‚‚ã®ã‚’ã‚»ãƒ¼ãƒ–
 		m_bFileLoaded = FALSE;
 		SaveFileList();
 
@@ -1216,7 +1216,7 @@ DEBUGOUT( "CLauncherDlg::OnHeaderEdit SEL=%d\n", m_SelectPos );
 		string Path = CPathlib::MakePath( fl.path.c_str(), fl.fname.c_str() );
 DEBUGOUT( "Path:%s\n", Path.c_str() );
 
-		// ƒA[ƒJƒCƒuƒtƒ@ƒCƒ‹‚ÍƒGƒfƒBƒbƒg•s‰Â
+		// ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«ã¯ã‚¨ãƒ‡ã‚£ãƒƒãƒˆä¸å¯
 		char*	pExt = ::PathFindExtension( Path.c_str() );
 		if( _stricmp( pExt, ".lzh" ) == 0 || _stricmp( pExt, ".zip" ) == 0 || _stricmp( pExt, ".cab" ) == 0 || _stricmp( pExt, ".rar" ) == 0 ) {
 			return;
@@ -1232,7 +1232,7 @@ DEBUGOUT( "Path:%s\n", Path.c_str() );
 			return;
 		}
 
-		// NESˆÈŠO‚ÍƒGƒfƒBƒbƒg•s‰Â
+		// NESä»¥å¤–ã¯ã‚¨ãƒ‡ã‚£ãƒƒãƒˆä¸å¯
 		if( header.ID[0] != 'N' || header.ID[1] != 'E'
 		 || header.ID[2] != 'S' || header.ID[3] != 0x1A) {
 			return;
@@ -1277,19 +1277,19 @@ DEBUGOUT( "Path:%s\n", Path.c_str() );
 
 					try {
 						if( (fp = ::fopen( Path.c_str(), "r+b" )) ) {
-							// ƒtƒ@ƒCƒ‹ƒTƒCƒYæ“¾
+							// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºå–å¾—
 							::fseek( fp, 0, SEEK_END );
 							size = ::ftell( fp );
 							::fseek( fp, 0, SEEK_SET );
 
-							// ƒeƒ“ƒ|ƒ‰ƒŠƒƒ‚ƒŠŠm•Û
+							// ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ¡ãƒ¢ãƒªç¢ºä¿
 							if( !(temp = (LPBYTE)::malloc( size )) )
-								// ƒƒ‚ƒŠ‚ğŠm•Ûo—ˆ‚Ü‚¹‚ñ
+								// ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿å‡ºæ¥ã¾ã›ã‚“
 								throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 
-							// ƒTƒCƒY•ª“Ç‚İ‚İ
+							// ã‚µã‚¤ã‚ºåˆ†èª­ã¿è¾¼ã¿
 							if( ::fread( temp, size, 1, fp ) != 1 )
-								// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+								// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 								throw	CApp::GetErrorString( IDS_ERROR_READ );
 
 							::memcpy( temp, &header, sizeof(header) );
@@ -1297,7 +1297,7 @@ DEBUGOUT( "Path:%s\n", Path.c_str() );
 							::fseek( fp, 0, SEEK_SET );
 
 							if( ::fwrite( temp, size, 1, fp ) != 1 )
-								// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+								// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 								throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 
 							FCLOSE( fp );
@@ -1305,7 +1305,7 @@ DEBUGOUT( "Path:%s\n", Path.c_str() );
 						}
 
 						CheckFile( fl );
-						m_bFileLoaded = FALSE;	// ƒZ[ƒu‚·‚éˆ×‚Éƒtƒ‰ƒOÁ‚·
+						m_bFileLoaded = FALSE;	// ã‚»ãƒ¼ãƒ–ã™ã‚‹ç‚ºã«ãƒ•ãƒ©ã‚°æ¶ˆã™
 
 						HWND hWndCtrl = ::GetDlgItem( m_hWnd, IDC_LCH_LIST );
 
@@ -1338,7 +1338,7 @@ BOOL CLauncherDlg::LoadFileList()
 {
 FILE*	fp = NULL;
 CHAR	buf[1024+1];
-const UCHAR seps[] = ";\n\0";	// ƒZƒpƒŒ[ƒ^
+const UCHAR seps[] = ";\n\0";	// ã‚»ãƒ‘ãƒ¬ãƒ¼ã‚¿
 FILELIST fl;
 
 //	string	Path = CPathlib::MakePathExt( CApp::GetModulePath(), "launcher", "lst" );
@@ -1513,10 +1513,10 @@ DEBUGOUT( "Save Launcher File:%s\n", Path.c_str() );
 
 /////////////////////////////////////////////////////////////////////////////
 
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_MESSAGE_BEGIN(CLchDispEditDlg)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
@@ -1525,7 +1525,7 @@ DLG_ON_COMMAND( IDC_DED_DEL, OnDel )
 DLG_ON_COMMAND( IDC_DED_UP, OnUp )
 DLG_ON_COMMAND( IDC_DED_DOWN, OnDown )
 DLG_COMMAND_END()
-// Notify ƒƒbƒZ[ƒW
+// Notify ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_NOTIFY_END()
 DLG_MESSAGE_END()
@@ -1698,17 +1698,17 @@ DLGCMD	CLchDispEditDlg::OnCancel( DLGCMDPARAM )
       INDEXTOSTATEIMAGEMASK((fCheck)+1), LVIS_STATEIMAGEMASK)
 #endif
 
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_MESSAGE_BEGIN(CLchFolderConfigDlg)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
 DLG_ON_COMMAND( IDC_LFL_ADD, OnAdd )
 DLG_ON_COMMAND( IDC_LFL_DEL, OnDel )
 DLG_COMMAND_END()
-// Notify ƒƒbƒZ[ƒW
+// Notify ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_NOTIFY_END()
 DLG_MESSAGE_END()
@@ -1726,7 +1726,7 @@ DLGMSG	CLchFolderConfigDlg::OnInitDialog( DLGMSGPARAM )
 	HWND	hWndCtrl = ::GetDlgItem( m_hWnd, IDC_LFL_LIST );
 	ListView_SetExtendedListViewStyle( hWndCtrl, LVS_EX_CHECKBOXES|LVS_EX_FULLROWSELECT|LVS_EX_GRIDLINES );
 
-	// ƒŒƒ|[ƒgƒ‚[ƒh‚Å‚Íƒwƒbƒ_[‚ª–³‚­‚Ä‚àİ’è‚µ‚È‚¢‚Æ•\¦‚³‚ê‚È‚¢
+	// ãƒ¬ãƒãƒ¼ãƒˆãƒ¢ãƒ¼ãƒ‰ã§ã¯ãƒ˜ãƒƒãƒ€ãƒ¼ãŒç„¡ãã¦ã‚‚è¨­å®šã—ãªã„ã¨è¡¨ç¤ºã•ã‚Œãªã„
 	LV_COLUMN lvcol;
 	lvcol.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 	lvcol.fmt = LVCFMT_LEFT;
@@ -1820,15 +1820,15 @@ DLGCMD	CLchFolderConfigDlg::OnDel( DLGCMDPARAM )
 
 ///////////////////////////////////////////////////////////////////////////////
 
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_MESSAGE_BEGIN(CLchHeaderEditDlg)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
 DLG_COMMAND_END()
-// Notify ƒƒbƒZ[ƒW
+// Notify ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_NOTIFY_END()
 DLG_MESSAGE_END()

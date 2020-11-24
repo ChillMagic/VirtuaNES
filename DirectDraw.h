@@ -1,4 +1,4 @@
-//
+ï»¿//
 // DirectDraw class
 //
 #ifndef	__DIRECTDRAW_INCLUDED__
@@ -23,7 +23,7 @@ using namespace std;
 class	CDirectDraw
 {
 public:
-	// ƒpƒuƒŠƒbƒNƒƒ“ƒo•Ï”
+	// ãƒ‘ãƒ–ãƒªãƒƒã‚¯ãƒ¡ãƒ³ãƒå¤‰æ•°
 	typedef	struct	tagDISPLAYMODE {
 		DWORD		dwWidth;
 		DWORD		dwHeight;
@@ -37,10 +37,10 @@ public:
 		BYTE		b;
 	} PALBUF, *LPPALBUF;
 
-	// —˜—p‰Â”\‚ÈƒfƒBƒXƒvƒŒƒCƒ‚[ƒh
+	// åˆ©ç”¨å¯èƒ½ãªãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ¢ãƒ¼ãƒ‰
 	enum { DD_DISPLAYMODEMAX = 512 };
 
-	INT		m_DisplayModeNum;	// ƒfƒBƒXƒvƒŒƒCƒ‚[ƒh”
+	INT		m_DisplayModeNum;	// ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ¢ãƒ¼ãƒ‰æ•°
 	DISPLAYMODE	m_DisplayModeBuf[DD_DISPLAYMODEMAX];
 
 	// Screen size
@@ -62,7 +62,7 @@ public:
 		BLTFILTER_LQ2X,
 	};
 
-	// ƒpƒuƒŠƒbƒNƒƒ“ƒoŠÖ”
+	// ãƒ‘ãƒ–ãƒªãƒƒã‚¯ãƒ¡ãƒ³ãƒé–¢æ•°
 	CDirectDraw();
 	virtual ~CDirectDraw();
 
@@ -77,7 +77,7 @@ public:
 	BOOL	EndDisplayChange();
 	BOOL	OnChangeDisplayMode();
 
-	// Displayƒ‚[ƒh
+	// Displayãƒ¢ãƒ¼ãƒ‰
 	INT	GetDisplayModeNum()	{ return m_DisplayModes.size(); }
 	void	SetDisplayMode( DWORD dwWidth, DWORD dwHeight, DWORD dwDepth, DWORD dwRate );
 	void	GetDisplayMode( DWORD& dwWidth, DWORD& dwHeight, DWORD& dwDepth, DWORD& dwRate );
@@ -198,7 +198,7 @@ public:
 	BYTE	GetPixel( INT x, INT y );
 
 protected:
-	// ƒvƒƒeƒNƒgƒƒ“ƒo•Ï”
+	// ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆãƒ¡ãƒ³ãƒå¤‰æ•°
 
 	// General
 	HWND	m_hWnd;			// Window handle
@@ -212,31 +212,31 @@ protected:
 	BOOL	m_bMMX;			// Existence of MMX technology.
 
 	// Options
-	BOOL	m_bUseHEL;		// HAL‚ğg‚í‚¸HEL‚ğg—p
-	BOOL	m_bSystemMemory;	// ƒT[ƒtƒFƒX‚ÉƒVƒXƒeƒ€ƒƒ‚ƒŠ‚ğg—p
+	BOOL	m_bUseHEL;		// HALã‚’ä½¿ã‚ãšHELã‚’ä½¿ç”¨
+	BOOL	m_bSystemMemory;	// ã‚µãƒ¼ãƒ•ã‚§ã‚¹ã«ã‚·ã‚¹ãƒ†ãƒ ãƒ¡ãƒ¢ãƒªã‚’ä½¿ç”¨
 
 	BOOL	m_bScreenMode;		// FALSE:Window  TRUE:Fullscreen
-	BOOL	m_bFlip;		// ƒtƒŠƒbƒvg—p
+	BOOL	m_bFlip;		// ãƒ•ãƒªãƒƒãƒ—ä½¿ç”¨
 	BOOL	m_bGDI;			// GDI
-	BOOL	m_bAspect;		// TVƒAƒXƒyƒNƒg•â³
-	BOOL	m_bAllLine;		// ‘Sƒ‰ƒCƒ“•\¦
-	BOOL	m_bMaxZoom;		// ‰æ–Ê‘S‘Ì‚Ü‚ÅŠg‘å
-	BOOL	m_bDoubleSize;		// ‚Q”{ƒTƒCƒYƒŒƒ“ƒ_ƒŠƒ“ƒO
-	BOOL	m_bTVFrameMode;		// TV˜g•\¦
-	BOOL	m_bScanlineMode;	// ƒXƒLƒƒƒ“ƒ‰ƒCƒ“ƒ‚[ƒh
-	INT	m_nScanlineColor;	// ƒXƒLƒƒƒ“ƒ‰ƒCƒ“ƒJƒ‰[
+	BOOL	m_bAspect;		// TVã‚¢ã‚¹ãƒšã‚¯ãƒˆè£œæ­£
+	BOOL	m_bAllLine;		// å…¨ãƒ©ã‚¤ãƒ³è¡¨ç¤º
+	BOOL	m_bMaxZoom;		// ç”»é¢å…¨ä½“ã¾ã§æ‹¡å¤§
+	BOOL	m_bDoubleSize;		// ï¼’å€ã‚µã‚¤ã‚ºãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+	BOOL	m_bTVFrameMode;		// TVæ è¡¨ç¤º
+	BOOL	m_bScanlineMode;	// ã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³ãƒ¢ãƒ¼ãƒ‰
+	INT	m_nScanlineColor;	// ã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³ã‚«ãƒ©ãƒ¼
 	BOOL	m_bZapper;		// Zapper
 	BOOL	m_bZapperDraw;		// Zapper Sight drawing
 
 	BOOL	m_bWindowVSync;		// Wait for VSync(Window mode)
 
-	BOOL	m_bForceWrite;		// í‚Éã‘‚«•`‰æ
+	BOOL	m_bForceWrite;		// å¸¸ã«ä¸Šæ›¸ãæç”»
 	INT	m_nBltFilter;		// Blit Filter
 
-	// —˜—p‰Â”\‚ÈƒfƒBƒXƒvƒŒƒCƒ‚[ƒh
+	// åˆ©ç”¨å¯èƒ½ãªãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ¢ãƒ¼ãƒ‰
 	std::vector<DISPLAYMODE> m_DisplayModes;
 
-	// ƒtƒ‹ƒXƒNƒŠ[ƒ“ƒfƒBƒXƒvƒŒƒCƒ‚[ƒh
+	// ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ¢ãƒ¼ãƒ‰
 	DWORD	m_dwDisplayWidth;
 	DWORD	m_dwDisplayHeight;
 	DWORD	m_dwDisplayDepth;
@@ -253,7 +253,7 @@ protected:
 	LPDIRECTDRAWSURFACE7	m_lpDDRender2;	// RenderSurface2
 	LPDIRECTDRAWSURFACE7	m_lpDDAscii;	// AsciiSurface
 	LPDIRECTDRAWSURFACE7	m_lpDDZapper;	// ZapperSurface
-	LPDIRECTDRAWSURFACE7	m_lpDDTV;	// TV˜g(^^;
+	LPDIRECTDRAWSURFACE7	m_lpDDTV;	// TVæ (^^;
 	LPDIRECTDRAWCLIPPER	m_lpDDClipper;	// Clipper
 	LPDIRECTDRAWCLIPPER	m_lpDDClipper2;	// Render window Clipper
 	LPDIRECTDRAWPALETTE	m_lpDDPalette;	// DirectDraw Palette
@@ -264,13 +264,13 @@ protected:
 
 	BOOL			m_bDeltaUpdate;
 
-	// ƒpƒŒƒbƒg
+	// ãƒ‘ãƒ¬ãƒƒãƒˆ
 	INT	m_nPaletteMode;
 	BOOL	m_bMonoMode;
 	BOOL	m_bPaletteUpdate;	// Palette Update?
 
-	static	PALBUF	m_PalDefault[64];	// ƒfƒtƒHƒ‹ƒgƒpƒŒƒbƒg
-	PALBUF		m_PaletteBuf[64];	// ƒpƒŒƒbƒgƒoƒbƒtƒ@
+	static	PALBUF	m_PalDefault[64];	// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ‘ãƒ¬ãƒƒãƒˆ
+	PALBUF		m_PaletteBuf[64];	// ãƒ‘ãƒ¬ãƒƒãƒˆãƒãƒƒãƒ•ã‚¡
 
 	typedef	struct	tagLOGPAL {
 		WORD		palVersion;
@@ -281,17 +281,17 @@ protected:
 	HPALETTE	m_hPalette;	// Windows GDI Palette handle
 	LOGPAL		m_logPalette;	// Windows GDI Palette
 
-	// 256Fƒ‚[ƒh—p
+	// 256è‰²ãƒ¢ãƒ¼ãƒ‰ç”¨
 	RGBQUAD	m_cpPalette[8][64*2];	// Color
 	RGBQUAD	m_mpPalette[8][64*2];	// Monochrome
 
-	// ƒsƒNƒZƒ‹ƒtƒH[ƒ}ƒbƒg‚É•ÏŠ·‚µ‚½ƒpƒŒƒbƒg
+	// ãƒ”ã‚¯ã‚»ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã«å¤‰æ›ã—ãŸãƒ‘ãƒ¬ãƒƒãƒˆ
 	DWORD	m_cnPalette[8][256];	// Color
 	DWORD	m_csPalette[8][256];	// Color/Scanline
 	DWORD	m_mnPalette[8][256];	// Monochrome
 	DWORD	m_msPalette[8][256];	// Monochrome/Scanline
 
-	// 2xSaI mmx—p‚ÌRGB555ƒpƒŒƒbƒg
+	// 2xSaI mmxç”¨ã®RGB555ãƒ‘ãƒ¬ãƒƒãƒˆ
 	DWORD	m_cfPalette[8][256];	// Color
 	DWORD	m_mfPalette[8][256];	// Monochrome
 
@@ -307,7 +307,7 @@ protected:
 	// For DiskAccessLamp
 	BOOL	m_bDiskAccessLamp;
 
-	// ƒvƒƒeƒNƒgƒƒ“ƒoŠÖ”
+	// ãƒ—ãƒ­ãƒ†ã‚¯ãƒˆãƒ¡ãƒ³ãƒé–¢æ•°
 	static	HRESULT	WINAPI	EnumModesCallback( LPDDSURFACEDESC2 lpDDSurfaceDesc, LPVOID lpContext );
 
 	void	RenderString( INT x, INT y, LPCSTR str );
@@ -331,7 +331,7 @@ protected:
 	static	BLTFUNC	nxHq2xBltTable[];
 	static	BLTFUNC	nxLq2xBltTable[];
 
-	// ‘å—Êc
+	// å¤§é‡â€¦
 	void	Render8bpp_Normal(LPBYTE,LPBYTE,DDSURFACEDESC2&,BOOL);
 	void	Render16bpp_Normal(LPBYTE,LPBYTE,DDSURFACEDESC2&,BOOL);
 	void	Render24bpp_Normal(LPBYTE,LPBYTE,DDSURFACEDESC2&,BOOL);
@@ -352,7 +352,7 @@ protected:
 	void	Render24bpp_DoubleScanline(LPBYTE,LPBYTE,DDSURFACEDESC2&,BOOL);
 	void	Render32bpp_DoubleScanline(LPBYTE,LPBYTE,DDSURFACEDESC2&,BOOL);
 
-	// ƒvƒŠƒŒƒ“ƒ_—p
+	// ãƒ—ãƒªãƒ¬ãƒ³ãƒ€ç”¨
 	void	Render16bpp( LPBYTE lpSrc, LPBYTE lpDst );
 	void	Render16bppPrefilter( LPBYTE lpSrc, LPBYTE lpDst );
 	void	Render32bpp( LPBYTE lpSrc, LPBYTE lpDst );
@@ -372,8 +372,8 @@ protected:
 	void	nx_lq2x_32bpp(LPBYTE,LPBYTE,DDSURFACEDESC2&,BOOL);
 
 private:
-	// ƒvƒ‰ƒCƒx[ƒgƒƒ“ƒo•Ï”
-	// ƒvƒ‰ƒCƒx[ƒgƒƒ“ƒoŠÖ”
+	// ãƒ—ãƒ©ã‚¤ãƒ™ãƒ¼ãƒˆãƒ¡ãƒ³ãƒå¤‰æ•°
+	// ãƒ—ãƒ©ã‚¤ãƒ™ãƒ¼ãƒˆãƒ¡ãƒ³ãƒé–¢æ•°
 };
 
 extern	CDirectDraw	DirectDraw;

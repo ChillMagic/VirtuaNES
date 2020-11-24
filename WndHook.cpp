@@ -1,5 +1,5 @@
-//
-// ƒƒbƒZ[ƒWƒtƒBƒ‹ƒ^ƒŠƒ“ƒOƒTƒ|[ƒgƒNƒ‰ƒX
+ï»¿//
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã‚µãƒãƒ¼ãƒˆã‚¯ãƒ©ã‚¹
 //
 #include "DebugOut.h"
 
@@ -14,7 +14,7 @@ BOOL	CWndHook::m_bMsgFiltering = FALSE;
 BOOL	CWndHook::m_bMsgFilter = FALSE;
 HHOOK 	CWndHook::m_hOldMsgFilter = NULL;
 
-// ƒƒbƒZ[ƒWƒtƒBƒ‹ƒ^ƒtƒbƒN‚Ì‰Šú‰»(ƒEƒCƒ“ƒhƒE‚ª‰Šú‰»‚³‚ê‚Ä‚©‚çŒÄ‚Ño‚·Ž–)
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚£ãƒ«ã‚¿ãƒ•ãƒƒã‚¯ã®åˆæœŸåŒ–(ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒåˆæœŸåŒ–ã•ã‚Œã¦ã‹ã‚‰å‘¼ã³å‡ºã™äº‹)
 void	CWndHook::Initialize()
 {
 	m_hOldMsgFilter = ::SetWindowsHookEx( WH_MSGFILTER, (HOOKPROC)MessageFilterProc, NULL, ::GetCurrentThreadId() );
@@ -28,7 +28,7 @@ void	CWndHook::Release()
 	}
 }
 
-// ƒƒbƒZ[ƒWƒtƒBƒ‹ƒ^ˆ—(ƒ_ƒCƒAƒƒO‚Í•’Ê‚Å‚Í—ˆ‚È‚¢ƒƒbƒZ[ƒW‚ª‚ ‚é‚½‚ß)
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚£ãƒ«ã‚¿å‡¦ç†(ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã¯æ™®é€šã§ã¯æ¥ãªã„ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒã‚ã‚‹ãŸã‚)
 LRESULT	CALLBACK CWndHook::MessageFilterProc( INT code, WPARAM wParam, LPARAM lParam )
 {
 	if( code < 0 ) {
@@ -36,7 +36,7 @@ LRESULT	CALLBACK CWndHook::MessageFilterProc( INT code, WPARAM wParam, LPARAM lP
 	}
 
 	if( m_bMsgFiltering && code == MSGF_DIALOGBOX ) {
-		// Šù‚ÉƒtƒBƒ‹ƒ^ƒŠƒ“ƒO’†‚©H
+		// æ—¢ã«ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ä¸­ã‹ï¼Ÿ
 		if( m_bMsgFilter )
 			return	FALSE;
 		m_bMsgFilter = TRUE;
@@ -56,10 +56,10 @@ LRESULT	CALLBACK CWndHook::MessageFilterProc( INT code, WPARAM wParam, LPARAM lP
 
 BOOL	CWndHook::WalkPreTranslateTree( MSG* lpMsg )
 {
-	// ƒƒCƒ“ƒtƒŒ[ƒ€ƒEƒCƒ“ƒhƒE
+	// ãƒ¡ã‚¤ãƒ³ãƒ•ãƒ¬ãƒ¼ãƒ ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦
 	HWND	hWndStop = CApp::GetHWnd();
 
-	// PreTranslateMessage‚ð’H‚é
+	// PreTranslateMessageã‚’è¾¿ã‚‹
 	for( HWND hWnd = lpMsg->hwnd; hWnd != NULL; hWnd = ::GetParent(hWnd) ) {
 		if( hWnd == hWndStop )
 			break;

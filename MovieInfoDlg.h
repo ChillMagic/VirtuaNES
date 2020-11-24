@@ -1,5 +1,5 @@
-//
-// ƒ€[ƒr[î•ñƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒ ãƒ¼ãƒ“ãƒ¼æƒ…å ±ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CMOVIEINFODLG_INCLUDED__
 #define	__CMOVIEINFODLG_INCLUDED__

@@ -1,5 +1,5 @@
-//
-// ƒƒbƒZ[ƒWƒtƒBƒ‹ƒ^ƒŠƒ“ƒOƒTƒ|[ƒgƒNƒ‰ƒX
+ï»¿//
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã‚µãƒãƒ¼ãƒˆã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CWNDHOOK_INCLUDED__
 #define	__CWNDHOOK_INCLUDED__
@@ -23,12 +23,12 @@ public:
 protected:
 	static	LRESULT	CALLBACK MessageFilterProc( INT code, WPARAM wParam, LPARAM lParam );
 
-	// ƒƒbƒZ[ƒW‚ðƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚·‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+	// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã™ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
 	static	BOOL	m_bMsgFiltering;
 
-	// ƒƒbƒZ[ƒW‚ªƒtƒBƒ‹ƒ^ƒŠƒ“ƒO’†‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+	// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ä¸­ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
 	static	BOOL	m_bMsgFilter;
-	// Œ³‚ÌƒtƒbƒNƒvƒƒV[ƒWƒƒ
+	// å…ƒã®ãƒ•ãƒƒã‚¯ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
 	static	HHOOK 	m_hOldMsgFilter;
 private:
 };

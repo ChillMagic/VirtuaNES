@@ -1,5 +1,5 @@
-//
-// ƒƒCƒ“ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX
+ï»¿//
+// ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CMAINFRAME_INCLUDED__
 #define	__CMAINFRAME_INCLUDED__

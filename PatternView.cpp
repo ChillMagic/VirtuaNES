@@ -1,5 +1,5 @@
-//
-// ƒpƒ^[ƒ“ƒrƒ…[ƒNƒ‰ƒX
+ï»¿//
+// ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ“ãƒ¥ãƒ¼ã‚¯ãƒ©ã‚¹
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -57,7 +57,7 @@ BOOL	CPatternView::Create( HWND hWndParent )
 			WS_EX_TOOLWINDOW,
 			VIRTUANES_WNDCLASS,
 			"PatternView BG0",
-			WS_OVERLAPPEDWINDOW,	// WindowŠg‘åk¬‰Â”\
+			WS_OVERLAPPEDWINDOW,	// Windowæ‹¡å¤§ç¸®å°å¯èƒ½
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
@@ -65,7 +65,7 @@ BOOL	CPatternView::Create( HWND hWndParent )
 			hWndParent,
 			NULL,
 			CApp::GetInstance(),
-			(LPVOID)this		// This ‚ğ–„‚ß‚Şˆ×
+			(LPVOID)this		// This ã‚’åŸ‹ã‚è¾¼ã‚€ç‚º
 		);
 	if( !hWnd ) {
 		DEBUGOUT( "CreateWindow faild.\n" );
@@ -108,7 +108,7 @@ WNDMSG	CPatternView::OnCreate( WNDMSGPARAM )
 {
 	DEBUGOUT( "CPatternView::OnCreate\n" );
 
-	// ˆÊ’uC³
+	// ä½ç½®ä¿®æ­£
 	RECT	rw, rc;
 	::GetWindowRect( m_hWnd, &rw );
 	::GetClientRect( m_hWnd, &rc );
@@ -133,7 +133,7 @@ WNDMSG	CPatternView::OnClose( WNDMSGPARAM )
 WNDMSG	CPatternView::OnDestroy( WNDMSGPARAM )
 {
 	DEBUGOUT( "CPatternView::OnDestroy\n" );
-	// ˆÊ’u•Û‘¶
+	// ä½ç½®ä¿å­˜
 	::GetWindowRect( m_hWnd, &Config.general.rcPatternViewPos );
 
 	m_hWnd = NULL;
@@ -161,16 +161,16 @@ WNDMSG	CPatternView::OnTimer( WNDMSGPARAM )
 	if( !Emu.IsRunning() )
 		return	TRUE;
 
-	// ƒpƒŒƒbƒg
+	// ãƒ‘ãƒ¬ãƒƒãƒˆ
 	LPBYTE	pPAL = (m_SelectPal<4)?&BGPAL[m_SelectPal*4]:&SPPAL[(m_SelectPal&3)*4];
 	m_BitmapHdr.rgb[0] = m_Palette[pPAL[0]];
 	m_BitmapHdr.rgb[1] = m_Palette[pPAL[1]];
 	m_BitmapHdr.rgb[2] = m_Palette[pPAL[2]];
 	m_BitmapHdr.rgb[3] = m_Palette[pPAL[3]];
 
-	// ƒLƒƒƒ‰ƒNƒ^ƒf[ƒ^XV
+	// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ‡ãƒ¼ã‚¿æ›´æ–°
 	for( INT i = 0; i < 8; i++ ) {
-		// XV‚³‚ê‚½ƒoƒ“ƒN‚Ì‚İƒLƒƒƒ‰ƒNƒ^XV
+		// æ›´æ–°ã•ã‚ŒãŸãƒãƒ³ã‚¯ã®ã¿ã‚­ãƒ£ãƒ©ã‚¯ã‚¿æ›´æ–°
 		if( m_lpBank[i] != PPU_MEM_BANK[i] || PPU_MEM_TYPE[i] == BANKTYPE_CRAM ) {
 			m_lpBank[i] = PPU_MEM_BANK[i];
 

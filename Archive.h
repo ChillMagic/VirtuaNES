@@ -1,5 +1,5 @@
-//
-// ƒA[ƒJƒCƒuƒtƒ@ƒCƒ‹‘€ì
+ï»¿//
+// ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«æ“ä½œ
 //
 #ifndef	__CARCHIVEFILE_INCLUDED__
 #define	__CARCHIVEFILE_INCLUDED__

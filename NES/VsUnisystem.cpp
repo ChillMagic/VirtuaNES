@@ -1,6 +1,6 @@
-#include "VsUnisystem.h"
+ï»¿#include "VsUnisystem.h"
 
-// ƒfƒtƒHƒ‹ƒgDIP-SW
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆDIP-SW
 VSDIPSWITCH	vsdip_default[] = {
 //	Dipname				mask&value
 	"Unknown",			0x0100,
@@ -42,7 +42,7 @@ VSDIPSWITCH	vsdip_default[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -85,7 +85,7 @@ VSDIPSWITCH	vsdip_tkoboxing[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -118,7 +118,7 @@ VSDIPSWITCH	vsdip_rbibaseball[] = {
 	"Wrong 3",			0x20,
 	"Wrong 4",			0xC0,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -154,7 +154,7 @@ VSDIPSWITCH	vsdip_duckhunt[] = {
 	"80000pts",			0x80,
 	"100000pts",			0xC0,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -188,7 +188,7 @@ VSDIPSWITCH	vsdip_jajamaru[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -225,7 +225,7 @@ VSDIPSWITCH	vsdip_tetris[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -264,7 +264,7 @@ VSDIPSWITCH	vsdip_topgun[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -303,7 +303,7 @@ VSDIPSWITCH	vsdip_slalom[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -339,7 +339,7 @@ VSDIPSWITCH	vsdip_skykid[] = {
 	"Wrong 3",			0x80,
 	"Wrong 4",			0xC0,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -379,7 +379,7 @@ VSDIPSWITCH	vsdip_starluster[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -416,7 +416,7 @@ VSDIPSWITCH	vsdip_drmario[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -455,7 +455,7 @@ VSDIPSWITCH	vsdip_castlevania[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -497,7 +497,7 @@ VSDIPSWITCH	vsdip_platoon[] = {
 	"5 Coins / 1 Credit",		0xC0,
 	"Free Play",			0xE0,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -536,7 +536,7 @@ VSDIPSWITCH	vsdip_excitebike[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -575,7 +575,7 @@ VSDIPSWITCH	vsdip_clucluland[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -614,7 +614,7 @@ VSDIPSWITCH	vsdip_iceclimber[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -653,7 +653,7 @@ VSDIPSWITCH	vsdip_supermariobros[] = {
 	"3",				0x80,
 	"4",				0x00,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -692,7 +692,7 @@ VSDIPSWITCH	vsdip_pinball[] = {
 	"Normal",			0x00,
 	"Fast",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -731,7 +731,7 @@ VSDIPSWITCH	vsdip_machrider[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -773,7 +773,7 @@ VSDIPSWITCH	vsdip_machriderj[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -809,7 +809,7 @@ VSDIPSWITCH	vsdip_soccer[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -847,7 +847,7 @@ VSDIPSWITCH	vsdip_battlecity[] = {
 	"Wrong 2",			0x40,
 	"Wrong 3",			0xC0,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -886,7 +886,7 @@ VSDIPSWITCH	vsdip_gradius[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -928,7 +928,7 @@ VSDIPSWITCH	vsdip_goonies[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -964,7 +964,7 @@ VSDIPSWITCH	vsdip_hogansalley[] = {
 	"80000pts",			0x80,
 	"100000pts",			0xC0,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -1010,7 +1010,7 @@ VSDIPSWITCH	vsdip_freedomforce[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -1056,7 +1056,7 @@ VSDIPSWITCH	vsdip_superxevious[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -1095,7 +1095,7 @@ VSDIPSWITCH	vsdip_golf[] = {
 	"Easy",				0x00,
 	"Hard",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -1134,7 +1134,7 @@ VSDIPSWITCH	vsdip_strokandmatchegolf[] = {
 	"Easy",				0x00,
 	"Hard",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -1176,7 +1176,7 @@ VSDIPSWITCH	vsdip_raidonbungelingbay[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 
@@ -1215,7 +1215,7 @@ VSDIPSWITCH	vsdip_mightybombjack[] = {
 	"Off",				0x00,
 	"On",				0x80,
 	NULL,				0xFF,
-// ƒfƒŠƒ~ƒ^
+// ãƒ‡ãƒªãƒŸã‚¿
 	NULL,				0,
 };
 

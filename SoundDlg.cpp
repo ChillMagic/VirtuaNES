@@ -1,5 +1,5 @@
-//
-// ÉTÉEÉìÉhÉ_ÉCÉAÉçÉOÉNÉâÉX
+Ôªø//
+// „Çµ„Ç¶„É≥„Éâ„ÉÄ„Ç§„Ç¢„É≠„Ç∞„ÇØ„É©„Çπ
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -32,9 +32,9 @@ UINT	CSoundDlg::m_nVolumeID[] = {
 };
 
 DLG_MESSAGE_BEGIN(CSoundDlg)
-// ÉÅÉbÉZÅ[ÉW
+// „É°„ÉÉ„Çª„Éº„Ç∏
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
-// ÉRÉ}ÉìÉh
+// „Ç≥„Éû„É≥„Éâ
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
@@ -51,12 +51,12 @@ INT	CSoundDlg::DoModal( HWND hWndParent )
 void	CSoundDlg::OnInitialMember()
 {
 	INT	i;
-	// É`ÉFÉbÉNÉ{ÉbÉNÉX
+	// „ÉÅ„Çß„ÉÉ„ÇØ„Éú„ÉÉ„ÇØ„Çπ
 	BTNCHECK( IDC_SND_ENABLE,		Config.sound.bEnable );
 	BTNCHECK( IDC_SND_VOLEFFECT_ENABLE,	!Config.sound.bDisableVolumeEffect );
 	BTNCHECK( IDC_SND_EXTSOUND_ENABLE,	Config.sound.bExtraSoundEnable );
 
-	// ÉXÉâÉCÉ_Å[
+	// „Çπ„É©„Ç§„ÉÄ„Éº
 	for( i = 0; m_nVolumeID[i*2+0]; i++ ) {
 		::SendDlgItemMessage( m_hWnd, m_nVolumeID[i*2+0], TBM_SETRANGE, TRUE, MAKELONG(0,200) );
 		::SendDlgItemMessage( m_hWnd, m_nVolumeID[i*2+0], TBM_SETPOS, TRUE, (WPARAM)200-Config.sound.nVolume[m_nVolumeID[i*2+1]] );
@@ -64,7 +64,7 @@ void	CSoundDlg::OnInitialMember()
 		::SendDlgItemMessage( m_hWnd, m_nVolumeID[i*2+0], TBM_SETLINESIZE, 0, 1 );
 		::SendDlgItemMessage( m_hWnd, m_nVolumeID[i*2+0], TBM_SETPAGESIZE, 0, 20 );
 	}
-	// ÉTÉìÉvÉäÉìÉOÉåÅ[ÉgÉRÉìÉ{É{ÉbÉNÉX
+	// „Çµ„É≥„Éó„É™„É≥„Ç∞„É¨„Éº„Éà„Ç≥„É≥„Éú„Éú„ÉÉ„ÇØ„Çπ
 	CHAR	szMode[64];
 	::SendDlgItemMessage( m_hWnd, IDC_SND_SAMPLERATE_COMBO, CB_RESETCONTENT, 0, 0 );
 //	for( i = 0; i < 8; i++ ) {
@@ -77,21 +77,21 @@ void	CSoundDlg::OnInitialMember()
 		::SendDlgItemMessage( m_hWnd, IDC_SND_SAMPLERATE_COMBO, CB_INSERTSTRING, (WPARAM)i, (LPARAM)szMode );
 		i++;
 	}
-	// ÉoÉbÉtÉ@ÉTÉCÉYÉRÉìÉ{É{ÉbÉNÉX
+	// „Éê„ÉÉ„Éï„Ç°„Çµ„Ç§„Ç∫„Ç≥„É≥„Éú„Éú„ÉÉ„ÇØ„Çπ
 	::SendDlgItemMessage( m_hWnd, IDC_SND_BUFFERSIZE_COMBO, CB_RESETCONTENT, 0, 0 );
 	for( i = 2; i <= 10; i++ ) {
 		::wsprintf( szMode, "%d Frame", i );
 		::SendDlgItemMessage( m_hWnd, IDC_SND_BUFFERSIZE_COMBO, CB_INSERTSTRING, (WPARAM)i-2, (LPARAM)szMode );
 	}
 
-	// ÉtÉBÉãÉ^ÉRÉìÉ{É{ÉbÉNÉX
+	// „Éï„Ç£„É´„Çø„Ç≥„É≥„Éú„Éú„ÉÉ„ÇØ„Çπ
 	::SendDlgItemMessage( m_hWnd, IDC_SND_FILTERTYPE_COMBO, CB_RESETCONTENT, 0, 0 );
 	for( i = IDS_SND_FILTER_NONE; i <= IDS_SND_FILTER_TYPE4; i++ ) {
 		CApp::LoadString( i, szMode, sizeof(szMode) );
 		::SendDlgItemMessage( m_hWnd, IDC_SND_FILTERTYPE_COMBO, CB_INSERTSTRING, (WPARAM)i-IDS_SND_FILTER_NONE, (LPARAM)szMode );
 	}
 
-	// èâä˙ëIë
+	// ÂàùÊúüÈÅ∏Êäû
 	::SendDlgItemMessage( m_hWnd, IDC_SND_SAMPLERATE_COMBO, CB_SETCURSEL, 0, 0 );
 //	for( i = 0; i < 8; i++ ) {
 	i = 0;

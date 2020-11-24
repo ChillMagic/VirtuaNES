@@ -1,5 +1,5 @@
-//
-// ƒlƒbƒgƒvƒŒƒCƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CNETPLAYDLG_INCLUDED__
 #define	__CNETPLAYDLG_INCLUDED__

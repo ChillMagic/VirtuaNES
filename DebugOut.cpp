@@ -1,4 +1,4 @@
-//
+ï»¿//
 // Debug output
 //
 #include "DebugOut.h"
@@ -12,7 +12,7 @@ CDebugOut::CDebugOut()
 #if	defined(_DEBUG) || defined(_DEBUGOUT)
 	hWndDebugOutput = ::FindWindow( szClassName, NULL );
 	if( !hWndDebugOutput ) {
-		::OutputDebugString( "DebugWindow ‚ª‚ ‚è‚Ü‚¹‚ñ\n" );
+		::OutputDebugString( "DebugWindow ãŒã‚ã‚Šã¾ã›ã‚“\n" );
 	}
 #endif
 }
@@ -41,8 +41,8 @@ void __cdecl CDebugOut::Out( LPSTR fmt, ... )
 			COPYDATASTRUCT	cds;
 			cds.dwData = 0;
 			cds.lpData = (void*)buf;
-			cds.cbData = ::strlen(buf)+1; //  I’[‚ÌNULL‚à‘—‚é
-			//  •¶š—ñ‘—M
+			cds.cbData = ::strlen(buf)+1; //  çµ‚ç«¯ã®NULLã‚‚é€ã‚‹
+			//  æ–‡å­—åˆ—é€ä¿¡
 			::SendMessage( hWndDebugOutput, WM_COPYDATA, (WPARAM)NULL, (LPARAM)&cds );
 		} else {
 			::OutputDebugString( buf );

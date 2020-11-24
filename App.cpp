@@ -1,29 +1,29 @@
-//
-// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒTƒ|[ƒgƒNƒ‰ƒX
+ï»¿//
+// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚µãƒãƒ¼ãƒˆã‚¯ãƒ©ã‚¹
 //
 #include "VirtuaNESres.h"
 #include "App.h"
 
-// _tWinMain‚©‚ç‚Ìˆø”‚»‚Ì‚Ü‚Ü
+// _tWinMainã‹ã‚‰ã®å¼•æ•°ãã®ã¾ã¾
 HINSTANCE CApp::m_hInstance = NULL;
 HINSTANCE CApp::m_hPrevInstance = NULL;
 LPTSTR	CApp::m_lpCmdLine = NULL;
 INT	CApp::m_nCmdShow = 0;
 
-// Œ¾ŒêƒŠƒ\[ƒXƒvƒ‰ƒOƒCƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
+// è¨€èªžãƒªã‚½ãƒ¼ã‚¹ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
 HINSTANCE CApp::m_hPlugin = NULL;
-// ƒƒCƒ“ƒEƒCƒ“ƒhƒE‚ÌƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+// ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 HWND	CApp::m_hWnd = NULL;
-// ƒƒCƒ“ƒEƒCƒ“ƒhƒE‚Ìƒƒjƒ…[ƒnƒ“ƒhƒ‹
+// ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ³ãƒ‰ãƒ«
 HMENU	CApp::m_hMenu = NULL;
 
-// ƒvƒƒOƒ‰ƒ€‚ÌƒpƒX(‹N“®Žž‚ÌƒpƒX)
+// ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ‘ã‚¹(èµ·å‹•æ™‚ã®ãƒ‘ã‚¹)
 CHAR	CApp::m_szModulePath[_MAX_PATH];
 
-// ƒGƒ‰[ƒXƒgƒŠƒ“ƒO(ƒeƒ“ƒ|ƒ‰ƒŠ)
+// ã‚¨ãƒ©ãƒ¼ã‚¹ãƒˆãƒªãƒ³ã‚°(ãƒ†ãƒ³ãƒãƒ©ãƒª)
 CHAR	szErrorString[256];
 
-// ƒGƒ‰[ˆ——p
+// ã‚¨ãƒ©ãƒ¼å‡¦ç†ç”¨
 INT	CApp::m_ErrorStringTableID[] = {
 	IDS_ERROR,
 	IDS_ERROR_STARTUP,
@@ -76,6 +76,6 @@ CHAR*	CApp::GetErrorString( INT nID )
 		if( m_ErrorStringTableID[i] == nID )
 			return	m_ErrorString[i];
 	}
-	return	"";	// NULL ƒXƒgƒŠƒ“ƒO‚Æ‚µ‚Ä“n‚·
+	return	"";	// NULL ã‚¹ãƒˆãƒªãƒ³ã‚°ã¨ã—ã¦æ¸¡ã™
 }
 

@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 // Mapper020  Nintendo Disk System(FDS)                                 //
 //////////////////////////////////////////////////////////////////////////
 class	Mapper020 : public Mapper
@@ -63,17 +63,17 @@ protected:
 
 	INT	irq_counter, irq_latch;	// $4020-$4021
 	BYTE	irq_enable, irq_repeat;	// $4022
-	BYTE	irq_occur;		// IRQ”­¶‚É0ˆÈŠO‚É‚È‚é
-	BYTE	irq_transfer;		// Š„‚è‚İ“]‘—ƒtƒ‰ƒO
+	BYTE	irq_occur;		// IRQç™ºç”Ÿæ™‚ã«0ä»¥å¤–ã«ãªã‚‹
+	BYTE	irq_transfer;		// å‰²ã‚Šè¾¼ã¿è»¢é€ãƒ•ãƒ©ã‚°
 
 	BYTE	disk_enable;		// Disk I/O enable
 	BYTE	sound_enable;		// Sound I/O enable
-	BYTE	RW_start;		// “Ç‚İ‘‚«‰Â”\‚É‚È‚Á‚½‚çIRQ”­¶
-	BYTE	RW_mode;		// “Ç‚İ‘‚«ƒ‚[ƒh
-	BYTE	disk_motor_mode;	// ƒfƒBƒXƒNƒ‚[ƒ^[
-	BYTE	disk_eject;		// ƒfƒBƒXƒNƒJ[ƒh‚Ì‘}“ü/”ñ‘}“ü
-	BYTE	drive_ready;		// “Ç‚İ‘‚«’†‚©‚Ç‚¤‚©
-	BYTE	drive_reset;		// ƒhƒ‰ƒCƒuƒŠƒZƒbƒgó‘Ô
+	BYTE	RW_start;		// èª­ã¿æ›¸ãå¯èƒ½ã«ãªã£ãŸã‚‰IRQç™ºç”Ÿ
+	BYTE	RW_mode;		// èª­ã¿æ›¸ããƒ¢ãƒ¼ãƒ‰
+	BYTE	disk_motor_mode;	// ãƒ‡ã‚£ã‚¹ã‚¯ãƒ¢ãƒ¼ã‚¿ãƒ¼
+	BYTE	disk_eject;		// ãƒ‡ã‚£ã‚¹ã‚¯ã‚«ãƒ¼ãƒ‰ã®æŒ¿å…¥/éæŒ¿å…¥
+	BYTE	drive_ready;		// èª­ã¿æ›¸ãä¸­ã‹ã©ã†ã‹
+	BYTE	drive_reset;		// ãƒ‰ãƒ©ã‚¤ãƒ–ãƒªã‚»ãƒƒãƒˆçŠ¶æ…‹
 
 	INT	block_point;
 	INT	block_mode;

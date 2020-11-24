@@ -1,4 +1,4 @@
-#ifndef	__CEHAT_INCLUDED__
+Ôªø#ifndef	__CEHAT_INCLUDED__
 #define	__CEHAT_INCLUDED__
 
 #include "typedef.h"
@@ -6,17 +6,17 @@
 #include <string>
 using namespace std;
 
-// à»â∫ÇÃÇQÇ¬ÇÕORÉ}ÉXÉN
+// ‰ª•‰∏ã„ÅÆÔºí„Å§„ÅØOR„Éû„Çπ„ÇØ
 #define	CHEAT_ENABLE		(1<<0)
 #define	CHEAT_KEYDISABLE	(1<<1)
 
-// èëÇ´çûÇ›éÌóﬁ
-#define	CHEAT_TYPE_ALWAYS	0	// èÌÇ…èëÇ´çûÇ›
-#define	CHEAT_TYPE_ONCE		1	// ÇPâÒÇæÇØèëÇ´çûÇ›
-#define	CHEAT_TYPE_GREATER	2	// ÉfÅ[É^ÇÊÇËëÂÇ´Ç¢éû
-#define	CHEAT_TYPE_LESS		3	// ÉfÅ[É^ÇÊÇËè¨Ç≥Ç¢éû
+// Êõ∏„ÅçËæº„ÅøÁ®ÆÈ°û
+#define	CHEAT_TYPE_ALWAYS	0	// Â∏∏„Å´Êõ∏„ÅçËæº„Åø
+#define	CHEAT_TYPE_ONCE		1	// ÔºëÂõû„Å†„ÅëÊõ∏„ÅçËæº„Åø
+#define	CHEAT_TYPE_GREATER	2	// „Éá„Éº„Çø„Çà„ÇäÂ§ß„Åç„ÅÑÊôÇ
+#define	CHEAT_TYPE_LESS		3	// „Éá„Éº„Çø„Çà„ÇäÂ∞è„Åï„ÅÑÊôÇ
 
-// ÉfÅ[É^í∑
+// „Éá„Éº„ÇøÈï∑
 #define	CHEAT_LENGTH_1BYTE	0
 #define	CHEAT_LENGTH_2BYTE	1
 #define	CHEAT_LENGTH_3BYTE	2

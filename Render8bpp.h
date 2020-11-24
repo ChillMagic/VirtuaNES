@@ -1,4 +1,4 @@
-//
+﻿//
 // 8bit Normal
 //
 void	CDirectDraw::Render8bpp_Normal( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2& ddsd, BOOL bForceWrite )

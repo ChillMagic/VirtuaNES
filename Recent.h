@@ -1,5 +1,5 @@
-//
-// Recent File ƒNƒ‰ƒX
+ï»¿//
+// Recent File ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CRECENT_INCLUDED__
 #define	__CRECENT_INCLUDED__

@@ -1,5 +1,5 @@
-//
-// ƒŒƒWƒXƒgƒŠƒTƒ|[ƒgƒNƒ‰ƒX
+ï»¿//
+// ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‚µãƒãƒ¼ãƒˆã‚¯ãƒ©ã‚¹
 //
 
 #include "DebugOut.h"

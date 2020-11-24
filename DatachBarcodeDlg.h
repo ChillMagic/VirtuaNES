@@ -1,5 +1,5 @@
-//
-// DATACHƒo[ƒR[ƒhƒoƒgƒ‰[ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// DATACHãƒãƒ¼ã‚³ãƒ¼ãƒ‰ãƒãƒˆãƒ©ãƒ¼ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CDATACHBARCODEDLG_INCLUDED__
 #define	__CDATACHBARCODEDLG_INCLUDED__

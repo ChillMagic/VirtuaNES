@@ -1,5 +1,5 @@
-//
-// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒTƒ|[ƒgƒNƒ‰ƒX
+ï»¿//
+// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚µãƒãƒ¼ãƒˆã‚¯ãƒ©ã‚¹
 //
 
 #ifndef	__CAPP_INCLUDED__
@@ -14,7 +14,7 @@
 
 class CApp {
 public:
-	// ‹N“®‚Éİ’è‚·‚é
+	// èµ·å‹•æ™‚ã«è¨­å®šã™ã‚‹
 	static	void	SetInstance( HINSTANCE hInstance )	{ m_hInstance = hInstance; }
 	static	void	SetPrevInstance( HINSTANCE hInstance )	{ m_hPrevInstance = hInstance; }
 	static	void	SetCmdLine( LPSTR lpCmdLine )		{ m_lpCmdLine = lpCmdLine; }
@@ -26,7 +26,7 @@ public:
 
 	static	void	SetModulePath( LPCSTR lpModulePath )	{ ::strcpy( m_szModulePath, lpModulePath ); }
 
-	// ƒAƒvƒŠ“à•”‚Åg—p‚·‚é
+	// ã‚¢ãƒ—ãƒªå†…éƒ¨ã§ä½¿ç”¨ã™ã‚‹
 	static	HINSTANCE	GetInstance()		{ return m_hInstance; }
 	static	HINSTANCE	GetPrevInstance()	{ return m_hPrevInstance; }
 	static	LPTSTR		GetCmdLine()		{ return m_lpCmdLine; }
@@ -43,34 +43,34 @@ public:
 	static	INT		LoadString( UINT uID, LPTSTR lpBuffer, INT nBufferMax ) {
 					return	::LoadString( m_hPlugin, uID, lpBuffer, nBufferMax ); }
 
-	// ƒGƒ‰[ˆ——p
+	// ã‚¨ãƒ©ãƒ¼å‡¦ç†ç”¨
 	static	void	LoadErrorString();
 	static	CHAR*	GetErrorString( INT nID );
 
 protected:
-	// WinMain ‚©‚ç‚Ìˆø”‚»‚Ì‚Ü‚Ü
+	// WinMain ã‹ã‚‰ã®å¼•æ•°ãã®ã¾ã¾
 	static	HINSTANCE	m_hInstance;
 	static	HINSTANCE	m_hPrevInstance;
 	static	LPSTR		m_lpCmdLine;
 	static	INT		m_nCmdShow;
 
-	// Œ¾ŒêƒŠƒ\[ƒXƒvƒ‰ƒOƒCƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
+	// è¨€èªãƒªã‚½ãƒ¼ã‚¹ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
 	static	HINSTANCE	m_hPlugin;
-	// ƒƒCƒ“ƒEƒCƒ“ƒhƒE‚ÌƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+	// ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 	static	HWND		m_hWnd;
-	// ƒƒCƒ“ƒEƒCƒ“ƒhƒE‚Ìƒƒjƒ…[ƒnƒ“ƒhƒ‹
+	// ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ³ãƒ‰ãƒ«
 	static	HMENU		m_hMenu;
 
-	// ƒvƒƒOƒ‰ƒ€‚ÌƒpƒX(‹N“®‚ÌƒpƒX)
+	// ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ‘ã‚¹(èµ·å‹•æ™‚ã®ãƒ‘ã‚¹)
 	static	CHAR		m_szModulePath[_MAX_PATH];
 
-	// ƒGƒ‰[ˆ——p
+	// ã‚¨ãƒ©ãƒ¼å‡¦ç†ç”¨
 	static	INT	m_ErrorStringTableID[ERRORSTRING_MAX];
 	static	CHAR	m_ErrorString[ERRORSTRING_MAX][256];
 private:
 };
 
-// ƒGƒ‰[ƒƒbƒZ[ƒW—pƒeƒ“ƒ|ƒ‰ƒŠ
+// ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç”¨ãƒ†ãƒ³ãƒãƒ©ãƒª
 extern	CHAR	szErrorString[256];
 
 #endif	// !__CAPP_INCLUDED__

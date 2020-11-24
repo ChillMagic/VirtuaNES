@@ -1,5 +1,5 @@
-//
-// ƒQ[ƒ€ƒIƒvƒVƒ‡ƒ“ƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ã‚²ãƒ¼ãƒ ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #ifndef	__CGAMEOPTIONDLG_INCLUDED__
 #define	__CGAMEOPTIONDLG_INCLUDED__

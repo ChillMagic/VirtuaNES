@@ -1,5 +1,5 @@
-//
-// ƒ`ƒƒƒbƒgƒ_ƒCƒAƒƒOƒNƒ‰ƒX
+ï»¿//
+// ãƒãƒ£ãƒƒãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -26,16 +26,16 @@ using namespace std;
 #include "Wnd.h"
 #include "DipSwitchDlg.h"
 
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_MESSAGE_BEGIN(CDipSwitchDlg)
 DLG_ON_MESSAGE( WM_INITDIALOG,	OnInitDialog )
 
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒžãƒ³ãƒ‰
 DLG_COMMAND_BEGIN()
 DLG_ON_COMMAND( IDOK, OnOK )
 DLG_ON_COMMAND( IDCANCEL, OnCancel )
 DLG_COMMAND_END()
-// Notify ƒƒbƒZ[ƒW
+// Notify ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 DLG_NOTIFY_BEGIN()
 DLG_NOTIFY_END()
 DLG_MESSAGE_END()
@@ -93,7 +93,7 @@ DEBUGOUT( "GET DIPSWITCH:%02X\n", val );
 	}
 	m_nDispCount = nStatic-IDC_EVS_DIPNAME0;
 
-	// Žg‚í‚È‚¢“z‚Í”ñ•\Ž¦‚É‚·‚é
+	// ä½¿ã‚ãªã„å¥´ã¯éžè¡¨ç¤ºã«ã™ã‚‹
 	for( ; nStatic <= IDC_EVS_DIPNAME7; nStatic++, nCombo++ ) {
 		::ShowWindow( ::GetDlgItem( m_hWnd, nStatic ), SW_HIDE );
 		::ShowWindow( ::GetDlgItem( m_hWnd, nCombo ), SW_HIDE );
@@ -106,7 +106,7 @@ DLGCMD	CDipSwitchDlg::OnOK( DLGCMDPARAM )
 {
 //	DEBUGOUT( "CDipSwitchDlg::OnOK\n" );
 
-	// ‘I‘ð‚³‚ê‚Ä‚¢‚é“z‚ÌItemData‚ðŽæ“¾‚µ‚ÄDipSwitchƒf[ƒ^‚ðì‚è’¼‚·(OnInitDialog‚ÅItemData‚ðÝ’èÏ‚Ý)
+	// é¸æŠžã•ã‚Œã¦ã„ã‚‹å¥´ã®ItemDataã‚’å–å¾—ã—ã¦DipSwitchãƒ‡ãƒ¼ã‚¿ã‚’ä½œã‚Šç›´ã™(OnInitDialogã§ItemDataã‚’è¨­å®šæ¸ˆã¿)
 	BYTE	dipval = 0;
 	for( INT i = IDC_EVS_DIPCOMBO0; i < IDC_EVS_DIPCOMBO0+m_nDispCount; i++ ) {
 		INT	sel = ::SendDlgItemMessage( m_hWnd, i, CB_GETCURSEL, 0, 0 );
