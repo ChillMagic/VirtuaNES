@@ -56,8 +56,8 @@ DLGMSG	CJoyAxisDlg::OnInitDialog( DLGMSGPARAM )
 	::memcpy( m_JoyAxisSetting, Config.general.JoyAxisSetting, 16*sizeof(WORD) );
 
 	OnJoySettingSetup( m_JoySel );
-
-	for( INT i = IDC_AST_XAXIS_PROGRESS; i <= IDC_AST_RZAXIS_PROGRESS; i++ ) {
+	INT i;
+	for( i = IDC_AST_XAXIS_PROGRESS; i <= IDC_AST_RZAXIS_PROGRESS; i++ ) {
 		::SendDlgItemMessage( m_hWnd, i, PBM_SETRANGE32, (WPARAM)-10000, (LPARAM)10000 );
 		::SendDlgItemMessage( m_hWnd, i, PBM_SETSTEP, (WPARAM)1, 0 ); 
 	}
