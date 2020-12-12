@@ -43,6 +43,7 @@ static	void	internal_scale2x_16_mmx_single(euI16* dst, const euI16* src0, const 
 	/* always do the first and last run */
 	count -= 2*4;
 
+#ifndef _WIN64
 	__asm {
 		mov		eax, src0
 		mov		ebx, src1
@@ -231,6 +232,7 @@ label1:
 
 		emms
 	}
+#endif
 }
 
 static	void	internal_scale2x_32_mmx_single(euI32* dst, const euI32* src0, const euI32* src1, const euI32* src2, unsigned count)
@@ -238,6 +240,7 @@ static	void	internal_scale2x_32_mmx_single(euI32* dst, const euI32* src0, const 
 	/* always do the first and last run */
 	count -= 2*2;
 
+#ifndef _WIN64
 	__asm {
 		mov		eax, src0
 		mov		ebx, src1
@@ -426,6 +429,7 @@ label1:
 
 		emms
 	}
+#endif
 }
 
 static	void	internal_scale2x_16_mmx(euI16* dst0, euI16* dst1, const euI16* src0, const euI16* src1, const euI16* src2, unsigned count)

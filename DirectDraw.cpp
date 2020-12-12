@@ -254,6 +254,7 @@ CDirectDraw::CDirectDraw()
 	ZEROMEMORY( m_szInfo, sizeof(m_szInfo) );
 	ZEROMEMORY( m_szMess, sizeof(m_szMess) );
 
+#ifndef _WIN64
 	// MMX detect
 	{
 		m_bMMX = FALSE;
@@ -283,6 +284,7 @@ CDirectDraw::CDirectDraw()
 			}
 		}
 	}
+#endif
 
 	// TEST
 //	m_nBltFilter = BLTFILTER_2XSAI;

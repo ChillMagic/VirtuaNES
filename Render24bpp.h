@@ -3,6 +3,7 @@
 //
 void	CDirectDraw::Render24bpp_Normal( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2& ddsd, BOOL bForceWrite )
 {
+#ifndef _WIN64
 	LPBYTE	pScn = lpRdr;
 	LPBYTE	pDst = (LPBYTE)ddsd.lpSurface;
 	LPBYTE	pDlt = (LPBYTE)lpDlt;
@@ -146,6 +147,7 @@ _r24bn_skip2:
 			pDst += pitch;
 		}
 	}
+#endif
 }
 
 //
@@ -153,6 +155,7 @@ _r24bn_skip2:
 //
 void	CDirectDraw::Render24bpp_Scanline( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2& ddsd, BOOL bForceWrite )
 {
+#ifndef _WIN64
 	LPBYTE	pScn = lpRdr;
 	LPBYTE	pDst = (LPBYTE)ddsd.lpSurface;
 	LPBYTE	pDlt = (LPBYTE)lpDlt;
@@ -413,6 +416,7 @@ _r24bs_skip4:
 			pDst += pitch;
 		}
 	}
+#endif
 }
 
 //
@@ -420,6 +424,7 @@ _r24bs_skip4:
 //
 void	CDirectDraw::Render24bpp_Double( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2& ddsd, BOOL bForceWrite )
 {
+#ifndef _WIN64
 	LPBYTE	pScn = lpRdr;
 	LPBYTE	pDst = (LPBYTE)ddsd.lpSurface;
 	LPBYTE	pDlt = (LPBYTE)lpDlt;
@@ -711,6 +716,7 @@ _r24bn_d_skip4:
 			pDst += pitch;
 		}
 	}
+#endif
 }
 
 //
@@ -718,6 +724,7 @@ _r24bn_d_skip4:
 //
 void	CDirectDraw::Render24bpp_DoubleScanline( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2& ddsd, BOOL bForceWrite )
 {
+#ifndef _WIN64
 	LPBYTE	pScn = lpRdr;
 	LPBYTE	pDst = (LPBYTE)ddsd.lpSurface;
 	LPBYTE	pDlt = (LPBYTE)lpDlt;
@@ -1009,4 +1016,5 @@ _r24bs_d_skip4:
 			pDst += pitch;
 		}
 	}
+#endif
 }

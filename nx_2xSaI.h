@@ -16,6 +16,7 @@
 //
 static	void	nx_2xSaILine_16bpp_mmx( euI8* pSrc, euI8* pDlt, euI32 srcPitch, euI32 width, euI8* pDst, euI32 dstPitch, euI32 bForceWrite )
 {
+#ifndef _WIN64
 	__asm {
 		mov		eax, pSrc
 		mov		ebx, srcPitch
@@ -551,10 +552,12 @@ nx_2xSaILine_16mmx_skipprocess:
 
 		emms
 	}
+#endif
 }
 
 static	void	nx_2xSaILine_32bpp_mmx( euI8* pSrc, euI8* pDlt, euI32 srcPitch, euI32 width, euI8* pDst, euI32 dstPitch, euI32 bForceWrite )
 {
+#ifndef _WIN64
 	__asm {
 		mov		eax, pSrc
 		mov		ebx, srcPitch
@@ -1252,4 +1255,5 @@ nx_2xSaILine_32mmx_skipprocess:
 
 		emms
 	}
+#endif
 }

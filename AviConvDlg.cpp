@@ -489,7 +489,7 @@ double	Samples = 0.0;
 					LPBYTE	pSrc = &pRender[CDirectDraw::RENDER_WIDTH*i+8];
 					LPBYTE	pDst = &pScreen[CDirectDraw::SCREEN_WIDTH*3*(CDirectDraw::SCREEN_HEIGHT-i-1)];
 					RGBQUAD* pPal = &pPalette[ (pLinecolor[i] & 7)*256+((pLinecolor[i] & 0x80)?0x40:0x00) ];
-#if	0
+#if	1
 					for( INT j = 0; j < CDirectDraw::SCREEN_WIDTH; j++ ) {
 						BYTE	pixel = *pSrc++;
 						pixel |= (pLinecolor[i] & 0x80)?0x40:0;

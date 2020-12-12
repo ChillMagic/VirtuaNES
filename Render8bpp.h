@@ -3,6 +3,7 @@
 //
 void	CDirectDraw::Render8bpp_Normal( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2& ddsd, BOOL bForceWrite )
 {
+#ifndef _WIN64
 	LPBYTE	pScn = lpRdr;
 	LPBYTE	pDst = (LPBYTE)ddsd.lpSurface;
 	DWORD	width = SCREEN_WIDTH;
@@ -30,6 +31,7 @@ _r8bn_loop:
 		pScn += RENDER_WIDTH;
 		pDst += pitch;
 	}
+#endif
 }
 
 //
@@ -37,6 +39,7 @@ _r8bn_loop:
 //
 void	CDirectDraw::Render8bpp_Scanline( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2& ddsd, BOOL bForceWrite )
 {
+#ifndef _WIN64
 	LPBYTE	pScn = lpRdr;
 	LPBYTE	pDst = (LPBYTE)ddsd.lpSurface;
 	DWORD	width = SCREEN_WIDTH;
@@ -83,6 +86,7 @@ _r8bs_loop2:
 		pScn += RENDER_WIDTH;
 		pDst += pitch;
 	}
+#endif
 }
 
 //
@@ -90,6 +94,7 @@ _r8bs_loop2:
 //
 void	CDirectDraw::Render8bpp_Double( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2& ddsd, BOOL bForceWrite )
 {
+#ifndef _WIN64
 	LPBYTE	pScn = lpRdr;
 	LPBYTE	pDst = (LPBYTE)ddsd.lpSurface;
 	DWORD	width = SCREEN_WIDTH;
@@ -243,6 +248,7 @@ _r8bn_d_loop4:
 		emms
 	}
 	}
+#endif
 }
 
 //
@@ -250,6 +256,7 @@ _r8bn_d_loop4:
 //
 void	CDirectDraw::Render8bpp_DoubleScanline( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2& ddsd, BOOL bForceWrite )
 {
+#ifndef _WIN64
 	LPBYTE	pScn = lpRdr;
 	LPBYTE	pDst = (LPBYTE)ddsd.lpSurface;
 	DWORD	width = SCREEN_WIDTH;
@@ -404,4 +411,5 @@ _r8bs_d_loop4:
 		emms
 	}
 	}
+#endif
 }
