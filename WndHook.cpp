@@ -63,7 +63,7 @@ BOOL	CWndHook::WalkPreTranslateTree( MSG* lpMsg )
 	for( HWND hWnd = lpMsg->hwnd; hWnd != NULL; hWnd = ::GetParent(hWnd) ) {
 		if( hWnd == hWndStop )
 			break;
-		CWnd*	pWnd = (CWnd*)::GetWindowLong( hWnd, GWL_USERDATA );
+		CWnd*	pWnd = (CWnd*)::GetWindowLong( hWnd, GWLP_USERDATA );
 		if( pWnd ) {
 			if( pWnd->PreTranslateMessage( lpMsg ) )
 				return	TRUE;

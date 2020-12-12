@@ -176,7 +176,7 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			break;
 		// メインウインドウのメッセージフィルタリング
 		if( CApp::GetHWnd() == msg.hwnd ) {
-			CWnd* pWnd = (CWnd*)::GetWindowLong( msg.hwnd, GWL_USERDATA );
+			CWnd* pWnd = (CWnd*)::GetWindowLong( msg.hwnd, GWLP_USERDATA );
 			if( pWnd ) {
 				if( pWnd->PreTranslateMessage( &msg ) )
 					continue;
