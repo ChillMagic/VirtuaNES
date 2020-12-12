@@ -32,6 +32,9 @@
       <UniqueIdentifier>{7136bdc3-ee6e-4401-92ad-f24714e41680}</UniqueIdentifier>
       <Extensions>*.c *.cpp *.h</Extensions>
     </Filter>
+    <Filter Include="Zlib\minizip">
+      <UniqueIdentifier>{32003c8e-1165-447e-9534-b9fe9df2d96c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutDlg.cpp">
@@ -238,11 +241,59 @@
     <ClCompile Include="NES\VsUnisystem.cpp">
       <Filter>NES</Filter>
     </ClCompile>
-    <ClCompile Include="zlib\unzip.c">
-      <Filter>Zlib</Filter>
-    </ClCompile>
     <ClCompile Include="dinput.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\adler32.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\compress.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\crc32.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\deflate.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\gzclose.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\gzlib.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\gzread.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\gzwrite.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\infback.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\inffast.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\inflate.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\inftrees.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\trees.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\uncompr.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\zutil.c">
+      <Filter>Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\minizip\unzip.c">
+      <Filter>Zlib\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\minizip\ioapi.c">
+      <Filter>Zlib\minizip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -533,15 +584,6 @@
     </ClInclude>
     <ClInclude Include="NES\VsUnisystem.h">
       <Filter>NES</Filter>
-    </ClInclude>
-    <ClInclude Include="zlib\unzip.h">
-      <Filter>Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="zlib\zconf.h">
-      <Filter>Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="zlib\zlib.h">
-      <Filter>Zlib</Filter>
     </ClInclude>
     <ClInclude Include="NES\ROM_Patch.hpp">
       <Filter>NES</Filter>
@@ -1533,6 +1575,45 @@
     <ClInclude Include="NES\PadEX\EXPAD_Zapper.hpp">
       <Filter>NES\PadEx</Filter>
     </ClInclude>
+    <ClInclude Include="zlib\crc32.h">
+      <Filter>Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\deflate.h">
+      <Filter>Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\gzguts.h">
+      <Filter>Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inffast.h">
+      <Filter>Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inffixed.h">
+      <Filter>Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inflate.h">
+      <Filter>Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inftrees.h">
+      <Filter>Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\trees.h">
+      <Filter>Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zconf.h">
+      <Filter>Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zlib.h">
+      <Filter>Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zutil.h">
+      <Filter>Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\minizip\unzip.h">
+      <Filter>Zlib\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\minizip\ioapi.h">
+      <Filter>Zlib\minizip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="CheatImageList.bmp">
@@ -1555,11 +1636,6 @@
     <Manifest Include="res\VirtuaNES.exe.manifest">
       <Filter>Resource Files</Filter>
     </Manifest>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="zlib\zlib.lib">
-      <Filter>Zlib</Filter>
-    </Library>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="VirtuaNES.rc">

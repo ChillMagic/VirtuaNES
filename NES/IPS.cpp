@@ -4,7 +4,7 @@
 #include "Config.h"
 #include "Debugout.h"
 
-#include "unzip.h"
+#include "minizip/unzip.h"
 #include "ips.h"
 
 #include <vector>

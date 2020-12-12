@@ -28,7 +28,7 @@
 
 #define UNZ_BUFSIZE (65536)
 
-#include "unzip.h"
+#include "minizip/unzip.h"
 
 #pragma	pack(1)
 #define	FNAME_MAX32	512
