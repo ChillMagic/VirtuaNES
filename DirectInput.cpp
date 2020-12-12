@@ -86,13 +86,13 @@ CDirectInput::DIKEYTBL	CDirectInput::DIKeyTable[] = {
 	0x00,		NULL
 };
 
-LPSTR	CDirectInput::DIKeyDirTable[] = {
+LPCSTR	CDirectInput::DIKeyDirTable[] = {
 	"X+", "X-", "Y+", "Y-", "Z+", "Z-",
 	"RX+", "RX-", "RY+", "RY-", "RZ+", "RZ-",
 	"S0+", "S0-", "S1+", "S1-",
 };
 
-LPSTR	CDirectInput::DIKeyDirTable2[] = {
+LPCSTR	CDirectInput::DIKeyDirTable2[] = {
 	"P0 Up", "P0 Down", "P0 Left", "P0 Right",
 	"P1 Up", "P1 Down", "P1 Left", "P1 Right",
 	"P2 Up", "P2 Down", "P2 Left", "P2 Right",

@@ -103,14 +103,14 @@ void	CShortcutDlg::OnInitialMember()
 
 		// 設定ｷｰ
 		if( m_ControlBuf[i] == 0 ) {
-			ListView_SetItemText( hWndCtrl, i, 1, "----" );
+			ListView_SetItemText( hWndCtrl, i, 1, (LPSTR)"----" );
 		} else {
 			string	str = Config.ShortcutToKeyName( m_ControlBuf[i] );
 			ListView_SetItemText( hWndCtrl, i, 1, (LPSTR)str.c_str() );
 		}
 		// 設定ｷｰ2
 		if( m_ControlBuf2[i] == 0 ) {
-			ListView_SetItemText( hWndCtrl, i, 2, "----" );
+			ListView_SetItemText( hWndCtrl, i, 2, (LPSTR)"----" );
 		} else {
 			string	str = Config.ShortcutToKeyName( m_ControlBuf2[i] );
 			ListView_SetItemText( hWndCtrl, i, 2, (LPSTR)str.c_str() );
@@ -187,10 +187,10 @@ DLGMSG	CShortcutDlg::OnTimer( DLGMSGPARAM )
 			// Set cancel
 			if( DirectInput.m_Sw[DIK_ESCAPE] && !(DirectInput.m_Sw[DIK_LSHIFT] || DirectInput.m_Sw[DIK_RSHIFT]) ) {
 				if( m_SelectSubID == 2 ) {
-					ListView_SetItemText( hWndCtrl, m_SelectID, 2, "----" );
+					ListView_SetItemText( hWndCtrl, m_SelectID, 2, (LPSTR)"----" );
 					m_ControlBuf2[m_SelectID] = 0;
 				} else {
-					ListView_SetItemText( hWndCtrl, m_SelectID, 1, "----" );
+					ListView_SetItemText( hWndCtrl, m_SelectID, 1, (LPSTR)"----" );
 					m_ControlBuf[m_SelectID] = 0;
 				}
 //				::SetWindowText( hWndCtrl, "----" );

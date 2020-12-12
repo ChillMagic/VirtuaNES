@@ -341,7 +341,7 @@ void	CLauncherDlg::ResetListView()
 	LVITEM	lvitem;
 	lvitem.mask = LVIF_TEXT|LVIF_PARAM;
 	lvitem.iSubItem = 0;
-	lvitem.pszText = "";
+	lvitem.pszText = (LPSTR)"";
 
 	::SendMessage( hWndCtrl, WM_SETREDRAW, (WPARAM)FALSE, 0 );
 
@@ -811,7 +811,7 @@ _error_return:
 void CLauncherDlg::ResetFileList()
 {
 INT	i;
-LPSTR	pszExt[] = {
+LPCSTR	pszExt[] = {
 	"*.nes",
 	"*.fds",
 	"*.nsf",
@@ -829,7 +829,7 @@ LPSTR	pszExt[] = {
 	m_FileListNum = 0;
 
 	string	path;
-	CHAR**	pExt;
+	LPCSTR*	pExt;
 	BOOL	bFind;
 	FILELIST fl;
 	fl.crc = fl.crcall = 0;
@@ -1732,7 +1732,7 @@ DLGMSG	CLchFolderConfigDlg::OnInitDialog( DLGMSGPARAM )
 	lvcol.fmt = LVCFMT_LEFT;
 	lvcol.cx = 1024;
 	lvcol.iSubItem = 0;
-	lvcol.pszText = "";
+	lvcol.pszText = (LPSTR)"";
 	ListView_InsertColumn( hWndCtrl, 0, &lvcol );
 
 	LV_ITEM	lvitem;

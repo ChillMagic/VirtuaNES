@@ -922,7 +922,7 @@ LPBYTE	pScn = nes->ppu->GetScreenPtr()+8;
 	}
 }
 
-void	MapperNSF::DrawString( INT x, INT y, LPSTR str, BYTE col )
+void	MapperNSF::DrawString( INT x, INT y, LPCSTR str, BYTE col )
 {
 	while( *str ) {
 		DrawFont( x, y, *str, col );

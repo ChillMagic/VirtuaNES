@@ -9,7 +9,7 @@
 
 #define	CLOSESOCKET(soc) if((soc)!=INVALID_SOCKET){::closesocket((soc));(soc)=INVALID_SOCKET;}
 
-static	char*	SocketErrorDump( int eno );
+static	const char*	SocketErrorDump( int eno );
 
 CNetPlay	NetPlay;
 
@@ -738,7 +738,7 @@ DEBUGOUT( "Unknown message.\n" );
 	return	0L;
 }
 
-static	char*	SocketErrorDump( int eno )
+static	const char*	SocketErrorDump( int eno )
 {
 	switch( eno ) {
 	case	0:			return	"No error";

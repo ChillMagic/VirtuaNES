@@ -48,8 +48,8 @@ public:
 	LONG	m_JoyAxis[DIJOYSTICK_MAX][8];
 	string	m_JoyName[DIJOYSTICK_MAX];
 
-	static	LPSTR	DIKeyDirTable[];
-	static	LPSTR	DIKeyDirTable2[];
+	static	LPCSTR	DIKeyDirTable[];
+	static	LPCSTR	DIKeyDirTable2[];
 
 	// パブリックメンバ関数
 	CDirectInput();
