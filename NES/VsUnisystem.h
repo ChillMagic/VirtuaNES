@@ -10,7 +10,7 @@
 
 struct VSDIPSWITCH
 {
-	char*	name;
+	LPCSTR	name;
 	WORD	value;
 };
 

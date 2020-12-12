@@ -45,7 +45,7 @@ public:
 
 	// エラー処理用
 	static	void	LoadErrorString();
-	static	CHAR*	GetErrorString( INT nID );
+	static	LPCSTR	GetErrorString( INT nID );
 
 protected:
 	// WinMain からの引数そのまま

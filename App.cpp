@@ -70,7 +70,7 @@ void	CApp::LoadErrorString()
 	}
 }
 
-CHAR*	CApp::GetErrorString( INT nID )
+LPCSTR	CApp::GetErrorString( INT nID )
 {
 	for( INT i = 0; m_ErrorStringTableID[i]; i++ ) {
 		if( m_ErrorStringTableID[i] == nID )
