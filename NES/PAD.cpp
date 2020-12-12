@@ -677,22 +677,22 @@ void	PAD::NsfSub()
 		nsfbit &= ~((1<<4)|(1<<5));
 }
 
-#include "EXPAD_Zapper.cpp"
-#include "EXPAD_Paddle.cpp"
-#include "EXPAD_HyperShot.cpp"
-#include "EXPAD_Keyboard.cpp"
-#include "EXPAD_Supor_Keyboard.cpp"
-#include "EXPAD_CrazyClimber.cpp"
-#include "EXPAD_Toprider.cpp"
-#include "EXPAD_SpaceShadowGun.cpp"
+#include "EXPAD_Zapper.hpp"
+#include "EXPAD_Paddle.hpp"
+#include "EXPAD_HyperShot.hpp"
+#include "EXPAD_Keyboard.hpp"
+#include "EXPAD_Supor_Keyboard.hpp"
+#include "EXPAD_CrazyClimber.hpp"
+#include "EXPAD_Toprider.hpp"
+#include "EXPAD_SpaceShadowGun.hpp"
 
-#include "EXPAD_FamlyTrainer.cpp"
-#include "EXPAD_ExcitingBoxing.cpp"
-#include "EXPAD_Mahjang.cpp"
-#include "EXPAD_OekakidsTablet.cpp"
-#include "EXPAD_TurboFile.cpp"
+#include "EXPAD_FamlyTrainer.hpp"
+#include "EXPAD_ExcitingBoxing.hpp"
+#include "EXPAD_Mahjang.hpp"
+#include "EXPAD_OekakidsTablet.hpp"
+#include "EXPAD_TurboFile.hpp"
 
-#include "EXPAD_VSUnisystem.cpp"
-#include "EXPAD_VSZapper.cpp"
+#include "EXPAD_VSUnisystem.hpp"
+#include "EXPAD_VSZapper.hpp"
 
-#include "EXPAD_Gyromite.cpp"
+#include "EXPAD_Gyromite.hpp"

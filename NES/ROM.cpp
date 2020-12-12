@@ -341,7 +341,7 @@ DEBUGOUT( "PAGESIZE:%d\n", NSF_PAGE_SIZE );
 
 				romdatabase.HeaderCorrect( header, crcall, crc );
 
-#include "ROM_Patch.cpp"
+#include "ROM_Patch.hpp"
 				fdsmakerID = fdsgameID = 0;
 			} else {
 				crc = crcall = crcvrom = 0;
