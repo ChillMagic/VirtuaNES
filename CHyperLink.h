@@ -67,10 +67,10 @@ public:
 		::SetWindowLong( hWnd, GWL_STYLE, (LONG)dwStyle );
 
 		// コントロールのサブクラス化
-		m_lpfnOldWndProc = (WNDPROC)::SetWindowLong( hWnd, GWLP_WNDPROC, (LONG)HyperLinkProc );
+		m_lpfnOldWndProc = (WNDPROC)::SetWindowLongPtr( hWnd, GWLP_WNDPROC, (LONG_PTR)HyperLinkProc );
 
 		// Thisを埋め込む
-		::SetWindowLong( hWnd, GWLP_USERDATA, (LONG)this );
+		::SetWindowLongPtr( hWnd, GWLP_USERDATA, (LONG_PTR)this );
 
 		return	TRUE;
 	}
@@ -80,7 +80,7 @@ public:
 		if( m_hWnd ) {
 			// サブクラス化を解除
 			if( m_lpfnOldWndProc ) {
-				::SetWindowLong( m_hWnd, GWLP_WNDPROC, (LONG)m_lpfnOldWndProc );
+				::SetWindowLongPtr( m_hWnd, GWLP_WNDPROC, (LONG_PTR)m_lpfnOldWndProc );
 				m_lpfnOldWndProc = NULL;
 			}
 
@@ -174,7 +174,7 @@ protected:
 
 	static	LRESULT CALLBACK HyperLinkProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
-		CHyperLink*	pHyperLink = reinterpret_cast<CHyperLink*>(::GetWindowLong( hWnd, GWLP_USERDATA));
+		CHyperLink*	pHyperLink = reinterpret_cast<CHyperLink*>(::GetWindowLongPtr( hWnd, GWLP_USERDATA));
 
 		switch( msg ) {
 			case	WM_DESTROY:

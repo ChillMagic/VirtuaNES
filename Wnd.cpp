@@ -67,7 +67,7 @@ void	CWnd::SetThis()
 {
 	// Dispatch出来るようにCWnd*を埋め込む
 	if( m_hWnd ) {
-		::SetWindowLong( m_hWnd, GWLP_USERDATA, (LONG)this );
+		::SetWindowLongPtr( m_hWnd, GWLP_USERDATA, (LONG_PTR)this );
 	}
 }
 
@@ -76,17 +76,17 @@ LRESULT	CALLBACK CWnd::g_WndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPa
 	// ウインドウが開く前にこっそり処理する
 	if( msg == WM_CREATE ) {
 		LPCREATESTRUCT	lpcs = (LPCREATESTRUCT)lParam;
-		CWnd* pWnd = (CWnd*)::GetWindowLong( hWnd, GWLP_USERDATA );
+		CWnd* pWnd = (CWnd*)::GetWindowLongPtr( hWnd, GWLP_USERDATA );
 		if( !pWnd ) {
 			// CWnd* thisを埋め込む
-			::SetWindowLong( hWnd, GWLP_USERDATA, (LONG)lpcs->lpCreateParams );
+			::SetWindowLongPtr( hWnd, GWLP_USERDATA, (LONG_PTR)lpcs->lpCreateParams );
 			// 自分のウインドウハンドル
 			pWnd = (CWnd*)lpcs->lpCreateParams;
 			pWnd->m_hWnd = hWnd;
 		}
 	}
 	// CWnd* thisを埋め込んである
-	CWnd* pWnd = (CWnd*)::GetWindowLong( hWnd, GWLP_USERDATA );
+	CWnd* pWnd = (CWnd*)::GetWindowLongPtr( hWnd, GWLP_USERDATA );
 
 	if( pWnd ) {
 		return	pWnd->DispatchWnd( hWnd, msg, wParam, lParam );
@@ -101,10 +101,10 @@ INT_PTR	CALLBACK CWnd::g_DlgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPa
 	if( msg == WM_INITDIALOG ) {
 		// Dispatch出来るようにCWnd*を埋め込む(モーダルは必ずDialogBoxParamで起動する事)
 		// CWnd* thisを埋め込んであるが，モーダルでは入っていない
-		CWnd* pWnd = (CWnd*)::GetWindowLong( hWnd, GWLP_USERDATA );
+		CWnd* pWnd = (CWnd*)::GetWindowLongPtr( hWnd, GWLP_USERDATA );
 
 		if( !pWnd ) {
-			::SetWindowLong( hWnd, GWLP_USERDATA, (LONG)lParam );
+			::SetWindowLongPtr( hWnd, GWLP_USERDATA, (LONG_PTR)lParam );
 			pWnd = (CWnd*)lParam;
 		}
 		// 自分のウインドウハンドル
@@ -124,7 +124,7 @@ INT_PTR	CALLBACK CWnd::g_DlgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPa
 	}
 
 	// CWnd* thisを埋め込んである
-	CWnd* pWnd = (CWnd*)::GetWindowLong( hWnd, GWLP_USERDATA );
+	CWnd* pWnd = (CWnd*)::GetWindowLongPtr( hWnd, GWLP_USERDATA );
 
 	if( pWnd ) {
 		return	pWnd->DispatchDlg( hWnd, msg, wParam, lParam );
