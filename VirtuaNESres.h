@@ -1,5 +1,4 @@
-﻿#ifndef	__VIRTUANES_RESOURCE_INCLUDED__
-#define	__VIRTUANES_RESOURCE_INCLUDED__
+﻿#pragma once
 
 // VirtuaNES version
 #define	VIRTUANES_VERSION		0x0097
@@ -951,5 +950,3 @@
 #define	ID_LCH_LIST7			0xA017
 #define	ID_LCH_LIST8			0xA018
 #define	ID_LCH_LIST9			0xA019
-
-#endif	// !__VIRTUANES_RESOURCE_INCLUDED__
