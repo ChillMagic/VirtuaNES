@@ -26,14 +26,6 @@ public:
 	static	BOOL	WriteProfileInt( LPCSTR lpszSection, LPCSTR lpszEntry, INT nValue );
 	static	BOOL	WriteProfileString( LPCSTR lpszSection, LPCSTR lpszEntry, LPCSTR lpszValue );
 	static	BOOL	WriteProfileBinary( LPCSTR lpszSection, LPCSTR lpszEntry, LPVOID pData, UINT nBytes );
-
-protected:
-	static	CHAR	m_szRegistryKey[MAX_PATH];
-
-	static	void*/*HKEY*/	GetRegistryKey();
-	static	void*/*HKEY*/	GetSectionKey( LPCTSTR lpszSection );
-
-private:
 };
 
 #endif	// !__CREGISTRY_INCLUDED__

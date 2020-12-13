@@ -7,8 +7,6 @@
 // Zlib use!
 // Reprogrammed by Norix
 //
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
 #include <Shlwapi.h>
 
 #include <cstdio>

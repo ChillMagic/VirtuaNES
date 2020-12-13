@@ -14,7 +14,7 @@
 
 #define	INI_USE
 
-CHAR	CRegistry::m_szRegistryKey[MAX_PATH] = { "App" };
+static CHAR	m_szRegistryKey[MAX_PATH] = { "App" };
 
 void	CRegistry::SetRegistryKey( LPCTSTR lpszKey )
 {
@@ -31,7 +31,7 @@ void	CRegistry::SetRegistryKey( LPCTSTR lpszKey )
 #endif
 }
 
-void*/*HKEY*/	CRegistry::GetRegistryKey()
+static HKEY	GetRegistryKey()
 {
 	HKEY	hAppKey = NULL;
 	HKEY	hSoftKey = NULL;
@@ -45,7 +45,7 @@ void*/*HKEY*/	CRegistry::GetRegistryKey()
 	return	hAppKey;
 }
 
-void*/*HKEY*/	CRegistry::GetSectionKey( LPCTSTR lpszSection )
+static HKEY	GetSectionKey( LPCTSTR lpszSection )
 {
 	HKEY	hAppKey = (HKEY)GetRegistryKey();
 	if( !hAppKey )
