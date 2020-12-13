@@ -141,6 +141,9 @@
     <ResourceCompile Include="res\Japanese.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="res\Brasil.res" />
+    <Resource Include="res\French.res" />
+    <Resource Include="res\Korean.res" />
     <Resource Include="res\Sim_Chinese.res" />
     <Resource Include="res\Tra_Chinese.res" />
   </ItemGroup>

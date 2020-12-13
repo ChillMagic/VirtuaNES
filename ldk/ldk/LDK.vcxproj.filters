@@ -44,5 +44,14 @@
     <Resource Include="res\Tra_Chinese.res">
       <Filter>Resource Files</Filter>
     </Resource>
+    <Resource Include="res\Korean.res">
+      <Filter>Resource Files</Filter>
+    </Resource>
+    <Resource Include="res\Brasil.res">
+      <Filter>Resource Files</Filter>
+    </Resource>
+    <Resource Include="res\French.res">
+      <Filter>Resource Files</Filter>
+    </Resource>
   </ItemGroup>
 </Project>
