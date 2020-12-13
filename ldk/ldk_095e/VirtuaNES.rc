@@ -1,0 +1,1840 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+#include "virtuanesres.h"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// âpåÍ (±“ÿ∂) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "#include ""virtuanesres.h""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,0,9,5
+ PRODUCTVERSION 0,0,9,5
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", " \0"
+            VALUE "FileDescription", "VirtuaNES Language Plugin(English(US))\0"
+            VALUE "FileVersion", "0.95\0"
+            VALUE "InternalName", "VirtuaNES Language Plugin(English(US))\0"
+            VALUE "LegalCopyright", "Copyright (C) 2001-2007 Norix\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "English.vlp\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "VirtuaNES Language Plugin(English(US))\0"
+            VALUE "ProductVersion", "0.95\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_VERSION DIALOG DISCARDABLE  0, 0, 187, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Version infomation"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,130,75,50,14
+    CTEXT           "",IDC_VER_VERSION,51,15,106,10,SS_CENTERIMAGE
+    GROUPBOX        "",IDC_STATIC,5,0,177,70
+    ICON            "",IDC_VER_ICON,29,16,20,20
+    CTEXT           "Copyright (C) 2001-2007 Norix",IDC_STATIC,51,30,106,10,
+                    SS_CENTERIMAGE
+    LTEXT           "",IDC_VER_WEBSITE,45,55,125,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    LTEXT           "",IDC_VER_EMAIL,45,45,125,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    LTEXT           "E-mail",IDC_STATIC,10,45,30,8
+    LTEXT           "Website",IDC_STATIC,10,55,30,8
+END
+
+IDD_ROMINFO DIALOG DISCARDABLE  0, 0, 189, 185
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ROM infomation"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,130,165,50,14
+    CTEXT           "Name",IDC_STATIC,5,5,20,15,SS_CENTERIMAGE
+    LTEXT           "",IDC_ROM_NAME,30,5,150,15,SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "Mapper",IDC_STATIC,10,30,35,15,SS_CENTERIMAGE
+    CTEXT           "0",IDC_ROM_MAPPER,50,30,40,15,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "PRG ROM",IDC_STATIC,10,50,35,15,SS_CENTERIMAGE
+    CTEXT           "0KB",IDC_ROM_PRG,50,50,40,15,SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "CHR ROM",IDC_STATIC,100,50,35,15,SS_CENTERIMAGE
+    CTEXT           "0KB",IDC_ROM_CHR,140,50,40,15,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "MIRROR",IDC_STATIC,10,75,35,15,SS_CENTERIMAGE
+    CTEXT           "H",IDC_ROM_MIRROR,50,75,40,15,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "S-RAM",IDC_STATIC,100,75,35,15,SS_CENTERIMAGE
+    CTEXT           "No",IDC_ROM_SRAM,140,75,40,15,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "4 SCREEN",IDC_STATIC,10,95,35,15,SS_CENTERIMAGE
+    CTEXT           "No",IDC_ROM_4SCREEN,50,95,40,15,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "TRAINER",IDC_STATIC,100,95,35,15,SS_CENTERIMAGE
+    CTEXT           "No",IDC_ROM_TRAINER,140,95,40,15,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "VS-Unisysem",IDC_STATIC,5,115,45,15,SS_CENTERIMAGE
+    CTEXT           "No",IDC_ROM_VSUNISYSTEM,50,115,40,15,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "PRG CRC",IDC_STATIC,10,140,35,15,SS_CENTERIMAGE
+    CTEXT           "00000000",IDC_ROM_CRC,50,140,40,15,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "ALL CRC",IDC_STATIC,100,140,35,15,SS_CENTERIMAGE
+    CTEXT           "00000000",IDC_ROM_CRCALL,140,140,40,15,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "CHR CRC",IDC_STATIC,10,160,35,15,SS_CENTERIMAGE
+    CTEXT           "00000000",IDC_ROM_CRCCHR,50,160,40,15,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+END
+
+IDD_CFG_EMULATOR DIALOG DISCARDABLE  0, 0, 219, 279
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Emulator Configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,109,260,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,164,260,50,14
+    PUSHBUTTON      "Default",IDDEFAULT,54,260,50,14
+    GROUPBOX        "CPU Core",IDC_STATIC,4,5,211,25
+    CONTROL         "Ignore illegal opcode",IDC_EMU_ILLEGALOP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,15,90,10
+    GROUPBOX        "Peripheral equipment",IDC_STATIC,4,35,211,25
+    CONTROL         "Enable NES type 4 player adapter",IDC_EMU_FOURPLAYER,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,45,135,10
+    GROUPBOX        "Frame rate control",IDC_STATIC,4,65,211,55
+    CONTROL         "Auto frame skip",IDC_EMU_AUTOFRAMESKIP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,75,65,10
+    CONTROL         "Throttle use",IDC_EMU_THROTTLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,90,60,10
+    CONTROL         "Slider1",IDC_EMU_THROTTLE_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_TOP | WS_TABSTOP,75,81,105,21
+    CTEXT           "FPS",IDC_STATIC,181,75,25,10,SS_CENTERIMAGE
+    CTEXT           "",IDC_EMU_FPS,181,87,25,15,SS_CENTERIMAGE | SS_SUNKEN
+    CONTROL         "Disksystem throttle use",IDC_EMU_DISKTHROTTLE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,105,100,10
+    GROUPBOX        "Othres",IDC_STATIC,4,125,211,130
+    CONTROL         "Prohibition of double activation",IDC_EMU_DOUBLEEXECUTE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,135,195,10
+    CONTROL         "Launcher is started simultaneously with a startup",
+                    IDC_EMU_STARTUPLAUNCHER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,150,195,10
+    CONTROL         "Switch to fullscreen on ROM load",
+                    IDC_EMU_LOADFULLSCREEN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,165,195,10
+    CONTROL         "CRC check of a state/movie",IDC_EMU_CRCCHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,180,195,10
+    CONTROL         "Background movement",IDC_EMU_BACKGROUND,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,195,95,10
+    LTEXT           "Priority",IDC_STATIC,110,195,30,10,SS_CENTERIMAGE
+    COMBOBOX        IDC_EMU_PRIORITY_COMBO,145,193,62,75,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Picture of a snapshot is taken by PNG",
+                    IDC_EMU_PNGSNAPSHOT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,211,195,10
+    CONTROL         "Use JoystickID",IDC_EMU_NOJOYSTICKID,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,225,195,10
+    CONTROL         "Pauses at launcher active",IDC_EMU_PAUSELAUNCHER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,240,195,10
+END
+
+IDD_CFG_GRAPHICS DIALOG DISCARDABLE  0, 0, 219, 259
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Graphics Configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,109,239,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,164,239,50,14
+    PUSHBUTTON      "Default",IDDEFAULT,54,239,50,14
+    GROUPBOX        "General",IDC_STATIC,4,5,211,85
+    CONTROL         "TV aspect correct",IDC_GRA_ASPECT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,15,90,10
+    CONTROL         "Display TV frame",IDC_GRA_TVFRAME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,115,15,90,10
+    CONTROL         "Show 240 lines",IDC_GRA_ALLLINE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,30,90,10
+    CONTROL         "Display frame rate",IDC_GRA_FPS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,115,30,95,10
+    CONTROL         "No-limit sprites",IDC_GRA_ALLSPRITE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,45,90,10
+    CONTROL         "Fake TV mode(scanline)",IDC_GRA_SCANLINE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,115,45,95,10
+    CONTROL         "Screen left clip",IDC_GRA_LEFTCLIP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,60,90,10
+    CONTROL         "Slider1",IDC_GRA_SCANLINE_SLIDER,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,110,58,71,12
+    CTEXT           "",IDC_GRA_SCANLINE_COLOR,182,58,25,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CONTROL         "DISKSYSTEM access lamp",IDC_GRA_DISKACCESSLAMP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,75,110,10
+    GROUPBOX        "DirectDraw",IDC_STATIC,4,95,211,57
+    CONTROL         "Double size rendering",IDC_GRA_DOUBLESIZE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,105,90,10
+    CONTROL         "SystemMemory Surface",IDC_GRA_SYSTEMMEMORY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,115,105,90,10
+    CONTROL         "use HEL",IDC_GRA_USEHEL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,121,90,10
+    CONTROL         "Sync drawing(Window)",IDC_GRA_WAITVSYNC,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,115,121,95,10
+    CONTROL         "Using Sleep",IDC_GRA_SYNCNOSLEEP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,137,95,10
+    GROUPBOX        "Full screen",IDC_STATIC,4,158,211,42
+    CONTROL         "Sync drawing",IDC_GRA_SYNCDRAW,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,168,70,10
+    CTEXT           "Resolution",IDC_STATIC,85,168,40,10,SS_CENTERIMAGE
+    COMBOBOX        IDC_GRA_RESOLUTION_COMBO,130,166,80,117,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Fit screen",IDC_GRA_FITZOOM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,184,70,10
+    CONTROL         "Display also except 4:3",IDC_GRA_NOSQUARELIST,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,115,184,95,10
+    GROUPBOX        "Palette",IDC_STATIC,4,205,211,27
+    CONTROL         "",IDC_GRA_PALETTE_USE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,216,8,10
+    EDITTEXT        IDC_GRA_PALETTE_EDIT,25,215,140,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_GRA_PALETTE_BROWSE,170,214,37,14
+END
+
+IDD_CFG_SOUND DIALOG DISCARDABLE  0, 0, 230, 245
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Sound Configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,120,227,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,175,227,50,14
+    PUSHBUTTON      "Default",IDDEFAULT,65,227,50,14
+    GROUPBOX        "General",IDC_STATIC,5,5,220,75
+    CONTROL         "Sound enable",IDC_SND_ENABLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,20,74,10
+    CONTROL         "VolEffect enable",IDC_SND_VOLEFFECT_ENABLE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,40,74,10
+    CONTROL         "Extra sound enable",IDC_SND_EXTSOUND_ENABLE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,60,74,10
+    CTEXT           "Sampling rate",IDC_STATIC,93,20,48,12,SS_CENTERIMAGE
+    CTEXT           "Buffer size",IDC_STATIC,93,40,48,12,SS_CENTERIMAGE
+    CTEXT           "Filter type",IDC_STATIC,93,60,48,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_SND_SAMPLERATE_COMBO,146,19,72,91,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_SND_BUFFERSIZE_COMBO,146,39,72,91,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_SND_FILTERTYPE_COMBO,146,59,72,81,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Channel",IDC_STATIC,5,85,220,137
+    CTEXT           "Master",IDC_STATIC,13,95,30,15,SS_CENTERIMAGE
+    CONTROL         "Slider1",IDC_SND_MASTER_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,15,105,
+                    23,54
+    CTEXT           "Square1",IDC_STATIC,48,95,30,15,SS_CENTERIMAGE
+    CONTROL         "Slider1",IDC_SND_CH0_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,50,105,
+                    23,54
+    CTEXT           "Square2",IDC_STATIC,83,95,30,15,SS_CENTERIMAGE
+    CONTROL         "Slider1",IDC_SND_CH1_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,85,105,
+                    23,54
+    CTEXT           "Triangle",IDC_STATIC,118,95,30,15,SS_CENTERIMAGE
+    CONTROL         "Slider1",IDC_SND_CH2_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,120,105,
+                    23,54
+    CTEXT           "Noise",IDC_STATIC,155,95,30,15,SS_CENTERIMAGE
+    CONTROL         "Slider1",IDC_SND_CH3_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,155,105,
+                    23,54
+    CTEXT           "DPCM",IDC_STATIC,185,95,30,15,SS_CENTERIMAGE
+    CONTROL         "Slider1",IDC_SND_CH4_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,190,105,
+                    23,54
+    CTEXT           "VRC6",IDC_STATIC,15,155,25,15,SS_CENTERIMAGE
+    CONTROL         "Slider1",IDC_SND_EX0_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,15,165,
+                    23,54
+    CONTROL         "Slider1",IDC_SND_EX1_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,50,165,
+                    23,54
+    CONTROL         "Slider1",IDC_SND_EX2_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,85,165,
+                    23,54
+    CONTROL         "Slider1",IDC_SND_EX3_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,120,165,
+                    23,54
+    CONTROL         "Slider1",IDC_SND_EX4_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,155,165,
+                    23,54
+    CONTROL         "Slider1",IDC_SND_EX5_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,190,165,
+                    23,54
+    CTEXT           "VRC7",IDC_STATIC,50,155,25,15,SS_CENTERIMAGE
+    CTEXT           "FDS",IDC_STATIC,85,155,25,15,SS_CENTERIMAGE
+    CTEXT           "MMC5",IDC_STATIC,120,155,25,15,SS_CENTERIMAGE
+    CTEXT           "N106",IDC_STATIC,155,155,25,15,SS_CENTERIMAGE
+    CTEXT           "FME7",IDC_STATIC,190,155,25,15,SS_CENTERIMAGE
+END
+
+IDD_CFG_FOLDER DIALOG DISCARDABLE  0, 0, 256, 270
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Folder Configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,130,250,55,14
+    PUSHBUTTON      "Cancel",IDCANCEL,190,250,60,14
+    PUSHBUTTON      "Default",IDDEFAULT,70,250,55,14
+    LTEXT           "ROM file folder",IDC_STATIC,5,5,85,8,SS_CENTERIMAGE
+    CONTROL         "",IDC_FLD_ROM_USE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    5,15,10,12
+    EDITTEXT        IDC_FLD_ROM_EDIT,20,15,180,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_FLD_ROM_BROWSE,205,13,45,14
+    LTEXT           "Save file folder",IDC_STATIC,5,35,85,8,SS_CENTERIMAGE
+    CONTROL         "",IDC_FLD_SAVE_USE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,45,10,12
+    EDITTEXT        IDC_FLD_SAVE_EDIT,20,45,180,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_FLD_SAVE_BROWSE,205,44,45,14
+    LTEXT           "State file folder",IDC_STATIC,5,65,85,8,SS_CENTERIMAGE
+    CONTROL         "",IDC_FLD_STATE_USE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,75,10,12
+    EDITTEXT        IDC_FLD_STATE_EDIT,20,75,180,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_FLD_STATE_BROWSE,205,74,45,14
+    LTEXT           "Cheat file folder",IDC_STATIC,5,95,85,8,SS_CENTERIMAGE
+    CONTROL         "",IDC_FLD_CHEAT_USE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,105,10,12
+    EDITTEXT        IDC_FLD_CHEAT_EDIT,20,105,180,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_FLD_CHEAT_BROWSE,205,104,45,14
+    LTEXT           "Movie file folder",IDC_STATIC,5,125,85,8,SS_CENTERIMAGE
+    CONTROL         "",IDC_FLD_MOVIE_USE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,135,10,12
+    EDITTEXT        IDC_FLD_MOVIE_EDIT,20,135,180,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_FLD_MOVIE_BROWSE,205,134,45,14
+    LTEXT           "Snapshot file folder",IDC_STATIC,5,155,85,8,
+                    SS_CENTERIMAGE
+    CONTROL         "",IDC_FLD_SNAPSHOT_USE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,165,10,12
+    EDITTEXT        IDC_FLD_SNAPSHOT_EDIT,20,165,180,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_FLD_SNAPSHOT_BROWSE,205,164,45,14
+    LTEXT           "Wave file folder",IDC_STATIC,5,185,85,8,SS_CENTERIMAGE
+    CONTROL         "",IDC_FLD_WAVE_USE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,195,10,12
+    EDITTEXT        IDC_FLD_WAVE_EDIT,20,195,180,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_FLD_WAVE_BROWSE,205,194,45,14
+    LTEXT           "IPS file folder",IDC_STATIC,5,215,85,8,SS_CENTERIMAGE
+    CONTROL         "",IDC_FLD_IPS_USE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    5,225,10,12
+    EDITTEXT        IDC_FLD_IPS_EDIT,20,225,180,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_FLD_IPS_BROWSE,205,225,45,14
+END
+
+IDD_CFG_SHORTCUT DIALOG DISCARDABLE  0, 0, 241, 189
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Shortcut Configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,130,170,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,185,170,50,14
+    PUSHBUTTON      "Default",IDDEFAULT,75,170,50,14
+    CONTROL         "List1",IDC_CUT_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOLABELWRAP | 
+                    LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,5,5,230,160
+END
+
+IDD_CFG_LANGUAGE DIALOG DISCARDABLE  0, 0, 159, 127
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Language Configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,50,110,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,105,110,50,14
+    LISTBOX         IDC_LNG_LIST,4,20,150,85,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Please select use language.",IDC_STATIC,5,5,150,10,
+                    SS_CENTERIMAGE
+END
+
+IDD_CFG_CONTROLLER DIALOG DISCARDABLE  0, 0, 282, 159
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Controller Configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,150,140,60,14
+    PUSHBUTTON      "Cancel",IDCANCEL,215,140,60,14
+    PUSHBUTTON      "Default",IDDEFAULT,85,140,60,14
+    CONTROL         "Tab1",IDC_CTR_TAB,"SysTabControl32",TCS_MULTILINE,5,3,
+                    271,132
+    COMBOBOX        IDC_CTR_SELECT_COMBO,5,141,70,42,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_CTR_PLAYER1 DIALOG DISCARDABLE  0, 0, 262, 101
+STYLE WS_CHILD | WS_CAPTION
+CAPTION "Controller 1"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "----",IDC_CTR_UP,30,10,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_RIGHT,55,35,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_LEFT,5,35,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_DOWN,30,60,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A,215,80,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B,170,80,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A_RAPID,215,50,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B_RAPID,170,50,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXA,75,80,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXB,120,80,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "B",IDC_STATIC,170,70,40,8,SS_CENTERIMAGE
+    CTEXT           "A",IDC_STATIC,215,70,40,8,SS_CENTERIMAGE
+    CTEXT           "SELECT",IDC_STATIC,75,70,40,8,SS_CENTERIMAGE
+    CTEXT           "START",IDC_STATIC,120,70,40,8,SS_CENTERIMAGE
+    LISTBOX         IDC_CTR_B_RAPID_LIST,170,5,40,35,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_CTR_A_RAPID_LIST,215,5,40,35,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_CTR_PLAYER2 DIALOG DISCARDABLE  0, 0, 262, 101
+STYLE WS_CHILD | WS_CAPTION
+CAPTION "Controller 2"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "----",IDC_CTR_UP,30,10,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_RIGHT,55,35,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_LEFT,5,35,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_DOWN,30,60,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A,215,80,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B,170,80,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A_RAPID,215,50,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B_RAPID,170,50,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXA,75,80,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXB,120,80,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXC,110,20,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "B",IDC_STATIC,170,70,40,8,SS_CENTERIMAGE
+    CTEXT           "A",IDC_STATIC,215,70,40,8,SS_CENTERIMAGE
+    CTEXT           "SELECT",IDC_STATIC,75,70,40,8,SS_CENTERIMAGE
+    CTEXT           "START",IDC_STATIC,120,70,40,8,SS_CENTERIMAGE
+    CTEXT           "MIC",IDC_STATIC,110,10,40,8,SS_CENTERIMAGE
+    LISTBOX         IDC_CTR_B_RAPID_LIST,170,5,40,35,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_CTR_A_RAPID_LIST,215,5,40,35,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_CTR_PLAYER3 DIALOG DISCARDABLE  0, 0, 262, 101
+STYLE WS_CHILD | WS_CAPTION
+CAPTION "Controller 3"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "----",IDC_CTR_UP,30,10,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_RIGHT,55,35,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_LEFT,5,35,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_DOWN,30,60,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A,215,80,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B,170,80,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A_RAPID,215,50,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B_RAPID,170,50,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXA,75,80,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXB,120,80,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "B",IDC_STATIC,170,70,40,8,SS_CENTERIMAGE
+    CTEXT           "A",IDC_STATIC,215,70,40,8,SS_CENTERIMAGE
+    CTEXT           "SELECT",IDC_STATIC,75,70,40,8,SS_CENTERIMAGE
+    CTEXT           "START",IDC_STATIC,120,70,40,8,SS_CENTERIMAGE
+    LISTBOX         IDC_CTR_B_RAPID_LIST,170,5,40,35,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_CTR_A_RAPID_LIST,215,5,40,35,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_CTR_PLAYER4 DIALOG DISCARDABLE  0, 0, 262, 101
+STYLE WS_CHILD | WS_CAPTION
+CAPTION "Controller 4"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "----",IDC_CTR_UP,30,10,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_RIGHT,55,35,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_LEFT,5,35,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_DOWN,30,60,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A,215,80,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B,170,80,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A_RAPID,215,50,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B_RAPID,170,50,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXA,75,80,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXB,120,80,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "B",IDC_STATIC,170,70,40,8,SS_CENTERIMAGE
+    CTEXT           "A",IDC_STATIC,215,70,40,8,SS_CENTERIMAGE
+    CTEXT           "SELECT",IDC_STATIC,75,70,40,8,SS_CENTERIMAGE
+    CTEXT           "START",IDC_STATIC,120,70,40,8,SS_CENTERIMAGE
+    LISTBOX         IDC_CTR_B_RAPID_LIST,170,5,40,35,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_CTR_A_RAPID_LIST,215,5,40,35,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_CTR_CRAZYCLIMBER DIALOG DISCARDABLE  0, 0, 262, 101
+STYLE WS_CHILD | WS_CAPTION
+CAPTION "Crazy Climber"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "----",IDC_CTR_UP,55,18,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_RIGHT,80,43,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_LEFT,30,43,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_DOWN,55,68,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A,165,18,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B_RAPID,190,43,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A_RAPID,140,43,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B,165,68,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+END
+
+IDD_CTR_FAMLYTRAINER DIALOG DISCARDABLE  0, 0, 262, 101
+STYLE WS_CHILD | WS_CAPTION
+CAPTION "FamilyTrainer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "----",IDC_CTR_UP,35,18,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_DOWN,85,18,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_LEFT,135,18,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_RIGHT,185,18,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A,35,43,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B,85,43,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A_RAPID,135,43,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B_RAPID,185,43,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXA,35,68,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXB,85,68,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXC,135,68,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXD,185,68,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+END
+
+IDD_CTR_EXCITINGBOXING DIALOG DISCARDABLE  0, 0, 262, 101
+STYLE WS_CHILD | WS_CAPTION
+CAPTION "ExcitingBoxing"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "----",IDC_CTR_UP,140,65,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_DOWN,140,30,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_LEFT,80,65,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_RIGHT,80,30,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A,190,30,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B,30,30,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A_RAPID,190,65,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B_RAPID,30,65,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "Straight",IDC_STATIC,140,55,40,8
+    CTEXT           "R Jabb",IDC_STATIC,140,20,40,8
+    CTEXT           "Body",IDC_STATIC,80,55,40,8
+    CTEXT           "L Jabb",IDC_STATIC,80,20,40,8
+    CTEXT           "R Hook",IDC_STATIC,190,20,40,8
+    CTEXT           "R Move",IDC_STATIC,190,55,40,8
+    CTEXT           "L Hook",IDC_STATIC,30,20,40,8
+    CTEXT           "L Move",IDC_STATIC,30,55,40,8
+END
+
+IDD_CTR_MAHJANG DIALOG DISCARDABLE  0, 0, 262, 101
+STYLE WS_CHILD | WS_CAPTION
+CAPTION "Mahjang"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "----",IDC_CTR_UP,10,15,30,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_DOWN,45,15,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_LEFT,80,15,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_RIGHT,115,15,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A,150,15,30,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B,185,15,30,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A_RAPID,220,15,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B_RAPID,10,45,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXA,45,45,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXB,80,45,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXC,115,45,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXD,150,45,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXE,185,45,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXF,220,45,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXG,10,75,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXH,45,75,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXI,80,75,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXJ,115,75,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXK,150,75,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXL,185,75,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_EXM,220,75,30,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "A",IDC_STATIC,10,5,30,8
+    CTEXT           "B",IDC_STATIC,45,5,30,8
+    CTEXT           "C",IDC_STATIC,80,5,30,8
+    CTEXT           "D",IDC_STATIC,115,5,30,8
+    CTEXT           "E",IDC_STATIC,150,5,30,8
+    CTEXT           "F",IDC_STATIC,185,5,30,8
+    CTEXT           "G",IDC_STATIC,220,5,30,8
+    CTEXT           "H",IDC_STATIC,10,35,30,8
+    CTEXT           "I",IDC_STATIC,45,35,30,8
+    CTEXT           "J",IDC_STATIC,80,35,30,8
+    CTEXT           "K",IDC_STATIC,115,35,30,8
+    CTEXT           "L",IDC_STATIC,150,35,30,8
+    CTEXT           "M",IDC_STATIC,185,35,30,8
+    CTEXT           "N",IDC_STATIC,220,35,30,8
+    CTEXT           "Start",IDC_STATIC,10,65,30,8
+    CTEXT           "Select",IDC_STATIC,45,65,30,8
+    CTEXT           "Kan",IDC_STATIC,80,65,30,8
+    CTEXT           "Pon",IDC_STATIC,115,65,30,8
+    CTEXT           "Chii",IDC_STATIC,150,65,30,8
+    CTEXT           "Reach",IDC_STATIC,185,65,30,8
+    CTEXT           "Ron",IDC_STATIC,220,65,30,8
+END
+
+IDD_CTR_NSFPLAYER DIALOG DISCARDABLE  0, 0, 262, 101
+STYLE WS_CHILD | WS_CAPTION
+CAPTION "NSF Player"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "----",IDC_CTR_UP,191,10,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_RIGHT,80,31,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_LEFT,80,10,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_DOWN,191,31,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "----",IDC_CTR_A,80,53,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "----",IDC_CTR_B,80,75,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "Song no +1",IDC_STATIC,25,31,45,15,SS_CENTERIMAGE
+    CTEXT           "Song no -1",IDC_STATIC,25,10,45,15,SS_CENTERIMAGE
+    CTEXT           "Song no -16",IDC_STATIC,25,53,45,15,SS_CENTERIMAGE
+    CTEXT           "Song no +16",IDC_STATIC,25,75,45,15,SS_CENTERIMAGE
+    CTEXT           "Play",IDC_STATIC,135,10,45,15,SS_CENTERIMAGE
+    CTEXT           "Stop",IDC_STATIC,135,31,45,15,SS_CENTERIMAGE
+END
+
+IDD_CTR_VSUNISYSTEM DIALOG DISCARDABLE  0, 0, 262, 101
+STYLE WS_CHILD | WS_CAPTION
+CAPTION "VS-Unisystem"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "----",IDC_CTR_UP,70,20,40,15,SS_NOTIFY | SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "Coin 1",IDC_STATIC,30,20,30,15,SS_CENTERIMAGE
+    CTEXT           "----",IDC_CTR_DOWN,185,20,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "Coin 2",IDC_STATIC,145,20,30,15,SS_CENTERIMAGE
+    CTEXT           "----",IDC_CTR_LEFT,70,55,40,15,SS_NOTIFY | 
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "Service",IDC_STATIC,30,55,30,15,SS_CENTERIMAGE
+END
+
+IDD_CFG_AXISSETTING DIALOG DISCARDABLE  0, 0, 185, 155
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Joystick Axis mode setting"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,75,135,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,130,135,50,14
+    PUSHBUTTON      "Default",IDDEFAULT,20,135,50,14
+    CTEXT           "ID",IDC_STATIC,5,10,10,13,SS_CENTERIMAGE
+    COMBOBOX        IDC_AST_ID_COMBO,15,10,165,65,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Min",IDC_STATIC,8,30,15,8
+    CTEXT           "Max",IDC_STATIC,62,30,15,8
+    CONTROL         "Disable X-Axis",IDC_AST_XAXIS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,80,40,95,10
+    CONTROL         "Disable Y-Axis",IDC_AST_YAXIS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,80,55,95,10
+    CONTROL         "Disable Z-Axis",IDC_AST_ZAXIS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,80,70,95,10
+    CONTROL         "Disable RX-Axis",IDC_AST_RXAXIS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,80,85,95,10
+    CONTROL         "Disable RY-Axis",IDC_AST_RYAXIS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,80,100,95,10
+    CONTROL         "Disable RZ-Axis",IDC_AST_RZAXIS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,80,115,95,10
+    CONTROL         "Progress1",IDC_AST_XAXIS_PROGRESS,"msctls_progress32",
+                    PBS_SMOOTH,15,40,55,10
+    CONTROL         "Progress1",IDC_AST_YAXIS_PROGRESS,"msctls_progress32",
+                    PBS_SMOOTH,15,55,55,10
+    CONTROL         "Progress1",IDC_AST_ZAXIS_PROGRESS,"msctls_progress32",
+                    PBS_SMOOTH,15,70,55,10
+    CONTROL         "Progress1",IDC_AST_RXAXIS_PROGRESS,"msctls_progress32",
+                    PBS_SMOOTH,15,85,55,10
+    CONTROL         "Progress1",IDC_AST_RYAXIS_PROGRESS,"msctls_progress32",
+                    PBS_SMOOTH,15,100,55,10
+    CONTROL         "Progress1",IDC_AST_RZAXIS_PROGRESS,"msctls_progress32",
+                    PBS_SMOOTH,15,115,55,10
+END
+
+IDD_LAUNCHER DIALOGEX 0, 0, 314, 225
+STYLE WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Launcher"
+MENU IDR_LCH_MENU
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "List1",IDC_LCH_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,0,0,314,225
+END
+
+IDD_LCH_DISPEDIT DIALOG DISCARDABLE  0, 0, 162, 157
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Display column configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,50,140,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,105,140,50,14
+    LISTBOX         IDC_DED_HIDELIST,4,20,56,95,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_DED_VIEWLIST,100,20,56,95,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Add>>",IDC_DED_ADD,65,25,30,14
+    PUSHBUTTON      "<<Del",IDC_DED_DEL,65,55,30,14
+    PUSHBUTTON      "Up",IDC_DED_UP,100,120,25,14
+    PUSHBUTTON      "Down",IDC_DED_DOWN,130,120,25,14
+    CTEXT           "Not display",IDC_STATIC,5,5,55,10,SS_CENTERIMAGE
+    CTEXT           "Display",IDC_STATIC,100,5,55,10,SS_CENTERIMAGE
+END
+
+IDD_LCH_HEADEREDIT DIALOG DISCARDABLE  0, 0, 147, 123
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "NES header edit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,38,102,50,14
+    DEFPUSHBUTTON   "Cancel",IDCANCEL,93,102,50,14
+    CTEXT           "Mapper",IDC_STATIC,5,5,25,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_HED_EDIT,30,5,20,12,ES_CENTER | ES_NUMBER
+    GROUPBOX        "",IDC_STATIC,4,20,140,75
+    CONTROL         "VMIRROR",IDC_HED_VMIRROR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,35,55,10
+    CONTROL         "SRAM",IDC_HED_SRAM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,78,35,55,10
+    CONTROL         "4 Screen",IDC_HED_4SCREEN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,55,55,10
+    CONTROL         "Trainer",IDC_HED_TRAINER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,78,55,55,10
+    CONTROL         "VS-Unisystem",IDC_HED_VSUNISYSTEM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,75,55,10
+END
+
+IDD_LCH_FOLDER DIALOG DISCARDABLE  0, 0, 210, 157
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Folder list"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,100,140,50,14
+    DEFPUSHBUTTON   "Cancel",IDCANCEL,155,140,50,14
+    PUSHBUTTON      "Add",IDC_LFL_ADD,5,140,35,14
+    PUSHBUTTON      "Delete",IDC_LFL_DEL,45,140,35,14
+    CONTROL         "List1",IDC_LFL_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_NOCOLUMNHEADER | WS_TABSTOP,1,0,208,
+                    135,WS_EX_CLIENTEDGE
+END
+
+IDD_CFG_MOVIE DIALOG DISCARDABLE  0, 0, 142, 140
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Movie Configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,30,121,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,85,121,50,14
+    CONTROL         "1P",IDC_MVI_1P_USE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,16,20,26,10
+    CONTROL         "2P",IDC_MVI_2P_USE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,46,20,26,10
+    CONTROL         "3P",IDC_MVI_3P_USE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,76,20,26,10
+    CONTROL         "4P",IDC_MVI_4P_USE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,106,20,26,10
+    GROUPBOX        "Use controller",IDC_STATIC,5,5,131,35
+    CONTROL         "Prohibit a movie rerecord function.",
+                    IDC_MVI_RERECORD_DISABLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,60,125,10
+    CONTROL         "Replay it repeatedly.",IDC_MVI_LOOPPLAY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,75,125,10
+    CONTROL         "Start a record from reset.",IDC_MVI_RESETRECORD,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,45,125,10
+    CONTROL         "Display Pad infomation.",IDC_MVI_PADDISPLAY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,90,125,10
+    CONTROL         "Display Time infomation.",IDC_MVI_TIMEDISPLAY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,105,125,10
+END
+
+IDD_MOVIEINFO DIALOG DISCARDABLE  0, 0, 163, 125
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Movie Info"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,105,105,50,14
+    CTEXT           "Version",IDC_STATIC,5,25,65,14,SS_CENTERIMAGE
+    CTEXT           "Version",IDC_MIF_VERSION,75,25,80,14,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "Frames",IDC_STATIC,5,45,65,14,SS_CENTERIMAGE
+    CTEXT           "Frames",IDC_MIF_FRAMES,75,45,80,14,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "Times",IDC_STATIC,5,65,65,14,SS_CENTERIMAGE
+    CTEXT           "Times",IDC_MIF_TIMES,75,65,80,14,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "Rerecord Times",IDC_STATIC,5,85,65,14,SS_CENTERIMAGE
+    CTEXT           "RerecordTimes",IDC_MIF_RERECORDTIMES,75,85,80,14,
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "Record version",IDC_STATIC,5,5,65,14,SS_CENTERIMAGE
+    CTEXT           "Version",IDC_MIF_RERECORDVERSION,75,5,80,14,
+                    SS_CENTERIMAGE | SS_SUNKEN
+END
+
+IDD_NETPLAY DIALOG DISCARDABLE  0, 0, 236, 149
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "NetPlay"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "Port",IDC_STATIC,5,5,34,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_NET_PORT_COMBO,40,5,60,105,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Latency",IDC_STATIC,105,5,34,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_NET_LATENCY_COMBO,140,5,85,105,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Address",IDC_STATIC,5,25,34,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_NET_HOST_COMBO,40,25,185,120,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CTEXT           "NickName",IDC_STATIC,5,45,34,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_NET_NICKNAME,40,45,185,12,ES_AUTOHSCROLL
+    GROUPBOX        "Type",IDC_STATIC,10,65,215,25
+    CONTROL         "Server",IDC_NET_SERVER,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,20,75,39,10
+    CONTROL         "Client",IDC_NET_CLIENT,"Button",BS_AUTORADIOBUTTON,115,
+                    75,39,10
+    LTEXT           "Status",IDC_STATIC,10,95,22,8
+    CTEXT           "",IDC_NET_STATUS,10,105,215,20,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    DEFPUSHBUTTON   "Connect",IDC_NET_CONNECT,115,131,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,175,131,50,14
+END
+
+IDD_NETPLAY_CHAT DIALOGEX 0, 0, 185, 132
+STYLE WS_CAPTION | WS_THICKFRAME
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Chat"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_NCT_EDIT,0,115,145,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NCT_MESSAGE,0,0,185,110,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_NOHIDESEL | ES_READONLY | 
+                    ES_WANTRETURN | WS_VSCROLL | NOT WS_TABSTOP
+    PUSHBUTTON      "Send(&S)",IDC_NCT_SEND,150,114,30,14
+END
+
+IDD_CODEINPUT DIALOG DISCARDABLE  0, 0, 166, 79
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Code Input"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Cheat code",IDC_STATIC,5,5,45,10,SS_CENTERIMAGE
+    EDITTEXT        IDC_CHC_CODE,5,15,155,12,ES_AUTOHSCROLL
+    LTEXT           "Comment",IDC_STATIC,5,30,45,10,SS_CENTERIMAGE
+    EDITTEXT        IDC_CHC_COMMENT,5,40,155,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,55,60,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,111,60,50,14
+END
+
+IDD_CHEAT DIALOG DISCARDABLE  0, 0, 226, 193
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Cheat code"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List1",IDC_CHT_CODE_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,5,5,215,125
+    PUSHBUTTON      "All Enable",IDC_CHT_ENABLE,5,135,50,14
+    PUSHBUTTON      "All Disable",IDC_CHT_DISABLE,60,135,50,14
+    PUSHBUTTON      "All Delete",IDC_CHT_CLEAR,115,135,50,14
+    PUSHBUTTON      "Input",IDC_CHT_INPUT,5,155,50,14
+    PUSHBUTTON      "Edit",IDC_CHT_EDIT,60,155,50,14
+    PUSHBUTTON      "Load",IDC_CHT_LOAD,170,135,50,14
+    PUSHBUTTON      "Save",IDC_CHT_SAVE,170,155,50,14
+    PUSHBUTTON      "Remove",IDC_CHT_REMOVE,115,155,50,14
+    DEFPUSHBUTTON   "OK",IDOK,115,175,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,170,175,50,14
+END
+
+IDD_CODEEDIT DIALOG DISCARDABLE  0, 0, 221, 169
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Code edit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,110,150,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,165,150,50,14
+    GROUPBOX        "",IDC_STATIC,5,0,210,55
+    RTEXT           "Address",IDC_STATIC,10,14,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_CED_ADDR,45,14,55,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_TABSTOP
+    RTEXT           "Data",IDC_STATIC,115,14,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_CED_DATA,150,14,55,12,ES_AUTOHSCROLL
+    RTEXT           "Comment",IDC_STATIC,10,34,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_CED_COMMENT,45,34,160,12,ES_AUTOHSCROLL
+    GROUPBOX        "Radix",IDC_STATIC,5,60,60,40
+    CONTROL         "10(DEC)",IDC_CED_RADIX_DEC,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,70,40,10
+    CONTROL         "16(HEX)",IDC_CED_RADIX_HEX,"Button",BS_AUTORADIOBUTTON,
+                    10,85,40,10
+    GROUPBOX        "Length",IDC_STATIC,70,60,145,40
+    CONTROL         "1byte",IDC_CED_LENGTH_1BYTE,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,75,70,36,10
+    CONTROL         "2byte",IDC_CED_LENGTH_2BYTE,"Button",BS_AUTORADIOBUTTON,
+                    140,70,36,10
+    CONTROL         "3byte",IDC_CED_LENGTH_3BYTE,"Button",BS_AUTORADIOBUTTON,
+                    75,85,36,10
+    CONTROL         "4byte",IDC_CED_LENGTH_4BYTE,"Button",BS_AUTORADIOBUTTON,
+                    140,85,36,10
+    GROUPBOX        "Type",IDC_STATIC,5,105,210,40
+    CONTROL         "Always",IDC_CED_TYPE_ALWAYS,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,115,95,10
+    CONTROL         "Once",IDC_CED_TYPE_ONCE,"Button",BS_AUTORADIOBUTTON,110,
+                    115,95,10
+    CONTROL         "Greater",IDC_CED_TYPE_GREATER,"Button",
+                    BS_AUTORADIOBUTTON,10,130,95,10
+    CONTROL         "Less",IDC_CED_TYPE_LESS,"Button",BS_AUTORADIOBUTTON,110,
+                    130,100,10
+END
+
+IDD_SEARCH DIALOG DISCARDABLE  0, 0, 346, 215
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Cheat support"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Search result",IDC_STATIC,5,5,85,8,SS_CENTERIMAGE
+    CONTROL         "List1",IDC_SCH_RESULT_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,5,15,160,195
+    GROUPBOX        "Radix",IDC_STATIC,170,5,50,55
+    CONTROL         "10(DEC)",IDC_SCH_RADIX_DEC,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,175,20,40,10
+    CONTROL         "16(HEX)",IDC_SCH_RADIX_HEX,"Button",BS_AUTORADIOBUTTON,
+                    175,40,40,10
+    GROUPBOX        "Length",IDC_STATIC,225,5,50,55
+    CONTROL         "1byte",IDC_SCH_LENGTH_1BYTE,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,231,15,36,10
+    CONTROL         "2byte",IDC_SCH_LENGTH_2BYTE,"Button",BS_AUTORADIOBUTTON,
+                    231,25,36,10
+    CONTROL         "3byte",IDC_SCH_LENGTH_3BYTE,"Button",BS_AUTORADIOBUTTON,
+                    231,35,36,10
+    CONTROL         "4byte",IDC_SCH_LENGTH_4BYTE,"Button",BS_AUTORADIOBUTTON,
+                    231,45,36,10
+    GROUPBOX        "Area",IDC_STATIC,280,5,60,55
+    CONTROL         "RAM",IDC_SCH_AREA_RAM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,285,15,50,10
+    CONTROL         "SRAM",IDC_SCH_AREA_SRAM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,285,30,50,10
+    CONTROL         "EXRAM",IDC_SCH_AREA_EXRAM,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,285,45,50,10
+    GROUPBOX        "Search",IDC_STATIC,170,65,170,100
+    PUSHBUTTON      "Start",IDC_SCH_START,175,75,50,14
+    PUSHBUTTON      "Update",IDC_SCH_UPDATE,230,75,50,14
+    PUSHBUTTON      "Undo",IDC_SCH_UNDO,285,75,50,14
+    PUSHBUTTON      "Old = Now",IDC_SCH_EQUAL,175,95,50,14
+    PUSHBUTTON      "Old < Now",IDC_SCH_GRATER,230,95,50,14
+    PUSHBUTTON      "Old <= Now",IDC_SCH_GRATEREQUAL,285,95,50,14
+    PUSHBUTTON      "Old != Now",IDC_SCH_NOTEQUAL,175,115,50,14
+    PUSHBUTTON      "Old > Now",IDC_SCH_LESS,230,115,50,14
+    PUSHBUTTON      "Old >= Now",IDC_SCH_LESSEQUAL,285,115,50,14
+    LTEXT           "Data",IDC_STATIC,175,135,50,8,SS_CENTERIMAGE
+    EDITTEXT        IDC_SCH_DATA_EDIT,175,145,50,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Search",IDC_SCH_SEARCH,230,144,50,14
+    GROUPBOX        "Data write",IDC_STATIC,170,170,170,40
+    LTEXT           "Address",IDC_STATIC,175,180,50,8
+    EDITTEXT        IDC_SCH_WADDR_EDIT,175,190,50,12,ES_AUTOHSCROLL
+    LTEXT           "Data",IDC_STATIC,230,180,50,8
+    EDITTEXT        IDC_SCH_WDATA_EDIT,230,190,50,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Write",IDC_SCH_WRITE,285,189,50,14
+END
+
+IDD_CFG_GAMEOPTION DIALOG DISCARDABLE  0, 0, 182, 129
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Game option configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,70,109,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,125,109,50,14
+    PUSHBUTTON      "Default",IDDEFAULT,15,109,50,14
+    COMBOBOX        IDC_OPT_RENDER_COMBO,10,15,90,75,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_OPT_VIDEOMODE_COMBO,115,15,55,75,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_OPT_IRQTYPE_COMBO,10,50,90,75,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Prohibit FrameIRQ",IDC_OPT_FRAMEIRQ,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,70,105,10
+    GROUPBOX        "Rendering",IDC_STATIC,5,5,100,30
+    GROUPBOX        "IRQ",IDC_STATIC,5,40,170,45
+    GROUPBOX        "VideoMode",IDC_STATIC,110,5,65,30
+    PUSHBUTTON      "Only setting change",IDC_OPT_NOTSAVE,70,90,105,14
+END
+
+IDD_EXT_BARCODEBATTLER DIALOG DISCARDABLE  0, 0, 106, 49
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "DATACH BarcodeBattler"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EBB_CODE,5,10,95,12,ES_AUTOHSCROLL | ES_NUMBER
+    PUSHBUTTON      "Random(&R)",IDC_EBB_RANDOM,5,30,45,14
+    PUSHBUTTON      "Transfer(&T)",IDC_EBB_TRANSFER,55,30,45,14
+END
+
+IDD_CFG_PALETTE DIALOG DISCARDABLE  0, 0, 252, 225
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Palette edit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,140,205,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,195,205,50,14
+    PUSHBUTTON      "Default",IDDEFAULT,85,205,50,14
+    GROUPBOX        "Color info",IDC_STATIC,10,105,160,72
+    CTEXT           "No.",IDC_STATIC,15,115,20,12,SS_CENTERIMAGE
+    CTEXT           "Red",IDC_STATIC,15,130,20,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_PAL_R_EDIT,40,130,25,12,ES_RIGHT | ES_NUMBER
+    CONTROL         "Spin1",IDC_PAL_R_UPDOWN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,60,130,11,12
+    CONTROL         "Slider1",IDC_PAL_R_SLIDER,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,70,130,90,12
+    CTEXT           "Green",IDC_STATIC,15,145,20,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_PAL_G_EDIT,40,145,25,12,ES_RIGHT | ES_NUMBER
+    CONTROL         "Spin1",IDC_PAL_G_UPDOWN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,60,145,11,12
+    CONTROL         "Slider1",IDC_PAL_G_SLIDER,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,70,145,90,12
+    CTEXT           "Blue",IDC_STATIC,15,160,20,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_PAL_B_EDIT,40,160,25,12,ES_RIGHT | ES_NUMBER
+    CONTROL         "Spin1",IDC_PAL_B_UPDOWN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,60,160,11,12
+    CONTROL         "Slider1",IDC_PAL_B_SLIDER,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,70,160,90,12
+    GROUPBOX        "Right click",IDC_STATIC,180,126,60,51
+    PUSHBUTTON      "UNDO",IDC_PAL_UNDO,180,105,60,14
+    CONTROL         "Copy",IDC_PAL_COPY,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,185,140,45,10
+    CONTROL         "Exchange",IDC_PAL_EXCHANGE,"Button",BS_AUTORADIOBUTTON,
+                    185,158,45,10
+    CTEXT           "",IDC_PAL_NO,40,115,15,12,SS_CENTERIMAGE | SS_SUNKEN
+    PUSHBUTTON      "Load",IDC_PAL_LOAD,5,185,50,14
+    PUSHBUTTON      "Save",IDC_PAL_SAVE,60,185,50,14
+END
+
+IDD_EXT_VSUNISYSTEM DIALOG DISCARDABLE  0, 0, 226, 205
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "VS-Unisystem DipSwitch"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,115,185,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,170,185,50,14
+    GROUPBOX        "",IDC_STATIC,5,0,215,180
+    LTEXT           "Static",IDC_EVS_DIPNAME0,15,15,85,13,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_EVS_DIPCOMBO0,105,15,105,100,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Static",IDC_EVS_DIPNAME1,15,35,85,13,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_EVS_DIPCOMBO1,105,35,105,100,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Static",IDC_EVS_DIPNAME2,15,55,85,13,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_EVS_DIPCOMBO2,105,55,105,100,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Static",IDC_EVS_DIPNAME3,15,75,85,13,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_EVS_DIPCOMBO3,105,75,105,100,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Static",IDC_EVS_DIPNAME4,15,95,85,13,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_EVS_DIPCOMBO4,105,95,105,95,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Static",IDC_EVS_DIPNAME5,15,115,85,13,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_EVS_DIPCOMBO5,105,115,105,95,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Static",IDC_EVS_DIPNAME6,15,135,85,13,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_EVS_DIPCOMBO6,105,135,105,95,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Static",IDC_EVS_DIPNAME7,15,155,85,13,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_EVS_DIPCOMBO7,105,155,105,95,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_MOVIECONV DIALOG DISCARDABLE  0, 0, 247, 159
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "AVI convert"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,190,140,50,14
+    LTEXT           "ROM file",IDC_STATIC,5,5,70,8,SS_CENTERIMAGE
+    EDITTEXT        IDC_MCV_ROMFILE,5,15,195,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_MCV_ROMBROWSE,205,14,35,14
+    LTEXT           "Movie file",IDC_STATIC,5,30,70,8,SS_CENTERIMAGE
+    EDITTEXT        IDC_MCV_MOVIEFILE,5,40,195,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_MCV_MOVIEBROWSE,205,39,35,14
+    LTEXT           "AVI file",IDC_STATIC,5,55,70,8,SS_CENTERIMAGE
+    EDITTEXT        IDC_MCV_AVIFILE,5,65,195,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_MCV_AVIBROWSE,205,64,35,14
+    GROUPBOX        "Option",IDC_STATIC,5,85,135,70
+    CTEXT           "Frame Rate",IDC_STATIC,10,95,50,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_MCV_FRAMERATE_COMBO,60,95,75,135,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Sampling Rate",IDC_STATIC,10,116,50,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_MCV_SAMPLERATE_COMBO,60,115,75,91,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Filter type",IDC_STATIC,10,136,50,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_MCV_FILTERTYPE_COMBO,60,135,75,81,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Select Video Format",IDC_MCV_VIDEOSELECT,150,90,90,15
+    PUSHBUTTON      "Convert",IDC_MCV_CONVERT,150,115,90,15
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "File(&F)"
+    BEGIN
+        MENUITEM "Open(&O)",                    ID_OPEN
+        MENUITEM "Close(&C)",                   ID_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "NetPlay(&N)",                 ID_NETPLAY_CONNECT
+        MENUITEM "Disconnect(&D)",              ID_NETPLAY_DISCONNECT
+        MENUITEM "Chat(&A)",                    ID_NETPLAY_CHAT
+        MENUITEM SEPARATOR
+        MENUITEM "Launcher(&L)",                ID_LAUNCHER
+        MENUITEM SEPARATOR
+        MENUITEM "ROM info(&I)",                ID_ROMINFO
+        MENUITEM "WAVE Record(&W)",             ID_WAVERECORD
+        MENUITEM SEPARATOR
+        POPUP "Recent Path(&P)"
+        BEGIN
+            MENUITEM "None",                        ID_MRU_PATH0
+        END
+        POPUP "Recent File(&F)"
+        BEGIN
+            MENUITEM "None",                        ID_MRU_FILE0
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Exit(&X)",                    ID_EXIT
+    END
+    POPUP "Edit(&E)"
+    BEGIN
+        MENUITEM "HW Reset(&R)",                ID_HWRESET
+        MENUITEM "SW Reset(&S)",                ID_SWRESET
+        MENUITEM SEPARATOR
+        MENUITEM "Pause(&P)",                   ID_PAUSE
+        MENUITEM SEPARATOR
+        MENUITEM "State load",                  ID_STATE_LOAD
+        MENUITEM "State save",                  ID_STATE_SAVE
+        POPUP "State slot"
+        BEGIN
+            MENUITEM "Slot0",                       ID_STATE_SLOT0
+            MENUITEM "Slot1",                       ID_STATE_SLOT1
+            MENUITEM "Slot2",                       ID_STATE_SLOT2
+            MENUITEM "Slot3",                       ID_STATE_SLOT3
+            MENUITEM "Slot4",                       ID_STATE_SLOT4
+            MENUITEM "Slot5",                       ID_STATE_SLOT5
+            MENUITEM "Slot6",                       ID_STATE_SLOT6
+            MENUITEM "Slot7",                       ID_STATE_SLOT7
+            MENUITEM "Slot8",                       ID_STATE_SLOT8
+            MENUITEM "Slot9",                       ID_STATE_SLOT9
+        END
+        MENUITEM SEPARATOR
+        POPUP "Quick load"
+        BEGIN
+            MENUITEM "Slot0",                       ID_QUICKLOAD_SLOT0
+            MENUITEM "Slot1",                       ID_QUICKLOAD_SLOT1
+            MENUITEM "Slot2",                       ID_QUICKLOAD_SLOT2
+            MENUITEM "Slot3",                       ID_QUICKLOAD_SLOT3
+            MENUITEM "Slot4",                       ID_QUICKLOAD_SLOT4
+            MENUITEM "Slot5",                       ID_QUICKLOAD_SLOT5
+            MENUITEM "Slot6",                       ID_QUICKLOAD_SLOT6
+            MENUITEM "Slot7",                       ID_QUICKLOAD_SLOT7
+            MENUITEM "Slot8",                       ID_QUICKLOAD_SLOT8
+            MENUITEM "Slot9",                       ID_QUICKLOAD_SLOT9
+        END
+        POPUP "Quick save"
+        BEGIN
+            MENUITEM "Slot0",                       ID_QUICKSAVE_SLOT0
+            MENUITEM "Slot1",                       ID_QUICKSAVE_SLOT1
+            MENUITEM "Slot2",                       ID_QUICKSAVE_SLOT2
+            MENUITEM "Slot3",                       ID_QUICKSAVE_SLOT3
+            MENUITEM "Slot4",                       ID_QUICKSAVE_SLOT4
+            MENUITEM "Slot5",                       ID_QUICKSAVE_SLOT5
+            MENUITEM "Slot6",                       ID_QUICKSAVE_SLOT6
+            MENUITEM "Slot7",                       ID_QUICKSAVE_SLOT7
+            MENUITEM "Slot8",                       ID_QUICKSAVE_SLOT8
+            MENUITEM "Slot9",                       ID_QUICKSAVE_SLOT9
+        END
+        MENUITEM SEPARATOR
+        POPUP "Movie"
+        BEGIN
+            MENUITEM "Replay(&P)",                  ID_MOVIE_PLAY
+            MENUITEM SEPARATOR
+            MENUITEM "Record(&R)",                  ID_MOVIE_REC
+            MENUITEM "Append(&A)",                  ID_MOVIE_REC_APPEND
+            MENUITEM SEPARATOR
+            MENUITEM "Stop(&S)",                    ID_MOVIE_STOP
+            MENUITEM SEPARATOR
+            MENUITEM "Info(&I)",                    ID_MOVIE_INFO
+            MENUITEM SEPARATOR
+            MENUITEM "AVI convert(&C)",             ID_MOVIE_CONVERT
+        END
+        MENUITEM SEPARATOR
+        POPUP "Disk"
+        BEGIN
+            MENUITEM "Eject",                       ID_DISK_EJECT
+            MENUITEM SEPARATOR
+            MENUITEM "Disk1 SideA",                 ID_DISK_0A
+            MENUITEM "Disk1 SideB",                 ID_DISK_0B
+            MENUITEM "Disk2 SideA",                 ID_DISK_1A
+            MENUITEM "Disk2 SideB",                 ID_DISK_1B
+            MENUITEM "Disk3 SideA",                 ID_DISK_2A
+            MENUITEM "Disk3 SideB",                 ID_DISK_2B
+            MENUITEM "Disk4 SideA",                 ID_DISK_3A
+            MENUITEM "Disk4 SideB",                 ID_DISK_3B
+        END
+        MENUITEM SEPARATOR
+        POPUP "ExtController"
+        BEGIN
+            MENUITEM "None",                        ID_EXCTR_NONE
+            MENUITEM SEPARATOR
+            MENUITEM "Arkanoid paddle",             ID_EXCTR_PADDLE
+            MENUITEM "Hyper Shot",                  ID_EXCTR_HYPERSHOT
+            MENUITEM "Zapper",                      ID_EXCTR_ZAPPER
+            MENUITEM "FamilyBasic Keyboard",        ID_EXCTR_KEYBOARD
+            MENUITEM "Crazy Climber",               ID_EXCTR_CRAZYCLIMBER
+            MENUITEM "Top Rider",                   ID_EXCTR_TOPRIDER
+            MENUITEM "SpaceShadow Gun",             ID_EXCTR_SPACESHADOWGUN
+            MENUITEM "FamilyTrainer A side",        ID_EXCTR_FAMILYTRAINER_A
+            MENUITEM "FamilyTrainer B side",        ID_EXCTR_FAMILYTRAINER_B
+            MENUITEM "ExcitingBoxing",              ID_EXCTR_EXCITINGBOXING
+            MENUITEM "Mahjang",                     ID_EXCTR_MAHJANG
+            MENUITEM "Oekakids Tablet",             ID_EXCTR_OEKAKIDS_TABLET
+            MENUITEM "TurboFile",                   ID_EXCTR_TURBOFILE
+            MENUITEM "VS-Unisystem",                ID_EXCTR_VSUNISYSTEM
+            MENUITEM "VS-Unisystem Zapper",         ID_EXCTR_VSUNISYSTEM_ZAPPER
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "ExtDevice"
+        BEGIN
+            MENUITEM "DATACH BarcodeBattler",       ID_BARCODEBATTLER
+            MENUITEM SEPARATOR
+            MENUITEM "VS-Unisystem DipSwitch",      ID_VSUNISYSTEM_DIPSWITCH
+            MENUITEM SEPARATOR
+            POPUP "Turbo File"
+            BEGIN
+                MENUITEM "Bank0",                       ID_TURBOFILE_BANK0
+                MENUITEM "Bank1",                       ID_TURBOFILE_BANK1
+                MENUITEM "Bank2",                       ID_TURBOFILE_BANK2
+                MENUITEM "Bank3",                       ID_TURBOFILE_BANK3
+            END
+            MENUITEM SEPARATOR
+            POPUP "Tape"
+            BEGIN
+                MENUITEM "Play(&P)",                    ID_TAPE_PLAY
+                MENUITEM "Record(&R)",                  ID_TAPE_REC
+                MENUITEM SEPARATOR
+                MENUITEM "Stop(&S)",                    ID_TAPE_STOP
+            END
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Snapshot(&Z)",                ID_SNAPSHOT
+    END
+    POPUP "Option(&C)"
+    BEGIN
+        MENUITEM "Emulator(&E)",                ID_CFG_EMULATOR
+        MENUITEM "Graphics(&G)",                ID_CFG_GRAPHICS
+        MENUITEM "Sound(&S)",                   ID_CFG_SOUND
+        MENUITEM "Controller(&C)",              ID_CFG_CONTROLLER
+        MENUITEM "Joystick Axis Mode(&J)",      ID_CFG_JOYAXIS
+        MENUITEM "Shortcut key(&K)",            ID_CFG_SHORTCUT
+        MENUITEM "Folder(&P)",                  ID_CFG_FOLDER
+        MENUITEM "Language(&L)",                ID_CFG_LANGUAGE
+        MENUITEM "Movie(&M)",                   ID_CFG_MOVIE
+        MENUITEM "Game option(&O)",             ID_CFG_GAMEOPTION
+        MENUITEM "Palette edit(&Z)",            ID_CFG_PALETTE
+        MENUITEM SEPARATOR
+        MENUITEM "Full screen",                 ID_FULLSCREEN
+        POPUP "Zoom"
+        BEGIN
+            MENUITEM "x1",                          ID_ZOOMx1
+            MENUITEM "x2",                          ID_ZOOMx2
+            MENUITEM "x3",                          ID_ZOOMx3
+            MENUITEM "x4",                          ID_ZOOMx4
+        END
+        POPUP "Filter"
+        BEGIN
+            MENUITEM "None",                        ID_FILTER_NONE
+            MENUITEM "2xSaI",                       ID_FILTER_2XSAI
+            MENUITEM "Super2xSaI",                  ID_FILTER_SUPER2XSAI
+            MENUITEM "SuperEagle",                  ID_FILTER_SUPEREAGLE
+            MENUITEM "Scale2x",                     ID_FILTER_SCALE2X
+            MENUITEM "hq2x",                        ID_FILTER_HQ2X
+            MENUITEM "lq2x",                        ID_FILTER_LQ2X
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Display TV frame",            ID_TVFRAME
+        MENUITEM "FPS Display",                 ID_FPSDISP
+    END
+    POPUP "Tool(&T)"
+    BEGIN
+        MENUITEM "Cheat support(&S)",           ID_SEARCH
+        MENUITEM "Cheat code(&C)",              ID_CHEAT
+        MENUITEM SEPARATOR
+        MENUITEM "Cheat enable(&E)",            ID_CHEAT_ENABLE
+        MENUITEM "Cheat disable(&D)",           ID_CHEAT_DISABLE
+        MENUITEM SEPARATOR
+        MENUITEM "Game Genie(&G)",              ID_GENIE
+        MENUITEM SEPARATOR
+        MENUITEM "Auto IPS patch(&I)",          ID_AUTOIPS
+        MENUITEM SEPARATOR
+        POPUP "Viewer(&V)"
+        BEGIN
+            MENUITEM "Pattern Viewer(&P)",          ID_VIEW_PATTERN
+            MENUITEM "NameTable Viewer(&N)",        ID_VIEW_NAMETABLE
+            MENUITEM "Palette Viewer(&C)",          ID_VIEW_PALETTE
+            MENUITEM SEPARATOR
+            MENUITEM "Memory Viewer(&M)",           ID_VIEW_MEMORY
+        END
+    END
+    POPUP "Help(&H)"
+    BEGIN
+        MENUITEM "About(&A)",                   ID_ABOUT
+    END
+END
+
+IDR_LCH_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "List selection(&L)"
+    BEGIN
+        MENUITEM "List0",                       ID_LCH_LIST0
+        MENUITEM "List1",                       ID_LCH_LIST1
+        MENUITEM "List2",                       ID_LCH_LIST2
+        MENUITEM "List3",                       ID_LCH_LIST3
+        MENUITEM "List4",                       ID_LCH_LIST4
+        MENUITEM "List5",                       ID_LCH_LIST5
+        MENUITEM "List6",                       ID_LCH_LIST6
+        MENUITEM "List7",                       ID_LCH_LIST7
+        MENUITEM "List8",                       ID_LCH_LIST8
+        MENUITEM "List9",                       ID_LCH_LIST9
+    END
+    POPUP "Edit(&E)"
+    BEGIN
+        MENUITEM "NES header edit(&H)",         ID_LCH_HEADEREDIT
+    END
+    POPUP "Option(&C)"
+    BEGIN
+        MENUITEM "Folder list(&F)",             ID_LCH_FOLDER
+        MENUITEM "Display column(&D)",          ID_LCH_DISPEDIT
+    END
+    MENUITEM "Refresh(&R)",                 ID_LCH_REFRESH
+END
+
+IDR_SCH_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "--"
+    BEGIN
+        MENUITEM "Code append",                 ID_SCH_APPEND
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR               "ERROR"
+    IDS_ERROR_STARTUP       "Weren't able to start."
+    IDS_ERROR_UNKNOWN       "An indistinct error occurred"
+    IDS_ERROR_OPEN          "Don't open a\n%s\nfile."
+    IDS_ERROR_READ          "Failed in reading of a file."
+    IDS_ERROR_WRITE         "Failed in writing of a file."
+    IDS_ERROR_OUTOFMEMORY   "Out of memory."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_ILLEGALOPCODE "Executed an undefined order."
+    IDS_ERROR_UNSUPPORTFORMAT "Unsupported format."
+    IDS_ERROR_INVALIDNESHEADER "NES header is abnormal."
+    IDS_ERROR_SMALLFILE     "File size is too small."
+    IDS_ERROR_UNSUPPORTMAPPER "Mapper %d unsupported."
+    IDS_ERROR_NODISKBIOS    "There isn't DISKSYS.ROM."
+    IDS_ERROR_UNSUPPORTDISK "Many disks don't support than 8."
+    IDS_ERROR_ILLEGALDISKSIZE "Disk size is abnormal."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_ILLEGALMAPPERNO 
+                            "Mapper please appoint numerical value from 0 to 255."
+    IDS_ERROR_ILLEGALHEADER "Because a NES header is illegal,\n there can be the thing that does not work normally.\nDo execute?"
+    IDS_ERROR_ILLEGALSTATECRC 
+                            "Because recorded CRC is different,\n there is the case that cannot load normally.\nDo load?"
+    IDS_ERROR_ILLEGALMOVIECRC 
+                            "Because recorded CRC is different,\n there can be the thing that cannot playback normally.\nDo execute?"
+    IDS_ERROR_ILLEGALMOVIEVER 
+                            "Because a recorded version is different,\n there can be the thing that cannot playback normally.\nDo execute?"
+    IDS_ERROR_ILLEGALMOVIEOLD 
+                            "Because a version of a movie file is old, cannot playback."
+    IDS_ERROR_ILLEGALMOVIECRC_A 
+                            "Because recorded CRC is different,\n there can be the thing that there is not append record normally.\nDo execute?"
+    IDS_ERROR_ILLEGALMOVIEVER_A 
+                            "Because a recorded version is different,\n there can be the thing that there is not append record normally.\nDo execute?"
+    IDS_ERROR_ILLEGALMOVIEOLD_A 
+                            "Because a version of a movie file is old,\n there is not append record."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_NETWORKDISCONNECT "Network disconnected."
+    IDS_ERROR_NETWORKERROR  "Network error."
+    IDS_ERROR_NETWORKERROR_VERSION "Version of VirtuaNES is different."
+    IDS_ERROR_NETWORKERROR_CRC "Game is different.(PRG CRC is different)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_UI_OPENROM          "Open ROM file"
+    IDS_UI_OPENPALETTE      "Open Palette file"
+    IDS_UI_BROWSE           "Please select a folder."
+    IDS_UI_SAVEPALETTE      "Save Palette file"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_UI_WAVERECORD       "WAVE Record"
+    IDS_UI_PLAYMOVIE        "Movie play"
+    IDS_UI_RECMOVIE         "Movie record"
+    IDS_UI_APPENDMOVIE      "Movie append record"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_UI_LOADCHEATCODE    "Open Cheat code"
+    IDS_UI_SAVECHEATCODE    "Save Cheat code"
+    IDS_UI_LOADGENIECODE    "Open GameGenie"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_EMU_PRIORITY_IDLE   "Idle"
+    IDS_EMU_PRIORITY_MOSTLOWER "Most lower"
+    IDS_EMU_PRIORITY_LOWER  "Lower"
+    IDS_EMU_PRIORITY_NORMAL "Normal"
+    IDS_EMU_PRIORITY_HIGHER "Higher"
+    IDS_EMU_PRIORITY_MOSTHIGHER "Most higher"
+    IDS_EMU_PRIORITY_REALTIME "Realtime(danger)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SND_FILTER_NONE     "None"
+    IDS_SND_FILTER_TYPE1    "Lowpass filter 1"
+    IDS_SND_FILTER_TYPE2    "Lowpass filter 2"
+    IDS_SND_FILTER_TYPE3    "Lowpass filter 3"
+    IDS_SND_FILTER_TYPE4    "Lowpass filter 4"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CTR_SELECT1         "Setting 1"
+    IDS_CTR_SELECT2         "Setting 2"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_OPT_RENDER_POST_ALL "Scanline type 1"
+    IDS_OPT_RENDER_PRE_ALL  "Scanline type 2"
+    IDS_OPT_RENDER_POST     "Scanline type 3"
+    IDS_OPT_RENDER_PRE      "Scanline type 4(Default)"
+    IDS_OPT_RENDER_TILE     "Tile"
+    IDS_OPT_IRQ_HSYNC       "H-SYNC"
+    IDS_OPT_IRQ_CLOCK       "CLOCK"
+    IDS_OPT_VIDEOMODE_NTSC  "NTSC"
+    IDS_OPT_VIDEOMODE_PAL   "PAL"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_TITLE           "-Press any key-"
+    IDS_CUT_TYPE            "Type"
+    IDS_CUT_KEY             "Key 1"
+    IDS_CUT_KEY2            "Key 2"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_OPEN            "Open"
+    IDS_CUT_CLOSE           "Close"
+    IDS_CUT_LAUNCHER        "Launcher"
+    IDS_CUT_ROMINFO         "ROM Info"
+    IDS_CUT_WAVERECORD      "WAVE record"
+    IDS_CUT_NETPLAY_CONNECT "NetPlay"
+    IDS_CUT_NETPLAY_DISCONNECT "Disconnect"
+    IDS_CUT_NETPLAY_CHAT    "Chat"
+    IDS_CUT_EXIT            "Exit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_HWRESET         "HW Reset"
+    IDS_CUT_SWRESET         "SW Reset"
+    IDS_CUT_PAUSE           "Pause(Toggle)"
+    IDS_CUT_THROTTLE        "Throttle mode(Toggle)"
+    IDS_CUT_FRAMESKIP_AUTO  "FrameSkip Auto"
+    IDS_CUT_FRAMESKIP_UP    "FrameSkip +1"
+    IDS_CUT_FRAMESKIP_DOWN  "FrameSkip -1"
+    IDS_CUT_ONEFRAME        "One step(Pause)"
+    IDS_CUT_KEYTHROTTLE     "Throttle"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_STATE_LOAD      "State Load"
+    IDS_CUT_STATE_SAVE      "State Save"
+    IDS_CUT_STATE_UP        "State Slot +1"
+    IDS_CUT_STATE_DOWN      "State Slot -1"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_STATE_SLOT0     "State Slot 0"
+    IDS_CUT_STATE_SLOT1     "State Slot 1"
+    IDS_CUT_STATE_SLOT2     "State Slot 2"
+    IDS_CUT_STATE_SLOT3     "State Slot 3"
+    IDS_CUT_STATE_SLOT4     "State Slot 4"
+    IDS_CUT_STATE_SLOT5     "State Slot 5"
+    IDS_CUT_STATE_SLOT6     "State Slot 6"
+    IDS_CUT_STATE_SLOT7     "State Slot 7"
+    IDS_CUT_STATE_SLOT8     "State Slot 8"
+    IDS_CUT_STATE_SLOT9     "State Slot 9"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_QUICKLOAD_SLOT0 "Quick load Slot0"
+    IDS_CUT_QUICKLOAD_SLOT1 "Quick load Slot1"
+    IDS_CUT_QUICKLOAD_SLOT2 "Quick load Slot2"
+    IDS_CUT_QUICKLOAD_SLOT3 "Quick load Slot3"
+    IDS_CUT_QUICKLOAD_SLOT4 "Quick load Slot4"
+    IDS_CUT_QUICKLOAD_SLOT5 "Quick load Slot5"
+    IDS_CUT_QUICKLOAD_SLOT6 "Quick load Slot6"
+    IDS_CUT_QUICKLOAD_SLOT7 "Quick load Slot7"
+    IDS_CUT_QUICKLOAD_SLOT8 "Quick load Slot8"
+    IDS_CUT_QUICKLOAD_SLOT9 "Quick load Slot9"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_QUICKSAVE_SLOT0 "Quick save Slot0"
+    IDS_CUT_QUICKSAVE_SLOT1 "Quick save Slot1"
+    IDS_CUT_QUICKSAVE_SLOT2 "Quick save Slot2"
+    IDS_CUT_QUICKSAVE_SLOT3 "Quick save Slot3"
+    IDS_CUT_QUICKSAVE_SLOT4 "Quick save Slot4"
+    IDS_CUT_QUICKSAVE_SLOT5 "Quick save Slot5"
+    IDS_CUT_QUICKSAVE_SLOT6 "Quick save Slot6"
+    IDS_CUT_QUICKSAVE_SLOT7 "Quick save Slot7"
+    IDS_CUT_QUICKSAVE_SLOT8 "Quick save Slot8"
+    IDS_CUT_QUICKSAVE_SLOT9 "Quick save Slot9"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_DISK_EJECT      "Disk Eject"
+    IDS_CUT_DISK_0A         "Disk 1 Side A"
+    IDS_CUT_DISK_0B         "Disk 1 Side B"
+    IDS_CUT_DISK_1A         "Disk 2 Side A"
+    IDS_CUT_DISK_1B         "Disk 2 Side B"
+    IDS_CUT_DISK_2A         "Disk 3 Side A"
+    IDS_CUT_DISK_2B         "Disk 3 Side B"
+    IDS_CUT_DISK_3A         "Disk 4 Side A"
+    IDS_CUT_DISK_3B         "Disk 4 Side B"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_SNAPSHOT        "Snapshot"
+    IDS_CUT_FPSDISP         "FPS Display(Toggle)"
+    IDS_CUT_TVASPECT        "TV aspect correct(Toggle)"
+    IDS_CUT_TVFRAME         "TV frame display(Toggle)"
+    IDS_CUT_SCANLINE        "Fake TV mode(Toggle)"
+    IDS_CUT_ALLLINE         "Show 240 lines(Toggle)"
+    IDS_CUT_ALLSPRITE       "No-limit sprites(Toggle)"
+    IDS_CUT_SYNCDRAW        "Sync drawing(Toggle/Fullscreen)"
+    IDS_CUT_FITSCREEN       "Fit screen(Toggle/Fullscreen)"
+    IDS_CUT_LEFTCLIP        "Screen left clip(Toggle)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_MOVIE_INFO      "Movie info"
+    IDS_CUT_MOVIE_PLAY      "Movie play"
+    IDS_CUT_MOVIE_REC       "Movie record"
+    IDS_CUT_MOVIE_REC_APPEND "Movie append record"
+    IDS_CUT_MOVIE_STOP      "Movie stop"
+    IDS_CUT_MOVIE_CONVERT   "AVI convert"
+    IDS_CUT_TAPE_PLAY       "Tape Play"
+    IDS_CUT_TAPE_REC        "Tape Record"
+    IDS_CUT_TAPE_STOP       "Tape Stop"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_ZOOMx1          "Zoom x1"
+    IDS_CUT_ZOOMx2          "Zoom x2"
+    IDS_CUT_ZOOMx3          "Zoom x3"
+    IDS_CUT_ZOOMx4          "Zoom x4"
+    IDS_CUT_FULLSCREEN      "FullScreen(Toggle)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_MUTE_MASTER     "Master Mute(Toggle)"
+    IDS_CUT_MUTE_RECTANGLE1 "Square1 Mute(Toggle)"
+    IDS_CUT_MUTE_RECTANGLE2 "Square2 Mute(Toggle)"
+    IDS_CUT_MUTE_TRIANGLE   "Triangle Mute(Toggle)"
+    IDS_CUT_MUTE_NOISE      "Noise Mute(Toggle)"
+    IDS_CUT_MUTE_DPCM       "DPCM Mute(Toggle)"
+    IDS_CUT_MUTE_EXTERNAL1  "Ext CH1 Mute(Toggle)"
+    IDS_CUT_MUTE_EXTERNAL2  "Ext CH2 Mute(Toggle)"
+    IDS_CUT_MUTE_EXTERNAL3  "Ext CH3 Mute(Toggle)"
+    IDS_CUT_MUTE_EXTERNAL4  "Ext CH4 Mute(Toggle)"
+    IDS_CUT_MUTE_EXTERNAL5  "Ext CH5 Mute(Toggle)"
+    IDS_CUT_MUTE_EXTERNAL6  "Ext CH6 Mute(Toggle)"
+    IDS_CUT_MUTE_EXTERNAL7  "Ext CH7 Mute(Toggle)"
+    IDS_CUT_MUTE_EXTERNAL8  "Ext CH8 Mute(Toggle)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_SEARCH          "Cheat support"
+    IDS_CUT_CHEAT           "Cheat code"
+    IDS_CUT_CHEAT_ENABLE    "Cheat enable"
+    IDS_CUT_CHEAT_DISABLE   "Cheat disable"
+    IDS_CUT_GENIE           "GameGenie"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUT_VIEW_PATTERN    "Pattern Viewer"
+    IDS_CUT_VIEW_NAMETABLE  "NameTable Viewer"
+    IDS_CUT_VIEW_PALETTE    "Palette Viewer"
+    IDS_CUT_VIEW_MEMORY     "Memory Viewer"
+    IDS_CUT_VIEW_WATCH      "Memory Watch"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LCH_LISTUPDATE      "Updating..(%d/%d)"
+    IDS_LCH_HEADERREWRITE   "May really renew it?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LCH_FILENAME        "File name"
+    IDS_LCH_PATH            "Path"
+    IDS_LCH_MAPPER          "Mapper"
+    IDS_LCH_PRG             "PRG"
+    IDS_LCH_CHR             "CHR"
+    IDS_LCH_ALLCRC          "ALL CRC"
+    IDS_LCH_PRGCRC          "PRG CRC"
+    IDS_LCH_INFO            "Info"
+    IDS_LCH_DATABASE        "DB check"
+    IDS_LCH_TITLE           "Title"
+    IDS_LCH_COUNTRY         "Country"
+    IDS_LCH_MANUFACTURER    "Manufacturer"
+    IDS_LCH_SALEDATE        "Sale date"
+    IDS_LCH_PRICE           "Price"
+    IDS_LCH_GENRE           "Genre"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NET_NOCONNECT       "No connection."
+    IDS_NET_ACCEPTING       "Waiting for client."
+    IDS_NET_CONNECTING      "Connected to server."
+    IDS_NET_CALCULATING     "Calculate network latency."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CHT_CHEATCODE       "Cheat code"
+    IDS_CHT_COMMENT         "Comment"
+    IDS_CHT_ADDRESS         "Address"
+    IDS_CHT_DATA_NOW        "Now"
+    IDS_CHT_DATA_OLD        "Old"
+END
+
+#endif    // âpåÍ (±“ÿ∂) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,56 @@
+
+////////////////////////////////////
+// Items added with v0.95 gain it //
+////////////////////////////////////
+
+A change of "VirtuaNESres.h".
+
+=======
+LDK.cpp
+=======
+
+No change.
+
+=======
+Version
+=======
+
+<Change>
+VS_VERSION_INFO
+
+====
+Menu
+====
+
+<Add>
+ID_DISK_2A
+ID_DISK_2B
+ID_DISK_3A
+ID_DISK_3B
+
+<Change>
+
+======
+Dialog
+======
+
+<Change>
+IDD_CFG_MOVIE
+
+<Add>
+IDC_MVI_TIMEDISPLAY
+
+============
+String table
+============
+
+<Change>
+IDS_ERROR_UNSUPPORTDISK
+
+<Add>
+IDS_CUT_DISK_2A
+IDS_CUT_DISK_2B
+IDS_CUT_DISK_3A
+IDS_CUT_DISK_3B
+
+
