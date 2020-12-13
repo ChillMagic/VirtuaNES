@@ -1,53 +1,53 @@
-
+﻿
 /////////////////////////////////////
-// v0.95�Œǉ����ꂽ���ړ��ɕt���� //
+// v0.95で追加された項目等に付いて //
 /////////////////////////////////////
 
-VirtuaNESres.h�̕ύX�B
+VirtuaNESres.hの変更。
 
 =======
 LDK.cpp
 =======
 
-���ɂȂ��B
+特になし。
 
 ==========
-�o�[�W����
+バージョン
 ==========
 
-<�ύX>
+<変更>
 VS_VERSION_INFO
 
 ========
-���j���[
+メニュー
 ========
 
-<�V�K�ǉ�>
+<新規追加>
 ID_DISK_2A
 ID_DISK_2B
 ID_DISK_3A
 ID_DISK_3B
 
-<�ύX>
+<変更>
 
 ==========
-�_�C�A���O
+ダイアログ
 ==========
 
-<�ύX>
+<変更>
 IDD_CFG_MOVIE
 
-<�V�K�ǉ�>
+<新規追加>
 IDC_MVI_TIMEDISPLAY
 
 ==================
-�X�g�����O�e�[�u��
+ストリングテーブル
 ==================
 
-<�ύX>
+<変更>
 IDS_ERROR_UNSUPPORTDISK
 
-<�V�K�ǉ�>
+<新規追加>
 IDS_CUT_DISK_2A
 IDS_CUT_DISK_2B
 IDS_CUT_DISK_3A

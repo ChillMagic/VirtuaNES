@@ -1,4 +1,4 @@
-#ifndef	__VIRTUANES_RESOURCE_INCLUDED__
+ï»¿#ifndef	__VIRTUANES_RESOURCE_INCLUDED__
 #define	__VIRTUANES_RESOURCE_INCLUDED__
 
 // VirtuaNES version
@@ -269,7 +269,7 @@
 #define	IDS_CHT_DATA_NOW		0x0703
 #define	IDS_CHT_DATA_OLD		0x0704
 
-// ƒRƒ“ƒgƒ[ƒ‹IDs
+// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«IDs
 // UI
 #define	IDDEFAULT			101
 #define	IDR_MENU			110
@@ -348,7 +348,7 @@
 #define	IDD_DBG_MEMSEARCH		906
 #define	IDD_DBG_MEMSEARCH_MENU		907
 
-// ƒ_ƒCƒAƒƒO“àƒRƒ“ƒgƒ[ƒ‹IDs
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°å†…ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«IDs
 // IDD_VERSION
 #define	IDC_VER_VERSION			1000
 #define	IDC_VER_ICON			1001
@@ -533,7 +533,7 @@
 #define	IDC_CTR_EXW			2040
 #define	IDC_CTR_EXX			2041
 
-#define	IDC_CTR_END			2041	// I’[
+#define	IDC_CTR_END			2041	// çµ‚ç«¯
 
 #define	IDC_CTR_A_RAPID_LIST		2050
 #define	IDC_CTR_B_RAPID_LIST		2051
@@ -709,25 +709,25 @@
 // IDD_DEBUGGER
 //
 
-// ƒƒjƒ…[ƒRƒ}ƒ“ƒh IDs
+// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚³ãƒãƒ³ãƒ‰ IDs
 //
-// ƒtƒ@ƒCƒ‹(&F)
+// ãƒ•ã‚¡ã‚¤ãƒ«(&F)
 #define	ID_OPEN				0x8000
 #define	ID_CLOSE			0x8001
 #define	ID_EXIT				0x8002
 #define	ID_LAUNCHER			0x8010
-#define	ID_LAUNCHER_CLOSE		0x8011	// “à•”ƒRƒ}ƒ“ƒh
+#define	ID_LAUNCHER_CLOSE		0x8011	// å†…éƒ¨ã‚³ãƒãƒ³ãƒ‰
 #define	ID_ROMINFO			0x8020
 #define	ID_WAVERECORD			0x8028
 #define	ID_ABOUT			0x8080
 #define	ID_HTMLHELP			0x8081
 
-// "È¯ÄÜ°¸"POPUP
+// "ï¾ˆï½¯ï¾„ï¾œï½°ï½¸"POPUP
 #define	ID_NETPLAY_CONNECT		0x80D0
 #define	ID_NETPLAY_DISCONNECT		0x80D1
 #define	ID_NETPLAY_CHAT			0x80D2	// ChatWindow
 
-// "Ñ°ËŞ°"POPUP
+// "ï¾‘ï½°ï¾‹ï¾ï½°"POPUP
 #define	ID_MOVIE_REC			0x80E0
 #define	ID_MOVIE_REC_APPEND		0x80E1
 #define	ID_MOVIE_PLAY			0x80E2
@@ -735,7 +735,7 @@
 #define	ID_MOVIE_INFO			0x80E4
 #define	ID_MOVIE_CONVERT		0x80E8
 
-// Å‹ßg‚Á‚½ƒtƒ@ƒCƒ‹
+// æœ€è¿‘ä½¿ã£ãŸãƒ•ã‚¡ã‚¤ãƒ«
 #define	ID_MRU_FILE0			0x8300
 #define	ID_MRU_FILE1			0x8301
 #define	ID_MRU_FILE2			0x8302
@@ -746,7 +746,7 @@
 #define	ID_MRU_FILE7			0x8307
 #define	ID_MRU_FILE8			0x8308
 #define	ID_MRU_FILE9			0x8309
-// Å‹ßg‚Á‚½ƒpƒX
+// æœ€è¿‘ä½¿ã£ãŸãƒ‘ã‚¹
 #define	ID_MRU_PATH0			0x8310
 #define	ID_MRU_PATH1			0x8311
 #define	ID_MRU_PATH2			0x8312
@@ -758,13 +758,13 @@
 #define	ID_MRU_PATH8			0x8318
 #define	ID_MRU_PATH9			0x8319
 
-// •ÒW(&E)
+// ç·¨é›†(&E)
 #define	ID_HWRESET			0x8100
 #define	ID_SWRESET			0x8101
 #define	ID_PAUSE			0x8102
 #define	ID_STATE_LOAD			0x8103
 #define	ID_STATE_SAVE			0x8104
-// "½Ã°Ä½Û¯Ä"POPUP
+// "ï½½ï¾ƒï½°ï¾„ï½½ï¾›ï½¯ï¾„"POPUP
 #define	ID_STATE_SLOT0			0x8110
 #define	ID_STATE_SLOT1			0x8111
 #define	ID_STATE_SLOT2			0x8112
@@ -776,7 +776,7 @@
 #define	ID_STATE_SLOT8			0x8118
 #define	ID_STATE_SLOT9			0x8119
 
-// "ÃŞ¨½¸"POPUP
+// "ï¾ƒï¾ï½¨ï½½ï½¸"POPUP
 #define	ID_DISK_EJECT			0x8120
 #define	ID_DISK_0A			0x8121
 #define	ID_DISK_0B			0x8122
@@ -788,7 +788,7 @@
 #define	ID_DISK_3B			0x8128
 
 
-// "Šg’£ºİÄÛ°×"POPUP
+// "æ‹¡å¼µï½ºï¾ï¾„ï¾›ï½°ï¾—"POPUP
 #define	ID_EXCTR_NONE			0x8130
 #define	ID_EXCTR_PADDLE			0x8131
 #define	ID_EXCTR_HYPERSHOT		0x8132
@@ -808,9 +808,9 @@
 #define	ID_EXCTR_VSUNISYSTEM		0x813E
 #define	ID_EXCTR_VSUNISYSTEM_ZAPPER	0x813F
 
-#define	ID_EXCTR_END			0x813F		// I’[
+#define	ID_EXCTR_END			0x813F		// çµ‚ç«¯
 
-// "QuickÛ°ÄŞ"POPUP
+// "Quickï¾›ï½°ï¾„ï¾"POPUP
 #define	ID_QUICKLOAD_SLOT0		0x8140
 #define	ID_QUICKLOAD_SLOT1		0x8141
 #define	ID_QUICKLOAD_SLOT2		0x8142
@@ -821,7 +821,7 @@
 #define	ID_QUICKLOAD_SLOT7		0x8147
 #define	ID_QUICKLOAD_SLOT8		0x8148
 #define	ID_QUICKLOAD_SLOT9		0x8149
-// "Quick¾°ÌŞ"POPUP
+// "Quickï½¾ï½°ï¾Œï¾"POPUP
 #define	ID_QUICKSAVE_SLOT0		0x8150
 #define	ID_QUICKSAVE_SLOT1		0x8151
 #define	ID_QUICKSAVE_SLOT2		0x8152
@@ -833,8 +833,8 @@
 #define	ID_QUICKSAVE_SLOT8		0x8158
 #define	ID_QUICKSAVE_SLOT9		0x8159
 
-// Šg’£ÃŞÊŞ²½
-// "Ã°ÌßÃŞÊŞ²½"POPUP
+// æ‹¡å¼µï¾ƒï¾ï¾Šï¾ï½²ï½½
+// "ï¾ƒï½°ï¾Œï¾Ÿï¾ƒï¾ï¾Šï¾ï½²ï½½"POPUP
 #define	ID_TAPE_PLAY			0x8180
 #define	ID_TAPE_REC			0x8181
 #define	ID_TAPE_STOP			0x8182
@@ -842,13 +842,13 @@
 #define	ID_BARCODEBATTLER		0x8190
 #define	ID_VSUNISYSTEM_DIPSWITCH	0x8194
 
-// "À°ÎŞÌ§²Ù"POPUP
+// "ï¾€ï½°ï¾ï¾ï¾Œï½§ï½²ï¾™"POPUP
 #define	ID_TURBOFILE_BANK0		0x81A0
 #define	ID_TURBOFILE_BANK1		0x81A1
 #define	ID_TURBOFILE_BANK2		0x81A2
 #define	ID_TURBOFILE_BANK3		0x81A3
 
-// İ’è(&C)
+// è¨­å®š(&C)
 #define	ID_CFG_EMULATOR			0x8200
 #define	ID_CFG_GRAPHICS			0x8201
 #define	ID_CFG_SOUND			0x8202
@@ -860,13 +860,13 @@
 #define	ID_CFG_GAMEOPTION		0x8208
 #define	ID_CFG_JOYAXIS			0x8209
 #define	ID_CFG_PALETTE			0x820A
-// "‰æ–Ê»²½Ş"POPUP
+// "ç”»é¢ï½»ï½²ï½½ï¾"POPUP
 #define	ID_ZOOMx1			0x8220
 #define	ID_ZOOMx2			0x8221
 #define	ID_ZOOMx3			0x8222
 #define	ID_ZOOMx4			0x8223
 
-// ƒTƒEƒ“ƒhƒ~ƒ…[ƒg
+// ã‚µã‚¦ãƒ³ãƒ‰ãƒŸãƒ¥ãƒ¼ãƒˆ
 #define	ID_MUTE_0			0x8230
 #define	ID_MUTE_1			0x8231
 #define	ID_MUTE_2			0x8232
@@ -884,7 +884,7 @@
 #define	ID_MUTE_E			0x823E
 #define	ID_MUTE_F			0x823F
 
-// ƒc[ƒ‹(&T)
+// ãƒ„ãƒ¼ãƒ«(&T)
 #define	ID_SEARCH			0x8800
 #define	ID_CHEAT			0x8801
 #define	ID_GENIE			0x8802
@@ -901,7 +901,7 @@
 #define	ID_VIEW_MEMORY			0x8910
 #define	ID_VIEW_WATCH			0x8911
 
-// ‚»‚Ì‘¼‚ÌƒRƒ}ƒ“ƒh(ƒƒjƒ…[•\¦‚³‚ê‚é‚à‚Ì‚à‚ ‚é)
+// ãã®ä»–ã®ã‚³ãƒãƒ³ãƒ‰(ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¡¨ç¤ºã•ã‚Œã‚‹ã‚‚ã®ã‚‚ã‚ã‚‹)
 #define	ID_STATE_UP			0x9000
 #define	ID_STATE_DOWN			0x9001
 #define	ID_THROTTLE			0x9002
@@ -922,7 +922,7 @@
 #define	ID_ONEFRAME			0x9011
 #define	ID_KEYTHROTTLE			0x9012
 
-// ‰æ–ÊƒtƒBƒ‹ƒ^
+// ç”»é¢ãƒ•ã‚£ãƒ«ã‚¿
 #define	ID_FILTER_NONE			0x9100
 #define	ID_FILTER_2XSAI			0x9101
 #define	ID_FILTER_SUPER2XSAI		0x9102
@@ -932,10 +932,10 @@
 #define	ID_FILTER_LQ2X			0x9106
 #define	ID_FILTER_END			0x9106
 
-// ƒ`[ƒgƒƒjƒ…[
+// ãƒãƒ¼ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼
 #define	ID_SCH_APPEND			0x9800
 
-// ƒ‰ƒ“ƒ`ƒƒ[ƒƒjƒ…[
+// ãƒ©ãƒ³ãƒãƒ£ãƒ¼ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 //
 #define	ID_LCH_FOLDER			0xA000
 #define	ID_LCH_DISPEDIT			0xA001
