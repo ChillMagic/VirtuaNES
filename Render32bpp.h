@@ -3,7 +3,6 @@
 //
 void	CDirectDraw::Render32bpp_Normal( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2& ddsd, BOOL bForceWrite )
 {
-#ifndef _WIN64
 	LPBYTE	pScn = lpRdr;
 	LPBYTE	pDst = (LPBYTE)ddsd.lpSurface;
 	LPBYTE	pDlt = (LPBYTE)lpDlt;
@@ -27,6 +26,7 @@ void	CDirectDraw::Render32bpp_Normal( LPBYTE lpRdr, LPBYTE lpDlt, DDSURFACEDESC2
 
 		width = SCREEN_WIDTH;
 
+#ifndef _WIN64
 		if( bFWrite ) {
 		__asm {
 			mov		eax, pScn
@@ -75,10 +75,6 @@ _r32bn_loop_fw:
 			sub		width, 8
 			jg		_r32bn_loop_fw
 			}
-
-			pScn += RENDER_WIDTH;
-			pDlt += SCREEN_WIDTH;
-			pDst += pitch;
 		} else {
 		__asm {
 			mov		eax, pScn
@@ -133,13 +129,32 @@ _r32bn_skip2:
 			sub		width, 8
 			jg		_r32bn_loop
 			}
-
-			pScn += RENDER_WIDTH;
-			pDlt += SCREEN_WIDTH;
-			pDst += pitch;
 		}
-	}
+#else
+		uint32_t *ipScn = (uint32_t *)pScn;
+		uint32_t *ipDlt = (uint32_t *)pDlt;
+		uint32_t *ipPal = (uint32_t *)pPal;
+		uint32_t *ipDst = (uint32_t *)pDst;
+
+		for (; width > 0; width -= 4) {
+			// check previous!!
+			if (bFWrite || *ipScn != *ipDlt) {
+				*ipDlt = *ipScn;
+				for (int i = 0; i != 4; ++i) {
+					ipDst[i] = ipPal[((uint8_t*)ipScn)[i]];
+				}
+			}
+
+			ipScn += 1;
+			ipDlt += 1;
+			ipDst += 4;
+		}
 #endif
+
+		pScn += RENDER_WIDTH;
+		pDlt += SCREEN_WIDTH;
+		pDst += pitch;
+	}
 }
 
 //
