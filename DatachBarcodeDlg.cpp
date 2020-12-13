@@ -26,8 +26,8 @@ using namespace std;
 #include "DatachBarcodeDlg.h"
 
 #include "EmuThread.h"
-#include "nes.h"
-#include "mapper.h"
+#include "NES/nes.h"
+#include "NES/Mapper/mapper.h"
 
 // メッセージ
 DLG_MESSAGE_BEGIN(CDatachBarcodeDlg)

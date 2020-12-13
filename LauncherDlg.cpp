@@ -28,8 +28,8 @@ using namespace std;
 #include "Wnd.h"
 #include "LauncherDlg.h"
 
-#include "rom.h"
-#include "romdb.h"
+#include "NES/rom.h"
+#include "NES/romdb.h"
 
 #include "EmuThread.h"
 

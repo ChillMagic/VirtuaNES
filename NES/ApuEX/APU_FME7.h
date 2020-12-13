@@ -15,7 +15,7 @@
 #include "macro.h"
 
 #include "APU_INTERFACE.h"
-#include "nes.h"
+#include "../nes.h"
 
 class	APU_FME7 : public APU_INTERFACE
 {

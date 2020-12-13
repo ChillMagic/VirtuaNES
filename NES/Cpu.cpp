@@ -24,7 +24,7 @@
 #include "ppu.h"
 #include "apu.h"
 #include "rom.h"
-#include "mapper.h"
+#include "Mapper/mapper.h"
 
 /*--------------[ DEFINE                ]-------------------------------*/
 #define	DPCM_SYNCCLOCK	FALSE

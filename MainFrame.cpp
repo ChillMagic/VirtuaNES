@@ -46,10 +46,10 @@ using namespace std;
 #include "DirectSound.h"
 #include "DirectInput.h"
 
-#include "nes.h"
-#include "rom.h"
-#include "romdb.h"
-#include "pad.h"
+#include "NES/nes.h"
+#include "NES/rom.h"
+#include "NES/romdb.h"
+#include "NES/pad.h"
 
 BOOL	CMainFrame::m_bKeyEnable = FALSE;
 volatile BOOL	CMainFrame::m_bKeyThreadExit = FALSE;

@@ -15,8 +15,8 @@
 #include "typedef.h"
 #include "macro.h"
 
-#include "nes.h"
-#include "mmu.h"
+#include "../nes.h"
+#include "../mmu.h"
 
 #include "mapper.h"
 

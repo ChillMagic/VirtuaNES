@@ -17,7 +17,7 @@ using namespace std;
 #include "PaletteEdit.h"
 #include "EmuThread.h"
 
-#include "MMU.h"
+#include "NES/MMU.h"
 
 #include "DirectDraw.h"
 

@@ -677,22 +677,22 @@ void	PAD::NsfSub()
 		nsfbit &= ~((1<<4)|(1<<5));
 }
 
-#include "EXPAD_Zapper.hpp"
-#include "EXPAD_Paddle.hpp"
-#include "EXPAD_HyperShot.hpp"
-#include "EXPAD_Keyboard.hpp"
-#include "EXPAD_Supor_Keyboard.hpp"
-#include "EXPAD_CrazyClimber.hpp"
-#include "EXPAD_Toprider.hpp"
-#include "EXPAD_SpaceShadowGun.hpp"
+#include "PadEx/EXPAD_Zapper.hpp"
+#include "PadEx/EXPAD_Paddle.hpp"
+#include "PadEx/EXPAD_HyperShot.hpp"
+#include "PadEx/EXPAD_Keyboard.hpp"
+#include "PadEx/EXPAD_Supor_Keyboard.hpp"
+#include "PadEx/EXPAD_CrazyClimber.hpp"
+#include "PadEx/EXPAD_Toprider.hpp"
+#include "PadEx/EXPAD_SpaceShadowGun.hpp"
 
-#include "EXPAD_FamlyTrainer.hpp"
-#include "EXPAD_ExcitingBoxing.hpp"
-#include "EXPAD_Mahjang.hpp"
-#include "EXPAD_OekakidsTablet.hpp"
-#include "EXPAD_TurboFile.hpp"
+#include "PadEx/EXPAD_FamlyTrainer.hpp"
+#include "PadEx/EXPAD_ExcitingBoxing.hpp"
+#include "PadEx/EXPAD_Mahjang.hpp"
+#include "PadEx/EXPAD_OekakidsTablet.hpp"
+#include "PadEx/EXPAD_TurboFile.hpp"
 
-#include "EXPAD_VSUnisystem.hpp"
-#include "EXPAD_VSZapper.hpp"
+#include "PadEx/EXPAD_VSUnisystem.hpp"
+#include "PadEx/EXPAD_VSZapper.hpp"
 
-#include "EXPAD_Gyromite.hpp"
+#include "PadEx/EXPAD_Gyromite.hpp"

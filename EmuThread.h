@@ -20,14 +20,14 @@ using namespace std;
 #include "typedef.h"
 #include "macro.h"
 
-#include "nes.h"
-#include "mmu.h"
-#include "cpu.h"
-#include "ppu.h"
-#include "apu.h"
-#include "pad.h"
-#include "rom.h"
-#include "mapper.h"
+#include "NES/nes.h"
+#include "NES/mmu.h"
+#include "NES/cpu.h"
+#include "NES/ppu.h"
+#include "NES/apu.h"
+#include "NES/pad.h"
+#include "NES/rom.h"
+#include "NES/Mapper/mapper.h"
 
 // Prototypes
 // NetPlay Event

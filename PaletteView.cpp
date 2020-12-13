@@ -16,7 +16,7 @@ using namespace std;
 #include "PaletteView.h"
 #include "EmuThread.h"
 
-#include "MMU.h"
+#include "NES/MMU.h"
 
 #include "DirectDraw.h"
 

@@ -18,11 +18,11 @@ using namespace std;
 #include "Wnd.h"
 #include "AviConvDlg.h"
 
-#include "nes.h"
-#include "mmu.h"
-#include "ppu.h"
-#include "apu.h"
-#include "rom.h"
+#include "NES/nes.h"
+#include "NES/mmu.h"
+#include "NES/ppu.h"
+#include "NES/apu.h"
+#include "NES/rom.h"
 
 #include "DirectDraw.h"
 

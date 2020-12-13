@@ -16,7 +16,7 @@
 
 #include "APU_INTERFACE.h"
 
-#include "emu2413.h"
+#include "emu2413/emu2413.h"
 
 class	APU_VRC7 : public APU_INTERFACE
 {

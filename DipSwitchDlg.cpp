@@ -21,7 +21,7 @@ using namespace std;
 #include "Pathlib.h"
 
 #include "EmuThread.h"
-#include "VsUnisystem.h"
+#include "NES/VsUnisystem.h"
 
 #include "Wnd.h"
 #include "DipSwitchDlg.h"

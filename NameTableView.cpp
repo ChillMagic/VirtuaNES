@@ -16,7 +16,7 @@ using namespace std;
 #include "NameTableView.h"
 #include "EmuThread.h"
 
-#include "MMU.h"
+#include "NES/MMU.h"
 
 #include "DirectDraw.h"
 

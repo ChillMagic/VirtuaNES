@@ -6,7 +6,7 @@
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
 #include "APU_N106.h"
-#include "state.h"
+#include "../state.h"
 
 #include "DebugOut.h"
 

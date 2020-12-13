@@ -12,7 +12,7 @@
 using namespace std;
 
 #include "Wnd.h"
-#include "cheat.h"
+#include "NES/cheat.h"
 
 // サーチダイアログ
 class	CSearchDlg : public CWnd

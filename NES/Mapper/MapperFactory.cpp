@@ -14,13 +14,13 @@
 #include "typedef.h"
 #include "macro.h"
 
-#include "nes.h"
-#include "mmu.h"
-#include "cpu.h"
-#include "ppu.h"
-#include "apu.h"
-#include "pad.h"
-#include "rom.h"
+#include "../nes.h"
+#include "../mmu.h"
+#include "../cpu.h"
+#include "../ppu.h"
+#include "../apu.h"
+#include "../pad.h"
+#include "../rom.h"
 
 #include "mapper.h"
 

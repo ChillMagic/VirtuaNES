@@ -15,13 +15,13 @@
 #include "typedef.h"
 #include "macro.h"
 
-#include "APU_INTERNAL.h"
-#include "APU_VRC6.h"
-#include "APU_VRC7.h"
-#include "APU_MMC5.h"
-#include "APU_FDS.h"
-#include "APU_N106.h"
-#include "APU_FME7.h"
+#include "ApuEx/APU_INTERNAL.h"
+#include "ApuEx/APU_VRC6.h"
+#include "ApuEx/APU_VRC7.h"
+#include "ApuEx/APU_MMC5.h"
+#include "ApuEx/APU_FDS.h"
+#include "ApuEx/APU_N106.h"
+#include "ApuEx/APU_FME7.h"
 
 //#define	QUEUE_LENGTH	4096
 #define	QUEUE_LENGTH	8192

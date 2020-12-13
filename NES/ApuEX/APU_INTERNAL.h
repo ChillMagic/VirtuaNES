@@ -16,8 +16,8 @@
 #include "macro.h"
 
 #include "APU_INTERFACE.h"
-#include "nes.h"
-#include "cpu.h"
+#include "../nes.h"
+#include "../cpu.h"
 
 class	APU_INTERNAL : public APU_INTERFACE
 {

@@ -30,7 +30,7 @@
 #include "apu.h"
 #include "pad.h"
 #include "rom.h"
-#include "mapper.h"
+#include "Mapper/mapper.h"
 
 #include "DirectDraw.h"
 #include "DirectSound.h"

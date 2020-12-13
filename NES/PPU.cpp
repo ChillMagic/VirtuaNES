@@ -23,7 +23,7 @@
 #include "cpu.h"
 #include "ppu.h"
 #include "rom.h"
-#include "mapper.h"
+#include "Mapper/mapper.h"
 
 BYTE	PPU::VSColorMap[5][64] = {
 	{	0x35, 0xFF, 0x16, 0x22, 0x1C, 0xFF, 0xFF, 0x15,
