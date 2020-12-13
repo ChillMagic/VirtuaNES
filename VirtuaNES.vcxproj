@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="AboutDlg.cpp" />
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="AppWrapper.cpp" />
     <ClCompile Include="Archive.cpp" />
     <ClCompile Include="AviConvDlg.cpp" />
     <ClCompile Include="AviWriter.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="CheatDlg.cpp" />
     <ClCompile Include="Com.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="ConfigWrapper.cpp" />
     <ClCompile Include="ControllerDlg.cpp" />
     <ClCompile Include="Crclib.cpp" />
     <ClCompile Include="DatachBarcodeDlg.cpp" />
@@ -222,14 +224,23 @@
   <ItemGroup>
     <ClInclude Include="AboutDlg.h" />
     <ClInclude Include="App.h" />
+    <ClInclude Include="AppWrapper.h" />
     <ClInclude Include="Archive.h" />
     <ClInclude Include="AviConvDlg.h" />
     <ClInclude Include="AviWriter.h" />
+    <ClInclude Include="CCfgController.h" />
+    <ClInclude Include="CCfgEmulator.h" />
+    <ClInclude Include="CCfgGraphics.h" />
+    <ClInclude Include="CCfgMovie.h" />
+    <ClInclude Include="CCfgPath.h" />
+    <ClInclude Include="CCfgSound.h" />
+    <ClInclude Include="CGameOption.h" />
     <ClInclude Include="ChatDlg.h" />
     <ClInclude Include="CheatDlg.h" />
     <ClInclude Include="CHyperLink.h" />
     <ClInclude Include="Com.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="ConfigWrapper.h" />
     <ClInclude Include="ControllerDlg.h" />
     <ClInclude Include="Crclib.h" />
     <ClInclude Include="DatachBarcodeDlg.h" />

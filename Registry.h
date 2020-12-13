@@ -4,10 +4,7 @@
 #ifndef	__CREGISTRY_INCLUDED__
 #define	__CREGISTRY_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#include <windowsx.h>
-#include <tchar.h>
+#include "Typedef.h"
 
 #include <string>
 using namespace std;
@@ -17,6 +14,11 @@ class	CRegistry
 public:
 	static	void	SetRegistryKey( LPCSTR	lpszKey );
 
+#ifdef GetProfileInt
+#undef GetProfileInt
+#undef GetProfileString
+#undef WriteProfileString
+#endif
 	static	UINT	GetProfileInt   ( LPCSTR lpszSection, LPCSTR lpszEntry, INT nDefault );
 	static	BOOL	GetProfileString( LPCSTR lpszSection, LPCSTR lpszEntry, LPVOID lpData, UINT nBytes );
 	static	BOOL	GetProfileBinary( LPCSTR lpszSection, LPCSTR lpszEntry, LPVOID lpData, UINT nBytes );
@@ -28,8 +30,8 @@ public:
 protected:
 	static	CHAR	m_szRegistryKey[MAX_PATH];
 
-	static	HKEY	GetRegistryKey();
-	static	HKEY	GetSectionKey( LPCTSTR lpszSection );
+	static	void*/*HKEY*/	GetRegistryKey();
+	static	void*/*HKEY*/	GetSectionKey( LPCTSTR lpszSection );
 
 private:
 };

@@ -16,9 +16,9 @@
 #include "VirtuaNESres.h"
 
 #include "DebugOut.h"
-#include "App.h"
+#include "AppWrapper.h"
 #include "Pathlib.h"
-#include "Config.h"
+#include "ConfigWrapper.h"
 #include "Crclib.h"
 
 #include "Nes.h"
@@ -227,7 +227,7 @@ NES::NES( const char* fname )
 
 		if( !(mapper = CreateMapper(this, rom->GetMapperNo())) ) {
 			// 未サポートのマッパーです
-			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_UNSUPPORTMAPPER );
+			LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_UNSUPPORTMAPPER );
 			sprintf( szErrorString, szErrStr, rom->GetMapperNo() );
 			throw	szErrorString;
 		}
@@ -301,21 +301,21 @@ NES::NES( const char* fname )
 		Reset();
 
 		// ゲーム固有のデフォルトオプションを設定(設定戻す時に使う為)
-		GameOption.defRenderMethod = (INT)GetRenderMethod();
-		GameOption.defIRQtype      = (INT)GetIrqType();
-		GameOption.defFrameIRQ     = GetFrameIRQmode();
-		GameOption.defVideoMode    = GetVideoMode();
+		ConfigWrapper::GetCGameOption().defRenderMethod = (INT)GetRenderMethod();
+		ConfigWrapper::GetCGameOption().defIRQtype      = (INT)GetIrqType();
+		ConfigWrapper::GetCGameOption().defFrameIRQ     = GetFrameIRQmode();
+		ConfigWrapper::GetCGameOption().defVideoMode    = GetVideoMode();
 
 		// 設定をロードして設定する(エントリが無ければデフォルトが入る)
 		if( rom->GetMapperNo() != 20 ) {
-			GameOption.Load( rom->GetPROM_CRC() );
+			ConfigWrapper::GetCGameOption().Load( rom->GetPROM_CRC() );
 		} else {
-			GameOption.Load( rom->GetGameID(), rom->GetMakerID() );
+			ConfigWrapper::GetCGameOption().Load( rom->GetGameID(), rom->GetMakerID() );
 		}
-		SetRenderMethod( (RENDERMETHOD)GameOption.nRenderMethod );
-		SetIrqType     ( GameOption.nIRQtype );
-		SetFrameIRQmode( GameOption.bFrameIRQ );
-		SetVideoMode   ( GameOption.bVideoMode );
+		SetRenderMethod( (RENDERMETHOD)ConfigWrapper::GetCGameOption().nRenderMethod );
+		SetIrqType     ( ConfigWrapper::GetCGameOption().nIRQtype );
+		SetFrameIRQmode( ConfigWrapper::GetCGameOption().bFrameIRQ );
+		SetVideoMode   ( ConfigWrapper::GetCGameOption().bVideoMode );
 	} catch( CHAR* str ) {
 		DELETEPTR( cpu );
 		DELETEPTR( ppu );
@@ -334,7 +334,7 @@ NES::NES( const char* fname )
 		DELETEPTR( mapper );
 
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
 
@@ -578,15 +578,15 @@ INT	scanline = 0;
 					if( RenderMethod == POST_ALL_RENDER )
 						EmulationCPU( nescfg->ScanlineCycles );
 					if( bDraw ) {
-						ppu->Scanline( scanline, Config.graphics.bAllSprite, Config.graphics.bLeftClip );
+						ppu->Scanline( scanline, ConfigWrapper::GetCCfgGraphics().bAllSprite, ConfigWrapper::GetCCfgGraphics().bLeftClip );
 					} else {
 						if( pad->IsZapperMode() && scanline == ZapperY ) {
-							ppu->Scanline( scanline, Config.graphics.bAllSprite, Config.graphics.bLeftClip );
+							ppu->Scanline( scanline, ConfigWrapper::GetCCfgGraphics().bAllSprite, ConfigWrapper::GetCCfgGraphics().bLeftClip );
 						} else {
 							if( !ppu->IsSprite0( scanline ) ) {
 								ppu->DummyScanline( scanline );
 							} else {
-								ppu->Scanline( scanline, Config.graphics.bAllSprite, Config.graphics.bLeftClip );
+								ppu->Scanline( scanline, ConfigWrapper::GetCCfgGraphics().bAllSprite, ConfigWrapper::GetCCfgGraphics().bLeftClip );
 							}
 						}
 					}
@@ -600,15 +600,15 @@ INT	scanline = 0;
 					if( RenderMethod == POST_RENDER )
 						EmulationCPU( nescfg->HDrawCycles );
 					if( bDraw ) {
-						ppu->Scanline( scanline, Config.graphics.bAllSprite, Config.graphics.bLeftClip );
+						ppu->Scanline( scanline, ConfigWrapper::GetCCfgGraphics().bAllSprite, ConfigWrapper::GetCCfgGraphics().bLeftClip );
 					} else {
 						if( pad->IsZapperMode() && scanline == ZapperY ) {
-							ppu->Scanline( scanline, Config.graphics.bAllSprite, Config.graphics.bLeftClip );
+							ppu->Scanline( scanline, ConfigWrapper::GetCCfgGraphics().bAllSprite, ConfigWrapper::GetCCfgGraphics().bLeftClip );
 						} else {
 							if( !ppu->IsSprite0( scanline ) ) {
 								ppu->DummyScanline( scanline );
 							} else {
-								ppu->Scanline( scanline, Config.graphics.bAllSprite, Config.graphics.bLeftClip );
+								ppu->Scanline( scanline, ConfigWrapper::GetCCfgGraphics().bAllSprite, ConfigWrapper::GetCCfgGraphics().bLeftClip );
 							}
 						}
 					}
@@ -691,7 +691,7 @@ INT	scanline = 0;
 			} else if( scanline < 240 ) {
 			// スクリーン描画(Scanline 1〜239)
 				if( bDraw ) {
-					ppu->Scanline( scanline, Config.graphics.bAllSprite, Config.graphics.bLeftClip );
+					ppu->Scanline( scanline, ConfigWrapper::GetCCfgGraphics().bAllSprite, ConfigWrapper::GetCCfgGraphics().bLeftClip );
 					ppu->ScanlineNext();
 					EmulationCPU( FETCH_CYCLES*10 );
 					mapper->HSync( scanline );
@@ -700,7 +700,7 @@ INT	scanline = 0;
 					EmulationCPU( FETCH_CYCLES*10+nescfg->ScanlineEndCycles );
 				} else {
 					if( pad->IsZapperMode() && scanline == ZapperY ) {
-						ppu->Scanline( scanline, Config.graphics.bAllSprite, Config.graphics.bLeftClip );
+						ppu->Scanline( scanline, ConfigWrapper::GetCCfgGraphics().bAllSprite, ConfigWrapper::GetCCfgGraphics().bLeftClip );
 						ppu->ScanlineNext();
 						EmulationCPU( FETCH_CYCLES*10 );
 						mapper->HSync( scanline );
@@ -719,7 +719,7 @@ INT	scanline = 0;
 							ppu->ScanlineStart();
 							EmulationCPU( FETCH_CYCLES*10+nescfg->ScanlineEndCycles );
 						} else {
-							ppu->Scanline( scanline, Config.graphics.bAllSprite, Config.graphics.bLeftClip );
+							ppu->Scanline( scanline, ConfigWrapper::GetCCfgGraphics().bAllSprite, ConfigWrapper::GetCCfgGraphics().bLeftClip );
 							ppu->ScanlineNext();
 							EmulationCPU( FETCH_CYCLES*10 );
 							mapper->HSync( scanline );
@@ -775,7 +775,7 @@ INT	scanline = 0;
 	}
 
 	// Movie pad
-//	if( Config.movie.bPadDisplay && bDraw ) {
+//	if( ConfigWrapper::GetCCfgMovie().bPadDisplay && bDraw ) {
 //		DrawPad();
 //	}
 	// Movie pad
@@ -1072,8 +1072,8 @@ void	NES::LoadSRAM()
 		return;
 
 	string	pathstr, tempstr;
-	if( Config.path.bSavePath ) {
-		pathstr = CPathlib::CreatePath( CApp::GetModulePath(), Config.path.szSavePath );
+	if( ConfigWrapper::GetCCfgPath().bSavePath ) {
+		pathstr = CPathlib::CreatePath( AppWrapper::GetModulePath(), ConfigWrapper::GetCCfgPath().szSavePath );
 	} else {
 		pathstr = rom->GetRomPath();
 	}
@@ -1085,7 +1085,7 @@ void	NES::LoadSRAM()
 	{
 		if( !(fp = ::fopen( tempstr.c_str(), "rb" )) ) {
 			// xxx ファイルを開けません
-			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+			LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, tempstr.c_str() );
 			throw	szErrorString;
 		}
@@ -1114,7 +1114,7 @@ void	NES::LoadSRAM()
 		FCLOSE( fp );
 		DEBUGOUT( "Loading SAVERAM Error.\n" );
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
 }
@@ -1138,8 +1138,8 @@ INT	i;
 		DEBUGOUT( "Saving SAVERAM...\n" );
 
 		string	pathstr, tempstr;
-		if( Config.path.bSavePath ) {
-			pathstr = CPathlib::CreatePath( CApp::GetModulePath(), Config.path.szSavePath );
+		if( ConfigWrapper::GetCCfgPath().bSavePath ) {
+			pathstr = CPathlib::CreatePath( AppWrapper::GetModulePath(), ConfigWrapper::GetCCfgPath().szSavePath );
 			::CreateDirectory( pathstr.c_str(), NULL );
 		} else {
 			pathstr = rom->GetRomPath();
@@ -1152,14 +1152,14 @@ INT	i;
 		{
 			if( !(fp = ::fopen( tempstr.c_str(), "wb" )) ) {
 				// xxx ファイルを開けません
-				LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+				LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 				sprintf( szErrorString, szErrStr, tempstr.c_str() );
 				throw	szErrorString;
 			}
 
 			if( ::fwrite( WRAM, SAVERAM_SIZE, 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 
 			DEBUGOUT( "Ok.\n" );
@@ -1173,7 +1173,7 @@ INT	i;
 			DEBUGOUT( "Writing SAVERAM Error.\n" );
 			FCLOSE( fp );
 			// 不明なエラーが発生しました
-			throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 	#endif
 		}
 	}
@@ -1195,8 +1195,8 @@ void	NES::LoadDISK()
 	WORD	Version;
 
 	string	pathstr, tempstr;
-	if( Config.path.bSavePath ) {
-		pathstr = CPathlib::CreatePath( CApp::GetModulePath(), Config.path.szSavePath );
+	if( ConfigWrapper::GetCCfgPath().bSavePath ) {
+		pathstr = CPathlib::CreatePath( AppWrapper::GetModulePath(), ConfigWrapper::GetCCfgPath().szSavePath );
 	} else {
 		pathstr = rom->GetRomPath();
 	}
@@ -1207,39 +1207,39 @@ void	NES::LoadDISK()
 	{
 		if( !(fp = ::fopen( tempstr.c_str(), "rb" )) ) {
 			// xxx ファイルを開けません
-			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+			LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, tempstr.c_str() );
 			throw	szErrorString;
 		}
 
 		if( ::fread( &ifh, sizeof(DISKIMGFILEHDR), 1, fp ) != 1 ) {
 			// ファイルの読み込みに失敗しました
-			throw	CApp::GetErrorString( IDS_ERROR_READ );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 		}
 
 		if( ::memcmp( ifh.ID, "VirtuaNES DI", sizeof(ifh.ID) ) == 0 ) {
 			if( ifh.BlockVersion < 0x0100 && ifh.BlockVersion > 0x200 ) {
 				// 未対応形式です
-				throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 			}
 			Version = ifh.BlockVersion;
 		} else {
 			// 未対応形式です
-			throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 		}
 
 		if( Version == 0x0100 ) {
 		// Ver0.24以前
 			if( ifh.DiskNumber > 4 ) {
 				// 未対応形式です
-				throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 			}
 
 			for( i = 0; i < (INT)ifh.DiskNumber; i++ ) {
 				if( ::fread( &hdr, sizeof(DISKIMGHDR), 1, fp ) != 1 ) {
 					if( i == 0 ) {
 						// ファイルの読み込みに失敗しました
-						throw	CApp::GetErrorString( IDS_ERROR_READ );
+						throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 					} else {
 						break;
 					}
@@ -1255,7 +1255,7 @@ void	NES::LoadDISK()
 					diskno = 3;
 				} else {
 					// 未対応形式です
-					throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 				}
 
 				for( j = 0; j < 16; j++ ) {
@@ -1265,13 +1265,13 @@ void	NES::LoadDISK()
 							if( ::fread( disk, 4*1024, 1, fp ) != 1 ) {
 								bExit = TRUE;
 								// ファイルの読み込みに失敗しました
-								throw	CApp::GetErrorString( IDS_ERROR_READ );
+								throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 							}
 						} else {
 							if( ::fread( disk, 4*1024-36, 1, fp ) != 1 ) {
 								bExit = TRUE;
 								// ファイルの読み込みに失敗しました
-								throw	CApp::GetErrorString( IDS_ERROR_READ );
+								throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 							}
 						}
 					}
@@ -1293,20 +1293,20 @@ void	NES::LoadDISK()
 			// ヘッダ読み直し
 			if( ::fseek( fp, 0, SEEK_SET ) ) {
 				// ファイルの読み込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_READ );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 			}
 			if( ::fread( &dfh, sizeof(DISKFILEHDR), 1, fp ) != 1 ) {
 				// ファイルの読み込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_READ );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 			}
 
-			if( Config.emulator.bCrcCheck ) {
+			if( ConfigWrapper::GetCCfgEmulator().bCrcCheck ) {
 				// 現在ロード中のタイトルと違うかをチェック
 				if( dfh.ProgID  !=       rom->GetGameID()
 				 || dfh.MakerID != (WORD)rom->GetMakerID()
 				 || dfh.DiskNo  != (WORD)rom->GetDiskNo() ) {
 					// ファイルの読み込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_READ );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
 			}
 
@@ -1314,7 +1314,7 @@ void	NES::LoadDISK()
 				if( ::fread( &pos, sizeof(DWORD), 1, fp ) != 1 ) {
 					// ファイルの読み込みに失敗しました
 					bExit = TRUE;
-					throw	CApp::GetErrorString( IDS_ERROR_READ );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
 				data = (BYTE)(pos>>24);
 				pos &= 0x00FFFFFF;
@@ -1335,7 +1335,7 @@ void	NES::LoadDISK()
 		FCLOSE( fp );
 		DEBUGOUT( "Loading DISKIMAGE Error.\n" );
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
 }
@@ -1373,8 +1373,8 @@ void	NES::SaveDISK()
 			return;
 
 		string	pathstr, tempstr;
-		if( Config.path.bSavePath ) {
-			pathstr = CPathlib::CreatePath( CApp::GetModulePath(), Config.path.szSavePath );
+		if( ConfigWrapper::GetCCfgPath().bSavePath ) {
+			pathstr = CPathlib::CreatePath( AppWrapper::GetModulePath(), ConfigWrapper::GetCCfgPath().szSavePath );
 			::CreateDirectory( pathstr.c_str(), NULL );
 		} else {
 			pathstr = rom->GetRomPath();
@@ -1384,14 +1384,14 @@ void	NES::SaveDISK()
 
 		if( !(fp = ::fopen( tempstr.c_str(), "wb" )) ) {
 			// xxx ファイルを開けません
-			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+			LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 			::wsprintf( szErrorString, szErrStr, tempstr.c_str() );
 			throw	szErrorString;
 		}
 
 		if( ::fwrite( &ifh, sizeof(DISKFILEHDR), 1, fp ) != 1 ) {
 			// ファイルの書き込みに失敗しました
-			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 		}
 
 		for( i = 16; i < DiskSize; i++ ) {
@@ -1402,7 +1402,7 @@ void	NES::SaveDISK()
 				// Write File
 				if( ::fwrite( &data, sizeof(DWORD), 1, fp ) != 1 ) {
 					// ファイルの書き込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 				}
 			}
 		}
@@ -1415,7 +1415,7 @@ void	NES::SaveDISK()
 		FCLOSE( fp );
 		DEBUGOUT( "Saving DISKIMAGE Error.\n" );
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
 }
@@ -1428,8 +1428,8 @@ void	NES::LoadTurboFile()
 		return;
 
 	string	pathstr, tempstr;
-	if( Config.path.bSavePath ) {
-		pathstr = CPathlib::CreatePath( CApp::GetModulePath(), Config.path.szSavePath );
+	if( ConfigWrapper::GetCCfgPath().bSavePath ) {
+		pathstr = CPathlib::CreatePath( AppWrapper::GetModulePath(), ConfigWrapper::GetCCfgPath().szSavePath );
 	} else {
 		pathstr = rom->GetRomPath();
 	}
@@ -1441,7 +1441,7 @@ void	NES::LoadTurboFile()
 	{
 		if( !(fp = ::fopen( tempstr.c_str(), "rb" )) ) {
 			// xxx ファイルを開けません
-			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+			LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, tempstr.c_str() );
 			throw	szErrorString;
 		}
@@ -1471,7 +1471,7 @@ void	NES::LoadTurboFile()
 		FCLOSE( fp );
 		DEBUGOUT( "Loading TurboFile Error.\n" );
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
 }
@@ -1492,8 +1492,8 @@ INT	i;
 		DEBUGOUT( "Saving TURBOFILE...\n" );
 
 		string	pathstr, tempstr;
-		if( Config.path.bSavePath ) {
-			pathstr = CPathlib::CreatePath( CApp::GetModulePath(), Config.path.szSavePath );
+		if( ConfigWrapper::GetCCfgPath().bSavePath ) {
+			pathstr = CPathlib::CreatePath( AppWrapper::GetModulePath(), ConfigWrapper::GetCCfgPath().szSavePath );
 			::CreateDirectory( pathstr.c_str(), NULL );
 		} else {
 			pathstr = rom->GetRomPath();
@@ -1506,14 +1506,14 @@ INT	i;
 		{
 			if( !(fp = ::fopen( tempstr.c_str(), "wb" )) ) {
 				// xxx ファイルを開けません
-				LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+				LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 				sprintf( szErrorString, szErrStr, tempstr.c_str() );
 				throw	szErrorString;
 			}
 
 			if( ::fwrite( ERAM, sizeof(ERAM), 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 
 			DEBUGOUT( "Ok.\n" );
@@ -1527,7 +1527,7 @@ INT	i;
 			DEBUGOUT( "Writing TurboFile Error.\n" );
 			FCLOSE( fp );
 			// 不明なエラーが発生しました
-			throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 	#endif
 		}
 	}
@@ -1551,7 +1551,7 @@ FILEHDR2 header;
 		if( header.BlockVersion < 0x0100 )
 			return	0;
 
-		if( Config.emulator.bCrcCheck ) {
+		if( ConfigWrapper::GetCCfgEmulator().bCrcCheck ) {
 			if( header.BlockVersion >= 0x200 ) {
 				if( rom->GetMapperNo() != 20 ) {
 				// FDS以外
@@ -1583,7 +1583,7 @@ BOOL	bRet = FALSE;
 	try {
 		if( !(fp = ::fopen( fname, "rb" )) ) {
 			// xxx ファイルを開けません
-			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+			LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, fname );
 			throw	szErrorString;
 		}
@@ -1601,7 +1601,7 @@ BOOL	bRet = FALSE;
 		DEBUGOUT( "State load error.\n" );
 		FCLOSE( fp );
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
 
@@ -1618,7 +1618,7 @@ FILE*	fp = NULL;
 	try {
 		if( !(fp = ::fopen( fname, "wb" )) ) {
 			// xxx ファイルを開けません
-			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+			LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, fname );
 			throw	szErrorString;
 		}
@@ -1635,7 +1635,7 @@ FILE*	fp = NULL;
 		DEBUGOUT( "State save error.\n" );
 		FCLOSE( fp );
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
 
@@ -1671,7 +1671,7 @@ BOOL	NES::ReadState( FILE* fp )
 					// 古い奴のFDSはロード出来ません
 					if( rom->GetMapperNo() == 20 ) {
 						// 未対応形式です
-						throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
+						throw	AppWrapper::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 					}
 				} else 
 				if( Version == 0x0200 || Version == 0x0210 ) {
@@ -1680,16 +1680,16 @@ BOOL	NES::ReadState( FILE* fp )
 					// ヘッダ部読み直し
 					if( ::fseek( fp, -sizeof(BLOCKHDR), SEEK_CUR ) ) {
 						// ファイルの読み込みに失敗しました
-						throw	CApp::GetErrorString( IDS_ERROR_READ );
+						throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 					}
 					// Read File
 					if( ::fread( &hdr2, sizeof(FILEHDR2), 1, fp ) != 1 ) {
 						// ファイルの読み込みに失敗しました
-						throw	CApp::GetErrorString( IDS_ERROR_READ );
+						throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 					}
 
 #if	0
-					if( Config.emulator.bCrcCheck ) {
+					if( ConfigWrapper::GetCCfgEmulator().bCrcCheck ) {
 						// 現在ロード中のタイトルと違うかをチェック
 						if( rom->GetMapperNo() != 20 ) {
 						// FDS以外
@@ -1732,7 +1732,7 @@ BOOL	NES::ReadState( FILE* fp )
 								if( ::fseek( m_fpMovie, hdr2.MovieOffset, SEEK_SET ) ) {
 //DEBUGOUT( "MOVIE:STATE LOAD SEEK 失敗\n" );
 									// ファイルの読み込みに失敗しました
-									throw	CApp::GetErrorString( IDS_ERROR_READ );
+									throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 								}
 							} else {
 								return	FALSE;
@@ -1749,7 +1749,7 @@ BOOL	NES::ReadState( FILE* fp )
 
 		if( !bHeader ) {
 			// 未対応形式です
-			throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 		}
 
 //DEBUGOUT( "HEADER ID=%8s\n", hdr.ID );
@@ -1789,7 +1789,7 @@ BOOL	NES::ReadState( FILE* fp )
 					REGSTAT_O	reg;
 					if( ::fread( &reg, sizeof(REGSTAT_O), 1, fp ) != 1 ) {
 						// ファイルの読み込みに失敗しました
-						throw	CApp::GetErrorString( IDS_ERROR_READ );
+						throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 					}
 
 					// LOAD CPU STATE
@@ -1827,7 +1827,7 @@ BOOL	NES::ReadState( FILE* fp )
 					REGSTAT	reg;
 					if( ::fread( &reg, sizeof(REGSTAT), 1, fp ) != 1 ) {
 						// ファイルの読み込みに失敗しました
-						throw	CApp::GetErrorString( IDS_ERROR_READ );
+						throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 					}
 
 					// LOAD CPU STATE
@@ -1887,7 +1887,7 @@ BOOL	NES::ReadState( FILE* fp )
 				RAMSTAT	ram;
 				if( ::fread( &ram, sizeof(RAMSTAT), 1, fp ) != 1 ) {
 					// ファイルの読み込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_READ );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
 				::memcpy( RAM, ram.RAM, sizeof(ram.RAM) );
 				::memcpy( BGPAL, ram.BGPAL, sizeof(ram.BGPAL) );
@@ -1896,7 +1896,7 @@ BOOL	NES::ReadState( FILE* fp )
 				if( rom->IsSAVERAM() ) {
 					if( ::fread( WRAM, SAVERAM_SIZE, 1, fp ) != 1 ) {
 						// ファイルの読み込みに失敗しました
-						throw	CApp::GetErrorString( IDS_ERROR_READ );
+						throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 					}
 				}
 				}
@@ -1907,7 +1907,7 @@ BOOL	NES::ReadState( FILE* fp )
 				MMUSTAT mmu;
 				if( ::fread( &mmu, sizeof(MMUSTAT), 1, fp ) != 1 ) {
 					// ファイルの読み込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_READ );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
 				if( hdr.BlockVersion == 0x100 ) {
 				// ちょっと前のバージョン
@@ -1915,7 +1915,7 @@ BOOL	NES::ReadState( FILE* fp )
 					 || mmu.CPU_MEM_TYPE[3] == BANKTYPE_DRAM ) {
 						if( ::fread( CPU_MEM_BANK[3], 8*1024, 1, fp ) != 1 ) {
 							// ファイルの読み込みに失敗しました
-							throw	CApp::GetErrorString( IDS_ERROR_READ );
+							throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 						}
 					} else if( !rom->IsSAVERAM() ) {
 						SetPROM_8K_Bank( 3, mmu.CPU_MEM_PAGE[3] );
@@ -1929,7 +1929,7 @@ BOOL	NES::ReadState( FILE* fp )
 						} else {
 							if( ::fread( CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
 								// ファイルの読み込みに失敗しました
-								throw	CApp::GetErrorString( IDS_ERROR_READ );
+								throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 							}
 						}
 					}
@@ -1944,7 +1944,7 @@ BOOL	NES::ReadState( FILE* fp )
 						} else {
 							if( ::fread( CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
 								// ファイルの読み込みに失敗しました
-								throw	CApp::GetErrorString( IDS_ERROR_READ );
+								throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 							}
 						}
 					}
@@ -1952,7 +1952,7 @@ BOOL	NES::ReadState( FILE* fp )
 				// VRAM
 				if( ::fread( VRAM, 4*1024, 1, fp ) != 1 ) {
 					// ファイルの読み込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_READ );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
 
 				// CRAM
@@ -1960,7 +1960,7 @@ BOOL	NES::ReadState( FILE* fp )
 					if( mmu.CRAM_USED[i] != 0 ) {
 						if( ::fread( &CRAM[0x1000*i], 4*1024, 1, fp ) != 1 ) {
 							// ファイルの読み込みに失敗しました
-							throw	CApp::GetErrorString( IDS_ERROR_READ );
+							throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 						}
 					}
 				}
@@ -1984,7 +1984,7 @@ BOOL	NES::ReadState( FILE* fp )
 				MMCSTAT	mmc;
 				if( ::fread( &mmc, sizeof(MMCSTAT), 1, fp ) != 1 ) {
 					// ファイルの読み込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_READ );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
 				mapper->LoadState( mmc.mmcdata );
 				}
@@ -1995,7 +1995,7 @@ BOOL	NES::ReadState( FILE* fp )
 				CTRSTAT	ctr;
 				if( ::fread( &ctr, sizeof(CTRSTAT), 1, fp ) != 1 ) {
 					// ファイルの読み込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_READ );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
 
 				pad->pad1bit = ctr.ctrreg.ctr.pad1bit;
@@ -2012,7 +2012,7 @@ BOOL	NES::ReadState( FILE* fp )
 				SNDSTAT	snd;
 				if( ::fread( &snd, sizeof(SNDSTAT), 1, fp ) != 1 ) {
 					// ファイルの読み込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_READ );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
 				apu->LoadState( snd.snddata );
 				}
@@ -2034,13 +2034,13 @@ BOOL	NES::ReadState( FILE* fp )
 
 				if( ::fread( &ddata, sizeof(DISKDATA), 1, fp ) != 1 ) {
 					// ファイルの読み込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_READ );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
 
 				for( i = 0; i < ddata.DifferentSize; i++ ) {
 					if( ::fread( &pos, sizeof(DWORD), 1, fp ) != 1 ) {
 						// ファイルの読み込みに失敗しました
-						throw	CApp::GetErrorString( IDS_ERROR_READ );
+						throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 					}
 					data = (BYTE)(pos>>24);
 					pos &= 0x00FFFFFF;
@@ -2059,7 +2059,7 @@ BOOL	NES::ReadState( FILE* fp )
 				EXCTRSTAT exctr;
 				if( ::fread( &exctr, sizeof(EXCTRSTAT), 1, fp ) != 1 ) {
 					// ファイルの読み込みに失敗しました
-					throw CApp::GetErrorString( IDS_ERROR_READ );
+					throw AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
 
 				pad->SetSyncExData( exctr.data );
@@ -2101,7 +2101,7 @@ void	NES::WriteState( FILE* fp )
 	// Write File
 	if( ::fwrite( &hdr, sizeof(FILEHDR2), 1, fp ) != 1 )
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 
 	BLOCKHDR hdr;
@@ -2156,11 +2156,11 @@ void	NES::WriteState( FILE* fp )
 	// Write File
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 	if( ::fwrite( &reg, sizeof(REGSTAT), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 	}
 
@@ -2191,16 +2191,16 @@ void	NES::WriteState( FILE* fp )
 	// Write File
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 	if( ::fwrite( &ram, sizeof(RAMSTAT), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 	if( rom->IsSAVERAM() ) {
 		if( ::fwrite( WRAM, SAVERAM_SIZE, 1, fp ) != 1 )
 			// ファイルの書き込みに失敗しました
-			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 		}
 	}
 
@@ -2249,11 +2249,11 @@ void	NES::WriteState( FILE* fp )
 	// Write File
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 	if( ::fwrite( &mmu, sizeof(MMUSTAT), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 
 	// WRITE CPU RAM MEMORY BANK
@@ -2261,14 +2261,14 @@ void	NES::WriteState( FILE* fp )
 		if( mmu.CPU_MEM_TYPE[i] != BANKTYPE_ROM ) {
 			if( ::fwrite( CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 		}
 	}
 	// WRITE VRAM MEMORY(常に4K分すべて書き込む)
 	if( ::fwrite( VRAM, 4*1024, 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 
 	// WRITE CRAM MEMORY
@@ -2276,7 +2276,7 @@ void	NES::WriteState( FILE* fp )
 		if( CRAM_USED[i] != 0 ) {
 			if( ::fwrite( &CRAM[0x1000*i], 4*1024, 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 		}
 	}
@@ -2299,11 +2299,11 @@ void	NES::WriteState( FILE* fp )
 		// Write File
 		if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
 			// ファイルの書き込みに失敗しました
-			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 		}
 		if( ::fwrite( &mmc, sizeof(MMCSTAT), 1, fp ) != 1 ) {
 			// ファイルの書き込みに失敗しました
-			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 		}
 	}
 	}
@@ -2329,12 +2329,12 @@ void	NES::WriteState( FILE* fp )
 
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 
 	if( ::fwrite( &ctr, sizeof(CTRSTAT), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 	}
 
@@ -2354,12 +2354,12 @@ void	NES::WriteState( FILE* fp )
 
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 
 	if( ::fwrite( &snd, sizeof(SNDSTAT), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 	}
 
@@ -2388,12 +2388,12 @@ void	NES::WriteState( FILE* fp )
 	// Write File
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 	// Write File
 	if( ::fwrite( &dsk, sizeof(DISKDATA), 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
-		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 
 	for( i = 16; i < DiskSize; i++ ) {
@@ -2404,7 +2404,7 @@ void	NES::WriteState( FILE* fp )
 			// Write File
 			if( ::fwrite( &data, sizeof(DWORD), 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 		}
 	}
@@ -2427,12 +2427,12 @@ void	NES::WriteState( FILE* fp )
 
 		if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
 			// ファイルの書き込みに失敗しました
-			throw CApp::GetErrorString( IDS_ERROR_WRITE );
+			throw AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 		}
 
 		if( ::fwrite( &exctr, sizeof(EXCTRSTAT), 1, fp ) != 1 ) {
 			// ファイルの書き込みに失敗しました
-			throw CApp::GetErrorString( IDS_ERROR_WRITE );
+			throw AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 		}
 	}
 }
@@ -2458,7 +2458,7 @@ BOOL	NES::CommandParam( NESCOMMAND cmd, INT param )
 		case	NESCMD_NONE:
 			break;
 		case	NESCMD_DISK_THROTTLE_ON:
-			if( Config.emulator.bDiskThrottle ) {
+			if( ConfigWrapper::GetCCfgEmulator().bDiskThrottle ) {
 				m_bDiskThrottle = TRUE;
 			}
 			break;
@@ -2549,7 +2549,7 @@ FILE*	fp = NULL;
 
 		CHAR	name[_MAX_PATH];
 
-		if( !Config.emulator.bPNGsnapshot ) {
+		if( !ConfigWrapper::GetCCfgEmulator().bPNGsnapshot ) {
 			sprintf( name, "%s %04d%02d%02d%02d%02d%02d%01d.bmp", rom->GetRomName(),
 				now.wYear, now.wMonth, now.wDay, now.wHour, now.wMinute, now.wSecond, now.wMilliseconds/100 );
 		} else {
@@ -2558,8 +2558,8 @@ FILE*	fp = NULL;
 		}
 
 		string	pathstr, tempstr;
-		if( Config.path.bSnapshotPath ) {
-			pathstr = CPathlib::CreatePath( CApp::GetModulePath(), Config.path.szSnapshotPath );
+		if( ConfigWrapper::GetCCfgPath().bSnapshotPath ) {
+			pathstr = CPathlib::CreatePath( AppWrapper::GetModulePath(), ConfigWrapper::GetCCfgPath().szSnapshotPath );
 			::CreateDirectory( pathstr.c_str(), NULL );
 		} else {
 			pathstr = rom->GetRomPath();
@@ -2567,10 +2567,10 @@ FILE*	fp = NULL;
 		tempstr = CPathlib::MakePath( pathstr.c_str(), name );
 		DEBUGOUT( "Snapshot: %s\n", tempstr.c_str() );
 
-		if( !Config.emulator.bPNGsnapshot ) {
+		if( !ConfigWrapper::GetCCfgEmulator().bPNGsnapshot ) {
 			if( !(fp = ::fopen( tempstr.c_str(), "wb" )) ) {
 				// xxx ファイルを開けません
-				LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+				LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 				sprintf( szErrorString, szErrStr, tempstr.c_str() );
 				throw	szErrorString;
 			}
@@ -2605,22 +2605,22 @@ FILE*	fp = NULL;
 
 			if( ::fwrite( &bfh, sizeof(bfh), 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 			if( ::fwrite( &bih, sizeof(bih), 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 			if( ::fwrite( &rgb, sizeof(rgb), 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 
 			lpScn += 8;
 			for( INT i = 239; i >= 0; i-- ) {
 				if( ::fwrite( &lpScn[(256+16)*i], 256, 1, fp ) != 1 ) {
 					// ファイルの書き込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 				}
 			}
 
@@ -2644,7 +2644,7 @@ FILE*	fp = NULL;
 		DEBUGOUT( "Snapshot error.\n" );
 		FCLOSE( fp );
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
 
@@ -2715,7 +2715,7 @@ DEBUGOUT( "NES::MoviePlay\n" );
 		// 読み込み
 		if( ::fread( &m_hedMovie, sizeof(m_hedMovie), 1, m_fpMovie ) != 1 ) {
 			// ファイルの読み込みに失敗しました
-			throw	CApp::GetErrorString( IDS_ERROR_READ );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 		}
 
 		if( ::memcmp( m_hedMovie.ID, "VirtuaNES MV", sizeof(m_hedMovie.ID) ) == 0 ) {
@@ -2764,7 +2764,7 @@ DEBUGOUT( "NES::MoviePlay\n" );
 
 		if( ::fseek( m_fpMovie, MovieOffset, SEEK_SET ) ) {
 			// ファイルの読み込みに失敗しました
-			throw	CApp::GetErrorString( IDS_ERROR_READ );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 		}
 
 		// ムービーが記録されていない？
@@ -2784,7 +2784,7 @@ DEBUGOUT( "NES::MoviePlay\n" );
 		DEBUGOUT( "Movie play error.\n" );
 		FCLOSE( m_fpMovie );
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
 
@@ -2805,7 +2805,7 @@ DEBUGOUT( "NES::MovieRec\n" );
 	try {
 		if( !(m_fpMovie = ::fopen( fname, "wb" )) ) {
 			// xxx ファイルを開けません
-			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+			LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, fname );
 			throw	szErrorString;
 		}
@@ -2818,12 +2818,12 @@ DEBUGOUT( "NES::MovieRec\n" );
 
 		m_hedMovie.StateStOffset = sizeof(m_hedMovie);
 
-		m_hedMovie.Control |= Config.movie.bUsePlayer[0]?0x01:0x00;
-		m_hedMovie.Control |= Config.movie.bUsePlayer[1]?0x02:0x00;
-		m_hedMovie.Control |= Config.movie.bUsePlayer[2]?0x04:0x00;
-		m_hedMovie.Control |= Config.movie.bUsePlayer[3]?0x08:0x00;
-		m_hedMovie.Control |= Config.movie.bResetRec?0x40:0x00;
-		m_hedMovie.Control |= Config.movie.bRerecord?0x80:0x00;
+		m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bUsePlayer[0]?0x01:0x00;
+		m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bUsePlayer[1]?0x02:0x00;
+		m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bUsePlayer[2]?0x04:0x00;
+		m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bUsePlayer[3]?0x08:0x00;
+		m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bResetRec?0x40:0x00;
+		m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bRerecord?0x80:0x00;
 		m_MovieControl = m_hedMovie.Control;
 
 		// ゲーム固有オプション
@@ -2847,10 +2847,10 @@ DEBUGOUT( "NES::MovieRec\n" );
 		if( ::fwrite( &m_hedMovie, sizeof(m_hedMovie), 1, m_fpMovie ) != 1 ) {
 			FCLOSE( m_fpMovie );
 			// ファイルの書き込みに失敗しました
-			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 		}
 
-		if( Config.movie.bResetRec ) {
+		if( ConfigWrapper::GetCCfgMovie().bResetRec ) {
 			Reset();	// ハードウェアリセットからの記録開始
 		} else {
 			// ステート書き込み
@@ -2871,7 +2871,7 @@ DEBUGOUT( "NES::MovieRec\n" );
 		DEBUGOUT( "Movie record error.\n" );
 		FCLOSE( m_fpMovie );
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
 
@@ -2898,7 +2898,7 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 			// ファイルが無いとき
 			if( !(m_fpMovie = ::fopen( fname, "wb" )) ) {
 				// xxx ファイルを開けません
-				LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+				LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 				sprintf( szErrorString, szErrStr, fname );
 				throw	szErrorString;
 			}
@@ -2910,12 +2910,12 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 			m_hedMovie.RecordVersion = VIRTUANES_VERSION;
 			m_hedMovie.StateStOffset = sizeof(m_hedMovie);
 
-			m_hedMovie.Control |= Config.movie.bUsePlayer[0]?0x01:0x00;
-			m_hedMovie.Control |= Config.movie.bUsePlayer[1]?0x02:0x00;
-			m_hedMovie.Control |= Config.movie.bUsePlayer[2]?0x04:0x00;
-			m_hedMovie.Control |= Config.movie.bUsePlayer[3]?0x08:0x00;
-			m_hedMovie.Control |= Config.movie.bRerecord?0x80:0x00;
-			m_hedMovie.Control |= Config.movie.bResetRec?0x40:0x00;
+			m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bUsePlayer[0]?0x01:0x00;
+			m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bUsePlayer[1]?0x02:0x00;
+			m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bUsePlayer[2]?0x04:0x00;
+			m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bUsePlayer[3]?0x08:0x00;
+			m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bRerecord?0x80:0x00;
+			m_hedMovie.Control |= ConfigWrapper::GetCCfgMovie().bResetRec?0x40:0x00;
 			m_MovieControl = m_hedMovie.Control;
 
 			// ゲーム固有オプション
@@ -2928,10 +2928,10 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 			if( ::fwrite( &m_hedMovie, sizeof(m_hedMovie), 1, m_fpMovie ) != 1 ) {
 				FCLOSE( m_fpMovie );
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 
-			if( Config.movie.bResetRec ) {
+			if( ConfigWrapper::GetCCfgMovie().bResetRec ) {
 				Reset();	// ハードウェアリセットからの記録開始
 			} else {
 				// ステート書き込み
@@ -2944,7 +2944,7 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 		} else {
 			if( !(m_fpMovie = ::fopen( fname, "rb+" )) ) {
 				// xxx ファイルを開けません
-				LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
+				LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
 				sprintf( szErrorString, szErrStr, fname );
 				throw	szErrorString;
 			}
@@ -2952,12 +2952,12 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 			if( ::fseek( m_fpMovie, 0, SEEK_SET ) ) {
 				FCLOSE( m_fpMovie );
 				// ファイルの読み込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_READ );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 			}
 			if( ::fread( &m_hedMovie, sizeof(m_hedMovie), 1, m_fpMovie ) != 1 ) {
 				FCLOSE( m_fpMovie );
 				// ファイルの読み込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_READ );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 			}
 
 			if( ::memcmp( m_hedMovie.ID, "VirtuaNES MV", sizeof(m_hedMovie.ID) ) != 0 ) {
@@ -2978,17 +2978,17 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 			if( ::fseek( m_fpMovie, m_hedMovie.StateEdOffset, SEEK_SET ) ) {
 				FCLOSE( m_fpMovie );
 				// ファイルの読み込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_READ );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 			}
 			if( !ReadState( m_fpMovie ) ) {
 				FCLOSE( m_fpMovie );
 				// ファイルの読み込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_READ );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 			}
 			if( ::fseek( m_fpMovie, m_hedMovie.StateEdOffset, SEEK_SET ) ) {
 				FCLOSE( m_fpMovie );
 				// ファイルの読み込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_READ );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 			}
 		}
 		m_bMovieRec = TRUE;
@@ -3001,7 +3001,7 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 		DEBUGOUT( "Movie record error.\n" );
 		FCLOSE( m_fpMovie );
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
 
@@ -3030,7 +3030,7 @@ DEBUGOUT( "NES::MovieStop\n" );
 		if( ::fseek( m_fpMovie, 0, SEEK_SET ) ) {
 			FCLOSE( m_fpMovie );
 			// ファイルの書き込みに失敗しました
-			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 		}
 
 		// CRC 書き込み
@@ -3040,7 +3040,7 @@ DEBUGOUT( "NES::MovieStop\n" );
 		if( ::fwrite( &m_hedMovie, sizeof(m_hedMovie), 1, m_fpMovie ) != 1 ) {
 			FCLOSE( m_fpMovie );
 			// ファイルの書き込みに失敗しました
-			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 		}
 
 		FCLOSE( m_fpMovie );
@@ -3102,7 +3102,7 @@ void	NES::Movie()
 				if( ::fwrite( &Data, sizeof(Data), 1, m_fpMovie ) != 1 ) {
 					MovieStop();
 					// ファイルの書き込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 				}
 				// 種類
 				wData = (WORD)(0x0100|(pad->GetExController()&0x0FF));
@@ -3110,7 +3110,7 @@ void	NES::Movie()
 				if( ::fwrite( &wData, sizeof(wData), 1, m_fpMovie ) != 1 ) {
 					MovieStop();
 					// ファイルの書き込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 				}
 			}
 		}
@@ -3122,7 +3122,7 @@ void	NES::Movie()
 			if( ::fwrite( &Data, sizeof(Data), 1, m_fpMovie ) != 1 ) {
 				MovieStop();
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 			// コマンド
 			wData = (WORD)m_CommandRequest;
@@ -3130,7 +3130,7 @@ void	NES::Movie()
 			if( ::fwrite( &wData, sizeof(wData), 1, m_fpMovie ) != 1 ) {
 				MovieStop();
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 		}
 		m_CommandRequest = 0;
@@ -3152,7 +3152,7 @@ void	NES::Movie()
 			if( ::fwrite( &Data, sizeof(Data), 1, m_fpMovie ) != 1 ) {
 				MovieStop();
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 			// データ
 			dwData = pad->GetSyncExData();
@@ -3161,7 +3161,7 @@ void	NES::Movie()
 			if( ::fwrite( &dwData, sizeof(dwData), 1, m_fpMovie ) != 1 ) {
 				MovieStop();
 				// ファイルの書き込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 		}
 
@@ -3173,7 +3173,7 @@ void	NES::Movie()
 				if( ::fwrite( &Data, sizeof(Data), 1, m_fpMovie ) != 1 ) {
 					MovieStop();
 					// ファイルの書き込みに失敗しました
-					throw	CApp::GetErrorString( IDS_ERROR_WRITE );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 				}
 			}
 		}
@@ -3190,7 +3190,7 @@ void	NES::Movie()
 
 		// ムービー再生終了？
 		if( m_MovieStep >= m_MovieStepTotal ) {
-			if( !Config.movie.bLoopPlay ) {
+			if( !ConfigWrapper::GetCCfgMovie().bLoopPlay ) {
 				MovieStop();
 				return;
 			} else {
@@ -3519,9 +3519,9 @@ void	NES::DrawPad()
 {
 	if( m_bMoviePlay ) {
 		INT	offset_h = 12;
-		INT	offset_v = Config.graphics.bAllLine?(240-18):(240-22);
+		INT	offset_v = ConfigWrapper::GetCCfgGraphics().bAllLine?(240-18):(240-22);
 
-		if( Config.movie.bPadDisplay ) {
+		if( ConfigWrapper::GetCCfgMovie().bPadDisplay ) {
 
 			DWORD	dwData = pad->GetSyncData();
 			for( INT i = 0; i < 4; i++ ) {
@@ -3548,7 +3548,7 @@ void	NES::DrawPad()
 			}
 		}
 
-		if( Config.movie.bTimeDisplay ) {
+		if( ConfigWrapper::GetCCfgMovie().bTimeDisplay ) {
 			// Time display
 			INT	t = m_MovieStep;
 			INT	h = t / 216000;

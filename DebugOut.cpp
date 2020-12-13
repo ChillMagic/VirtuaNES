@@ -1,6 +1,8 @@
 ﻿//
 // Debug output
 //
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 #include "DebugOut.h"
 
 CDebugOut	Dbg;
@@ -21,8 +23,8 @@ void CDebugOut::Clear()
 {
 #if	defined(_DEBUG) || defined(_DEBUGOUT)
 	if( hWndDebugOutput ) {
-		if( ::IsWindow( hWndDebugOutput ) ) {
-			::SendMessage( hWndDebugOutput, WM_APP+1, (WPARAM)NULL, (LPARAM)NULL );
+		if( ::IsWindow( (HWND)hWndDebugOutput ) ) {
+			::SendMessage((HWND)hWndDebugOutput, WM_APP+1, (WPARAM)NULL, (LPARAM)NULL );
 		}
 	}
 #endif
@@ -37,13 +39,13 @@ void __cdecl CDebugOut::Out( LPCSTR fmt, ... )
 	::vsprintf( buf, fmt, va );
 
 	if( hWndDebugOutput ) {
-		if( ::IsWindow( hWndDebugOutput ) ) {
+		if( ::IsWindow((HWND)hWndDebugOutput ) ) {
 			COPYDATASTRUCT	cds;
 			cds.dwData = 0;
 			cds.lpData = (void*)buf;
 			cds.cbData = ::strlen(buf)+1; //  終端のNULLも送る
 			//  文字列送信
-			::SendMessage( hWndDebugOutput, WM_COPYDATA, (WPARAM)NULL, (LPARAM)&cds );
+			::SendMessage((HWND)hWndDebugOutput, WM_COPYDATA, (WPARAM)NULL, (LPARAM)&cds );
 		} else {
 			::OutputDebugString( buf );
 		}

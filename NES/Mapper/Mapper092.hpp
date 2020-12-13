@@ -32,7 +32,7 @@ void	Mapper092::Write( WORD addr, BYTE data )
 					  9,10, 8,11,13,12,14,15 };
 
 			// OSDにするべきか…
-			if( Config.sound.bExtraSoundEnable ) {
+			if( ConfigWrapper::GetCCfgSound().bExtraSoundEnable ) {
 DEBUGOUT( "CODE %02X\n", data );
 				DirectSound.EsfAllStop();
 				DirectSound.EsfPlay( ESF_MOEPRO_STRIKE+tbl[data&0x0F] );

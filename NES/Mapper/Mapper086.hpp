@@ -26,7 +26,7 @@ void	Mapper086::WriteLow( WORD addr, BYTE data )
 			}
 
 			// OSDにするべきか…
-			if( Config.sound.bExtraSoundEnable ) {
+			if( ConfigWrapper::GetCCfgSound().bExtraSoundEnable ) {
 				DirectSound.EsfAllStop();
 				DirectSound.EsfPlay( ESF_MOEPRO_STRIKE+(data&0x0F) );
 			}

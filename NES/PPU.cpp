@@ -14,7 +14,6 @@
 #include "Macro.h"
 
 #include "DebugOut.h"
-#include "App.h"
 
 #include "Nes.h"
 #include "MMU.h"

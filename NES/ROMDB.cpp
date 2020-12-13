@@ -9,8 +9,7 @@
 #include "Macro.h"
 
 #include "DebugOut.h"
-#include "App.h"
-#include "Plugin.h"
+#include "AppWrapper.h"
 #include "Pathlib.h"
 #include "Crclib.h"
 
@@ -85,7 +84,7 @@ ROMDB	db;
 
 DEBUGOUT( "Database loading...\n" );
 
-	string	Path = CPathlib::MakePathExt( CApp::GetModulePath(), "nesromdb", "dat" );
+	string	Path = CPathlib::MakePathExt( AppWrapper::GetModulePath(), "nesromdb", "dat" );
 
 DEBUGOUT( "File:%s\n", Path.c_str() );
 

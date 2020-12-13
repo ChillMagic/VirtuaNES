@@ -14,16 +14,16 @@ void	EXPAD_CrazyClimber::Sync()
 	bits = 0;
 
 	// Left
-	if( Config.ExButtonCheck( 0,  0 ) ) bits |= 1<<6;
-	if( Config.ExButtonCheck( 0,  1 ) ) bits |= 1<<7;
-	if( Config.ExButtonCheck( 0,  2 ) ) bits |= 1<<5;
-	if( Config.ExButtonCheck( 0,  3 ) ) bits |= 1<<4;
+	if( ConfigWrapper::ExButtonCheck( 0,  0 ) ) bits |= 1<<6;
+	if( ConfigWrapper::ExButtonCheck( 0,  1 ) ) bits |= 1<<7;
+	if( ConfigWrapper::ExButtonCheck( 0,  2 ) ) bits |= 1<<5;
+	if( ConfigWrapper::ExButtonCheck( 0,  3 ) ) bits |= 1<<4;
 
 	// Right
-	if( Config.ExButtonCheck( 0,  4 ) ) bits |= 1<<2;
-	if( Config.ExButtonCheck( 0,  5 ) ) bits |= 1<<3;
-	if( Config.ExButtonCheck( 0,  6 ) ) bits |= 1<<1;
-	if( Config.ExButtonCheck( 0,  7 ) ) bits |= 1<<0;
+	if( ConfigWrapper::ExButtonCheck( 0,  4 ) ) bits |= 1<<2;
+	if( ConfigWrapper::ExButtonCheck( 0,  5 ) ) bits |= 1<<3;
+	if( ConfigWrapper::ExButtonCheck( 0,  6 ) ) bits |= 1<<1;
+	if( ConfigWrapper::ExButtonCheck( 0,  7 ) ) bits |= 1<<0;
 
 	// 同時入力を禁止する
 	if( (bits&((1<<0)|(1<<1))) == ((1<<0)|(1<<1)) )

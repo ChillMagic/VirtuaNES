@@ -31,32 +31,32 @@ void	EXPAD_FamlyTrainer::Sync()
 	padbits = 0;
 
 	if( nes->pad->GetExController() == PAD::EXCONTROLLER_FAMILYTRAINER_A ) {
-		if( Config.ExButtonCheck( 1,  3 ) ) padbits |= 1<<3;
-		if( Config.ExButtonCheck( 1,  2 ) ) padbits |= 1<<2;
-		if( Config.ExButtonCheck( 1,  1 ) ) padbits |= 1<<1;
-		if( Config.ExButtonCheck( 1,  0 ) ) padbits |= 1<<0;
-		if( Config.ExButtonCheck( 1,  7 ) ) padbits |= 1<<7;
-		if( Config.ExButtonCheck( 1,  6 ) ) padbits |= 1<<6;
-		if( Config.ExButtonCheck( 1,  5 ) ) padbits |= 1<<5;
-		if( Config.ExButtonCheck( 1,  4 ) ) padbits |= 1<<4;
-		if( Config.ExButtonCheck( 1, 11 ) ) padbits |= 1<<11;
-		if( Config.ExButtonCheck( 1, 10 ) ) padbits |= 1<<10;
-		if( Config.ExButtonCheck( 1,  9 ) ) padbits |= 1<<9;
-		if( Config.ExButtonCheck( 1,  8 ) ) padbits |= 1<<8;
+		if( ConfigWrapper::ExButtonCheck( 1,  3 ) ) padbits |= 1<<3;
+		if( ConfigWrapper::ExButtonCheck( 1,  2 ) ) padbits |= 1<<2;
+		if( ConfigWrapper::ExButtonCheck( 1,  1 ) ) padbits |= 1<<1;
+		if( ConfigWrapper::ExButtonCheck( 1,  0 ) ) padbits |= 1<<0;
+		if( ConfigWrapper::ExButtonCheck( 1,  7 ) ) padbits |= 1<<7;
+		if( ConfigWrapper::ExButtonCheck( 1,  6 ) ) padbits |= 1<<6;
+		if( ConfigWrapper::ExButtonCheck( 1,  5 ) ) padbits |= 1<<5;
+		if( ConfigWrapper::ExButtonCheck( 1,  4 ) ) padbits |= 1<<4;
+		if( ConfigWrapper::ExButtonCheck( 1, 11 ) ) padbits |= 1<<11;
+		if( ConfigWrapper::ExButtonCheck( 1, 10 ) ) padbits |= 1<<10;
+		if( ConfigWrapper::ExButtonCheck( 1,  9 ) ) padbits |= 1<<9;
+		if( ConfigWrapper::ExButtonCheck( 1,  8 ) ) padbits |= 1<<8;
 	}
 	if( nes->pad->GetExController() == PAD::EXCONTROLLER_FAMILYTRAINER_B ) {
-		if( Config.ExButtonCheck( 1,  0 ) ) padbits |= 1<<3;
-		if( Config.ExButtonCheck( 1,  1 ) ) padbits |= 1<<2;
-		if( Config.ExButtonCheck( 1,  2 ) ) padbits |= 1<<1;
-		if( Config.ExButtonCheck( 1,  3 ) ) padbits |= 1<<0;
-		if( Config.ExButtonCheck( 1,  4 ) ) padbits |= 1<<7;
-		if( Config.ExButtonCheck( 1,  5 ) ) padbits |= 1<<6;
-		if( Config.ExButtonCheck( 1,  6 ) ) padbits |= 1<<5;
-		if( Config.ExButtonCheck( 1,  7 ) ) padbits |= 1<<4;
-		if( Config.ExButtonCheck( 1,  8 ) ) padbits |= 1<<11;
-		if( Config.ExButtonCheck( 1,  9 ) ) padbits |= 1<<10;
-		if( Config.ExButtonCheck( 1, 10 ) ) padbits |= 1<<9;
-		if( Config.ExButtonCheck( 1, 11 ) ) padbits |= 1<<8;
+		if( ConfigWrapper::ExButtonCheck( 1,  0 ) ) padbits |= 1<<3;
+		if( ConfigWrapper::ExButtonCheck( 1,  1 ) ) padbits |= 1<<2;
+		if( ConfigWrapper::ExButtonCheck( 1,  2 ) ) padbits |= 1<<1;
+		if( ConfigWrapper::ExButtonCheck( 1,  3 ) ) padbits |= 1<<0;
+		if( ConfigWrapper::ExButtonCheck( 1,  4 ) ) padbits |= 1<<7;
+		if( ConfigWrapper::ExButtonCheck( 1,  5 ) ) padbits |= 1<<6;
+		if( ConfigWrapper::ExButtonCheck( 1,  6 ) ) padbits |= 1<<5;
+		if( ConfigWrapper::ExButtonCheck( 1,  7 ) ) padbits |= 1<<4;
+		if( ConfigWrapper::ExButtonCheck( 1,  8 ) ) padbits |= 1<<11;
+		if( ConfigWrapper::ExButtonCheck( 1,  9 ) ) padbits |= 1<<10;
+		if( ConfigWrapper::ExButtonCheck( 1, 10 ) ) padbits |= 1<<9;
+		if( ConfigWrapper::ExButtonCheck( 1, 11 ) ) padbits |= 1<<8;
 	}
 }
 

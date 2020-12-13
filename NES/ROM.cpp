@@ -15,11 +15,10 @@
 #include "VirtuaNESres.h"
 
 #include "DebugOut.h"
-#include "App.h"
-#include "Plugin.h"
+#include "AppWrapper.h"
 #include "Pathlib.h"
 #include "Crclib.h"
-#include "Config.h"
+#include "ConfigWrapper.h"
 
 #include "Archive.h"
 
@@ -56,8 +55,8 @@ LONG	FileSize;
 	try {
 		if( !(fp = ::fopen( fname, "rb" )) ) {
 			// xxx ファイルを開けません
-			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
-			::wsprintf( szErrorString, szErrStr, fname );
+			LPCSTR	szErrStr = AppWrapper::GetErrorString( IDS_ERROR_OPEN );
+			::sprintf( szErrorString, szErrStr, fname );
 			throw	szErrorString;
 		}
 
@@ -68,19 +67,19 @@ LONG	FileSize;
 		// ファイルサイズチェック(NESヘッダ+1バイト以上か？)
 		if( FileSize < 17 ) {
 			// ファイルサイズが小さすぎます
-			throw	CApp::GetErrorString( IDS_ERROR_SMALLFILE );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_SMALLFILE );
 		}
 
 		// テンポラリメモリ確保
 		if( !(temp = (LPBYTE)::malloc( FileSize )) ) {
 			// メモリを確保出来ません
-			throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 		}
 
 		// サイズ分読み込み
 		if( ::fread( temp, FileSize, 1, fp ) != 1 ) {
 			// ファイルの読み込みに失敗しました
-			throw	CApp::GetErrorString( IDS_ERROR_READ );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 		}
 
 		FCLOSE( fp );
@@ -105,18 +104,18 @@ LONG	FileSize;
 
 			if( !UnCompress( fname, &temp, (LPDWORD)&FileSize ) ) {
 				// 未対応形式です
-				throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 			}
 			// ヘッダコピー
 			::memcpy( &header, temp, sizeof(NESHEADER) );
 		}
 
 		// Since the zip/fds/nes is defrosted and raw, now apply the patch
-		if( Config.emulator.bAutoIPS ) {
+		if( ConfigWrapper::GetCCfgEmulator().bAutoIPS ) {
 			LPBYTE	ipstemp = NULL;
 			if( !(ipstemp = (LPBYTE)::malloc( FileSize )) ) {
 				// メモリを確保出来ません
-				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
 			::memcpy( ipstemp, temp, FileSize );
 			if( ApplyIPS( fname, ipstemp, FileSize ) ) {
@@ -145,13 +144,13 @@ LONG	FileSize;
 
 			if( PRGsize <= 0 || (PRGsize+CHRsize) > FileSize ) {
 				// NESヘッダが異常です
-				throw	CApp::GetErrorString( IDS_ERROR_INVALIDNESHEADER );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_INVALIDNESHEADER );
 			}
 
 			// PRG BANK
 			if( !(lpPRG = (LPBYTE)malloc( PRGsize )) ) {
 				// メモリを確保出来ません
-				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
 
 			::memcpy( lpPRG, temp+PRGoffset, PRGsize );
@@ -160,7 +159,7 @@ LONG	FileSize;
 			if( CHRsize > 0 ) {
 				if( !(lpCHR = (LPBYTE)malloc( CHRsize )) ) {
 					// メモリを確保出来ません
-					throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 				}
 
 				if( FileSize >= CHRoffset+CHRsize ) {
@@ -178,7 +177,7 @@ LONG	FileSize;
 			if( IsTRAINER() ) {
 				if( !(lpTrainer = (LPBYTE)malloc( 512 )) ) {
 					// メモリを確保出来ません
-					throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
+					throw	AppWrapper::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 				}
 
 				memcpy( lpTrainer, temp+sizeof(NESHEADER), 512 );
@@ -193,11 +192,11 @@ LONG	FileSize;
 
 			if( FileSize < (16+65500*diskno) ) {
 				// ディスクサイズが異常です
-				throw	CApp::GetErrorString( IDS_ERROR_ILLEGALDISKSIZE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_ILLEGALDISKSIZE );
 			}
 			if( diskno > 8 ) {
 				// 8面より多いディスクは対応していません
-				throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTDISK );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_UNSUPPORTDISK );
 			}
 
 			ZEROMEMORY( &header, sizeof(NESHEADER) );
@@ -216,12 +215,12 @@ LONG	FileSize;
 			// PRG BANK
 			if( !(lpPRG = (LPBYTE)malloc( PRGsize )) ) {
 				// メモリを確保出来ません
-				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
 			// データのバックアップ用
 			if( !(lpDisk = (LPBYTE)malloc( PRGsize )) ) {
 				// メモリを確保出来ません
-				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
 			// CHR BANK
 			lpCHR = NULL;
@@ -240,11 +239,11 @@ LONG	FileSize;
 			lpPRG[4] = (BYTE)diskno;
 
 			// DISKSYSTEM BIOSのロード
-			string	Path = CPathlib::MakePathExt( CApp::GetModulePath(), "DISKSYS", "ROM" );
+			string	Path = CPathlib::MakePathExt( AppWrapper::GetModulePath(), "DISKSYS", "ROM" );
 
 			if( !(fp = fopen( Path.c_str(), "rb" )) ) {
 				// DISKSYS.ROMがありません
-				throw	CApp::GetErrorString( IDS_ERROR_NODISKBIOS );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_NODISKBIOS );
 			}
 
 			::fseek( fp, 0, SEEK_END );
@@ -252,21 +251,21 @@ LONG	FileSize;
 			::fseek( fp, 0, SEEK_SET );
 			if( FileSize < 17 ) {
 				// ファイルサイズが小さすぎます
-				throw	CApp::GetErrorString( IDS_ERROR_SMALLFILE );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_SMALLFILE );
 			}
 			if( !(bios = (LPBYTE)malloc( FileSize )) ) {
 				// メモリを確保出来ません
-				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
 			if( fread( bios, FileSize, 1, fp ) != 1 ) {
 				// ファイルの読み込みに失敗しました
-				throw	CApp::GetErrorString( IDS_ERROR_READ );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 			}
 			FCLOSE( fp );
 
 			if( !(lpDiskBios = (LPBYTE)malloc( 8*1024 )) ) {
 				// メモリを確保出来ません
-				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 			}
 
 			if( bios[0] == 'N' && bios[1] == 'E' && bios[2] == 'S' && bios[3] == 0x1A ) {
@@ -292,7 +291,7 @@ DEBUGOUT( "PRGSIZE:%d\n", PRGsize );
 DEBUGOUT( "PRGSIZE:%d\n", PRGsize );
 			if( !(lpPRG = (LPBYTE)malloc( PRGsize )) ) {
 				// メモリを確保出来ません
-				throw	CApp::GetErrorString( IDS_ERROR_OUTOFMEMORY );
+				throw	AppWrapper::GetErrorString( IDS_ERROR_OUTOFMEMORY );
 				throw	szErrorString;
 			}
 			ZEROMEMORY( lpPRG, PRGsize );
@@ -302,7 +301,7 @@ DEBUGOUT( "PRGSIZE:%d\n", PRGsize );
 DEBUGOUT( "PAGESIZE:%d\n", NSF_PAGE_SIZE );
 		} else {
 			// 未対応形式です
-			throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
+			throw	AppWrapper::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 		}
 
 		// パス/ファイル名取得
@@ -387,7 +386,7 @@ DEBUGOUT( "PAGESIZE:%d\n", NSF_PAGE_SIZE );
 #endif
 
 		// 不明なエラーが発生しました
-		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
+		throw	AppWrapper::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif	// !_DEBUG
 	}
 }

@@ -5,8 +5,12 @@
 #include "DebugOut.h"
 #include "Registry.h"
 
+#include <tchar.h>
 #include "App.h"
-#include "Pathlib.h"
+
+#undef GetProfileInt
+#undef GetProfileString
+#undef WriteProfileString
 
 #define	INI_USE
 
@@ -27,7 +31,7 @@ void	CRegistry::SetRegistryKey( LPCTSTR lpszKey )
 #endif
 }
 
-HKEY	CRegistry::GetRegistryKey()
+void*/*HKEY*/	CRegistry::GetRegistryKey()
 {
 	HKEY	hAppKey = NULL;
 	HKEY	hSoftKey = NULL;
@@ -41,9 +45,9 @@ HKEY	CRegistry::GetRegistryKey()
 	return	hAppKey;
 }
 
-HKEY	CRegistry::GetSectionKey( LPCTSTR lpszSection )
+void*/*HKEY*/	CRegistry::GetSectionKey( LPCTSTR lpszSection )
 {
-	HKEY	hAppKey = GetRegistryKey();
+	HKEY	hAppKey = (HKEY)GetRegistryKey();
 	if( !hAppKey )
 		return	NULL;
 	HKEY	hSectionKey = NULL;

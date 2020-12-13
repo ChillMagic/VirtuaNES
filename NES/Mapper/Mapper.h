@@ -8,8 +8,6 @@
 #ifndef	__MAPPER_INCLUDED__
 #define	__MAPPER_INCLUDED__
 
-#include "DirectSound.h"
-
 #include "Typedef.h"
 #include "Macro.h"
 

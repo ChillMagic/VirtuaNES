@@ -27,21 +27,21 @@ void	EXPAD_ExcitingBoxing::Sync()
 	padbits = 0;
 
 	// Straight
-	if( Config.ExButtonCheck( 2,  0 ) ) padbits |= 1<<3;
+	if( ConfigWrapper::ExButtonCheck( 2,  0 ) ) padbits |= 1<<3;
 	// Right Jabb
-	if( Config.ExButtonCheck( 2,  1 ) ) padbits |= 1<<2;
+	if( ConfigWrapper::ExButtonCheck( 2,  1 ) ) padbits |= 1<<2;
 	// Body
-	if( Config.ExButtonCheck( 2,  2 ) ) padbits |= 1<<1;
+	if( ConfigWrapper::ExButtonCheck( 2,  2 ) ) padbits |= 1<<1;
 	// Left Jabb
-	if( Config.ExButtonCheck( 2,  3 ) ) padbits |= 1<<0;
+	if( ConfigWrapper::ExButtonCheck( 2,  3 ) ) padbits |= 1<<0;
 	// Right hook
-	if( Config.ExButtonCheck( 2,  4 ) ) padbits |= 1<<7;
+	if( ConfigWrapper::ExButtonCheck( 2,  4 ) ) padbits |= 1<<7;
 	// Left hook
-	if( Config.ExButtonCheck( 2,  5 ) ) padbits |= 1<<4;
+	if( ConfigWrapper::ExButtonCheck( 2,  5 ) ) padbits |= 1<<4;
 	// Right move
-	if( Config.ExButtonCheck( 2,  6 ) ) padbits |= 1<<5;
+	if( ConfigWrapper::ExButtonCheck( 2,  6 ) ) padbits |= 1<<5;
 	// Left move
-	if( Config.ExButtonCheck( 2,  7 ) ) padbits |= 1<<6;
+	if( ConfigWrapper::ExButtonCheck( 2,  7 ) ) padbits |= 1<<6;
 }
 
 void	EXPAD_ExcitingBoxing::SetSyncData( INT type, LONG data )

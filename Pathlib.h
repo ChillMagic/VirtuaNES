@@ -4,14 +4,9 @@
 #ifndef	__CPATHLIB_INCLUDED__
 #define	__CPATHLIB_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#include <cstdio>
-#include <cstdlib>
-#include <shlobj.h>
-#include <Shlwapi.h>
-
 #include <string>
+
+#include "Typedef.h"
 using namespace std;
 
 class	CPathlib
@@ -36,10 +31,10 @@ public:
 	static	string	CreatePath( LPCSTR lpszBasePath, LPCSTR lpszPath );
 
 	// フォルダ選択
-	static	BOOL	SelectFolder( HWND hWnd, LPCSTR lpszTitle, LPSTR lpszFolder );
+	static	BOOL	SelectFolder( void* hWnd, LPCSTR lpszTitle, LPSTR lpszFolder );
 
 protected:
-	static INT CALLBACK BffCallback( HWND hWnd, UINT uMsg, LPARAM lParam, WPARAM wParam );
+	static INT CALLBACK BffCallback( void* hWnd, UINT uMsg, LPARAM lParam, WPARAM wParam );
 private:
 };
 

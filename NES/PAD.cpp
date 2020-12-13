@@ -9,7 +9,7 @@
 #include "Macro.h"
 
 #include "DebugOut.h"
-#include "Config.h"
+#include "ConfigWrapper.h"
 
 #include "DirectDraw.h"
 #include "DirectInput.h"
@@ -415,7 +415,7 @@ void	PAD::Sync()
 
 	// Mic
 	micbit = 0;
-	if( Config.ButtonCheck( 1, 10 ) ) micbit |= 4;
+	if( ConfigWrapper::ButtonCheck( 1, 10 ) ) micbit |= 4;
 
 	// For Excontroller
 	if( expad ) {
@@ -460,13 +460,13 @@ BYTE	PAD::SyncSub( INT no )
 WORD	bit = 0;
 
 	// Up
-	if( Config.ButtonCheck( no, 0 ) ) bit |= 1<<4;
+	if( ConfigWrapper::ButtonCheck( no, 0 ) ) bit |= 1<<4;
 	// Down
-	if( Config.ButtonCheck( no, 1 ) ) bit |= 1<<5;
+	if( ConfigWrapper::ButtonCheck( no, 1 ) ) bit |= 1<<5;
 	// Left
-	if( Config.ButtonCheck( no, 2 ) ) bit |= 1<<6;
+	if( ConfigWrapper::ButtonCheck( no, 2 ) ) bit |= 1<<6;
 	// Right
-	if( Config.ButtonCheck( no, 3 ) ) bit |= 1<<7;
+	if( ConfigWrapper::ButtonCheck( no, 3 ) ) bit |= 1<<7;
 
 	// 同時入力を禁止する
 //	if( (bit&((1<<4)|(1<<5))) == ((1<<4)|(1<<5)) )
@@ -475,22 +475,22 @@ WORD	bit = 0;
 		bit &= ~((1<<6)|(1<<7));
 
 	// A
-	if( Config.ButtonCheck( no, 4 ) ) bit |= 1<<0;
+	if( ConfigWrapper::ButtonCheck( no, 4 ) ) bit |= 1<<0;
 	// B
-	if( Config.ButtonCheck( no, 5 ) ) bit |= 1<<1;
+	if( ConfigWrapper::ButtonCheck( no, 5 ) ) bit |= 1<<1;
 
 	// A,B Rapid
-	if( Config.ButtonCheck( no, 6 ) ) bit |= 1<<8;
-	if( Config.ButtonCheck( no, 7 ) ) bit |= 1<<9;
+	if( ConfigWrapper::ButtonCheck( no, 6 ) ) bit |= 1<<8;
+	if( ConfigWrapper::ButtonCheck( no, 7 ) ) bit |= 1<<9;
 
 	// Select
-	if( Config.ButtonCheck( no, 8 ) ) bit |= 1<<2;
+	if( ConfigWrapper::ButtonCheck( no, 8 ) ) bit |= 1<<2;
 	// Start
-	if( Config.ButtonCheck( no, 9 ) ) bit |= 1<<3;
+	if( ConfigWrapper::ButtonCheck( no, 9 ) ) bit |= 1<<3;
 
 	// A rapid setup
 	if( bit&(1<<8) ) {
-		INT	spd = Config.controller.nRapid[no][0];
+		INT	spd = ConfigWrapper::GetCCfgController().nRapid[no][0];
 		if( spd >= 3 ) spd = 3;
 		INT*	tbl = rentbl[spd];
 
@@ -508,7 +508,7 @@ WORD	bit = 0;
 	}
 	// B rapid setup
 	if( bit&(1<<9) ) {
-		INT	spd = Config.controller.nRapid[no][1];
+		INT	spd = ConfigWrapper::GetCCfgController().nRapid[no][1];
 		if( spd >= 3 ) spd = 3;
 		INT*	tbl = rentbl[spd];
 
@@ -575,7 +575,7 @@ void	PAD::Strobe()
 		// Coin 2と被る為に消す
 		micbit  = 0;
 	} else {
-		if( Config.emulator.bFourPlayer ) {
+		if( ConfigWrapper::GetCCfgEmulator().bFourPlayer ) {
 		// NES type
 			pad1bit = (DWORD)padbitsync[0] | ((DWORD)padbitsync[2]<<8) | 0x00080000;
 			pad2bit = (DWORD)padbitsync[1] | ((DWORD)padbitsync[3]<<8) | 0x00040000;
@@ -655,18 +655,18 @@ void	PAD::NsfSub()
 	nsfbit = 0;
 
 	// Play
-	if( Config.ButtonCheck( 0, Config.controller.nNsfButton ) ) nsfbit |= 1<<0;
+	if( ConfigWrapper::ButtonCheck( 0, ConfigWrapper::GetCCfgController().nNsfButton ) ) nsfbit |= 1<<0;
 	// Stop
-	if( Config.ButtonCheck( 1, Config.controller.nNsfButton ) ) nsfbit |= 1<<1;
+	if( ConfigWrapper::ButtonCheck( 1, ConfigWrapper::GetCCfgController().nNsfButton ) ) nsfbit |= 1<<1;
 
 	// Number -1
-	if( Config.ButtonCheck( 2, Config.controller.nNsfButton ) ) nsfbit |= 1<<2;
+	if( ConfigWrapper::ButtonCheck( 2, ConfigWrapper::GetCCfgController().nNsfButton ) ) nsfbit |= 1<<2;
 	// Number +1
-	if( Config.ButtonCheck( 3, Config.controller.nNsfButton ) ) nsfbit |= 1<<3;
+	if( ConfigWrapper::ButtonCheck( 3, ConfigWrapper::GetCCfgController().nNsfButton ) ) nsfbit |= 1<<3;
 	// Number -16
-	if( Config.ButtonCheck( 4, Config.controller.nNsfButton ) ) nsfbit |= 1<<4;
+	if( ConfigWrapper::ButtonCheck( 4, ConfigWrapper::GetCCfgController().nNsfButton ) ) nsfbit |= 1<<4;
 	// Number +16
-	if( Config.ButtonCheck( 5, Config.controller.nNsfButton ) ) nsfbit |= 1<<5;
+	if( ConfigWrapper::ButtonCheck( 5, ConfigWrapper::GetCCfgController().nNsfButton ) ) nsfbit |= 1<<5;
 
 	// 同時入力を禁止する
 	if( (nsfbit&((1<<2)|(1<<3))) == ((1<<2)|(1<<3)) )

@@ -1,6 +1,10 @@
 ﻿//
 // パスライブラリクラス
 //
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+#include <ShlObj.h>
+#include <Shlwapi.h>
 #include "Pathlib.h"
 
 string	CPathlib::SplitPath( LPCSTR lpszPath )
@@ -86,21 +90,21 @@ string	CPathlib::CreatePath( LPCSTR lpszBasePath, LPCSTR lpszPath )
 	return	path;
 }
 
-INT CALLBACK	CPathlib::BffCallback( HWND hWnd, UINT uMsg, LPARAM lParam, WPARAM wParam )
+INT CALLBACK	CPathlib::BffCallback( void* hWnd, UINT uMsg, LPARAM lParam, WPARAM wParam )
 {
 	if( uMsg == BFFM_INITIALIZED && wParam ) {
-		::SendMessage( hWnd, BFFM_SETSELECTION, TRUE, wParam );
+		::SendMessage( (HWND)hWnd, BFFM_SETSELECTION, TRUE, wParam );
 	}
 	return	TRUE;
 }
 
-BOOL	CPathlib::SelectFolder( HWND hWnd, LPCSTR lpszTitle, LPSTR lpszFolder )
+BOOL	CPathlib::SelectFolder( void* hWnd, LPCSTR lpszTitle, LPSTR lpszFolder )
 {
 	BROWSEINFO	bi;
 	LPITEMIDLIST	pidl;
 
 	ZeroMemory( &bi, sizeof(bi) );
-	bi.hwndOwner = hWnd;
+	bi.hwndOwner = (HWND)hWnd;
 	bi.lpszTitle = lpszTitle;
 	bi.ulFlags = BIF_RETURNONLYFSDIRS;
 	// For Folder setup

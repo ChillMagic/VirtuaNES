@@ -312,10 +312,6 @@ typedef	struct	tagNMVHDR {
 #define	GETINT(p,v)	{ (v) = *(LPINT)p; p += sizeof(INT); }
 #define	GETBLOCK(p,v,s)	{ memcpy( (v), p, s ); p += s; }
 
-#ifndef ZeroMemory
-#define ZeroMemory(Destination,Length) memset((Destination),0,(Length))
-#endif
-
 #pragma pack( pop )
 
 #endif	// !__STATE_INCLUDED__

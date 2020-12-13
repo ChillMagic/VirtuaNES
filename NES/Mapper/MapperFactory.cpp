@@ -8,6 +8,8 @@
 #include <cstdio>
 #include <cstdlib>
 
+#include "DirectSound.h"
+
 #include "DebugOut.h"
 #include "Typedef.h"
 #include "Macro.h"
@@ -22,7 +24,7 @@
 
 #include "Mapper.h"
 
-#include "Config.h"
+#include "ConfigWrapper.h"
 
 //////////////////////////////////////////////////////////////////////////
 #include "Mapper000.h"

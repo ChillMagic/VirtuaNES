@@ -83,20 +83,20 @@ void	EXPAD_Toprider::Sync()
 BYTE	bit = 0;
 
 	// Up
-	if( Config.controller.nButton[0][ 0] && DirectInput.m_Sw[Config.controller.nButton[0][ 0]]
-	 || Config.controller.nButton[0][16] && DirectInput.m_Sw[Config.controller.nButton[0][16]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 0] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 0]]
+	 || ConfigWrapper::GetCCfgController().nButton[0][16] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][16]] )
 		bit |= 1<<4;
 	// Down
-	if( Config.controller.nButton[0][ 1] && DirectInput.m_Sw[Config.controller.nButton[0][ 1]]
-	 || Config.controller.nButton[0][17] && DirectInput.m_Sw[Config.controller.nButton[0][17]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 1] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 1]]
+	 || ConfigWrapper::GetCCfgController().nButton[0][17] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][17]] )
 		bit |= 1<<5;
 	// Left
-	if( Config.controller.nButton[0][ 2] && DirectInput.m_Sw[Config.controller.nButton[0][ 2]]
-	 || Config.controller.nButton[0][18] && DirectInput.m_Sw[Config.controller.nButton[0][18]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 2] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 2]]
+	 || ConfigWrapper::GetCCfgController().nButton[0][18] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][18]] )
 		bit |= 1<<6;
 	// Right
-	if( Config.controller.nButton[0][ 3] && DirectInput.m_Sw[Config.controller.nButton[0][ 3]]
-	 || Config.controller.nButton[0][19] && DirectInput.m_Sw[Config.controller.nButton[0][19]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 3] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 3]]
+	 || ConfigWrapper::GetCCfgController().nButton[0][19] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][19]] )
 		bit |= 1<<7;
 
 	// 左右同時入力を禁止する
@@ -104,19 +104,19 @@ BYTE	bit = 0;
 		bit &= ~((1<<6)|(1<<7));
 
 	// A,B
-	if( Config.controller.nButton[0][ 4] && DirectInput.m_Sw[Config.controller.nButton[0][ 4]]
-	 || Config.controller.nButton[0][20] && DirectInput.m_Sw[Config.controller.nButton[0][20]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 4] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 4]]
+	 || ConfigWrapper::GetCCfgController().nButton[0][20] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][20]] )
 		bit |= 1<<0;
-	if( Config.controller.nButton[0][ 5] && DirectInput.m_Sw[Config.controller.nButton[0][ 5]]
-	 || Config.controller.nButton[0][21] && DirectInput.m_Sw[Config.controller.nButton[0][21]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 5] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 5]]
+	 || ConfigWrapper::GetCCfgController().nButton[0][21] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][21]] )
 		bit |= 1<<1;
 
 	// Start, Select
-	if( Config.controller.nButton[0][ 8] && DirectInput.m_Sw[Config.controller.nButton[0][ 8]]
-	 || Config.controller.nButton[0][24] && DirectInput.m_Sw[Config.controller.nButton[0][24]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 8] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 8]]
+	 || ConfigWrapper::GetCCfgController().nButton[0][24] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][24]] )
 		bit |= 1<<2;
-	if( Config.controller.nButton[0][ 9] && DirectInput.m_Sw[Config.controller.nButton[0][ 9]]
-	 || Config.controller.nButton[0][25] && DirectInput.m_Sw[Config.controller.nButton[0][25]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 9] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 9]]
+	 || ConfigWrapper::GetCCfgController().nButton[0][25] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][25]] )
 		bit |= 1<<3;
 
 	if( !(bit & ((1<<6)|(1<<7))) ) {

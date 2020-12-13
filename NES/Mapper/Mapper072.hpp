@@ -22,7 +22,7 @@ void	Mapper072::Write( WORD addr, BYTE data )
 DEBUGOUT( "SOUND CODE:%02X\n", addr & 0x1F );
 
 			// OSDにするべきか…
-			if( Config.sound.bExtraSoundEnable ) {
+			if( ConfigWrapper::GetCCfgSound().bExtraSoundEnable ) {
 				DirectSound.EsfAllStop();
 				DirectSound.EsfPlay( ESF_MOETENNIS_00+(addr&0x1F) );
 			}

@@ -50,6 +50,7 @@ using namespace std;
 #include "NES/ROM.h"
 #include "NES/ROMDB.h"
 #include "NES/PAD.h"
+#include <tchar.h>
 
 BOOL	CMainFrame::m_bKeyEnable = FALSE;
 volatile BOOL	CMainFrame::m_bKeyThreadExit = FALSE;

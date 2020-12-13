@@ -10,6 +10,9 @@
 #include "DirectInput.h"
 #include "ExtSoundFile.h"
 
+#define	DIRECTINPUT_VERSION	0x0700
+#include <dinput.h>
+
 // Global instance
 CConfig	Config;
 
@@ -831,3 +834,226 @@ void	CGameOption::Save( LPCSTR name, DWORD gid, DWORD mid )
 	CRegistry::WriteProfileInt( szSection, "FrameIRQ",        (INT)bFrameIRQ );
 }
 
+
+void	CCfgPath::Default() {
+	bRomPath = bSavePath =
+		bStatePath = bSnapshotPath =
+		bMoviePath = bWavePath =
+		bCheatPath = bIpsPath = TRUE;
+
+	::lstrcpy(szRomPath, ".\\roms\\");
+	::lstrcpy(szSavePath, ".\\save\\");
+	::lstrcpy(szStatePath, ".\\state\\");
+	::lstrcpy(szSnapshotPath, ".\\snapshot\\");
+	::lstrcpy(szMoviePath, ".\\movie\\");
+	::lstrcpy(szWavePath, ".\\wave\\");
+	::lstrcpy(szCheatPath, ".\\cheatcode\\");
+	::lstrcpy(szIpsPath, ".\\ips\\");
+}
+
+
+void	CCfgShortCut::Default() {
+	for (INT i = 0; i < (sizeof(nShortCut) / sizeof(WORD)); i++) {
+		nShortCut[i] = 0;
+	}
+
+	// Main controls
+	nShortCut[0] = DIK_O + K_CTRL;		// ID_OPEN
+	nShortCut[1] = DIK_C + K_CTRL;		// ID_CLOSE
+	nShortCut[2] = DIK_L + K_CTRL;		// ID_LAUNCHER
+	nShortCut[3] = DIK_N + K_CTRL;		// ID_NETPLAY_CONNECT
+	nShortCut[4] = DIK_D + K_CTRL;		// ID_NETPLAY_DISCONNECT
+	nShortCut[5] = DIK_A + K_CTRL;		// ID_NETPLAY_CHAT
+	nShortCut[8] = DIK_I + K_CTRL;		// ID_ROMINFO
+	nShortCut[9] = DIK_W + K_CTRL;		// ID_WAVERECORD
+	nShortCut[15] = DIK_X + K_CTRL;		// ID_EXIT
+
+	// Emulation controls
+	nShortCut[16] = DIK_F1;		// Hardware reset
+	nShortCut[17] = DIK_F2;		// Software reset
+	nShortCut[18] = DIK_P;			// Hardware pause
+	nShortCut[19] = DIK_TAB;		// Throttle(toggled)
+	nShortCut[20] = DIK_NUMPADENTER;	// Frame skip Auto
+	nShortCut[21] = DIK_ADD;		// Frame skip +
+	nShortCut[22] = DIK_SUBTRACT;		// Frame skip -
+
+	nShortCut[23] = DIK_SPACE;		// One Frame step
+	nShortCut[24] = DIK_BACKSPACE;		// Throttle(Not toggle)
+
+	// State controls
+	nShortCut[32] = DIK_L;			// State Load
+	nShortCut[33] = DIK_S;			// State Save
+	nShortCut[34] = DIK_F3;		// State Slot +
+	nShortCut[35] = DIK_F4;		// State Slot -
+
+	// Disk controls
+	nShortCut[48] = DIK_5;			// Disk Eject
+	nShortCut[49] = DIK_1;			// Disk 0 Side A
+	nShortCut[50] = DIK_2;			// Disk 0 Side B
+	nShortCut[51] = DIK_3;			// Disk 1 Side A
+	nShortCut[52] = DIK_4;			// Disk 1 Side B
+	nShortCut[120] = DIK_1 + K_SHIFT;	// Disk 2 Side A
+	nShortCut[121] = DIK_2 + K_SHIFT;	// Disk 2 Side B
+	nShortCut[122] = DIK_3 + K_SHIFT;	// Disk 3 Side A
+	nShortCut[123] = DIK_4 + K_SHIFT;	// Disk 3 Side B
+
+	// Movie controls
+	nShortCut[56] = DIK_P + K_ALT;		// Movie Play
+	nShortCut[57] = DIK_R + K_ALT;		// Movie Rec
+	nShortCut[58] = DIK_A + K_ALT;		// Movie Rec Append
+	nShortCut[59] = DIK_S + K_ALT;		// Movie Stop
+	nShortCut[60] = DIK_M + K_ALT;		// Movie Info
+
+	// Screen controls
+	nShortCut[64] = DIK_F5;		// Zoom x1
+	nShortCut[65] = DIK_F6;		// Zoom x2
+	nShortCut[66] = DIK_F7;		// Zoom x3
+	nShortCut[67] = DIK_F8;		// Zoom x4
+	nShortCut[68] = DIK_RETURN + K_ALT;	// Fullscreen
+
+	// Sound controls
+	nShortCut[72] = DIK_BACK + K_CTRL;	// Mute Master
+	nShortCut[73] = DIK_1 + K_CTRL;		// Mute Rectangle #1
+	nShortCut[74] = DIK_2 + K_CTRL;		// Mute Rectangle #2
+	nShortCut[75] = DIK_3 + K_CTRL;		// Mute Triangle
+	nShortCut[76] = DIK_4 + K_CTRL;		// Mute Noise
+	nShortCut[77] = DIK_5 + K_CTRL;		// Mute Dpcm
+	nShortCut[78] = DIK_6 + K_CTRL;		// Mute External #1
+	nShortCut[79] = DIK_7 + K_CTRL;		// Mute External #2
+	nShortCut[80] = DIK_8 + K_CTRL;		// Mute External #3
+	nShortCut[81] = DIK_9 + K_CTRL;		// Mute External #4
+	nShortCut[82] = DIK_0 + K_CTRL;		// Mute External #5
+	nShortCut[83] = DIK_MINUS + K_CTRL;	// Mute External #6
+	nShortCut[84] = DIK_CIRCUMFLEX + K_CTRL;	// Mute External #7
+	nShortCut[85] = DIK_YEN + K_CTRL;	// Mute External #8
+
+	// Tape controls
+	nShortCut[90] = 0;			// Tape Play
+	nShortCut[91] = 0;			// Tape Rec
+	nShortCut[92] = 0;			// Tape Stop
+
+	// Other controls
+	nShortCut[96] = DIK_P + K_CTRL;		// Snapshot
+	nShortCut[97] = DIK_F11;		// FPSDISP
+	nShortCut[98] = DIK_F12 + K_CTRL;	// TV Aspect
+	nShortCut[99] = DIK_F11 + K_CTRL;	// TV frame
+	nShortCut[100] = DIK_F12;		// Scanline
+	nShortCut[101] = DIK_F9 + K_CTRL;		// Show 240 lines
+	nShortCut[102] = DIK_F9;		// All sprites
+	nShortCut[103] = DIK_F10;		// Sync draw
+	nShortCut[104] = DIK_F10 + K_CTRL;	// Fit screen
+	nShortCut[105] = 0;			// Left clip
+
+	// Cheat
+	nShortCut[110] = DIK_HOME + K_CTRL;	// Search
+	nShortCut[111] = DIK_END + K_CTRL;	// Cheat
+	nShortCut[112] = DIK_INSERT;		// Cheat enable
+	nShortCut[113] = DIK_DELETE;		// Cheat disable
+	nShortCut[114] = 0;			// GameGenie
+
+	// Tools
+	nShortCut[116] = 0;			// Pattern Viewer
+	nShortCut[117] = 0;			// NameTable Viewer
+	nShortCut[118] = 0;			// Palette Viewer
+
+	nShortCut[119] = 0;			// Memory Viewer
+
+	// Quick Load/Save
+	nShortCut[256] = DIK_NUMPAD0 + K_CTRL;	// QuickLoad Slot0
+	nShortCut[257] = DIK_NUMPAD1 + K_CTRL;	// QuickLoad Slot1
+	nShortCut[258] = DIK_NUMPAD2 + K_CTRL;	// QuickLoad Slot2
+	nShortCut[259] = DIK_NUMPAD3 + K_CTRL;	// QuickLoad Slot3
+	nShortCut[260] = DIK_NUMPAD4 + K_CTRL;	// QuickLoad Slot4
+	nShortCut[261] = DIK_NUMPAD5 + K_CTRL;	// QuickLoad Slot5
+	nShortCut[262] = DIK_NUMPAD6 + K_CTRL;	// QuickLoad Slot6
+	nShortCut[263] = DIK_NUMPAD7 + K_CTRL;	// QuickLoad Slot7
+	nShortCut[264] = DIK_NUMPAD8 + K_CTRL;	// QuickLoad Slot8
+	nShortCut[265] = DIK_NUMPAD9 + K_CTRL;	// QuickLoad Slot9
+
+	nShortCut[266] = DIK_NUMPAD0 + K_ALT;	// QuickSave Slot0
+	nShortCut[267] = DIK_NUMPAD1 + K_ALT;	// QuickSave Slot1
+	nShortCut[268] = DIK_NUMPAD2 + K_ALT;	// QuickSave Slot2
+	nShortCut[269] = DIK_NUMPAD3 + K_ALT;	// QuickSave Slot3
+	nShortCut[270] = DIK_NUMPAD4 + K_ALT;	// QuickSave Slot4
+	nShortCut[271] = DIK_NUMPAD5 + K_ALT;	// QuickSave Slot5
+	nShortCut[272] = DIK_NUMPAD6 + K_ALT;	// QuickSave Slot6
+	nShortCut[273] = DIK_NUMPAD7 + K_ALT;	// QuickSave Slot7
+	nShortCut[274] = DIK_NUMPAD8 + K_ALT;	// QuickSave Slot8
+	nShortCut[275] = DIK_NUMPAD9 + K_ALT;	// QuickSave Slot9
+}
+
+
+void	CCfgController::DefaultController1() {
+	for (INT i = 0; i < 64; i++)
+		nButton[0][i] = 0;
+
+	nButton[0][0] = DIK_UP;
+	nButton[0][1] = DIK_DOWN;
+	nButton[0][2] = DIK_LEFT;
+	nButton[0][3] = DIK_RIGHT;
+	nButton[0][4] = DIK_X;	// A
+	nButton[0][5] = DIK_Z;	// B
+	nButton[0][6] = 0;	// A Rapid
+	nButton[0][7] = 0;	// B Rapid
+	nButton[0][8] = DIK_RSHIFT; // SELECT
+	nButton[0][9] = DIK_RETURN; // START
+
+	nRapid[0][0] = 0;	// A Rapid speed
+	nRapid[0][1] = 0;	// B Rapid speed
+}
+
+void	CCfgController::DefaultController2() {
+	for (INT i = 0; i < 64; i++)
+		nButton[1][i] = 0;
+
+	nButton[1][0] = DIK_NUMPAD8;
+	nButton[1][1] = DIK_NUMPAD2;
+	nButton[1][2] = DIK_NUMPAD4;
+	nButton[1][3] = DIK_NUMPAD6;
+	nButton[1][4] = DIK_N;	// A
+	nButton[1][5] = DIK_B;	// B
+	nButton[1][6] = 0;	// A Rapid
+	nButton[1][7] = 0;	// B Rapid
+	nButton[1][8] = 0;	// SELECT
+	nButton[1][9] = 0;	// START
+	nButton[1][10] = DIK_M;	// Mic
+
+	nRapid[1][0] = 0;	// A Rapid speed
+	nRapid[1][1] = 0;	// B Rapid speed
+}
+
+void	CCfgController::DefaultNsfController() {
+	for (INT i = 0; i < 64; i++)
+		nNsfButton[i] = 0;
+
+	nNsfButton[0] = DIK_UP;	// Play
+	nNsfButton[1] = DIK_DOWN;	// Stop
+	nNsfButton[2] = DIK_LEFT;	// Number -1
+	nNsfButton[3] = DIK_RIGHT;	// Number +1
+	nNsfButton[4] = DIK_PRIOR;	// Number +16
+	nNsfButton[5] = DIK_NEXT;	// Number -16
+}
+
+void	CCfgController::DefaultVSUnisystem() {
+	for (INT i = 0; i < 64; i++)
+		nVSUnisystem[i] = 0;
+
+	nVSUnisystem[0] = DIK_C;	// Coin
+}
+
+void	CCfgNetPlay::Default() {
+	rcChatPos.left = rcChatPos.right =
+		rcChatPos.top = rcChatPos.bottom = 0;
+
+	::lstrcpy(szNick, "NoName");
+
+	for (INT i = 0; i < 16; i++) {
+		szRecentPort[i][0] = '\0';
+		szRecentHost[i][0] = '\0';
+	}
+	::lstrcpy(szRecentPort[0], "10000");
+	::lstrcpy(szRecentHost[0], "localhost:10000");
+
+	nRecentPort = 1;
+	nRecentHost = 1;
+}

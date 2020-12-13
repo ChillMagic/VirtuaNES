@@ -295,6 +295,12 @@
     <ClCompile Include="zlib\minizip\ioapi.c">
       <Filter>Zlib\minizip</Filter>
     </ClCompile>
+    <ClCompile Include="AppWrapper.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AboutDlg.h">
@@ -1613,6 +1619,33 @@
     </ClInclude>
     <ClInclude Include="zlib\minizip\ioapi.h">
       <Filter>Zlib\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="AppWrapper.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="CCfgSound.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigWrapper.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCfgController.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCfgEmulator.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCfgPath.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameOption.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCfgGraphics.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCfgMovie.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

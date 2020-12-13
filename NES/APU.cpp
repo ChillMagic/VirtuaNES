@@ -6,8 +6,7 @@
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
 #include "DebugOut.h"
-#include "App.h"
-#include "Config.h"
+#include "ConfigWrapper.h"
 
 #include "Nes.h"
 #include "MMU.h"
@@ -130,7 +129,7 @@ void	APU::QueueFlush()
 void	APU::SoundSetup()
 {
 	FLOAT	fClock = nes->nescfg->CpuClock;
-	INT	nRate = (INT)Config.sound.nRate;
+	INT	nRate = (INT)ConfigWrapper::GetCCfgSound().nRate;
 	internal.Setup( fClock, nRate );
 	vrc6.Setup( fClock, nRate );
 	vrc7.Setup( fClock, nRate );
@@ -148,7 +147,7 @@ void	APU::Reset()
 	elapsed_time = 0;
 
 	FLOAT	fClock = nes->nescfg->CpuClock;
-	INT	nRate = (INT)Config.sound.nRate;
+	INT	nRate = (INT)ConfigWrapper::GetCCfgSound().nRate;
 	internal.Reset( fClock, nRate );
 	vrc6.Reset( fClock, nRate );
 	vrc7.Reset( fClock, nRate );
@@ -271,7 +270,7 @@ void	APU::WriteExProcess( WORD addr, BYTE data )
 
 void	APU::Process( LPBYTE lpBuffer, DWORD dwSize )
 {
-INT	nBits = Config.sound.nBits;
+INT	nBits = ConfigWrapper::GetCCfgSound().nBits;
 DWORD	dwLength = dwSize / (nBits/8);
 INT	output;
 QUEUEDATA q;
@@ -280,10 +279,10 @@ DWORD	writetime;
 LPSHORT	pSoundBuf = m_SoundBuffer;
 INT	nCcount = 0;
 
-INT	nFilterType = Config.sound.nFilterType;
+INT	nFilterType = ConfigWrapper::GetCCfgSound().nFilterType;
 
-	if( !Config.sound.bEnable ) {
-		::FillMemory( lpBuffer, dwSize, (BYTE)(Config.sound.nRate==8?128:0) );
+	if( !ConfigWrapper::GetCCfgSound().bEnable ) {
+		::FillMemory( lpBuffer, dwSize, (BYTE)(ConfigWrapper::GetCCfgSound().nRate==8?128:0) );
 		return;
 	}
 
@@ -302,7 +301,7 @@ INT	nFilterType = Config.sound.nFilterType;
 	// 11:FME7
 	INT	vol[24];
 	BOOL*	bMute = m_bMute;
-	SHORT*	nVolume = Config.sound.nVolume;
+	SHORT*	nVolume = ConfigWrapper::GetCCfgSound().nVolume;
 
 	INT	nMasterVolume = bMute[0]?nVolume[0]:0;
 
@@ -344,8 +343,8 @@ INT	nFilterType = Config.sound.nFilterType;
 	vol[22] = bMute[7]?(FME7_VOL*nVolume[11]*nMasterVolume)/(100*100):0;
 	vol[23] = bMute[8]?(FME7_VOL*nVolume[11]*nMasterVolume)/(100*100):0;
 
-//	double	cycle_rate = ((double)FRAME_CYCLES*60.0/12.0)/(double)Config.sound.nRate;
-	double	cycle_rate = ((double)nes->nescfg->FrameCycles*60.0/12.0)/(double)Config.sound.nRate;
+//	double	cycle_rate = ((double)FRAME_CYCLES*60.0/12.0)/(double)ConfigWrapper::GetCCfgSound().nRate;
+	double	cycle_rate = ((double)nes->nescfg->FrameCycles*60.0/12.0)/(double)ConfigWrapper::GetCCfgSound().nRate;
 
 	// CPUサイクル数がループしてしまった時の対策処理
 	if( elapsed_time > nes->cpu->GetTotalCycles() ) {
@@ -448,7 +447,7 @@ INT	nFilterType = Config.sound.nFilterType;
 		{
 //		static	double	cutoff = (2.0*3.141592653579*40.0/44100.0);
 		static	double	cutofftemp = (2.0*3.141592653579*40.0);
-		double	cutoff = cutofftemp/(double)Config.sound.nRate;
+		double	cutoff = cutofftemp/(double)ConfigWrapper::GetCCfgSound().nRate;
 		static	double	tmp = 0.0;
 		double	in, out;
 

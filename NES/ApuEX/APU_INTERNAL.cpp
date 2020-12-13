@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////////////////
 #include "DebugOut.h"
 #include "Pathlib.h"
-#include "Config.h"
+#include "ConfigWrapper.h"
 
 #include "APU_INTERNAL.h"
 
@@ -765,7 +765,7 @@ INT	APU_INTERNAL::RenderRectangle( RECTANGLE& ch )
 	}
 	INT	volume = ch.nowvolume;
 
-	if( !(Config.sound.bChangeTone && ChannelTone[(!ch.complement)?0:1][ch.reg[0]>>6]) ) {
+	if( !(ConfigWrapper::GetCCfgSound().bChangeTone && ChannelTone[(!ch.complement)?0:1][ch.reg[0]>>6]) ) {
 		// 補間処理
 		double	total;
 		double	sample_weight = ch.phaseacc;
@@ -923,7 +923,7 @@ void	APU_INTERNAL::SyncUpdateTriangle( INT type )
 INT	APU_INTERNAL::RenderTriangle()
 {
 	INT	vol;
-	if( Config.sound.bDisableVolumeEffect ) {
+	if( ConfigWrapper::GetCCfgSound().bDisableVolumeEffect ) {
 		vol = 256;
 	} else {
 		vol = 256-(INT)((ch4.reg[1]&0x01)+ch4.dpcm_value*2);
@@ -937,7 +937,7 @@ INT	APU_INTERNAL::RenderTriangle()
 		return	ch2.nowvolume*vol/256;
 	}
 
-	if( !(Config.sound.bChangeTone && ChannelTone[2][0]) ) {
+	if( !(ConfigWrapper::GetCCfgSound().bChangeTone && ChannelTone[2][0]) ) {
 		ch2.phaseacc -= cycle_rate;
 		if( ch2.phaseacc >= 0 ) {
 			return	ch2.nowvolume*vol/256;

@@ -10,14 +10,14 @@ BYTE	EXPAD_VSUnisystem::Read4016()
 BYTE	data = 0x00;
 
 	// Coin 1
-	if( Config.ButtonCheck( 0, Config.controller.nVSUnisystem ) )
+	if( ConfigWrapper::ButtonCheck( 0, ConfigWrapper::GetCCfgController().nVSUnisystem ) )
 		data |= 0x20;
 	// Coin 2
-	if( Config.ButtonCheck( 1, Config.controller.nVSUnisystem ) ) {
+	if( ConfigWrapper::ButtonCheck( 1, ConfigWrapper::GetCCfgController().nVSUnisystem ) ) {
 		data |= 0x40;
 	}
 	// Service
-	if( Config.ButtonCheck( 2, Config.controller.nVSUnisystem ) ) {
+	if( ConfigWrapper::ButtonCheck( 2, ConfigWrapper::GetCCfgController().nVSUnisystem ) ) {
 		data |= 0x04;
 	}
 

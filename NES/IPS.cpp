@@ -1,13 +1,15 @@
 ﻿#include "Typedef.h"
-#include "App.h"
 #include "Pathlib.h"
-#include "Config.h"
-#include "Debugout.h"
+#include "ConfigWrapper.h"
+#include "DebugOut.h"
+#include "AppWrapper.h"
 
 #include "minizip/unzip.h"
 #include "IPS.h"
+#include "Macro.h"
 
 #include <vector>
+#include <Shlwapi.h>
 using namespace std;
 
 static	BOOL	PatchIPS( LPBYTE pIPS, LPBYTE pROM, LONG imagesize, LONG ipssize )
@@ -77,8 +79,8 @@ static	BOOL	PatchIPS( LPBYTE pIPS, LPBYTE pROM, LONG imagesize, LONG ipssize )
 BOOL	ApplyIPS( const char* filename, LPBYTE pROM, LONG imagesize )
 {
 	string	pathstr, tempstr;
-	if( Config.path.bIpsPath ) {
-		pathstr = CPathlib::CreatePath( CApp::GetModulePath(), Config.path.szIpsPath );
+	if( ConfigWrapper::GetCCfgPath().bIpsPath ) {
+		pathstr = CPathlib::CreatePath( AppWrapper::GetModulePath(), ConfigWrapper::GetCCfgPath().szIpsPath );
 	} else {
 		pathstr = CPathlib::SplitPath( filename );
 	}

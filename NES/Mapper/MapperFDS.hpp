@@ -496,16 +496,16 @@ void	Mapper020::MechanicalSound( INT type )
 	switch( type ) {
 		case	MECHANICAL_SOUND_BOOT:
 			// Head start point CAM sound.
-			if( Config.sound.bExtraSoundEnable )
+			if( ConfigWrapper::GetCCfgSound().bExtraSoundEnable )
 				DirectSound.EsfPlay( ESF_DISKSYSTEM_BOOT );
 			break;
 		case	MECHANICAL_SOUND_SEEKEND:
-			if( Config.sound.bExtraSoundEnable )
+			if( ConfigWrapper::GetCCfgSound().bExtraSoundEnable )
 				DirectSound.EsfPlay( ESF_DISKSYSTEM_SEEKEND );
 			// Reset or Seekend sound.
 			break;
 		case	MECHANICAL_SOUND_MOTOR_ON:
-			if( Config.sound.bExtraSoundEnable )
+			if( ConfigWrapper::GetCCfgSound().bExtraSoundEnable )
 				DirectSound.EsfPlayLoop( ESF_DISKSYSTEM_MOTOR );
 			// Start Motor sound.(loop)
 			break;

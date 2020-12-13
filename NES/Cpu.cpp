@@ -12,8 +12,8 @@
 #include "Macro.h"
 
 #include "DebugOut.h"
-#include "App.h"
-#include "Config.h"
+#include "AppWrapper.h"
+#include "ConfigWrapper.h"
 
 #include "Nes.h"
 #include "MMU.h"
@@ -1786,8 +1786,8 @@ register BYTE	DT;
 			case	0xD2:  /* JAM */
 			case	0xF2:  /* JAM */
 			default:
-				if( !Config.emulator.bIllegalOp ) {
-					throw	CApp::GetErrorString( IDS_ERROR_ILLEGALOPCODE );
+				if( !ConfigWrapper::GetCCfgEmulator().bIllegalOp ) {
+					throw	AppWrapper::GetErrorString( IDS_ERROR_ILLEGALOPCODE );
 					goto	_execute_exit;
 				} else {
 					R.PC--;
