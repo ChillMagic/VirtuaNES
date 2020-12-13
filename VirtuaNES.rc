@@ -113,7 +113,6 @@ IDB_LAUNCHERIMAGELIST   BITMAP  DISCARDABLE     "res\LauncherImageList.bmp"
 //
 // Generated from the TEXTINCLUDE 3 resource.
 //
-CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "res\\VirtuaNES.exe.manifest"
 
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED

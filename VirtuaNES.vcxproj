@@ -620,9 +620,6 @@
     <Image Include="res\header_up.ico" />
     <Image Include="res\VirtuaNES.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="res\VirtuaNES.exe.manifest" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

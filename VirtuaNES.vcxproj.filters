@@ -1633,11 +1633,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="res\VirtuaNES.exe.manifest">
-      <Filter>Resource Files</Filter>
-    </Manifest>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="VirtuaNES.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
