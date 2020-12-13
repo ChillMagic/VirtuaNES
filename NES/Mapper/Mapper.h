@@ -8,9 +8,6 @@
 #ifndef	__MAPPER_INCLUDED__
 #define	__MAPPER_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-
 #include "DirectSound.h"
 
 #include "Typedef.h"

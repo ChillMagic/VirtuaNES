@@ -8,8 +8,6 @@
 #ifndef	__APU_INTERNAL_INCLUDED__
 #define	__APU_INTERNAL_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
 #include <cmath>
 
 #include "Typedef.h"

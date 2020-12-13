@@ -8,9 +8,6 @@
 #ifndef	__APU_VRC6_INCLUDED__
 #define	__APU_VRC6_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-
 #include "Typedef.h"
 #include "Macro.h"
 

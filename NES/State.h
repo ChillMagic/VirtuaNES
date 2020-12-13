@@ -1,6 +1,8 @@
 ﻿#ifndef	__STATE_INCLUDED__
 #define	__STATE_INCLUDED__
 
+#include <cstring>
+
 #pragma pack( push, 1 )
 
 typedef	struct	tagFILEHDR {	//  0123456789AB
@@ -309,6 +311,10 @@ typedef	struct	tagNMVHDR {
 #define	GETDWORD(p,v)	{ (v) = *(LPDWORD)p; p += sizeof(DWORD); }
 #define	GETINT(p,v)	{ (v) = *(LPINT)p; p += sizeof(INT); }
 #define	GETBLOCK(p,v,s)	{ memcpy( (v), p, s ); p += s; }
+
+#ifndef ZeroMemory
+#define ZeroMemory(Destination,Length) memset((Destination),0,(Length))
+#endif
 
 #pragma pack( pop )
 
