@@ -5,14 +5,14 @@
 #define	__CCHEATDLG_INCLUDED__
 
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #include <list>
 #include <vector>
 #include <string>
 using namespace std;
 
 #include "Wnd.h"
-#include "NES/cheat.h"
+#include "NES/Cheat.h"
 
 // サーチダイアログ
 class	CSearchDlg : public CWnd

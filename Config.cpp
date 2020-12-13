@@ -8,7 +8,7 @@
 #include "Registry.h"
 
 #include "DirectInput.h"
-#include "extsoundfile.h"
+#include "ExtSoundFile.h"
 
 // Global instance
 CConfig	Config;

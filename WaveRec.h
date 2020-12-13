@@ -5,11 +5,10 @@
 #define	__CWAVEREC_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <stdio.h>
-#include <memory.h>
+#include <Windows.h>
+#include <cstdio>
 
-#include "typedef.h"
+#include "Typedef.h"
 
 #pragma pack(1)
 typedef struct {

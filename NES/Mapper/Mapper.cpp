@@ -7,18 +7,18 @@
 /*----------------------------------------------------------------------*/
 /*--------------[ INCLUDE               ]-------------------------------*/
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <Windows.h>
+#include <cstdio>
+#include <cstdlib>
 
 #include "DebugOut.h"
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
-#include "../nes.h"
-#include "../mmu.h"
+#include "../Nes.h"
+#include "../MMU.h"
 
-#include "mapper.h"
+#include "Mapper.h"
 
 /*--------------[ DEFINE                ]-------------------------------*/
 /*--------------[ EXTERNAL PROGRAM      ]-------------------------------*/

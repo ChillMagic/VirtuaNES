@@ -9,15 +9,15 @@
 #define	__NES_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <Windows.h>
+#include <cstdio>
+#include <cstdlib>
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
-#include "state.h"
-#include "cheat.h"
+#include "State.h"
+#include "Cheat.h"
 #include "VsUnisystem.h"
 
 #include <vector>

@@ -5,7 +5,7 @@
 #define	__CEMUTHREAD_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 
 #include <string>
 #include <deque>
@@ -17,17 +17,17 @@ using namespace std;
 #include "Config.h"
 #include "WaveRec.h"
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
-#include "NES/nes.h"
-#include "NES/mmu.h"
-#include "NES/cpu.h"
-#include "NES/ppu.h"
-#include "NES/apu.h"
-#include "NES/pad.h"
-#include "NES/rom.h"
-#include "NES/Mapper/mapper.h"
+#include "NES/Nes.h"
+#include "NES/MMU.h"
+#include "NES/CPU.h"
+#include "NES/PPU.h"
+#include "NES/APU.h"
+#include "NES/PAD.h"
+#include "NES/ROM.h"
+#include "NES/Mapper/Mapper.h"
 
 // Prototypes
 // NetPlay Event

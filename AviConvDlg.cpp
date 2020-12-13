@@ -3,7 +3,7 @@
 //
 //
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #include <shellapi.h>
 #include <commdlg.h>
 #include <string>
@@ -18,11 +18,11 @@ using namespace std;
 #include "Wnd.h"
 #include "AviConvDlg.h"
 
-#include "NES/nes.h"
-#include "NES/mmu.h"
-#include "NES/ppu.h"
-#include "NES/apu.h"
-#include "NES/rom.h"
+#include "NES/Nes.h"
+#include "NES/MMU.h"
+#include "NES/PPU.h"
+#include "NES/APU.h"
+#include "NES/ROM.h"
 
 #include "DirectDraw.h"
 

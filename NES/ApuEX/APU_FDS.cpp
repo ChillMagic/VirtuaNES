@@ -8,7 +8,7 @@
 #include "DebugOut.h"
 
 #include "APU_FDS.h"
-#include "../state.h"
+#include "../State.h"
 
 APU_FDS::APU_FDS()
 {

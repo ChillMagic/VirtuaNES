@@ -9,11 +9,11 @@
 #define	__APU_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <math.h>
+#include <Windows.h>
+#include <cmath>
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 #include "ApuEx/APU_INTERNAL.h"
 #include "ApuEx/APU_VRC6.h"

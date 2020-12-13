@@ -1,11 +1,11 @@
 ﻿#ifndef	__PNGWRITE_INCLUDED__
 #define	__PNGWRITE_INCLUDED__
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include "zlib.h"
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 class	PNGWRITE
 {

@@ -9,15 +9,15 @@
 #define	__APU_INTERNAL_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include "windows.h"
-#include "math.h"
+#include <Windows.h>
+#include <cmath>
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 #include "APU_INTERFACE.h"
-#include "../nes.h"
-#include "../cpu.h"
+#include "../Nes.h"
+#include "../CPU.h"
 
 class	APU_INTERNAL : public APU_INTERFACE
 {

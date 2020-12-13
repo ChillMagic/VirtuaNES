@@ -8,17 +8,17 @@
 // Reprogrammed by Norix
 //
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <shlwapi.h>
+#include <Windows.h>
+#include <Shlwapi.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <mbstring.h>
-#include <time.h>
+#include <ctime>
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 #include "DebugOut.h"
 
 #include "App.h"

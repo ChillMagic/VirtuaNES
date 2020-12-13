@@ -5,14 +5,14 @@
 #define	__CNETPLAY_INCLUDED__
 
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #include <windowsx.h>
-#include <commctrl.h>
+#include <CommCtrl.h>
 #include <mmsystem.h>
 #include <winsock.h>
 
-#include "macro.h"
-#include "typedef.h"
+#include "Macro.h"
+#include "Typedef.h"
 
 #include <string>
 using namespace std;

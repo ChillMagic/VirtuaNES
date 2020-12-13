@@ -6,24 +6,24 @@
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <Windows.h>
+#include <cstdio>
+#include <cstdlib>
 
 #include "VirtuaNESres.h"
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 #include "DebugOut.h"
 #include "App.h"
 
-#include "nes.h"
-#include "mmu.h"
-#include "cpu.h"
-#include "ppu.h"
-#include "rom.h"
-#include "Mapper/mapper.h"
+#include "Nes.h"
+#include "MMU.h"
+#include "CPU.h"
+#include "PPU.h"
+#include "ROM.h"
+#include "Mapper/Mapper.h"
 
 BYTE	PPU::VSColorMap[5][64] = {
 	{	0x35, 0xFF, 0x16, 0x22, 0x1C, 0xFF, 0xFF, 0x15,

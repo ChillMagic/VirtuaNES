@@ -1,7 +1,7 @@
 ﻿//
 // Recent File クラス
 //
-#include <TCHAR.h>
+#include <tchar.h>
 
 #include "DebugOut.h"
 #include "PathLib.h"

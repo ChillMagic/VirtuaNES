@@ -28,8 +28,8 @@
 #ifndef	__EASYVIRUSCHECKER__
 #define	__EASYVIRUSCHECKER__
 
-#include	<windows.h>
-#include	<shlwapi.h>
+#include	<Windows.h>
+#include	<Shlwapi.h>
 
 #pragma comment( lib, "shlwapi.lib" )
 

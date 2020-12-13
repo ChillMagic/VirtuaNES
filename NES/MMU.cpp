@@ -6,12 +6,12 @@
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include "typedef.h"
-#include "macro.h"
+#include <Windows.h>
+#include "Typedef.h"
+#include "Macro.h"
 #include "DebugOut.h"
 
-#include "mmu.h"
+#include "MMU.h"
 
 // CPU メモリバンク
 LPBYTE	CPU_MEM_BANK[8];	// 8K単位

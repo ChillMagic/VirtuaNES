@@ -1,8 +1,8 @@
 ﻿#define	INITGUID
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #include <windowsx.h>
-#include <commctrl.h>
+#include <CommCtrl.h>
 #include <crtdbg.h>
 
 #include <string>

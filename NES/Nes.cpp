@@ -6,14 +6,14 @@
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
+#include <Windows.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <ctime>
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 #include "VirtuaNESres.h"
 
@@ -23,20 +23,20 @@
 #include "Config.h"
 #include "Crclib.h"
 
-#include "nes.h"
-#include "mmu.h"
-#include "cpu.h"
-#include "ppu.h"
-#include "apu.h"
-#include "pad.h"
-#include "rom.h"
-#include "Mapper/mapper.h"
+#include "Nes.h"
+#include "MMU.h"
+#include "CPU.h"
+#include "PPU.h"
+#include "APU.h"
+#include "PAD.h"
+#include "ROM.h"
+#include "Mapper/Mapper.h"
 
 #include "DirectDraw.h"
 #include "DirectSound.h"
 #include "DirectInput.h"
 
-#include "pngwrite.h"
+#include "Pngwrite.h"
 
 NESCONFIG NESCONFIG_NTSC = {
 	21477270.0f,		// Base clock

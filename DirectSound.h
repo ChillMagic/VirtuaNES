@@ -5,16 +5,16 @@
 #define	__DIRECTSOUND_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #include <mmsystem.h>
 
 #define DIRECTSOUND_VERSION	0x0700
 #include <dsound.h>
 
-#include "extsoundfile.h"
+#include "ExtSoundFile.h"
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 class	CWaveData
 {

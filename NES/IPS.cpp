@@ -5,7 +5,7 @@
 #include "Debugout.h"
 
 #include "minizip/unzip.h"
-#include "ips.h"
+#include "IPS.h"
 
 #include <vector>
 using namespace std;

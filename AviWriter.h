@@ -5,8 +5,8 @@
 #define	__AVIFILEWRITER_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <vfw.h>
+#include <Windows.h>
+#include <Vfw.h>
 
 class	CAVIWriter
 {

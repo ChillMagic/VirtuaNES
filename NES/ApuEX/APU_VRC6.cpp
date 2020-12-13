@@ -6,7 +6,7 @@
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
 #include "APU_VRC6.h"
-#include "../state.h"
+#include "../State.h"
 
 #define	RECTANGLE_VOL_SHIFT	8
 #define	SAWTOOTH_VOL_SHIFT	6

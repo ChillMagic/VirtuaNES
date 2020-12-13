@@ -8,8 +8,8 @@
 #ifndef	__PPU_INCLUDED__
 #define	__PPU_INCLUDED__
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 // class prototype
 class	NES;

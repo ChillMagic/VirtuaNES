@@ -6,13 +6,13 @@
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <Windows.h>
+#include <cstdio>
+#include <cstdlib>
 #include <mbstring.h>
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 #include "VirtuaNESres.h"
 
@@ -25,11 +25,11 @@
 
 #include "Archive.h"
 
-#include "rom.h"
-#include "romdb.h"
-#include "mmu.h"
+#include "ROM.h"
+#include "ROMDB.h"
+#include "MMU.h"
 
-#include "ips.h"
+#include "IPS.h"
 
 //
 // コンストラクタ

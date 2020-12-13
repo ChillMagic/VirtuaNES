@@ -5,9 +5,9 @@
 #define	__CREGISTRY_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #include <windowsx.h>
-#include <TCHAR.h>
+#include <tchar.h>
 
 #include <string>
 using namespace std;

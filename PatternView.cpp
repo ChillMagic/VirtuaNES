@@ -2,13 +2,13 @@
 // パターンビュークラス
 //
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #include <shellapi.h>
 #include <string>
 using namespace std;
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 #include "VirtuaNESres.h"
 #include "DebugOut.h"

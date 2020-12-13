@@ -12,8 +12,8 @@
 #include <string>
 using namespace std;
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 #pragma pack( push, 1 )
 

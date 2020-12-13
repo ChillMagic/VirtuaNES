@@ -2,11 +2,11 @@
 #define	__VSUNISYSTEM_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <Windows.h>
+#include <cstdio>
+#include <cstdlib>
 
-#include "typedef.h"
+#include "Typedef.h"
 
 struct VSDIPSWITCH
 {

@@ -9,8 +9,8 @@
 #ifndef	__MMU_INCLUDED__
 #define	__MMU_INCLUDED__
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 // CPU メモリバンク
 extern	LPBYTE	CPU_MEM_BANK[8];	// 8K単位

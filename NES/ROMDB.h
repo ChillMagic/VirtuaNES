@@ -10,10 +10,10 @@
 #include <string>
 using namespace std;
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
-#include "rom.h"
+#include "ROM.h"
 
 //
 // ROM DATABASE (NESToy&NNNesterJ database)

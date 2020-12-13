@@ -2,8 +2,8 @@
 // AVI File Writer
 //
 
-#include "aviwriter.h"
-#include "macro.h"
+#include "AviWriter.h"
+#include "Macro.h"
 
 #pragma	comment(lib, "vfw32.lib")
 

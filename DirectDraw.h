@@ -5,7 +5,7 @@
 #define	__DIRECTDRAW_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #include <objbase.h>
 #include <mmsystem.h>
 
@@ -14,11 +14,11 @@ using namespace std;
 
 #define DIRECTDRAW_VERSION	0x0700
 #include <ddraw.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 class	CDirectDraw
 {

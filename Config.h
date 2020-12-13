@@ -5,18 +5,18 @@
 #define	__CCONFIG_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <stdlib.h>
+#include <Windows.h>
+#include <cstdlib>
 #define	DIRECTINPUT_VERSION	0x0700
 #include <dinput.h>
 
 #include <string>
 using namespace std;
 
-#include "extsoundfile.h"
+#include "ExtSoundFile.h"
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 class	CCfgGeneral
 {

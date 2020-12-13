@@ -4,7 +4,7 @@
 #ifndef	__CARCHIVEFILE_INCLUDED__
 #define	__CARCHIVEFILE_INCLUDED__
 
-#include "typedef.h"
+#include "Typedef.h"
 
 extern	BOOL	UnCompress( LPCSTR fname, LPBYTE* ppBuf, LPDWORD lpdwSize );
 

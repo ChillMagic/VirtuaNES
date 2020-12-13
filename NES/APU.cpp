@@ -9,12 +9,12 @@
 #include "App.h"
 #include "Config.h"
 
-#include "nes.h"
-#include "mmu.h"
-#include "cpu.h"
-#include "ppu.h"
-#include "rom.h"
-#include "apu.h"
+#include "Nes.h"
+#include "MMU.h"
+#include "CPU.h"
+#include "PPU.h"
+#include "ROM.h"
+#include "APU.h"
 
 // Volume adjust
 // Internal sounds

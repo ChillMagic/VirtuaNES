@@ -7,9 +7,9 @@
 #define	__CWND_INCLUDED__
 
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #include <windowsx.h>
-#include <commctrl.h>
+#include <CommCtrl.h>
 
 #include <string>
 #include <list>

@@ -3,7 +3,7 @@
 //
 //
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #include <process.h>
 #include <shellapi.h>
 #include <commdlg.h>
@@ -46,10 +46,10 @@ using namespace std;
 #include "DirectSound.h"
 #include "DirectInput.h"
 
-#include "NES/nes.h"
-#include "NES/rom.h"
-#include "NES/romdb.h"
-#include "NES/pad.h"
+#include "NES/Nes.h"
+#include "NES/ROM.h"
+#include "NES/ROMDB.h"
+#include "NES/PAD.h"
 
 BOOL	CMainFrame::m_bKeyEnable = FALSE;
 volatile BOOL	CMainFrame::m_bKeyThreadExit = FALSE;

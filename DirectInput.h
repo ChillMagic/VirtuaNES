@@ -5,14 +5,14 @@
 #define	__DIRECTINPUT_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #include <mmsystem.h>
 
 #define	DIRECTINPUT_VERSION	0x0700
 #include <dinput.h>
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 #include <string>
 using namespace std;

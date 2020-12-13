@@ -9,12 +9,12 @@
 #define	__MAPPER_INCLUDED__
 
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 
 #include "DirectSound.h"
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 // class prototype
 class	NES;

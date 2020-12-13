@@ -2,18 +2,18 @@
 // チャットダイアログクラス
 //
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <commctrl.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <Windows.h>
+#include <CommCtrl.h>
+#include <cstdio>
+#include <cstdlib>
 #include <mbstring.h>
-#include <shlwapi.h>
+#include <Shlwapi.h>
 
 #include <string>
 using namespace std;
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 #include "VirtuaNESres.h"
 #include "DebugOut.h"

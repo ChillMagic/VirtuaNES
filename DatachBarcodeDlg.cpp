@@ -2,10 +2,10 @@
 // DATACHバーコードバトラーダイアログクラス
 //
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <commctrl.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <Windows.h>
+#include <CommCtrl.h>
+#include <cstdio>
+#include <cstdlib>
 #include <time.h>
 
 #include <list>
@@ -13,8 +13,8 @@
 #include <string>
 using namespace std;
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 #include "VirtuaNESres.h"
 #include "DebugOut.h"
@@ -26,8 +26,8 @@ using namespace std;
 #include "DatachBarcodeDlg.h"
 
 #include "EmuThread.h"
-#include "NES/nes.h"
-#include "NES/Mapper/mapper.h"
+#include "NES/Nes.h"
+#include "NES/Mapper/Mapper.h"
 
 // メッセージ
 DLG_MESSAGE_BEGIN(CDatachBarcodeDlg)

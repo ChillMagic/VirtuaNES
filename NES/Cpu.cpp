@@ -7,24 +7,24 @@
 /*----------------------------------------------------------------------*/
 /*--------------[ INCLUDE               ]-------------------------------*/
 #define	WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 
 #include "VirtuaNESres.h"
 
-#include "typedef.h"
-#include "macro.h"
+#include "Typedef.h"
+#include "Macro.h"
 
 #include "DebugOut.h"
 #include "App.h"
 #include "Config.h"
 
-#include "nes.h"
-#include "mmu.h"
-#include "cpu.h"
-#include "ppu.h"
-#include "apu.h"
-#include "rom.h"
-#include "Mapper/mapper.h"
+#include "Nes.h"
+#include "MMU.h"
+#include "CPU.h"
+#include "PPU.h"
+#include "APU.h"
+#include "ROM.h"
+#include "Mapper/Mapper.h"
 
 /*--------------[ DEFINE                ]-------------------------------*/
 #define	DPCM_SYNCCLOCK	FALSE
