@@ -30,11 +30,19 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="English.rc">
+    <ResourceCompile Include="res\English.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="Japanese.rc">
+    <ResourceCompile Include="res\Japanese.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\Sim_Chinese.res">
+      <Filter>Resource Files</Filter>
+    </Resource>
+    <Resource Include="res\Tra_Chinese.res">
+      <Filter>Resource Files</Filter>
+    </Resource>
   </ItemGroup>
 </Project>

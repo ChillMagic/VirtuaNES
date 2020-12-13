@@ -137,8 +137,12 @@
     <ClInclude Include="VirtuaNESres.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="English.rc" />
-    <ResourceCompile Include="Japanese.rc" />
+    <ResourceCompile Include="res\English.rc" />
+    <ResourceCompile Include="res\Japanese.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\Sim_Chinese.res" />
+    <Resource Include="res\Tra_Chinese.res" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
