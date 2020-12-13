@@ -54,7 +54,7 @@ void	EXPAD_Paddle::Sync()
 	nes->GetZapperPos( paddle_x, y );
 
 	paddle_button = 0;
-	if( ::GetAsyncKeyState(VK_LBUTTON)&0x8000 )
+	if( APIWrapper::GetAsyncKeyStateLeftButton()&0x8000 )
 		paddle_button = 0xFF;
 }
 

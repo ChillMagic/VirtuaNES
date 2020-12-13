@@ -23,8 +23,8 @@ DEBUGOUT( "SOUND CODE:%02X\n", addr & 0x1F );
 
 			// OSDにするべきか…
 			if( ConfigWrapper::GetCCfgSound().bExtraSoundEnable ) {
-				DirectSound.EsfAllStop();
-				DirectSound.EsfPlay( ESF_MOETENNIS_00+(addr&0x1F) );
+				ConfigWrapper::DirectSoundEsfAllStop();
+				ConfigWrapper::DirectSoundEsfPlay( ESF_MOETENNIS_00+(addr&0x1F) );
 			}
 		}
 	}

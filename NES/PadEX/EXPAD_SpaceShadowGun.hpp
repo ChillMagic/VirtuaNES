@@ -29,7 +29,7 @@ BYTE	data = 0x08;
 	}
 
 	if( nes->GetZapperHit() ) {
-		if( DirectDraw.GetZapperHit() >= 0xFE )
+		if( ConfigWrapper::DirectDrawGetZapperHit() >= 0xFE )
 			data &= ~0x08;
 	}
 	return	data;
@@ -40,9 +40,9 @@ void	EXPAD_SpaceShadowGun::Sync()
 	nes->GetZapperPos( zapper_x, zapper_y );
 
 	zapper_button = 0;
-	if( ::GetAsyncKeyState(VK_LBUTTON)&0x8000 )
+	if( APIWrapper::GetAsyncKeyStateLeftButton()&0x8000 )
 		zapper_button |= 0x01;
-	if( ::GetAsyncKeyState(VK_RBUTTON)&0x8000 )
+	if( APIWrapper::GetAsyncKeyStateRightButton()&0x8000 )
 		zapper_button |= 0x02;
 }
 

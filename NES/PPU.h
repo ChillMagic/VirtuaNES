@@ -11,6 +11,8 @@
 #include "Typedef.h"
 #include "Macro.h"
 
+#include "MMU.h"
+
 // class prototype
 class	NES;
 

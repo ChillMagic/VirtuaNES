@@ -4,10 +4,6 @@
 #ifndef	__DIRECTINPUT_INCLUDED__
 #define	__DIRECTINPUT_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#include <mmsystem.h>
-
 #define	DIRECTINPUT_VERSION	0x0700
 #include <dinput.h>
 

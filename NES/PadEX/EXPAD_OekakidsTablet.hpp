@@ -20,9 +20,9 @@ BYTE	EXPAD_OekakidsTablet::Read4017()
 void	EXPAD_OekakidsTablet::Write4016( BYTE data )
 {
 	if( zapper_y < 48 ) {
-		DirectDraw.SetZapperDrawMode( TRUE );
+		ConfigWrapper::DirectDrawSetZapperDrawMode( TRUE );
 	} else {
-		DirectDraw.SetZapperDrawMode( FALSE );
+		ConfigWrapper::DirectDrawSetZapperDrawMode( FALSE );
 	}
 
 	if( !(data & 0x01) ) {
@@ -76,7 +76,7 @@ void	EXPAD_OekakidsTablet::Sync()
 	nes->GetZapperPos( zapper_x, zapper_y );
 
 	zapper_button = 0;
-	if( ::GetAsyncKeyState(VK_LBUTTON)&0x8000 )
+	if( APIWrapper::GetAsyncKeyStateLeftButton()&0x8000 )
 		zapper_button = 0xFF;
 }
 

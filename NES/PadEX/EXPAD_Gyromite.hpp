@@ -3,16 +3,16 @@
 //////////////////////////////////////////////////////////////////////////
 INT	EXPAD_Gyromite::CheckSignal()
 {
-	RGBQUAD palette[256];
-	RGBQUAD pixel;
+	ConfigWrapper::RGBQUAD palette[256];
+	ConfigWrapper::RGBQUAD pixel;
 
 	// throttling detection issues
-	DirectDraw.GetPaletteData( palette );
+	ConfigWrapper::DirectDrawGetPaletteData( palette );
 	pixel = palette[BGPAL[0]];
 
 	for( INT lcv=1; lcv<16; lcv++ ) {
 		// reject non-solid screens
-		if( memcmp( &(palette[BGPAL[lcv]]), &pixel, sizeof(RGBQUAD) ) != 0 ) {
+		if( memcmp( &(palette[BGPAL[lcv]]), &pixel, sizeof(ConfigWrapper::RGBQUAD) ) != 0 ) {
 			return 0xF00;
 	}
 	}

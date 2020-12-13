@@ -27,8 +27,8 @@ void	Mapper086::WriteLow( WORD addr, BYTE data )
 
 			// OSDにするべきか…
 			if( ConfigWrapper::GetCCfgSound().bExtraSoundEnable ) {
-				DirectSound.EsfAllStop();
-				DirectSound.EsfPlay( ESF_MOEPRO_STRIKE+(data&0x0F) );
+				ConfigWrapper::DirectSoundEsfAllStop();
+				ConfigWrapper::DirectSoundEsfPlay( ESF_MOEPRO_STRIKE+(data&0x0F) );
 			}
 		}
 		reg = data;

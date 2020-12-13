@@ -1,6 +1,8 @@
 ﻿//////////////////////////////////////////////////////////////////////////
 // Zapper                                                               //
 //////////////////////////////////////////////////////////////////////////
+#include "APIWrapper.h"
+
 void	EXPAD_Zapper::Reset()
 {
 	zapper_button = 0;
@@ -17,7 +19,7 @@ BYTE	data = 0x08;
 	}
 
 	if( nes->GetZapperHit() ) {
-		if( DirectDraw.GetZapperHit() >= 0x40 )
+		if( ConfigWrapper::DirectDrawGetZapperHit() >= 0x40 )
 			data &= ~0x08;
 	}
 
@@ -37,9 +39,9 @@ void	EXPAD_Zapper::Sync()
 	nes->GetZapperPos( zapper_x, zapper_y );
 
 	zapper_button = 0;
-	if( ::GetAsyncKeyState(VK_LBUTTON)&0x8000 )
+	if( APIWrapper::GetAsyncKeyStateLeftButton()&0x8000 )
 		zapper_button |= 0x01;
-	else if( ::GetAsyncKeyState(VK_RBUTTON)&0x8000 )
+	else if( APIWrapper::GetAsyncKeyStateRightButton()&0x8000 )
 		zapper_button |= 0x02;
 }
 

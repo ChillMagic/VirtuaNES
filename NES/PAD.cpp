@@ -11,9 +11,6 @@
 #include "DebugOut.h"
 #include "ConfigWrapper.h"
 
-#include "DirectDraw.h"
-#include "DirectInput.h"
-
 #include "Nes.h"
 #include "MMU.h"
 #include "CPU.h"
@@ -40,8 +37,8 @@ PAD::PAD( NES* parent ) : nes( parent )
 
 PAD::~PAD()
 {
-	DirectDraw.SetZapperMode( FALSE );
-	DirectDraw.SetZapperDrawMode( FALSE );
+	ConfigWrapper::DirectDrawSetZapperMode( FALSE );
+	ConfigWrapper::DirectDrawSetZapperDrawMode( FALSE );
 
 	DELETEPTR( expad );
 }
@@ -200,20 +197,20 @@ void	PAD::SetExController( INT type )
 	DELETEPTR( expad );
 
 	bZapperMode = FALSE;
-	DirectDraw.SetZapperMode( FALSE );
-	DirectDraw.SetZapperDrawMode( FALSE );
+	ConfigWrapper::DirectDrawSetZapperMode( FALSE );
+	ConfigWrapper::DirectDrawSetZapperDrawMode( FALSE );
 
 	// ExPad Instance create
 	switch( type ) {
 		case	EXCONTROLLER_ZAPPER:
 			expad = new EXPAD_Zapper( nes );
 			bZapperMode = TRUE;
-			DirectDraw.SetZapperMode( TRUE );
-			DirectDraw.SetZapperDrawMode( TRUE );
+			ConfigWrapper::DirectDrawSetZapperMode( TRUE );
+			ConfigWrapper::DirectDrawSetZapperDrawMode( TRUE );
 			break;
 		case	EXCONTROLLER_PADDLE:
 			expad = new EXPAD_Paddle( nes );
-			DirectDraw.SetZapperMode( TRUE );
+			ConfigWrapper::DirectDrawSetZapperMode( TRUE );
 			break;
 		case	EXCONTROLLER_HYPERSHOT:
 			expad = new EXPAD_HyperShot( nes );
@@ -233,8 +230,8 @@ void	PAD::SetExController( INT type )
 		case	EXCONTROLLER_SPACESHADOWGUN:
 			expad = new EXPAD_SpaceShadowGun( nes );
 			bZapperMode = TRUE;
-			DirectDraw.SetZapperMode( TRUE );
-			DirectDraw.SetZapperDrawMode( TRUE );
+			ConfigWrapper::DirectDrawSetZapperMode( TRUE );
+			ConfigWrapper::DirectDrawSetZapperDrawMode( TRUE );
 			break;
 
 		case	EXCONTROLLER_FAMILYTRAINER_A:
@@ -249,8 +246,8 @@ void	PAD::SetExController( INT type )
 			break;
 		case	EXCONTROLLER_OEKAKIDS_TABLET:
 			expad = new EXPAD_OekakidsTablet( nes );
-			DirectDraw.SetZapperMode( TRUE );
-			DirectDraw.SetZapperDrawMode( FALSE );
+			ConfigWrapper::DirectDrawSetZapperMode( TRUE );
+			ConfigWrapper::DirectDrawSetZapperDrawMode( FALSE );
 			break;
 		case	EXCONTROLLER_TURBOFILE:
 			expad = new EXPAD_TurboFile( nes );
@@ -262,8 +259,8 @@ void	PAD::SetExController( INT type )
 		case	EXCONTROLLER_VSZAPPER:
 			expad = new EXPAD_VSZapper( nes );
 			bZapperMode = TRUE;
-			DirectDraw.SetZapperMode( TRUE );
-			DirectDraw.SetZapperDrawMode( TRUE );
+			ConfigWrapper::DirectDrawSetZapperMode( TRUE );
+			ConfigWrapper::DirectDrawSetZapperDrawMode( TRUE );
 			break;
 
 		case	EXCONTROLLER_GYROMITE:
@@ -374,7 +371,7 @@ void	PAD::SetSyncExData( DWORD data )
 				expad->SetSyncData( 0, x );
 				expad->SetSyncData( 1, y );
 				nes->SetZapperPos( x, y );
-				DirectDraw.SetZapperPos( x, y );
+				ConfigWrapper::DirectDrawSetZapperPos( x, y );
 			}
 			if( excontroller_select != EXCONTROLLER_SPACESHADOWGUN ) {
 				if( data & 0x0010000 )

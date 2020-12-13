@@ -8,7 +8,8 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include "DirectSound.h"
+//#include "ConfigWrapper::DirectSoundh"
+#include <ExtSoundFile.h>
 
 #include "DebugOut.h"
 #include "Typedef.h"

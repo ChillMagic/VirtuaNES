@@ -83,20 +83,20 @@ void	EXPAD_Toprider::Sync()
 BYTE	bit = 0;
 
 	// Up
-	if( ConfigWrapper::GetCCfgController().nButton[0][ 0] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 0]]
-	 || ConfigWrapper::GetCCfgController().nButton[0][16] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][16]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 0] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][ 0])
+	 || ConfigWrapper::GetCCfgController().nButton[0][16] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][16]))
 		bit |= 1<<4;
 	// Down
-	if( ConfigWrapper::GetCCfgController().nButton[0][ 1] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 1]]
-	 || ConfigWrapper::GetCCfgController().nButton[0][17] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][17]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 1] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][ 1])
+	 || ConfigWrapper::GetCCfgController().nButton[0][17] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][17]))
 		bit |= 1<<5;
 	// Left
-	if( ConfigWrapper::GetCCfgController().nButton[0][ 2] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 2]]
-	 || ConfigWrapper::GetCCfgController().nButton[0][18] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][18]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 2] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][ 2])
+	 || ConfigWrapper::GetCCfgController().nButton[0][18] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][18]))
 		bit |= 1<<6;
 	// Right
-	if( ConfigWrapper::GetCCfgController().nButton[0][ 3] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 3]]
-	 || ConfigWrapper::GetCCfgController().nButton[0][19] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][19]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 3] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][ 3])
+	 || ConfigWrapper::GetCCfgController().nButton[0][19] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][19]))
 		bit |= 1<<7;
 
 	// 左右同時入力を禁止する
@@ -104,19 +104,19 @@ BYTE	bit = 0;
 		bit &= ~((1<<6)|(1<<7));
 
 	// A,B
-	if( ConfigWrapper::GetCCfgController().nButton[0][ 4] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 4]]
-	 || ConfigWrapper::GetCCfgController().nButton[0][20] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][20]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 4] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][ 4])
+	 || ConfigWrapper::GetCCfgController().nButton[0][20] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][20]))
 		bit |= 1<<0;
-	if( ConfigWrapper::GetCCfgController().nButton[0][ 5] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 5]]
-	 || ConfigWrapper::GetCCfgController().nButton[0][21] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][21]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 5] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][ 5])
+	 || ConfigWrapper::GetCCfgController().nButton[0][21] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][21]))
 		bit |= 1<<1;
 
 	// Start, Select
-	if( ConfigWrapper::GetCCfgController().nButton[0][ 8] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 8]]
-	 || ConfigWrapper::GetCCfgController().nButton[0][24] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][24]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 8] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][ 8])
+	 || ConfigWrapper::GetCCfgController().nButton[0][24] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][24]))
 		bit |= 1<<2;
-	if( ConfigWrapper::GetCCfgController().nButton[0][ 9] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][ 9]]
-	 || ConfigWrapper::GetCCfgController().nButton[0][25] && DirectInput.m_Sw[ConfigWrapper::GetCCfgController().nButton[0][25]] )
+	if( ConfigWrapper::GetCCfgController().nButton[0][ 9] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][ 9])
+	 || ConfigWrapper::GetCCfgController().nButton[0][25] && ConfigWrapper::DirectInputGetm_Sw((Keyboard)ConfigWrapper::GetCCfgController().nButton[0][25]))
 		bit |= 1<<3;
 
 	if( !(bit & ((1<<6)|(1<<7))) ) {

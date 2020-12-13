@@ -22,7 +22,7 @@ void	EXPAD_VSZapper::Strobe()
 	}
 
 	if( nes->GetZapperHit() ) {
-		if( DirectDraw.GetZapperHit() >= 0x40 ) {
+		if(ConfigWrapper::DirectDrawGetZapperHit() >= 0x40 ) {
 			readlatch[0] |= 0x40;
 		}
 	}
@@ -80,9 +80,9 @@ void	EXPAD_VSZapper::Sync()
 	nes->GetZapperPos( zapper_x, zapper_y );
 
 	zapper_button = 0;
-	if( ::GetAsyncKeyState(VK_LBUTTON)&0x8000 )
+	if( APIWrapper::GetAsyncKeyStateLeftButton()&0x8000 )
 		zapper_button |= 0x01;
-	if( ::GetAsyncKeyState(VK_RBUTTON)&0x8000 )
+	if( APIWrapper::GetAsyncKeyStateRightButton()&0x8000 )
 		zapper_button |= 0x02;
 }
 
