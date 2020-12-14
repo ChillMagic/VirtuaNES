@@ -794,20 +794,19 @@ bool CPU::Executor::DoExec(BYTE opcode) {
 
 		// スタック系
 	case 0x48: // PHA
-		PUSH(R.A);
+		PHA();
 		ADD_CYCLE(3);
 		break;
 	case 0x08: // PHP
-		PUSH(R.P | B_FLAG);
+		PHP();
 		ADD_CYCLE(3);
 		break;
 	case 0x68: // PLA (N-----Z-)
-		R.A = POP();
-		SET_ZN_FLAG(R.A);
+		PLA();
 		ADD_CYCLE(4);
 		break;
 	case 0x28: // PLP
-		R.P = POP() | R_FLAG;
+		PLP();
 		ADD_CYCLE(4);
 		break;
 
@@ -1236,13 +1235,13 @@ bool CPU::Executor::DoExec(BYTE opcode) {
 	case 0x89: // DOP (CYCLES 2)
 	case 0xC2: // DOP (CYCLES 2)
 	case 0xE2: // DOP (CYCLES 2)
-		R.PC++;
+		DOP();
 		ADD_CYCLE(2);
 		break;
 	case 0x04: // DOP (CYCLES 3)
 	case 0x44: // DOP (CYCLES 3)
 	case 0x64: // DOP (CYCLES 3)
-		R.PC++;
+		DOP();
 		ADD_CYCLE(3);
 		break;
 	case 0x14: // DOP (CYCLES 4)
@@ -1251,7 +1250,7 @@ bool CPU::Executor::DoExec(BYTE opcode) {
 	case 0x74: // DOP (CYCLES 4)
 	case 0xD4: // DOP (CYCLES 4)
 	case 0xF4: // DOP (CYCLES 4)
-		R.PC++;
+		DOP();
 		ADD_CYCLE(4);
 		break;
 	case 0x0C: // TOP
@@ -1261,7 +1260,7 @@ bool CPU::Executor::DoExec(BYTE opcode) {
 	case 0x7C: // TOP
 	case 0xDC: // TOP
 	case 0xFC: // TOP
-		R.PC += 2;
+		TOP();
 		ADD_CYCLE(4);
 		break;
 

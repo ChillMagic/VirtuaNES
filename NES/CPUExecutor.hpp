@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <initializer_list>
+
 #include "CPU.h"
 #include "MMU.h"
 
@@ -78,6 +80,14 @@ public:
 
 	int Exec(int request_cycles);
 private:
+	using ExecFunc = void (Executor::*) ();
+	struct OpCode {
+		OpCode(const std::initializer_list<ExecFunc> &funcs, int cycle)
+			: funcs(funcs.begin()), cycle(cycle) {}
+		const ExecFunc* funcs = nullptr;
+		int cycle = 0;
+	};
+	OpCode GetExec(BYTE opcode);
 	bool DoExec(BYTE opcode);
 public:
 	Executor(CPU& cpu) :
@@ -264,8 +274,8 @@ public:
 	}
 
 	// メモリライト
-	auto MW_ZP() { return ZPWR(EA, DT); }
-	auto MW_EA() { return WR6502(EA, DT); }
+	void MW_ZP() { ZPWR(EA, DT); }
+	void MW_EA() { WR6502(EA, DT); }
 
 	// STACK操作
 	template <typename T>
@@ -618,6 +628,16 @@ public:
 	void SEC() { R.P |= C_FLAG; }
 	void SED() { R.P |= D_FLAG; }
 	void SEI() { R.P |= I_FLAG; }
+
+	void PHA() { PUSH(R.A); }
+	void PHP() { PUSH(R.P | B_FLAG); }
+	void PLA() {
+		R.A = POP();
+		SET_ZN_FLAG(R.A);
+	}
+	void PLP() {
+		R.P = POP() | R_FLAG;
+	}
 
 	// Unofficial命令
 	void ANC() {
