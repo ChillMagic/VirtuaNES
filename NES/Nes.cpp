@@ -197,7 +197,7 @@ NES::NES( const char* fname )
 
 	try {
 		DEBUGOUT( "Allocating CPU..." );
-		if( !(cpu = new CPU(this)) )
+		if( !(cpu = new CPU(this, MMU)) )
 			throw	"Allocating CPU failed.";
 		DEBUGOUT( "Ok.\n" );
 

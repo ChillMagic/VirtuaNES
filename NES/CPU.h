@@ -56,12 +56,14 @@ typedef	struct	{
 } R6502;
 
 
+struct MMUClass;
+
 class	CPU
 {
 	class Executor;
 	friend class Executor;
 public:
-	CPU( NES* parent );
+	CPU( NES* parent, MMUClass &mmu );
 	virtual	~CPU();
 
 	BYTE	RD6502( WORD addr );
@@ -106,6 +108,8 @@ protected:
 
 	// Clock process
 	BOOL	m_bClockProcess;
+	
+	MMUClass &mmu;
 private:
 };
 

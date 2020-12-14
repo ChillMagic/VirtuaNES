@@ -313,6 +313,9 @@
     <ClCompile Include="NESSnapshot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NES\CPUOpCode.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SimpleVirusChecker.h">
@@ -1658,6 +1661,9 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\CPUExecutor.hpp">
+      <Filter>NES</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

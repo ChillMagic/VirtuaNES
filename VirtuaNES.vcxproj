@@ -191,6 +191,7 @@
     <ClCompile Include="NES\ApuEX\APU_VRC7.cpp" />
     <ClCompile Include="NES\ApuEX\emu2413\emu2413.c" />
     <ClCompile Include="NES\Cpu.cpp" />
+    <ClCompile Include="NES\CPUOpCode.cpp" />
     <ClCompile Include="NES\IPS.cpp" />
     <ClCompile Include="NES\Mapper\Mapper.cpp" />
     <ClCompile Include="NES\Mapper\MapperFactory.cpp" />
@@ -314,6 +315,7 @@
     <ClInclude Include="NES\ApuEX\emu2413\vrc7tone.h" />
     <ClInclude Include="NES\Cheat.h" />
     <ClInclude Include="NES\CPU.h" />
+    <ClInclude Include="NES\CPUExecutor.hpp" />
     <ClInclude Include="NES\IPS.h" />
     <ClInclude Include="NES\Mapper\EEPROM.h" />
     <ClInclude Include="NES\Mapper\Mapper.h" />
