@@ -126,8 +126,8 @@ public:
 	void	Resume();
 
 	void	Event( EMUEVENT ev );
-	void	EventParam( EMUEVENT ev, LONG Param );
-	void	EventParam2( EMUEVENT ev, LONG Param, LONG Param2 );
+	void	EventParam( EMUEVENT ev, LONG_PTR Param );
+	void	EventParam2( EMUEVENT ev, LONG_PTR Param, LONG_PTR Param2 );
 
 	BOOL	IsRunning()	{ return (g_Status!=STATUS_NONE); }
 	BOOL	IsPausing()	{ return (g_Status==STATUS_PAUSE); }
@@ -169,8 +169,8 @@ protected:
 
 	// スレッドイベントとイベントハンドル
 	static	INT	g_Event;
-	static	LONG	g_EventParam;
-	static	LONG	g_EventParam2;
+	static	LONG_PTR	g_EventParam;
+	static	LONG_PTR	g_EventParam2;
 	static	HANDLE	g_hEvent;
 	static	HANDLE	g_hEventAccept;
 

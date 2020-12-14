@@ -149,7 +149,7 @@ DLGCMD	CDatachBarcodeDlg::OnCodeTransfer( DLGCMDPARAM )
 	p = code;
 	INT	len = ::GetDlgItemText( m_hWnd, IDC_EBB_CODE, (LPTSTR)code, 14 );
 
-	Emu.EventParam2( CEmuThread::EV_BARCODE, (LONG)code, (LONG)len );
+	Emu.EventParam2( CEmuThread::EV_BARCODE, (LONG_PTR)code, (LONG)len );
 }
 
 DLGCMD	CDatachBarcodeDlg::OnCodeCreate( DLGCMDPARAM )

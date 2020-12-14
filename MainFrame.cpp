@@ -1233,7 +1233,7 @@ DEBUGOUT( "ステートファイル CHK=%d\n", ret );
 						return	TRUE;
 				}
 			}
-			Emu.EventParam2( CEmuThread::EV_STATE_LOAD, (INT)szFile, -1 );
+			Emu.EventParam2( CEmuThread::EV_STATE_LOAD, (LONG_PTR)szFile, -1 );
 		} else
 		if( (ret = NES::IsMovieFile( szFile, Nes->rom )) >= 0 ) {
 DEBUGOUT( "ムービーファイル CHK=%d\n", ret );
@@ -1253,7 +1253,7 @@ DEBUGOUT( "ムービーファイル CHK=%d\n", ret );
 						return	TRUE;
 				}
 			}
-			Emu.EventParam( CEmuThread::EV_MOVIE_PLAY, (INT)szFile );
+			Emu.EventParam( CEmuThread::EV_MOVIE_PLAY, (LONG_PTR)szFile );
 		}
 	}
 
@@ -1426,7 +1426,7 @@ WNDCMD	CMainFrame::OnWaveRecord( WNDCMDPARAM )
 			Emu.EventParam( CEmuThread::EV_FULLSCREEN_GDI, TRUE );
 
 		if( ::GetSaveFileName( &ofn ) ) {
-			Emu.EventParam( CEmuThread::EV_WAVEREC_START, (INT)szFile );
+			Emu.EventParam( CEmuThread::EV_WAVEREC_START, (LONG_PTR)szFile );
 		}
 
 		if( !m_bMenu )
@@ -2079,7 +2079,7 @@ WNDCMD	CMainFrame::OnZoom( WNDCMDPARAM )
 
 	CHAR	szStr[64];
 	::wsprintf( szStr, "Screen Zoom *%d", uID-ID_ZOOMx1+1 );
-	Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG)szStr );
+	Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG_PTR)szStr );
 }
 
 WNDCMD	CMainFrame::OnViewCommand( WNDCMDPARAM )
@@ -2157,7 +2157,7 @@ WNDCMD	CMainFrame::OnEmuCommand( WNDCMDPARAM )
 				m_nStateSlot = 0;
 			}
 			::wsprintf( szStr, "State Slot #%d", m_nStateSlot );
-			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG)szStr );
+			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG_PTR)szStr );
 			}
 			break;
 		case	ID_STATE_DOWN:
@@ -2167,7 +2167,7 @@ WNDCMD	CMainFrame::OnEmuCommand( WNDCMDPARAM )
 				m_nStateSlot = 10-1;
 			}
 			::wsprintf( szStr, "State Slot #%d", m_nStateSlot );
-			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG)szStr );
+			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG_PTR)szStr );
 			}
 			break;
 
@@ -2180,7 +2180,7 @@ WNDCMD	CMainFrame::OnEmuCommand( WNDCMDPARAM )
 			{
 			CHAR	szStr[64];
 			::wsprintf( szStr, "State Slot #%d", m_nStateSlot );
-			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG)szStr );
+			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG_PTR)szStr );
 			}
 			break;
 
@@ -2281,25 +2281,25 @@ WNDCMD	CMainFrame::OnEmuCommand( WNDCMDPARAM )
 			break;
 
 		case	ID_FILTER_NONE:
-			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG)"Filter: None" );
+			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG_PTR)"Filter: None" );
 			goto	_gohell;
 		case	ID_FILTER_2XSAI:
-			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG)"Filter: 2xSaI" );
+			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG_PTR)"Filter: 2xSaI" );
 			goto	_gohell;
 		case	ID_FILTER_SUPER2XSAI:
-			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG)"Filter: Super2xSaI" );
+			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG_PTR)"Filter: Super2xSaI" );
 			goto	_gohell;
 		case	ID_FILTER_SUPEREAGLE:
-			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG)"Filter: SuperEagle" );
+			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG_PTR)"Filter: SuperEagle" );
 			goto	_gohell;
 		case	ID_FILTER_SCALE2X:
-			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG)"Filter: Scale2x" );
+			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG_PTR)"Filter: Scale2x" );
 			goto	_gohell;
 		case	ID_FILTER_HQ2X:
-			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG)"Filter: hq2x" );
+			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG_PTR)"Filter: hq2x" );
 			goto	_gohell;
 		case	ID_FILTER_LQ2X:
-			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG)"Filter: lq2x" );
+			Emu.EventParam( CEmuThread::EV_MESSAGE_OUT, (LONG_PTR)"Filter: lq2x" );
 //			goto	_gohell;
 _gohell:
 			Config.graphics.nGraphicsFilter = (INT)(uID-ID_FILTER_NONE);
@@ -2346,10 +2346,10 @@ WNDCMD	CMainFrame::OnStateCommand( WNDCMDPARAM )
 				}
 			}
 		}
-		Emu.EventParam2( CEmuThread::EV_STATE_LOAD, (INT)tempstr.c_str(), m_nStateSlot );
+		Emu.EventParam2( CEmuThread::EV_STATE_LOAD, (LONG_PTR)tempstr.c_str(), m_nStateSlot );
 	}
 	if( uID == ID_STATE_SAVE ) {
-		Emu.EventParam2( CEmuThread::EV_STATE_SAVE, (INT)tempstr.c_str(), m_nStateSlot );
+		Emu.EventParam2( CEmuThread::EV_STATE_SAVE, (LONG_PTR)tempstr.c_str(), m_nStateSlot );
 	}
 }
 
@@ -2392,10 +2392,10 @@ WNDCMD	CMainFrame::OnStateCommand2( WNDCMDPARAM )
 				}
 			}
 		}
-		Emu.EventParam2( CEmuThread::EV_STATE_LOAD, (INT)tempstr.c_str(), slot );
+		Emu.EventParam2( CEmuThread::EV_STATE_LOAD, (LONG_PTR)tempstr.c_str(), slot );
 	}
 	if( !bLoad ) {
-		Emu.EventParam2( CEmuThread::EV_STATE_SAVE, (INT)tempstr.c_str(), slot );
+		Emu.EventParam2( CEmuThread::EV_STATE_SAVE, (LONG_PTR)tempstr.c_str(), slot );
 	}
 }
 
@@ -2466,7 +2466,7 @@ WNDCMD	CMainFrame::OnMovieCommand( WNDCMDPARAM )
 					}
 				}
 
-				Emu.EventParam( CEmuThread::EV_MOVIE_PLAY, (INT)szFile );
+				Emu.EventParam( CEmuThread::EV_MOVIE_PLAY, (LONG_PTR)szFile );
 			}
 _Movie_Play_Failed:;
 		}
@@ -2476,7 +2476,7 @@ _Movie_Play_Failed:;
 		CApp::LoadString( IDS_UI_RECMOVIE, szTitle, sizeof(szTitle) );
 		ofn.lpstrTitle = szTitle;
 		if( ::GetSaveFileName( &ofn ) ) {
-			Emu.EventParam( CEmuThread::EV_MOVIE_REC, (INT)szFile );
+			Emu.EventParam( CEmuThread::EV_MOVIE_REC, (LONG_PTR)szFile );
 		}
 	}
 	if( uID == ID_MOVIE_REC_APPEND ) {
@@ -2502,10 +2502,10 @@ _Movie_Play_Failed:;
 					}
 				}
 
-				Emu.EventParam( CEmuThread::EV_MOVIE_RECAPPEND, (INT)szFile );
+				Emu.EventParam( CEmuThread::EV_MOVIE_RECAPPEND, (LONG_PTR)szFile );
 			} else {
 				// 新規作成と同じ
-				Emu.EventParam( CEmuThread::EV_MOVIE_REC, (INT)szFile );
+				Emu.EventParam( CEmuThread::EV_MOVIE_REC, (LONG_PTR)szFile );
 			}
 		}
 _Movie_Append_Failed:;
@@ -2612,7 +2612,7 @@ WNDCMD	CMainFrame::OnTapeCommand( WNDCMDPARAM )
 		CApp::LoadString( IDS_UI_PLAYTAPE, szTitle, sizeof(szTitle) );
 		ofn.lpstrTitle = szTitle;
 		if( ::GetOpenFileName( &ofn ) ) {
-			Emu.EventParam( CEmuThread::EV_TAPE_PLAY, (INT)szFile );
+			Emu.EventParam( CEmuThread::EV_TAPE_PLAY, (LONG_PTR)szFile );
 		}
 	}
 	if( uID == ID_TAPE_REC ) {
@@ -2620,7 +2620,7 @@ WNDCMD	CMainFrame::OnTapeCommand( WNDCMDPARAM )
 		CApp::LoadString( IDS_UI_RECTAPE, szTitle, sizeof(szTitle) );
 		ofn.lpstrTitle = szTitle;
 		if( ::GetSaveFileName( &ofn ) ) {
-			Emu.EventParam( CEmuThread::EV_TAPE_REC, (INT)szFile );
+			Emu.EventParam( CEmuThread::EV_TAPE_REC, (LONG_PTR)szFile );
 		}
 	}
 

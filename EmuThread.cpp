@@ -34,8 +34,8 @@ string		CEmuThread::strNetStateName;
 INT	CEmuThread::g_Status = CEmuThread::STATUS_NONE;
 // スレッドイベントとイベントハンドル
 INT	CEmuThread::g_Event = CEmuThread::EV_NONE;
-LONG	CEmuThread::g_EventParam = 0;
-LONG	CEmuThread::g_EventParam2 = 0;
+LONG_PTR	CEmuThread::g_EventParam = 0;
+LONG_PTR	CEmuThread::g_EventParam2 = 0;
 HANDLE	CEmuThread::g_hEvent = NULL;
 HANDLE	CEmuThread::g_hEventAccept = NULL;
 
@@ -216,7 +216,7 @@ void	CEmuThread::Event( EMUEVENT ev )
 	}
 }
 
-void	CEmuThread::EventParam( EMUEVENT ev, LONG param )
+void	CEmuThread::EventParam( EMUEVENT ev, LONG_PTR param )
 {
 	if( IsRunning() ) {
 		::ResetEvent( g_hEventAccept );
@@ -228,7 +228,7 @@ void	CEmuThread::EventParam( EMUEVENT ev, LONG param )
 	}
 }
 
-void	CEmuThread::EventParam2( EMUEVENT ev, LONG param, LONG param2 )
+void	CEmuThread::EventParam2( EMUEVENT ev, LONG_PTR param, LONG_PTR param2 )
 {
 	if( IsRunning() ) {
 		::ResetEvent( g_hEventAccept );
@@ -419,7 +419,7 @@ DWORD WINAPI CEmuThread::ThreadProc( LPVOID lpParam )
 {
 INT	i;
 INT	Ev;
-LONG	Param, Param2;
+LONG_PTR	Param, Param2;
 BOOL	bLoop = TRUE;
 BOOL	bPause = FALSE;		// Thread pause
 BOOL	bEmuPause = FALSE;	// Emulation pause
