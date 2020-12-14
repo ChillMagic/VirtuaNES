@@ -3,13 +3,13 @@
 #include "ConfigWrapper.h"
 #include "DebugOut.h"
 #include "AppWrapper.h"
+#include "APIWrapper.h"
 
 #include "minizip/unzip.h"
 #include "IPS.h"
 #include "Macro.h"
 
 #include <vector>
-#include <Shlwapi.h>
 using namespace std;
 
 static	BOOL	PatchIPS( LPBYTE pIPS, LPBYTE pROM, LONG imagesize, LONG ipssize )
@@ -140,8 +140,8 @@ DEBUGOUT( "Open zip\n" );
 		if( unzGetCurrentFileInfo( unzipFile, &unzipFileInfo, fname_buf, sizeof(fname_buf), NULL, 0, NULL, 0 ) != UNZ_OK )
 			break;
 
-		char*	pExt = ::PathFindExtension( fname_buf );
-		if( _stricmp( pExt, ".ips" ) == 0 ) {
+		char*	pExt = APIWrapper::PathFindExtension( fname_buf );
+		if(APIWrapper::stricmp( pExt, ".ips" ) == 0 ) {
 
 			if( unzipFileInfo.uncompressed_size ) {
 				if( unzOpenCurrentFile( unzipFile ) != UNZ_OK )

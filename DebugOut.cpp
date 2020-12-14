@@ -30,7 +30,7 @@ void CDebugOut::Clear()
 #endif
 }
 
-void __cdecl CDebugOut::Out( LPCSTR fmt, ... )
+void CDebugOut::Out( LPCSTR fmt, ... )
 {
 #if	defined(_DEBUG) || defined(_DEBUGOUT)
 	CHAR	buf[1000];

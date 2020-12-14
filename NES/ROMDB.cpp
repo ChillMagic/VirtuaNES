@@ -3,7 +3,6 @@
 //
 #include <cstdio>
 #include <cstdlib>
-#include <mbstring.h>
 
 #include "Typedef.h"
 #include "Macro.h"
@@ -16,6 +15,10 @@
 #include "Archive.h"
 
 #include "ROMDB.h"
+
+#ifdef _WIN32
+#include <mbstring.h>
+#endif
 
 ROMDATABASE	romdatabase;
 
@@ -77,6 +80,7 @@ BOOL	ROMDATABASE::HeaderCorrect( NESHEADER& hdr, DWORD crcall, DWORD crc )
 
 void	ROMDATABASE::LoadDatabase()
 {
+#ifdef _WIN32
 FILE*	fp = NULL;
 CHAR	buf[512];
 const UCHAR seps[] = ";\n\0";	// セパレータ
@@ -181,5 +185,6 @@ DEBUGOUT( "File:%s\n", Path.c_str() );
 	} else {
 DEBUGOUT( "Database file not found.\n" );
 	}
+#endif
 }
 

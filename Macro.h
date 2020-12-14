@@ -4,6 +4,8 @@
 #ifndef	__MACRO_INCLUDED__
 #define	__MACRO_INCLUDED__
 
+#include <cstring>
+
 // 多重呼び出し対応マクロちゃん
 #define	DELETEPTR(x)	if(x) { delete x; x = NULL; }
 #define	DELETEARR(x)	if(x) { delete[] x; x = NULL; }
@@ -14,7 +16,7 @@
 #define	CLOSEHANDLE(x)	if(x) { ::CloseHandle(x); x = NULL; }
 
 // その他
-#define	ZEROMEMORY(p,s)	::memset( (p), 0, (s) )
+#define	ZEROMEMORY(p,s)	std::memset( (p), 0, (s) )
 
 // RECT構造体用
 #define	RCWIDTH(rc)	((rc).right-(rc).left)

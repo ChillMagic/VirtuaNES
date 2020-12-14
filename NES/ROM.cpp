@@ -7,7 +7,6 @@
 //////////////////////////////////////////////////////////////////////////
 #include <cstdio>
 #include <cstdlib>
-#include <mbstring.h>
 
 #include "Typedef.h"
 #include "Macro.h"
@@ -466,17 +465,17 @@ NESHEADER	header;
 //
 void	ROM::FilenameCheck( const char* fname )
 {
-	unsigned char*	p = (unsigned char*)fname;
+	// TODO: Use std::wstring
+	const char*	p = fname;
 
-	while( *p != (unsigned char)'\0' ) {
-		if( *p == (unsigned char)'(' ) {
-			if( _mbsnbicmp( p, (unsigned char*)"(E)", 3 ) == 0 ) {
+	while( *p != '\0' ) {
+		if( *p == '(' ) {
+			if( std::strncmp( p, "(E)", 3 ) == 0 ) {
 				bPAL = TRUE;
 				return;
 			}
 		}
-
-		p = _mbsinc(p);
+		p++;
 	}
 }
 

@@ -1,6 +1,7 @@
 ﻿#ifndef	__STATE_INCLUDED__
 #define	__STATE_INCLUDED__
 
+#include "Typedef.h"
 #include <cstring>
 
 #pragma pack( push, 1 )

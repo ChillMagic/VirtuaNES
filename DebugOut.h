@@ -9,7 +9,7 @@
 #include <string>
 using namespace std;
 
-typedef	void (__cdecl *DEBUGWINDOWOUTPUT)(LPCTSTR);
+//typedef	void (__cdecl *DEBUGWINDOWOUTPUT)(LPCTSTR);
 
 class CDebugOut {
 public:
@@ -17,7 +17,7 @@ public:
 
 	void Clear();
 
-	void __cdecl Out( LPCSTR fmt, ... );
+	void Out( LPCSTR fmt, ... );
 	void Out( const string& str );
 
 protected:

@@ -138,9 +138,9 @@ protected:
 	BOOL		bNSF;
 	INT		NSF_PAGE_SIZE;
 
-	CHAR		path[_MAX_PATH];
-	CHAR		name[_MAX_FNAME];
-	CHAR		fullpath[_MAX_PATH];
+	CHAR		path[MAX_PATH];
+	CHAR		name[MAX_FNAME];
+	CHAR		fullpath[MAX_PATH];
 
 	//
 	void	FilenameCheck( const char* fname );

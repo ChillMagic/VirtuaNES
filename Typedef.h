@@ -7,13 +7,14 @@
 /*----------------------------------------------------------------------*/
 #ifndef	__TYPEDEF_INCLUDED__
 #define	__TYPEDEF_INCLUDED__
+#include <cstdint>
 
 typedef	int		BOOL;
 
 typedef	unsigned char	BYTE;
 typedef	unsigned short	WORD;
 typedef	unsigned long	DWORD;
-typedef	unsigned __int64 QWORD;
+typedef	uint64_t QWORD;
 
 typedef float               FLOAT;
 typedef FLOAT*              PFLOAT;
@@ -22,13 +23,13 @@ typedef	unsigned char	UBYTE;
 typedef	unsigned short	UWORD;
 typedef	unsigned long	ULONG;
 typedef	unsigned long	UDWORD;
-typedef	unsigned __int64 UQWORD;
+typedef	uint64_t UQWORD;
 
 typedef	signed char	SBYTE;
 typedef	signed short	SWORD;
 typedef	signed long	SLONG;
 typedef	signed long	SDWORD;
-typedef	signed __int64	SQWORD;
+typedef	int64_t	SQWORD;
 
 typedef	signed int	INT;
 typedef	unsigned int	UINT;
@@ -98,14 +99,14 @@ typedef UCHAR* PUCHAR;
 typedef char* PSZ;
 #endif  /* !BASETYPES */
 
-#if defined(_WIN64)
-typedef __int64 INT_PTR, * PINT_PTR;
-typedef unsigned __int64 UINT_PTR, * PUINT_PTR;
+#if defined(_WIN64) || defined(__x86_64__)
+typedef int64_t INT_PTR, * PINT_PTR;
+typedef uint64_t UINT_PTR, * PUINT_PTR;
 
-typedef __int64 LONG_PTR, * PLONG_PTR;
-typedef unsigned __int64 ULONG_PTR, * PULONG_PTR;
+typedef int64_t LONG_PTR, * PLONG_PTR;
+typedef uint64_t ULONG_PTR, * PULONG_PTR;
 
-#define __int3264   __int64
+#define __int3264   int64_t
 
 #else
 typedef _W64 int INT_PTR, * PINT_PTR;
@@ -131,6 +132,7 @@ typedef	union	{
 } PAIR, *LPPAIR;
 
 #define MAX_PATH          260
+#define MAX_FNAME         256
 
 #ifndef FALSE
 #define FALSE               0
@@ -148,8 +150,12 @@ typedef	union	{
 #endif
 #endif
 
+#ifdef _WIN32
 #ifndef CALLBACK
 #define CALLBACK __stdcall
+#endif
+#else
+#define CALLBACK
 #endif
 
 #ifndef ZeroMemory

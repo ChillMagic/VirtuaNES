@@ -14,14 +14,14 @@ public:
 	BOOL	bCheatPath;
 	BOOL	bIpsPath;
 
-	CHAR	szRomPath[_MAX_PATH];
-	CHAR	szSavePath[_MAX_PATH];
-	CHAR	szStatePath[_MAX_PATH];
-	CHAR	szSnapshotPath[_MAX_PATH];
-	CHAR	szMoviePath[_MAX_PATH];
-	CHAR	szWavePath[_MAX_PATH];
-	CHAR	szCheatPath[_MAX_PATH];
-	CHAR	szIpsPath[_MAX_PATH];
+	CHAR	szRomPath[MAX_PATH];
+	CHAR	szSavePath[MAX_PATH];
+	CHAR	szStatePath[MAX_PATH];
+	CHAR	szSnapshotPath[MAX_PATH];
+	CHAR	szMoviePath[MAX_PATH];
+	CHAR	szWavePath[MAX_PATH];
+	CHAR	szCheatPath[MAX_PATH];
+	CHAR	szIpsPath[MAX_PATH];
 
 	void	Default();
 };

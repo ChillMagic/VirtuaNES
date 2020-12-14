@@ -37,7 +37,7 @@ public:
 	DWORD	dwDisplayRate;
 
 	BOOL	bPaletteFile;
-	CHAR	szPaletteFile[_MAX_PATH];
+	CHAR	szPaletteFile[MAX_PATH];
 
 	void	Default() {
 		bAspect = FALSE;
