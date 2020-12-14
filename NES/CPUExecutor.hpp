@@ -5,6 +5,7 @@
 
 #include "CPU.h"
 #include "MMU.h"
+#include "../Typedef.h"
 
 class CPU::Executor
 {
@@ -93,7 +94,7 @@ public:
 				this->funcs[i++] = f;
 			}
 		}
-		std::array<ExecFunc, 4> funcs;
+		std::array<ExecFunc, 4> funcs = {};
 		int cycle = 0;
 	};
 	using OpcodeDataType = std::array<OpCode, 0x100>;

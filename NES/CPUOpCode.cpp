@@ -23,7 +23,7 @@ bool CPU::Executor::DoExec(BYTE opcode) {
 }
 
 static CPU::Executor::OpcodeDataType GetOpcodeDataBase() {
-	CPU::Executor::OpcodeDataType data;
+	CPU::Executor::OpcodeDataType data = {};
 	using OpCode = CPU::Executor::OpCode;
 	using Executor = CPU::Executor;
 
