@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <initializer_list>
+#include <array>
+
 
 #include "CPU.h"
 #include "MMU.h"
@@ -81,13 +83,21 @@ public:
 	int Exec(int request_cycles);
 private:
 	using ExecFunc = void (Executor::*) ();
+public:
 	struct OpCode {
+		OpCode() = default;
 		OpCode(const std::initializer_list<ExecFunc> &funcs, int cycle)
-			: funcs(funcs.begin()), cycle(cycle) {}
-		const ExecFunc* funcs = nullptr;
+			: cycle(cycle) {
+			size_t i = 0;
+			for (auto f : funcs) {
+				this->funcs[i++] = f;
+			}
+		}
+		std::array<ExecFunc, 4> funcs;
 		int cycle = 0;
 	};
-	OpCode GetExec(BYTE opcode);
+	using OpcodeDataType = std::array<OpCode, 0x100>;
+private:
 	bool DoExec(BYTE opcode);
 public:
 	Executor(CPU& cpu) :
@@ -134,8 +144,7 @@ public:
 	auto ZPWRW(T1 A, T2 V) { return *((LPWORD)&mmu.RAM[static_cast<BYTE>(A)]) = static_cast<WORD>(V); }
 
 	// サイクルカウンタ
-	template <typename T>
-	auto ADD_CYCLE(T V) { exec_cycles += (V); }
+	auto ADD_CYCLE(int V) { exec_cycles += (V); }
 
 	//template <typename T> auto	ADD_CYCLE(T V)	{}
 

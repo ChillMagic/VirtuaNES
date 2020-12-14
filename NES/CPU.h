@@ -60,6 +60,7 @@ struct MMUClass;
 
 class	CPU
 {
+public:
 	class Executor;
 	friend class Executor;
 public:
