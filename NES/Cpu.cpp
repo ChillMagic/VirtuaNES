@@ -23,6 +23,70 @@
 #include "ROM.h"
 #include "Mapper/Mapper.h"
 
+class CPU::Executor {
+private:
+	// Referencs from class CPU
+	CPU &cpu;
+	
+	NES* &nes;
+	APU* &apu;
+	Mapper* &mapper;
+
+	R6502	&R;
+
+	INT	&TOTAL_cycles;	// CPUトータルサイクル数
+	INT	&DMA_cycles;	// DMAサイクル数
+
+	// PTR
+	LPBYTE	&STACK;
+
+	// Zero & Negative table
+	BYTE	(&ZN_Table)[256];
+
+	// Clock process
+	BOOL	&m_bClockProcess;
+
+	BYTE	RD6502(WORD addr) {
+		return cpu.RD6502(addr);
+	}
+	void	WR6502(WORD addr, BYTE data) {
+		return cpu.WR6502(addr, data);
+	}
+	WORD	RD6502W(WORD addr) {
+		return cpu.RD6502W(addr);
+	}
+
+private:
+	BYTE	opcode;		// オペコード
+	INT	OLD_cycles = TOTAL_cycles;
+	INT	exec_cycles;
+	BYTE	nmi_request, irq_request;
+	BOOL	bClockProcess = m_bClockProcess;
+
+	// TEMP
+	WORD	EA;
+	WORD	ET;
+	WORD	WT;
+	BYTE	DT;
+public:
+	BYTE OP6502(WORD addr);
+	WORD OP6502W(WORD addr);
+	int Exec(int request_cycles);
+public:
+	Executor(CPU &cpu) :
+		cpu(cpu),
+		nes(cpu.nes),
+		apu(cpu.apu),
+		mapper(cpu.mapper),
+		R(cpu.R),
+		TOTAL_cycles(cpu.TOTAL_cycles),
+		DMA_cycles(cpu.DMA_cycles),
+		STACK(cpu.STACK),
+		ZN_Table(cpu.ZN_Table),
+		m_bClockProcess(cpu.m_bClockProcess)
+	{
+		
+	}
 /*--------------[ DEFINE                ]-------------------------------*/
 #define	DPCM_SYNCCLOCK	FALSE
 /*--------------[ EXTERNAL PROGRAM      ]-------------------------------*/
@@ -36,80 +100,80 @@
 //#define	OP6502W(A)	RD6502W((A))
 
 // ゼロページリード
-#define	ZPRD(A)		(MMU.RAM[(BYTE)(A)])
-//#define	ZPRDW(A)	(*((LPWORD)&MMU.RAM[(BYTE)(A)]))
-#define	ZPRDW(A)	((WORD)MMU.RAM[(BYTE)(A)]+((WORD)MMU.RAM[(BYTE)((A)+1)]<<8))
+template <typename T> auto ZPRD(T A) { return MMU.RAM[(BYTE)(A)]; }
+//template <typename T> auto ZPRDW(T A) { return *((LPWORD)&MMU.RAM[(BYTE)(A)]); }
+template <typename T> auto ZPRDW(T A) { return (WORD)MMU.RAM[(BYTE)(A)] + ((WORD)MMU.RAM[(BYTE)((A)+1)] << 8); }
 
-#define	ZPWR(A,V)	{ MMU.RAM[(BYTE)(A)]=(V); }
-#define	ZPWRW(A,V)	{ *((LPWORD)&MMU.RAM[(BYTE)(A)])=(WORD)(V); }
+template <typename T1, typename T2> auto	ZPWR(T1 A, T2 V) { return MMU.RAM[(BYTE)(A)] = (V); }
+template <typename T1, typename T2> auto	ZPWRW(T1 A, T2 V) { return *((LPWORD)&MMU.RAM[(BYTE)(A)]) = (WORD)(V); }
 
 // サイクルカウンタ
-#define	ADD_CYCLE(V)	{ exec_cycles += (V); }
-//#define	ADD_CYCLE(V)	{}
+template <typename T> auto	ADD_CYCLE(T V)	{ exec_cycles += (V); }
+//template <typename T> auto	ADD_CYCLE(T V)	{}
 
 // EFFECTIVE ADDRESSページ境界超えチェック
-#define	CHECK_EA()	{ if( (ET&0xFF00) != (EA&0xFF00) ) ADD_CYCLE(1); }
-//#define	CHECK_EA()	{ if( (R.PC&0xFF00) != (EA&0xFF00) ) ADD_CYCLE(1); }
-//#define	CHECK_EA()	{}
+auto	CHECK_EA()	{ if( (ET&0xFF00) != (EA&0xFF00) ) ADD_CYCLE(1); }
+//auto	CHECK_EA()	{ if( (R.PC&0xFF00) != (EA&0xFF00) ) ADD_CYCLE(1); }
+//auto	CHECK_EA()	{}
 
 // フラグ操作
 // ゼロ／ネガティブフラグのチェックと設定
-#define	SET_ZN_FLAG(A)	{ R.P &= ~(Z_FLAG|N_FLAG); R.P |= ZN_Table[(BYTE)(A)]; }
+template <typename T> void	SET_ZN_FLAG(T A)	{ R.P &= ~(Z_FLAG|N_FLAG); R.P |= ZN_Table[(BYTE)(A)]; }
 
 // フラグセット
-#define	SET_FLAG(V)	{ R.P |=  (V); }
+template <typename T> void	SET_FLAG(T V)	{ R.P |=  (V); }
 // フラグクリア
-#define	CLR_FLAG(V)	{ R.P &= ~(V); }
+template <typename T> void	CLR_FLAG(T V)	{ R.P &= ~(V); }
 // フラグテスト＆セット／クリア
-#define	TST_FLAG(F,V)	{ R.P &= ~(V); if((F)) R.P |= (V); }
+template <typename T1, typename T2> void	TST_FLAG(T1 F, T2 V)	{ R.P &= ~(V); if((F)) R.P |= (V); }
 // フラグチェック
-#define	CHK_FLAG(V)	(R.P&(V))
+template <typename T> auto	CHK_FLAG(T V) { return R.P & (V); }
 
 // WT .... WORD TEMP
 // EA .... EFFECTIVE ADDRESS
 // ET .... EFFECTIVE ADDRESS TEMP
 // DT .... DATA
 
-#define	MR_IM()	{		\
+void	MR_IM()	{		\
 	DT = OP6502( R.PC++ );	\
 }
-#define	MR_ZP()	{		\
+void	MR_ZP()	{		\
 	EA = OP6502( R.PC++ );	\
 	DT = ZPRD( EA );	\
 }
-#define	MR_ZX()	{		\
+void	MR_ZX()	{		\
 	DT = OP6502( R.PC++ );	\
 	EA = (BYTE)(DT + R.X);	\
 	DT = ZPRD( EA );	\
 }
-#define	MR_ZY()	{		\
+void	MR_ZY()	{		\
 	DT = OP6502( R.PC++ );	\
 	EA = (BYTE)(DT + R.Y);	\
 	DT = ZPRD( EA );	\
 }
-#define	MR_AB()	{		\
+void	MR_AB()	{		\
 	EA = OP6502W( R.PC );	\
 	R.PC += 2;		\
 	DT = RD6502( EA );	\
 }
-#define	MR_AX()	{		\
+void	MR_AX()	{		\
 	ET = OP6502W( R.PC );	\
 	R.PC += 2;		\
 	EA = ET + R.X;		\
 	DT = RD6502( EA );	\
 }
-#define	MR_AY()	{		\
+void	MR_AY()	{		\
 	ET = OP6502W( R.PC );	\
 	R.PC += 2;		\
 	EA = ET + R.Y;		\
 	DT = RD6502( EA );	\
 }
-#define	MR_IX()	{		\
+void	MR_IX()	{		\
 	DT = OP6502( R.PC++ );	\
 	EA = ZPRDW( DT + R.X );	\
 	DT = RD6502( EA );	\
 }
-#define	MR_IY()	{		\
+void	MR_IY()	{		\
 	DT = OP6502( R.PC++ );	\
 	ET = ZPRDW( DT );	\
 	EA = ET + R.Y;		\
@@ -117,52 +181,52 @@
 }
 
 // EFFECTIVE ADDRESS
-#define	EA_ZP()	{		\
+void	EA_ZP()	{		\
 	EA = OP6502( R.PC++ );	\
 }
-#define	EA_ZX()	{		\
+void	EA_ZX()	{		\
 	DT = OP6502( R.PC++ );	\
 	EA = (BYTE)(DT + R.X);	\
 }
-#define	EA_ZY()	{		\
+void	EA_ZY()	{		\
 	DT = OP6502( R.PC++ );	\
 	EA = (BYTE)(DT + R.Y);	\
 }
-#define	EA_AB()	{		\
+void	EA_AB()	{		\
 	EA = OP6502W( R.PC );	\
 	R.PC += 2;		\
 }
-#define	EA_AX()	{		\
+void	EA_AX()	{		\
 	ET = OP6502W( R.PC );	\
 	R.PC += 2;		\
 	EA = ET + R.X;		\
 }
-#define	EA_AY()	{		\
+void	EA_AY()	{		\
 	ET = OP6502W( R.PC );	\
 	R.PC += 2;		\
 	EA = ET + R.Y;		\
 }
-#define	EA_IX()	{		\
+void	EA_IX()	{		\
 	DT = OP6502( R.PC++ );	\
 	EA = ZPRDW( DT + R.X );	\
 }
-#define	EA_IY()	{		\
+void	EA_IY()	{		\
 	DT = OP6502( R.PC++ );	\
 	ET = ZPRDW( DT );	\
 	EA = ET + (WORD)R.Y;	\
 }
 
 // メモリライト
-#define	MW_ZP()		ZPWR(EA,DT)
-#define	MW_EA()		WR6502(EA,DT)
+auto	MW_ZP() {	return ZPWR(EA, DT); }
+auto	MW_EA() {	return WR6502(EA, DT); }
 
 // STACK操作
-#define	PUSH(V)		{ STACK[(R.S--)&0xFF]=(V); }
-#define	POP()		STACK[(++R.S)&0xFF]
+template <typename T> void	PUSH(T V)		{ STACK[(R.S--)&0xFF]=(V); }
+auto	POP()		{ return STACK[(++R.S) & 0xFF]; }
 
 // 算術演算系
 /* ADC (NV----ZC) */
-#define	ADC() {							\
+void	ADC() {							\
 	WT = R.A+DT+(R.P&C_FLAG);				\
 	TST_FLAG( WT > 0xFF, C_FLAG );				\
 	TST_FLAG( ((~(R.A^DT))&(R.A^WT)&0x80), V_FLAG );	\
@@ -171,7 +235,7 @@
 }
 
 /* SBC (NV----ZC) */
-#define	SBC() {						\
+void	SBC() {						\
 	WT = R.A-DT-(~R.P&C_FLAG);			\
 	TST_FLAG( ((R.A^DT) & (R.A^WT)&0x80), V_FLAG );	\
 	TST_FLAG( WT < 0x100, C_FLAG );			\
@@ -180,85 +244,85 @@
 }
 
 /* INC (N-----Z-) */
-#define	INC() {			\
+void	INC() {			\
 	DT++;			\
 	SET_ZN_FLAG(DT);	\
 }
 /* INX (N-----Z-) */
-#define	INX() {			\
+void	INX() {			\
 	R.X++;			\
 	SET_ZN_FLAG(R.X);	\
 }
 /* INY (N-----Z-) */
-#define	INY() {			\
+void	INY() {			\
 	R.Y++;			\
 	SET_ZN_FLAG(R.Y);	\
 }
 
 /* DEC (N-----Z-) */
-#define	DEC() {			\
+void	DEC() {			\
 	DT--;			\
 	SET_ZN_FLAG(DT);	\
 }
 /* DEX (N-----Z-) */
-#define	DEX() {			\
+void	DEX() {			\
 	R.X--;			\
 	SET_ZN_FLAG(R.X);	\
 }
 /* DEY (N-----Z-) */
-#define	DEY() {			\
+void	DEY() {			\
 	R.Y--;			\
 	SET_ZN_FLAG(R.Y);	\
 }
 
 // 論理演算系
 /* AND (N-----Z-) */
-#define	AND() {			\
+void	AND() {			\
 	R.A &= DT;		\
 	SET_ZN_FLAG(R.A);	\
 }
 
 /* ORA (N-----Z-) */
-#define	ORA() {			\
+void	ORA() {			\
 	R.A |= DT;		\
 	SET_ZN_FLAG(R.A);	\
 }
 
 /* EOR (N-----Z-) */
-#define	EOR() {			\
+void	EOR() {			\
 	R.A ^= DT;		\
 	SET_ZN_FLAG(R.A);	\
 }
 
 /* ASL_A (N-----ZC) */
-#define	ASL_A() {			\
+void	ASL_A() {			\
 	TST_FLAG( R.A&0x80, C_FLAG );	\
 	R.A <<= 1;			\
 	SET_ZN_FLAG(R.A);		\
 }
 
 /* ASL (N-----ZC) */
-#define	ASL() {				\
+void	ASL() {				\
 	TST_FLAG( DT&0x80, C_FLAG );	\
 	DT <<= 1;			\
 	SET_ZN_FLAG(DT);		\
 }
 
 /* LSR_A (N-----ZC) */
-#define	LSR_A() {			\
+void	LSR_A() {			\
 	TST_FLAG( R.A&0x01, C_FLAG );	\
 	R.A >>= 1;			\
 	SET_ZN_FLAG(R.A);		\
 }
 /* LSR (N-----ZC) */
-#define	LSR() {				\
+void	LSR() {				\
 	TST_FLAG( DT&0x01, C_FLAG );	\
 	DT >>= 1;			\
 	SET_ZN_FLAG(DT);		\
 }
 
 /* ROL_A (N-----ZC) */
-#define	ROL_A() {				\
+void	ROL_A() {				\
 	if( R.P & C_FLAG ) {			\
 		TST_FLAG(R.A&0x80,C_FLAG);	\
 		R.A = (R.A<<1)|0x01;		\
@@ -269,7 +333,7 @@
 	SET_ZN_FLAG(R.A);			\
 }
 /* ROL (N-----ZC) */
-#define	ROL() {					\
+void	ROL() {					\
 	if( R.P & C_FLAG ) {			\
 		TST_FLAG(DT&0x80,C_FLAG);	\
 		DT = (DT<<1)|0x01;		\
@@ -281,7 +345,7 @@
 }
 
 /* ROR_A (N-----ZC) */
-#define	ROR_A() {				\
+void	ROR_A() {				\
 	if( R.P & C_FLAG ) {			\
 		TST_FLAG(R.A&0x01,C_FLAG);	\
 		R.A = (R.A>>1)|0x80;		\
@@ -292,7 +356,7 @@
 	SET_ZN_FLAG(R.A);			\
 }
 /* ROR (N-----ZC) */
-#define	ROR() {					\
+void	ROR() {					\
 	if( R.P & C_FLAG ) {			\
 		TST_FLAG(DT&0x01,C_FLAG);	\
 		DT = (DT>>1)|0x80;		\
@@ -304,7 +368,7 @@
 }
 
 /* BIT (NV----Z-) */
-#define	BIT() {					\
+void	BIT() {					\
 	TST_FLAG( (DT&R.A)==0, Z_FLAG );	\
 	TST_FLAG( DT&0x80, N_FLAG );		\
 	TST_FLAG( DT&0x40, V_FLAG );		\
@@ -312,47 +376,47 @@
 
 // ロード／ストア系
 /* LDA (N-----Z-) */
-#define	LDA()	{ R.A = DT; SET_ZN_FLAG(R.A); }
+void	LDA()	{ R.A = DT; SET_ZN_FLAG(R.A); }
 /* LDX (N-----Z-) */
-#define	LDX()	{ R.X = DT; SET_ZN_FLAG(R.X); }
+void	LDX()	{ R.X = DT; SET_ZN_FLAG(R.X); }
 /* LDY (N-----Z-) */
-#define	LDY()	{ R.Y = DT; SET_ZN_FLAG(R.Y); }
+void	LDY()	{ R.Y = DT; SET_ZN_FLAG(R.Y); }
 
 /* STA (--------) */
-#define	STA()	{ DT = R.A; }
+void	STA()	{ DT = R.A; }
 /* STX (--------) */
-#define	STX()	{ DT = R.X; }
+void	STX()	{ DT = R.X; }
 /* STY (--------) */
-#define	STY()	{ DT = R.Y; }
+void	STY()	{ DT = R.Y; }
 
 /* TAX (N-----Z-) */
-#define	TAX()	{ R.X = R.A; SET_ZN_FLAG(R.X); }
+void	TAX()	{ R.X = R.A; SET_ZN_FLAG(R.X); }
 /* TXA (N-----Z-) */
-#define	TXA()	{ R.A = R.X; SET_ZN_FLAG(R.A); }
+void	TXA()	{ R.A = R.X; SET_ZN_FLAG(R.A); }
 /* TAY (N-----Z-) */
-#define	TAY()	{ R.Y = R.A; SET_ZN_FLAG(R.Y); }
+void	TAY()	{ R.Y = R.A; SET_ZN_FLAG(R.Y); }
 /* TYA (N-----Z-) */
-#define	TYA()	{ R.A = R.Y; SET_ZN_FLAG(R.A); }
+void	TYA()	{ R.A = R.Y; SET_ZN_FLAG(R.A); }
 /* TSX (N-----Z-) */
-#define	TSX()	{ R.X = R.S; SET_ZN_FLAG(R.X); }
+void	TSX()	{ R.X = R.S; SET_ZN_FLAG(R.X); }
 /* TXS (--------) */
-#define	TXS()	{ R.S = R.X; }
+void	TXS()	{ R.S = R.X; }
 
 // 比較系
 /* CMP (N-----ZC) */
-#define	CMP_() {				\
+void	CMP_() {				\
 	WT = (WORD)R.A - (WORD)DT;		\
 	TST_FLAG( (WT&0x8000)==0, C_FLAG );	\
 	SET_ZN_FLAG( (BYTE)WT );		\
 }
 /* CPX (N-----ZC) */
-#define	CPX() {					\
+void	CPX() {					\
 	WT = (WORD)R.X - (WORD)DT;		\
 	TST_FLAG( (WT&0x8000)==0, C_FLAG );	\
 	SET_ZN_FLAG( (BYTE)WT );		\
 }
 /* CPY (N-----ZC) */
-#define	CPY() {					\
+void	CPY() {					\
 	WT = (WORD)R.Y - (WORD)DT;		\
 	TST_FLAG( (WT&0x8000)==0, C_FLAG );	\
 	SET_ZN_FLAG( (BYTE)WT );		\
@@ -360,40 +424,40 @@
 
 // ジャンプ／リターン系
 #if	1
-#define	JMP_ID() {				\
+void	JMP_ID() {				\
 	WT = OP6502W(R.PC);			\
 	EA = RD6502(WT);			\
 	WT = (WT&0xFF00)|((WT+1)&0x00FF);	\
 	R.PC = EA+RD6502(WT)*0x100;		\
 }
 #else
-#define	JMP_ID() {		\
+void	JMP_ID() {		\
 	ET = OP6502W(R.PC);	\
 	EA = RD6502W(ET);	\
 	R.PC = EA;		\
 }
 #endif
-#define	JMP() {			\
+void	JMP() {			\
 	R.PC = OP6502W( R.PC );	\
 }
-#define	JSR() {			\
+void	JSR() {			\
 	EA = OP6502W( R.PC );	\
 	R.PC++;			\
 	PUSH( R.PC>>8 );	\
 	PUSH( R.PC&0xFF );	\
 	R.PC = EA;		\
 }
-#define	RTS() {			\
+void	RTS() {			\
 	R.PC  = POP();		\
 	R.PC |= POP()*0x0100;	\
 	R.PC++;			\
 }
-#define	RTI() {			\
+void	RTI() {			\
 	R.P   = POP() | R_FLAG;	\
 	R.PC  = POP();		\
 	R.PC |= POP()*0x0100;	\
 }
-#define	_NMI() {			\
+void	_NMI() {			\
 	PUSH( R.PC>>8 );		\
 	PUSH( R.PC&0xFF );		\
 	CLR_FLAG( B_FLAG );		\
@@ -402,7 +466,7 @@
 	R.PC = RD6502W(NMI_VECTOR);	\
 	exec_cycles += 7;		\
 }
-#define	_IRQ() {			\
+void	_IRQ() {			\
 	PUSH( R.PC>>8 );		\
 	PUSH( R.PC&0xFF );		\
 	CLR_FLAG( B_FLAG );		\
@@ -411,7 +475,7 @@
 	R.PC = RD6502W(IRQ_VECTOR);	\
 	exec_cycles += 7;		\
 }
-#define	BRK() {				\
+void	BRK() {				\
 	R.PC++;				\
 	PUSH( R.PC>>8 );		\
 	PUSH( R.PC&0xFF );		\
@@ -422,7 +486,7 @@
 }
 
 #if	1
-#define	REL_JUMP() {		\
+void	REL_JUMP() {		\
 	ET = R.PC;		\
 	EA = R.PC + (SBYTE)DT;	\
 	R.PC = EA;		\
@@ -430,43 +494,43 @@
 	CHECK_EA();		\
 }
 #else
-#define	REL_JUMP() {			\
+void	REL_JUMP() {			\
 	R.PC = R.PC + (SBYTE)DT;	\
 	ADD_CYCLE(1);			\
 }
 #endif
 
-#define	BCC()	{ if( !(R.P & C_FLAG) ) REL_JUMP(); }
-#define	BCS()	{ if(  (R.P & C_FLAG) ) REL_JUMP(); }
-#define	BNE()	{ if( !(R.P & Z_FLAG) ) REL_JUMP(); }
-#define	BEQ()	{ if(  (R.P & Z_FLAG) ) REL_JUMP(); }
-#define	BPL()	{ if( !(R.P & N_FLAG) ) REL_JUMP(); }
-#define	BMI()	{ if(  (R.P & N_FLAG) ) REL_JUMP(); }
-#define	BVC()	{ if( !(R.P & V_FLAG) ) REL_JUMP(); }
-#define	BVS()	{ if(  (R.P & V_FLAG) ) REL_JUMP(); }
+void	BCC()	{ if( !(R.P & C_FLAG) ) REL_JUMP(); }
+void	BCS()	{ if(  (R.P & C_FLAG) ) REL_JUMP(); }
+void	BNE()	{ if( !(R.P & Z_FLAG) ) REL_JUMP(); }
+void	BEQ()	{ if(  (R.P & Z_FLAG) ) REL_JUMP(); }
+void	BPL()	{ if( !(R.P & N_FLAG) ) REL_JUMP(); }
+void	BMI()	{ if(  (R.P & N_FLAG) ) REL_JUMP(); }
+void	BVC()	{ if( !(R.P & V_FLAG) ) REL_JUMP(); }
+void	BVS()	{ if(  (R.P & V_FLAG) ) REL_JUMP(); }
 
 // フラグ制御系
-#define	CLC()	{ R.P &= ~C_FLAG; }
-#define	CLD()	{ R.P &= ~D_FLAG; }
-#define	CLI()	{ R.P &= ~I_FLAG; }
-#define	CLV()	{ R.P &= ~V_FLAG; }
-#define	SEC()	{ R.P |= C_FLAG; }
-#define	SED()	{ R.P |= D_FLAG; }
-#define	SEI()	{ R.P |= I_FLAG; }
+void	CLC()	{ R.P &= ~C_FLAG; }
+void	CLD()	{ R.P &= ~D_FLAG; }
+void	CLI()	{ R.P &= ~I_FLAG; }
+void	CLV()	{ R.P &= ~V_FLAG; }
+void	SEC()	{ R.P |= C_FLAG; }
+void	SED()	{ R.P |= D_FLAG; }
+void	SEI()	{ R.P |= I_FLAG; }
 
 // Unofficial命令
-#define	ANC()	{			\
+void	ANC()	{			\
 	R.A &= DT;			\
 	SET_ZN_FLAG( R.A );		\
 	TST_FLAG( R.P&N_FLAG, C_FLAG );	\
 }
 
-#define	ANE()	{			\
+void	ANE()	{			\
 	R.A = (R.A|0xEE)&R.X&DT;	\
 	SET_ZN_FLAG( R.A );		\
 }
 
-#define	ARR()	{				\
+void	ARR()	{				\
 	DT &= R.A;				\
 	R.A = (DT>>1)|((R.P&C_FLAG)<<7);	\
 	SET_ZN_FLAG( R.A );			\
@@ -474,44 +538,44 @@
 	TST_FLAG( (R.A>>6)^(R.A>>5), V_FLAG );	\
 }
 
-#define	ASR()	{			\
+void	ASR()	{			\
 	DT &= R.A;			\
 	TST_FLAG( DT&0x01, C_FLAG );	\
 	R.A = DT>>1;			\
 	SET_ZN_FLAG( R.A );		\
 }
 
-#define	DCP()	{			\
+void	DCP()	{			\
 	DT--;				\
 	CMP_();				\
 }
 
-#define	DOP()	{			\
+void	DOP()	{			\
 	R.PC++;				\
 }
 
-#define	ISB()	{			\
+void	ISB()	{			\
 	DT++;				\
 	SBC();				\
 }
 
-#define	LAS()	{			\
+void	LAS()	{			\
 	R.A = R.X = R.S = (R.S & DT);	\
 	SET_ZN_FLAG( R.A );		\
 }
 
-#define	LAX()	{			\
+void	LAX()	{			\
 	R.A = DT;			\
 	R.X = R.A;			\
 	SET_ZN_FLAG( R.A );		\
 }
 
-#define	LXA()	{			\
+void	LXA()	{			\
 	R.A = R.X = ((R.A|0xEE)&DT);	\
 	SET_ZN_FLAG( R.A );		\
 }
 
-#define	RLA()	{				\
+void	RLA()	{				\
 	if( R.P & C_FLAG ) {			\
 		TST_FLAG( DT&0x80, C_FLAG );	\
 		DT = (DT<<1)|1;			\
@@ -523,7 +587,7 @@
 	SET_ZN_FLAG( R.A );			\
 }
 
-#define	RRA()	{				\
+void	RRA()	{				\
 	if( R.P & C_FLAG ) {			\
 		TST_FLAG( DT&0x01, C_FLAG );	\
 		DT = (DT>>1)|0x80;		\
@@ -534,51 +598,53 @@
 	ADC();					\
 }
 
-#define	SAX()	{			\
+void	SAX()	{			\
 	DT = R.A & R.X;			\
 }
 
-#define	SBX()	{			\
+void	SBX()	{			\
 	WT = (R.A&R.X)-DT;		\
 	TST_FLAG( WT < 0x100, C_FLAG );	\
 	R.X = WT&0xFF;			\
 	SET_ZN_FLAG( R.X );		\
 }
 
-#define	SHA()	{				\
+void	SHA()	{				\
 	DT = R.A & R.X & (BYTE)((EA>>8)+1);	\
 }
 
-#define	SHS()	{			\
+void	SHS()	{			\
 	R.S = R.A & R.X;		\
 	DT = R.S & (BYTE)((EA>>8)+1);	\
 }
 
-#define	SHX()	{			\
+void	SHX()	{			\
 	DT = R.X & (BYTE)((EA>>8)+1);	\
 }
 
-#define	SHY()	{			\
+void	SHY()	{			\
 	DT = R.Y & (BYTE)((EA>>8)+1);	\
 }
 
-#define	SLO()	{			\
+void	SLO()	{			\
 	TST_FLAG( DT&0x80, C_FLAG );	\
 	DT <<= 1;			\
 	R.A |= DT;			\
 	SET_ZN_FLAG( R.A );		\
 }
 
-#define	SRE()	{			\
+void	SRE()	{			\
 	TST_FLAG( DT&0x01, C_FLAG );	\
 	DT >>= 1;			\
 	R.A ^= DT;			\
 	SET_ZN_FLAG( R.A );		\
 }
 
-#define	TOP()	{			\
+void	TOP()	{			\
 	R.PC += 2;			\
 }
+
+};
 
 //
 // コンストラクタ/デストラクタ
@@ -602,12 +668,12 @@ CPU::~CPU()
 #define	OP6502(A)	RD6502((A))
 #define	OP6502W(A)	RD6502W((A))
 #else
-inline	BYTE	OP6502( WORD addr )
+inline	BYTE	CPU::Executor::OP6502( WORD addr )
 {
 	return	MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
 }
 
-inline	WORD	OP6502W( WORD addr )
+inline	WORD	CPU::Executor::OP6502W( WORD addr )
 {
 #if	0
 	WORD	ret;
@@ -753,18 +819,11 @@ void	CPU::ClrIRQ( BYTE mask )
 //
 INT	CPU::EXEC( INT request_cycles )
 {
-BYTE	opcode;		// オペコード
-INT	OLD_cycles = TOTAL_cycles;
-INT	exec_cycles;
-BYTE	nmi_request, irq_request;
-BOOL	bClockProcess = m_bClockProcess;
+	return Executor(*this).Exec(request_cycles);
+}
 
-// TEMP
-register WORD	EA;
-register WORD	ET;
-register WORD	WT;
-register BYTE	DT;
-
+int	CPU::Executor::Exec(int request_cycles)
+{
 	while( request_cycles > 0 ) {
 		exec_cycles = 0;
 

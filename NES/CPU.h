@@ -58,6 +58,8 @@ typedef	struct	{
 
 class	CPU
 {
+	class Executor;
+	friend class Executor;
 public:
 	CPU( NES* parent );
 	virtual	~CPU();
