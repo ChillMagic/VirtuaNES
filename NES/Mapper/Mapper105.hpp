@@ -4,7 +4,7 @@
 
 void	Mapper105::Reset()
 {
-	SetPROM_32K_Bank( 0 );
+	MMU.SetPROM_32K_Bank( 0 );
 
 	reg[0] = 0x0C;
 	reg[1] = 0x00;
@@ -38,15 +38,15 @@ void	Mapper105::Write( WORD addr, BYTE data )
 
 	if( reg[0] & 0x02 ) {
 		if( reg[0] & 0x01 ) {
-			SetVRAM_Mirror( VRAM_HMIRROR );
+			MMU.SetVRAM_Mirror( VRAM_HMIRROR );
 		} else {
-			SetVRAM_Mirror( VRAM_VMIRROR );
+			MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 		}
 	} else {
 		if( reg[0] & 0x01 ) {
-			SetVRAM_Mirror( VRAM_MIRROR4H );
+			MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
 		} else {
-			SetVRAM_Mirror( VRAM_MIRROR4L );
+			MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
 		}
 	}
 
@@ -59,27 +59,27 @@ void	Mapper105::Write( WORD addr, BYTE data )
 			if(reg[1] & 0x08) {
 				if (reg[0] & 0x08) {
 					if (reg[0] & 0x04) {
-						SetPROM_8K_Bank(4,((reg[3] & 0x07) * 2 + 16));
-						SetPROM_8K_Bank(5,((reg[3] & 0x07) * 2 + 17));
-						SetPROM_8K_Bank(6,30);
-						SetPROM_8K_Bank(7,31);
+						MMU.SetPROM_8K_Bank(4,((reg[3] & 0x07) * 2 + 16));
+						MMU.SetPROM_8K_Bank(5,((reg[3] & 0x07) * 2 + 17));
+						MMU.SetPROM_8K_Bank(6,30);
+						MMU.SetPROM_8K_Bank(7,31);
 					} else {
-						SetPROM_8K_Bank(4,16);
-						SetPROM_8K_Bank(5,17);
-						SetPROM_8K_Bank(6,((reg[3] & 0x07) * 2 + 16));
-						SetPROM_8K_Bank(7,((reg[3] & 0x07) * 2 + 17));
+						MMU.SetPROM_8K_Bank(4,16);
+						MMU.SetPROM_8K_Bank(5,17);
+						MMU.SetPROM_8K_Bank(6,((reg[3] & 0x07) * 2 + 16));
+						MMU.SetPROM_8K_Bank(7,((reg[3] & 0x07) * 2 + 17));
 					}
 				} else {
-					SetPROM_8K_Bank(4,((reg[3] & 0x06) * 2 + 16));
-					SetPROM_8K_Bank(5,((reg[3] & 0x06) * 2 + 17));
-					SetPROM_8K_Bank(6,((reg[3] & 0x06) * 2 + 18));
-					SetPROM_8K_Bank(7,((reg[3] & 0x06) * 2 + 19));
+					MMU.SetPROM_8K_Bank(4,((reg[3] & 0x06) * 2 + 16));
+					MMU.SetPROM_8K_Bank(5,((reg[3] & 0x06) * 2 + 17));
+					MMU.SetPROM_8K_Bank(6,((reg[3] & 0x06) * 2 + 18));
+					MMU.SetPROM_8K_Bank(7,((reg[3] & 0x06) * 2 + 19));
 				}
 			} else {
-				SetPROM_8K_Bank(4,((reg[1] & 0x06) * 2 + 0));
-				SetPROM_8K_Bank(5,((reg[1] & 0x06) * 2 + 1));
-				SetPROM_8K_Bank(6,((reg[1] & 0x06) * 2 + 2));
-				SetPROM_8K_Bank(7,((reg[1] & 0x06) * 2 + 3));
+				MMU.SetPROM_8K_Bank(4,((reg[1] & 0x06) * 2 + 0));
+				MMU.SetPROM_8K_Bank(5,((reg[1] & 0x06) * 2 + 1));
+				MMU.SetPROM_8K_Bank(6,((reg[1] & 0x06) * 2 + 2));
+				MMU.SetPROM_8K_Bank(7,((reg[1] & 0x06) * 2 + 3));
 			}
 
 			if( reg[1] & 0x10 ) {

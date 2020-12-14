@@ -10,8 +10,8 @@ void	Mapper045::Reset()
 
 	prg0 = 0;
 	prg1 = 1;
-	prg2 = PROM_8K_SIZE-2;
-	prg3 = PROM_8K_SIZE-1;
+	prg2 = MMU.PROM_8K_SIZE-2;
+	prg3 = MMU.PROM_8K_SIZE-1;
 
 	DWORD	crc = nes->rom->GetPROM_CRC();
 	if( crc == 0x58bcacf6		// Kunio 8-in-1 (Pirate Cart)
@@ -24,13 +24,13 @@ void	Mapper045::Reset()
 	if( crc == 0xe0dd259d ) {	// Super 3-in-1 (Pirate Cart)
 		patch = 2;
 	}
-	SetPROM_32K_Bank( prg0, prg1, prg2, prg3 );
+	MMU.SetPROM_32K_Bank( prg0, prg1, prg2, prg3 );
 	p[0] = prg0;
 	p[1] = prg1;
 	p[2] = prg2;
 	p[3] = prg3;
 
-	SetVROM_8K_Bank( 0 );
+	MMU.SetVROM_8K_Bank( 0 );
 
 //	chr0 = c[0] = 0;
 //	chr1 = c[1] = 0
@@ -84,7 +84,7 @@ void	Mapper045::Write( WORD addr, BYTE data )
 				SetBank_CPU_4( p[0] );
 				SetBank_CPU_5( p[1] );
 			}
-			if( VROM_1K_SIZE ) {
+			if( MMU.VROM_1K_SIZE ) {
 				if( (data&0x80)!=(reg[6]&0x80) ) {
 					INT	swp;
 					swp = chr4; chr4 = chr0; chr0 = swp;
@@ -95,7 +95,7 @@ void	Mapper045::Write( WORD addr, BYTE data )
 					swp = c[5]; c[5] = c[1]; c[1] = swp;
 					swp = c[6]; c[6] = c[2]; c[2] = swp;
 					swp = c[7]; c[7] = c[3]; c[3] = swp;
-					SetVROM_8K_Bank( c[0],c[1],c[2],c[3],c[4],c[5],c[6],c[7] );
+					MMU.SetVROM_8K_Bank( c[0],c[1],c[2],c[3],c[4],c[5],c[6],c[7] );
 				}
 			}
 			reg[6] = data;
@@ -144,8 +144,8 @@ void	Mapper045::Write( WORD addr, BYTE data )
 			}
 			break;
 		case	0xA000:
-			if( data & 0x01 ) SetVRAM_Mirror( VRAM_HMIRROR );
-			else		  SetVRAM_Mirror( VRAM_VMIRROR );
+			if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+			else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			break;
 		case	0xC000:
 			if( patch == 2 ) {
@@ -198,7 +198,7 @@ void	Mapper045::SetBank_CPU_4( INT data )
 	data &= (reg[3] & 0x3F) ^ 0xFF;
 	data &= 0x3F;
 	data |= reg[1];
-	SetPROM_8K_Bank( 4, data );
+	MMU.SetPROM_8K_Bank( 4, data );
 	p[0] = data;
 }
 
@@ -207,7 +207,7 @@ void	Mapper045::SetBank_CPU_5( INT data )
 	data &= (reg[3] & 0x3F) ^ 0xFF;
 	data &= 0x3F;
 	data |= reg[1];
-	SetPROM_8K_Bank( 5, data );
+	MMU.SetPROM_8K_Bank( 5, data );
 	p[1] = data;
 }
 
@@ -216,7 +216,7 @@ void	Mapper045::SetBank_CPU_6( INT data )
 	data &= (reg[3] & 0x3F) ^ 0xFF;
 	data &= 0x3F;
 	data |= reg[1];
-	SetPROM_8K_Bank( 6, data );
+	MMU.SetPROM_8K_Bank( 6, data );
 	p[2] = data;
 }
 
@@ -225,7 +225,7 @@ void	Mapper045::SetBank_CPU_7( INT data )
 	data &= (reg[3] & 0x3F) ^ 0xFF;
 	data &= 0x3F;
 	data |= reg[1];
-	SetPROM_8K_Bank( 7, data );
+	MMU.SetPROM_8K_Bank( 7, data );
 	p[3] = data;
 }
 
@@ -252,9 +252,9 @@ void	Mapper045::SetBank_PPU()
 	}
 
 	if( reg[6] & 0x80 ) {
-		SetVROM_8K_Bank( c[4], c[5], c[6], c[7], c[0], c[1], c[2], c[3] );
+		MMU.SetVROM_8K_Bank( c[4], c[5], c[6], c[7], c[0], c[1], c[2], c[3] );
 	} else {
-		SetVROM_8K_Bank( c[0], c[1], c[2], c[3], c[4], c[5], c[6], c[7] );
+		MMU.SetVROM_8K_Bank( c[0], c[1], c[2], c[3], c[4], c[5], c[6], c[7] );
 	}
 }
 

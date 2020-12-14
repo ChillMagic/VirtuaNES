@@ -40,11 +40,11 @@ INT	i;
 		chr_page[1][i] = 4+(i&0x03);
 	}
 
-	SetPROM_32K_Bank( PROM_8K_SIZE-1, PROM_8K_SIZE-1, PROM_8K_SIZE-1, PROM_8K_SIZE-1 );
-	SetVROM_8K_Bank( 0 );
+	MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-1, MMU.PROM_8K_SIZE-1, MMU.PROM_8K_SIZE-1, MMU.PROM_8K_SIZE-1 );
+	MMU.SetVROM_8K_Bank( 0 );
 
 	for( i = 0; i < 8; i++ ) {
-		BG_MEM_BANK[i] = VROM+0x0400*i;
+		BG_MEM_BANK[i] = MMU.VROM+0x0400*i;
 		BG_MEM_PAGE[i] = i;
 	}
 
@@ -119,7 +119,7 @@ BYTE	data = (BYTE)(addr>>8);
 
 	if( addr >= 0x5C00 && addr <= 0x5FFF ) {
 		if( graphic_mode >= 2 ) { // ExRAM mode
-			data = VRAM[0x0800+(addr&0x3FF)];
+			data = MMU.VRAM[0x0800+(addr&0x3FF)];
 		}
 	} else if( addr >= 0x6000 && addr <= 0x7FFF ) {
 		data = Mapper::ReadLow( addr );
@@ -160,7 +160,7 @@ DEBUGOUT( "$%04X=%02X C:%10d\n", addr, data, nes->cpu->GetTotalCycles() );
 			nametable_mode = data;
 			for( i = 0; i < 4; i++ ) {
 				nametable_type[i] = data&0x03;
-				SetVRAM_1K_Bank( 8+i, nametable_type[i] );
+				MMU.SetVRAM_1K_Bank( 8+i, nametable_type[i] );
 				data >>= 2;
 			}
 			break;
@@ -239,18 +239,18 @@ DEBUGOUT( "$%04X=%02X C:%10d\n", addr, data, nes->cpu->GetTotalCycles() );
 				nes->apu->ExWrite( addr, data );
 			} else if( addr >= 0x5C00 && addr <= 0x5FFF ) {
 				if( graphic_mode == 2 ) {		// ExRAM
-					VRAM[0x0800+(addr&0x3FF)] = data;
+					MMU.VRAM[0x0800+(addr&0x3FF)] = data;
 				} else if( graphic_mode != 3 ) {	// Split,ExGraphic
 					if( irq_status&0x40 ) {
-						VRAM[0x0800+(addr&0x3FF)] = data;
+						MMU.VRAM[0x0800+(addr&0x3FF)] = data;
 					} else {
-						VRAM[0x0800+(addr&0x3FF)] = 0;
+						MMU.VRAM[0x0800+(addr&0x3FF)] = 0;
 					}
 				}
 			} else if( addr >= 0x6000 && addr <= 0x7FFF ) {
 				if( (sram_we_a == 0x02) && (sram_we_b == 0x01) ) {
-					if( CPU_MEM_TYPE[3] == BANKTYPE_RAM ) {
-						CPU_MEM_BANK[3][addr&0x1FFF] = data;
+					if( MMU.CPU_MEM_TYPE[3] == BANKTYPE_RAM ) {
+						MMU.CPU_MEM_BANK[3][addr&0x1FFF] = data;
 					}
 				}
 			}
@@ -262,8 +262,8 @@ void	Mapper005::Write( WORD addr, BYTE data )
 {
 	if( sram_we_a == 0x02 && sram_we_b == 0x01 ) {
 		if( addr >= 0x8000 && addr < 0xE000 ) {
-			if( CPU_MEM_TYPE[addr>>13] == BANKTYPE_RAM ) {
-				CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+			if( MMU.CPU_MEM_TYPE[addr>>13] == BANKTYPE_RAM ) {
+				MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
 			}
 		}
 	}
@@ -276,28 +276,28 @@ void	Mapper005::SetBank_CPU( WORD addr, BYTE data )
 		switch( addr & 7 ) {
 			case	4:
 				if( prg_size == 3 ) {
-					SetPROM_8K_Bank( 4, data&0x7F );
+					MMU.SetPROM_8K_Bank( 4, data&0x7F );
 				}
 				break;
 			case	5:
 				if( prg_size == 1 || prg_size == 2 ) {
-					SetPROM_16K_Bank( 4, (data&0x7F)>>1 );
+					MMU.SetPROM_16K_Bank( 4, (data&0x7F)>>1 );
 				} else if( prg_size == 3 ) {
-					SetPROM_8K_Bank( 5, (data&0x7F) );
+					MMU.SetPROM_8K_Bank( 5, (data&0x7F) );
 				}
 				break;
 			case	6:
 				if( prg_size == 2 || prg_size == 3 ) {
-					SetPROM_8K_Bank( 6, (data&0x7F) );
+					MMU.SetPROM_8K_Bank( 6, (data&0x7F) );
 				}
 				break;
 			case	7:
 				if( prg_size == 0 ) {
-					SetPROM_32K_Bank( (data&0x7F)>>2 );
+					MMU.SetPROM_32K_Bank( (data&0x7F)>>2 );
 				} else if( prg_size == 1 ) {
-					SetPROM_16K_Bank( 6, (data&0x7F)>>1 );
+					MMU.SetPROM_16K_Bank( 6, (data&0x7F)>>1 );
 				} else if( prg_size == 2 || prg_size == 3 ) {
-					SetPROM_8K_Bank( 7, (data&0x7F) );
+					MMU.SetPROM_8K_Bank( 7, (data&0x7F) );
 				}
 				break;
 		}
@@ -334,10 +334,10 @@ void	Mapper005::SetBank_SRAM( BYTE page, BYTE data )
 	if( sram_size == 3 ) data = (data > 3) ? 4 : data;
 
 	if( data != 8 ) {
-		SetPROM_Bank( page, &WRAM[0x2000*data], BANKTYPE_RAM );
-		CPU_MEM_PAGE[page] = data;
+		MMU.SetPROM_Bank( page, &MMU.WRAM[0x2000*data], BANKTYPE_RAM );
+		MMU.CPU_MEM_PAGE[page] = data;
 	} else {
-		CPU_MEM_TYPE[page] = BANKTYPE_ROM;
+		MMU.CPU_MEM_TYPE[page] = BANKTYPE_ROM;
 	}
 }
 
@@ -349,20 +349,20 @@ INT	i;
 	// PPU SP Bank
 		switch( chr_size ) {
 			case	0:
-				SetVROM_8K_Bank( chr_page[0][7] );
+				MMU.SetVROM_8K_Bank( chr_page[0][7] );
 				break;
 			case	1:
-				SetVROM_4K_Bank( 0, chr_page[0][3] );
-				SetVROM_4K_Bank( 4, chr_page[0][7] );
+				MMU.SetVROM_4K_Bank( 0, chr_page[0][3] );
+				MMU.SetVROM_4K_Bank( 4, chr_page[0][7] );
 				break;
 			case	2:
-				SetVROM_2K_Bank( 0, chr_page[0][1] );
-				SetVROM_2K_Bank( 2, chr_page[0][3] );
-				SetVROM_2K_Bank( 4, chr_page[0][5] );
-				SetVROM_2K_Bank( 6, chr_page[0][7] );
+				MMU.SetVROM_2K_Bank( 0, chr_page[0][1] );
+				MMU.SetVROM_2K_Bank( 2, chr_page[0][3] );
+				MMU.SetVROM_2K_Bank( 4, chr_page[0][5] );
+				MMU.SetVROM_2K_Bank( 6, chr_page[0][7] );
 				break;
 			case	3:
-				SetVROM_8K_Bank( chr_page[0][0],
+				MMU.SetVROM_8K_Bank( chr_page[0][0],
 						 chr_page[0][1],
 						 chr_page[0][2],
 						 chr_page[0][3],
@@ -377,34 +377,34 @@ INT	i;
 		switch( chr_size ) {
 			case	0:
 				for( i = 0; i < 8; i++ ) {
-					BG_MEM_BANK[i] = VROM+0x2000*(chr_page[1][7]%VROM_8K_SIZE)+0x0400*i;
-					BG_MEM_PAGE[i] = (chr_page[1][7]%VROM_8K_SIZE)*8+i;
+					BG_MEM_BANK[i] = MMU.VROM+0x2000*(chr_page[1][7]%MMU.VROM_8K_SIZE)+0x0400*i;
+					BG_MEM_PAGE[i] = (chr_page[1][7]%MMU.VROM_8K_SIZE)*8+i;
 				}
 				break;
 			case	1:
 				for( i = 0; i < 4; i++ ) {
-					BG_MEM_BANK[i+0] = VROM+0x1000*(chr_page[1][3]%VROM_4K_SIZE)+0x0400*i;
-					BG_MEM_BANK[i+4] = VROM+0x1000*(chr_page[1][7]%VROM_4K_SIZE)+0x0400*i;
-					BG_MEM_PAGE[i+0] = (chr_page[1][3]%VROM_4K_SIZE)*4+i;
-					BG_MEM_PAGE[i+4] = (chr_page[1][7]%VROM_4K_SIZE)*4+i;
+					BG_MEM_BANK[i+0] = MMU.VROM+0x1000*(chr_page[1][3]%MMU.VROM_4K_SIZE)+0x0400*i;
+					BG_MEM_BANK[i+4] = MMU.VROM+0x1000*(chr_page[1][7]%MMU.VROM_4K_SIZE)+0x0400*i;
+					BG_MEM_PAGE[i+0] = (chr_page[1][3]%MMU.VROM_4K_SIZE)*4+i;
+					BG_MEM_PAGE[i+4] = (chr_page[1][7]%MMU.VROM_4K_SIZE)*4+i;
 				}
 				break;
 			case	2:
 				for( i = 0; i < 2; i++ ) {
-					BG_MEM_BANK[i+0] = VROM+0x0800*(chr_page[1][1]%VROM_2K_SIZE)+0x0400*i;
-					BG_MEM_BANK[i+2] = VROM+0x0800*(chr_page[1][3]%VROM_2K_SIZE)+0x0400*i;
-					BG_MEM_BANK[i+4] = VROM+0x0800*(chr_page[1][5]%VROM_2K_SIZE)+0x0400*i;
-					BG_MEM_BANK[i+6] = VROM+0x0800*(chr_page[1][7]%VROM_2K_SIZE)+0x0400*i;
-					BG_MEM_PAGE[i+0] = (chr_page[1][1]%VROM_2K_SIZE)*2+i;
-					BG_MEM_PAGE[i+2] = (chr_page[1][3]%VROM_2K_SIZE)*2+i;
-					BG_MEM_PAGE[i+4] = (chr_page[1][5]%VROM_2K_SIZE)*2+i;
-					BG_MEM_PAGE[i+6] = (chr_page[1][7]%VROM_2K_SIZE)*2+i;
+					BG_MEM_BANK[i+0] = MMU.VROM+0x0800*(chr_page[1][1]%MMU.VROM_2K_SIZE)+0x0400*i;
+					BG_MEM_BANK[i+2] = MMU.VROM+0x0800*(chr_page[1][3]%MMU.VROM_2K_SIZE)+0x0400*i;
+					BG_MEM_BANK[i+4] = MMU.VROM+0x0800*(chr_page[1][5]%MMU.VROM_2K_SIZE)+0x0400*i;
+					BG_MEM_BANK[i+6] = MMU.VROM+0x0800*(chr_page[1][7]%MMU.VROM_2K_SIZE)+0x0400*i;
+					BG_MEM_PAGE[i+0] = (chr_page[1][1]%MMU.VROM_2K_SIZE)*2+i;
+					BG_MEM_PAGE[i+2] = (chr_page[1][3]%MMU.VROM_2K_SIZE)*2+i;
+					BG_MEM_PAGE[i+4] = (chr_page[1][5]%MMU.VROM_2K_SIZE)*2+i;
+					BG_MEM_PAGE[i+6] = (chr_page[1][7]%MMU.VROM_2K_SIZE)*2+i;
 				}
 				break;
 			case	3:
 				for( i = 0; i < 8; i++ ) {
-					BG_MEM_BANK[i] = VROM+0x0400*(chr_page[1][i]%VROM_1K_SIZE);
-					BG_MEM_PAGE[i] = (chr_page[1][i]%VROM_1K_SIZE)+i;
+					BG_MEM_BANK[i] = MMU.VROM+0x0400*(chr_page[1][i]%MMU.VROM_1K_SIZE);
+					BG_MEM_PAGE[i] = (chr_page[1][i]%MMU.VROM_1K_SIZE)+i;
 				}
 				break;
 		}
@@ -520,21 +520,21 @@ BOOL	bSplit;
 				// Get Nametable
 				tileadr = fill_chr*0x10+tile_yofs;
 				// Get TileBank
-				tilebank = 0x1000*((VRAM[0x0800+(ntbladr&0x03FF)]&0x3F)%VROM_4K_SIZE);
+				tilebank = 0x1000*((MMU.VRAM[0x0800+(ntbladr&0x03FF)]&0x3F)%MMU.VROM_4K_SIZE);
 				// Attribute
 				attr = (fill_pal<<2)&0x0C;
 				// Get Pattern
-				chr_l = VROM[tilebank+tileadr  ];
-				chr_h = VROM[tilebank+tileadr+8];
+				chr_l = MMU.VROM[tilebank+tileadr  ];
+				chr_h = MMU.VROM[tilebank+tileadr+8];
 			} else {
 			// Normal
-				tileofs = (PPUREG[0]&PPU_BGTBL_BIT)?0x1000:0x0000;
+				tileofs = (MMU.PPUREG[0]&PPU_BGTBL_BIT)?0x1000:0x0000;
 				tileadr = tileofs+fill_chr*0x10+tile_yofs;
 				attr = (fill_pal<<2)&0x0C;
 				// Get Pattern
 				if( chr_type ) {
-					chr_l = PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
-					chr_h = PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
+					chr_l = MMU.PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
+					chr_h = MMU.PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
 				} else {
 					chr_l = BG_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
 					chr_h = BG_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
@@ -544,30 +544,30 @@ BOOL	bSplit;
 		// ExGraphic mode
 			ntbladr = 0x2000+(addr&0x0FFF);
 			// Get Nametable
-			tileadr = (WORD)PPU_MEM_BANK[ntbladr>>10][ntbladr&0x03FF]*0x10+tile_yofs;
+			tileadr = (WORD)MMU.PPU_MEM_BANK[ntbladr>>10][ntbladr&0x03FF]*0x10+tile_yofs;
 			// Get TileBank
-			tilebank = 0x1000*((VRAM[0x0800+(ntbladr&0x03FF)]&0x3F)%VROM_4K_SIZE);
+			tilebank = 0x1000*((MMU.VRAM[0x0800+(ntbladr&0x03FF)]&0x3F)%MMU.VROM_4K_SIZE);
 			// Get Attribute
-			attr = (VRAM[0x0800+(ntbladr&0x03FF)]&0xC0)>>4;
+			attr = (MMU.VRAM[0x0800+(ntbladr&0x03FF)]&0xC0)>>4;
 			// Get Pattern
-			chr_l = VROM[tilebank+tileadr  ];
-			chr_h = VROM[tilebank+tileadr+8];
+			chr_l = MMU.VROM[tilebank+tileadr  ];
+			chr_h = MMU.VROM[tilebank+tileadr+8];
 		} else {
 		// Normal or ExVRAM
-			tileofs = (PPUREG[0]&PPU_BGTBL_BIT)?0x1000:0x0000;
+			tileofs = (MMU.PPUREG[0]&PPU_BGTBL_BIT)?0x1000:0x0000;
 			ntbladr = 0x2000+(addr&0x0FFF);
 			attradr = 0x23C0+(addr&0x0C00)+((addr&0x0380)>>4)+((addr&0x001C)>>2);
 			// Get Nametable
-			tileadr = tileofs+PPU_MEM_BANK[ntbladr>>10][ntbladr&0x03FF]*0x10+tile_yofs;
+			tileadr = tileofs+MMU.PPU_MEM_BANK[ntbladr>>10][ntbladr&0x03FF]*0x10+tile_yofs;
 			// Get Attribute
-			attr = PPU_MEM_BANK[attradr>>10][attradr&0x03FF];
+			attr = MMU.PPU_MEM_BANK[attradr>>10][attradr&0x03FF];
 			if( ntbladr & 0x0002 ) attr >>= 2;
 			if( ntbladr & 0x0040 ) attr >>= 4;
 			attr = (attr&0x03)<<2;
 			// Get Pattern
 			if( chr_type ) {
-				chr_l = PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
-				chr_h = PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
+				chr_l = MMU.PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
+				chr_h = MMU.PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
 			} else {
 				chr_l = BG_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
 				chr_h = BG_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
@@ -576,17 +576,17 @@ BOOL	bSplit;
 	} else {
 		ntbladr = ((split_addr&0x03E0)|(split_x&0x1F))&0x03FF;
 		// Get Split TileBank
-		tilebank = 0x1000*((INT)split_page%VROM_4K_SIZE);
-		tileadr  = (WORD)VRAM[0x0800+ntbladr]*0x10+split_yofs;
+		tilebank = 0x1000*((INT)split_page%MMU.VROM_4K_SIZE);
+		tileadr  = (WORD)MMU.VRAM[0x0800+ntbladr]*0x10+split_yofs;
 		// Get Attribute
 		attradr = 0x03C0+((ntbladr&0x0380)>>4)+((ntbladr&0x001C)>>2);
-		attr = VRAM[0x0800+attradr];
+		attr = MMU.VRAM[0x0800+attradr];
 		if( ntbladr & 0x0002 ) attr >>= 2;
 		if( ntbladr & 0x0040 ) attr >>= 4;
 		attr = (attr&0x03)<<2;
 		// Get Pattern
-		chr_l = VROM[tilebank+tileadr  ];
-		chr_h = VROM[tilebank+tileadr+8];
+		chr_l = MMU.VROM[tilebank+tileadr  ];
+		chr_h = MMU.VROM[tilebank+tileadr+8];
 	}
 }
 
@@ -664,10 +664,10 @@ void	Mapper005::LoadState( LPBYTE p )
 	}
 //	// BGバンクの再設定処理
 //	for( i = 0; i < 8; i++ ) {
-//		BG_MEM_PAGE[i] = p[40+i]%VROM_1K_SIZE;
+//		BG_MEM_PAGE[i] = p[40+i]%MMU.VROM_1K_SIZE;
 //	}
 //	for( i = 0; i < 8; i++ ) {
-//		BG_MEM_BANK[i] = VROM+0x0400*BG_MEM_PAGE[i];
+//		BG_MEM_BANK[i] = MMU.VROM+0x0400*BG_MEM_PAGE[i];
 //	}
 
 	SetBank_PPU();

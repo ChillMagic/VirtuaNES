@@ -23,14 +23,14 @@ void	Mapper198::Reset()
 void	Mapper198::WriteLow( WORD addr, BYTE data )
 {
 	if( addr>0x4018 && addr<0x6000 )
-		CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+		MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
 	else
 		adr5000buf[addr&0xFFF] = data;
 }
 BYTE	Mapper198::ReadLow( WORD addr )
 {
 	if( addr>0x4018 && addr<0x6000 )
-		return	CPU_MEM_BANK[addr>>13][addr&0x1FFF];
+		return	MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
 	else
 		return	adr5000buf[addr&0xFFF];
 }
@@ -85,8 +85,8 @@ void	Mapper198::Write( WORD addr, BYTE data )
 		case	0xA000:
 			reg[2] = data;
 			if( !nes->rom->Is4SCREEN() ) {
-				if( data & 0x01 ) SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xA001:
@@ -110,21 +110,21 @@ void	Mapper198::Write( WORD addr, BYTE data )
 void	Mapper198::SetBank_CPU()
 {
 	if( reg[0] & 0x40 ) {
-		SetPROM_32K_Bank( PROM_8K_SIZE-2, prg1, prg0, PROM_8K_SIZE-1 );
+		MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-2, prg1, prg0, MMU.PROM_8K_SIZE-1 );
 	} else {
-		SetPROM_32K_Bank( prg0, prg1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+		MMU.SetPROM_32K_Bank( prg0, prg1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 	}
 }
 
 void	Mapper198::SetBank_PPU()
 {
 
-	if( VROM_1K_SIZE ) {
+	if( MMU.VROM_1K_SIZE ) {
 		if( reg[0] & 0x80 ) {
-			SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
+			MMU.SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
 					 chr01, chr01+1, chr23, chr23+1 );
 		} else {
-			SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
+			MMU.SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
 					 chr4, chr5, chr6, chr7 );
 		}
 	}

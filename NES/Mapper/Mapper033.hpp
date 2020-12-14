@@ -17,9 +17,9 @@ void	Mapper033::Reset()
 	reg[5] = 7;
 	reg[6] = 1;
 
-	SetPROM_32K_Bank( 0, 1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 
-	if( VROM_8K_SIZE ) {
+	if( MMU.VROM_8K_SIZE ) {
 		SetBank();
 	}
 
@@ -54,18 +54,18 @@ void	Mapper033::Write( WORD addr, BYTE data )
 	switch( addr ) {
 		case	0x8000:
 			if( patch ) {
-				if( data & 0x40 ) SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  SetVRAM_Mirror( VRAM_VMIRROR );
-				SetPROM_8K_Bank( 4, data & 0x1F );
+				if( data & 0x40 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				MMU.SetPROM_8K_Bank( 4, data & 0x1F );
 			} else {
-				SetPROM_8K_Bank( 4, data );
+				MMU.SetPROM_8K_Bank( 4, data );
 			}
 			break;
 		case	0x8001:
 			if( patch ) {
-				SetPROM_8K_Bank( 5, data & 0x1F );
+				MMU.SetPROM_8K_Bank( 5, data & 0x1F );
 			} else {
-				SetPROM_8K_Bank( 5, data );
+				MMU.SetPROM_8K_Bank( 5, data );
 			}
 			break;
 
@@ -135,8 +135,8 @@ void	Mapper033::Write( WORD addr, BYTE data )
 #endif
 
 		case	0xE000:
-			if( data & 0x40 ) SetVRAM_Mirror( VRAM_HMIRROR );
-			else		  SetVRAM_Mirror( VRAM_VMIRROR );
+			if( data & 0x40 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+			else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			break;
 	}
 }
@@ -174,17 +174,17 @@ void	Mapper033::HSync( INT scanline )
 
 void	Mapper033::SetBank()
 {
-	SetVROM_2K_Bank( 0, reg[0] );
-	SetVROM_2K_Bank( 2, reg[1] );
+	MMU.SetVROM_2K_Bank( 0, reg[0] );
+	MMU.SetVROM_2K_Bank( 2, reg[1] );
 
 //	if( reg[6] & 0x01 ) {
-		SetVROM_1K_Bank( 4, reg[2] );
-		SetVROM_1K_Bank( 5, reg[3] );
-		SetVROM_1K_Bank( 6, reg[4] );
-		SetVROM_1K_Bank( 7, reg[5] );
+		MMU.SetVROM_1K_Bank( 4, reg[2] );
+		MMU.SetVROM_1K_Bank( 5, reg[3] );
+		MMU.SetVROM_1K_Bank( 6, reg[4] );
+		MMU.SetVROM_1K_Bank( 7, reg[5] );
 //	} else {
-//		SetVROM_2K_Bank( 4, reg[0] );
-//		SetVROM_2K_Bank( 6, reg[1] );
+//		MMU.SetVROM_2K_Bank( 4, reg[0] );
+//		MMU.SetVROM_2K_Bank( 6, reg[1] );
 //	}
 }
 

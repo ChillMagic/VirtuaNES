@@ -252,7 +252,7 @@ NES::NES( const char* fname )
 		if( rom->IsVSUNISYSTEM() ) DEBUGOUT( "Yes\n" );
 		else			   DEBUGOUT( "No\n" );
 
-		NesSub_MemoryInitial();
+		MMU.NesSub_MemoryInitial();
 		LoadSRAM();
 		LoadDISK();
 
@@ -375,25 +375,25 @@ void	NES::Reset()
 	SaveTurboFile();
 
 	// RAM Clear
-	ZEROMEMORY( RAM, sizeof(RAM) );
+	ZEROMEMORY( MMU.RAM, sizeof(MMU.RAM) );
 	if( rom->GetPROM_CRC() == 0x29401686 ) {	// Minna no Taabou no Nakayoshi Dai Sakusen(J)
-		::memset( RAM, 0xFF, sizeof(RAM) );
+		::memset( MMU.RAM, 0xFF, sizeof(MMU.RAM) );
 	}
 
 	// RAM set
 	if( !rom->IsSAVERAM() && rom->GetMapperNo() != 20 ) {
-		::memset( WRAM, 0xFF, sizeof(WRAM) );
+		::memset( MMU.WRAM, 0xFF, sizeof(MMU.WRAM) );
 	}
 
-	ZEROMEMORY( CRAM, sizeof(CRAM) );
-	ZEROMEMORY( VRAM, sizeof(VRAM) );
+	ZEROMEMORY( MMU.CRAM, sizeof(MMU.CRAM) );
+	ZEROMEMORY( MMU.VRAM, sizeof(MMU.VRAM) );
 
-	ZEROMEMORY( SPRAM, sizeof(SPRAM) );
-	ZEROMEMORY( BGPAL, sizeof(BGPAL) );
-	ZEROMEMORY( SPPAL, sizeof(SPPAL) );
+	ZEROMEMORY( MMU.SPRAM, sizeof(MMU.SPRAM) );
+	ZEROMEMORY( MMU.BGPAL, sizeof(MMU.BGPAL) );
+	ZEROMEMORY( MMU.SPPAL, sizeof(MMU.SPPAL) );
 
-	ZEROMEMORY( CPUREG, sizeof(CPUREG) );
-	ZEROMEMORY( PPUREG, sizeof(PPUREG) );
+	ZEROMEMORY( MMU.CPUREG, sizeof(MMU.CPUREG) );
+	ZEROMEMORY( MMU.PPUREG, sizeof(MMU.PPUREG) );
 
 	m_bDiskThrottle = FALSE;
 
@@ -403,32 +403,32 @@ void	NES::Reset()
 		SetVideoMode( TRUE );
 	}
 
-	PROM = rom->GetPROM();
-	VROM = rom->GetVROM();
+	MMU.PROM = rom->GetPROM();
+	MMU.VROM = rom->GetVROM();
 
-	PROM_8K_SIZE  = rom->GetPROM_SIZE()*2;
-	PROM_16K_SIZE = rom->GetPROM_SIZE();
-	PROM_32K_SIZE = rom->GetPROM_SIZE()/2;
+	MMU.PROM_8K_SIZE  = rom->GetPROM_SIZE()*2;
+	MMU.PROM_16K_SIZE = rom->GetPROM_SIZE();
+	MMU.PROM_32K_SIZE = rom->GetPROM_SIZE()/2;
 
-	VROM_1K_SIZE = rom->GetVROM_SIZE()*8;
-	VROM_2K_SIZE = rom->GetVROM_SIZE()*4;
-	VROM_4K_SIZE = rom->GetVROM_SIZE()*2;
-	VROM_8K_SIZE = rom->GetVROM_SIZE();
+	MMU.VROM_1K_SIZE = rom->GetVROM_SIZE()*8;
+	MMU.VROM_2K_SIZE = rom->GetVROM_SIZE()*4;
+	MMU.VROM_4K_SIZE = rom->GetVROM_SIZE()*2;
+	MMU.VROM_8K_SIZE = rom->GetVROM_SIZE();
 
 	// デフォルトバンク
-	if( VROM_8K_SIZE ) {
-		SetVROM_8K_Bank( 0 );
+	if( MMU.VROM_8K_SIZE ) {
+		MMU.SetVROM_8K_Bank( 0 );
 	} else {
-		SetCRAM_8K_Bank( 0 );
+		MMU.SetCRAM_8K_Bank( 0 );
 	}
 
 	// ミラー
 	if( rom->Is4SCREEN() ) {
-		SetVRAM_Mirror( VRAM_MIRROR4 );
+		MMU.SetVRAM_Mirror( VRAM_MIRROR4 );
 	} else if( rom->IsVMIRROR() ) {
-		SetVRAM_Mirror( VRAM_VMIRROR );
+		MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 	} else {
-		SetVRAM_Mirror( VRAM_HMIRROR );
+		MMU.SetVRAM_Mirror( VRAM_HMIRROR );
 	}
 
 	apu->SelectExSound( 0 );
@@ -438,7 +438,7 @@ void	NES::Reset()
 
 	// Trainer
 	if( rom->IsTRAINER() ) {
-		::memcpy( WRAM+0x1000, rom->GetTRAINER(), 512 );
+		::memcpy( MMU.WRAM+0x1000, rom->GetTRAINER(), 512 );
 	}
 
 	pad->Reset();
@@ -636,7 +636,7 @@ INT	scanline = 0;
 				if( RenderMethod < POST_RENDER ) {
 					if( scanline == 241 ) {
 						ppu->VBlankStart();
-						if( PPUREG[0] & PPU_VBLANK_BIT ) {
+						if( MMU.PPUREG[0] & PPU_VBLANK_BIT ) {
 							cpu->NMI();
 						}
 					}
@@ -645,7 +645,7 @@ INT	scanline = 0;
 				} else {
 					if( scanline == 241 ) {
 						ppu->VBlankStart();
-						if( PPUREG[0] & PPU_VBLANK_BIT ) {
+						if( MMU.PPUREG[0] & PPU_VBLANK_BIT ) {
 							cpu->NMI();
 						}
 					}
@@ -743,7 +743,7 @@ INT	scanline = 0;
 				}
 				if( scanline == 241 ) {
 					ppu->VBlankStart();
-					if( PPUREG[0]&PPU_VBLANK_BIT ) {
+					if( MMU.PPUREG[0]&PPU_VBLANK_BIT ) {
 						cpu->NMI();
 					}
 				}
@@ -805,9 +805,9 @@ R6502	reg;
 
 	if( m_bNsfPlaying ) {
 		if( m_bNsfInit ) {
-			ZEROMEMORY( RAM, sizeof(RAM) );
+			ZEROMEMORY( MMU.RAM, sizeof(MMU.RAM) );
 			if( !(rom->GetNsfHeader()->ExtraChipSelect&0x04) ) {
-				ZEROMEMORY( WRAM, 0x2000 );
+				ZEROMEMORY( MMU.WRAM, 0x2000 );
 			}
 
 			apu->Reset();
@@ -885,7 +885,7 @@ BYTE	NES::Read( WORD addr )
 {
 	switch( addr>>13 ) {
 		case	0x00:	// $0000-$1FFF
-			return	RAM[addr&0x07FF];
+			return	MMU.RAM[addr&0x07FF];
 		case	0x01:	// $2000-$3FFF
 			return	ppu->Read( addr&0xE007 );
 		case	0x02:	// $4000-$5FFF
@@ -901,7 +901,7 @@ BYTE	NES::Read( WORD addr )
 		case	0x05:	// $A000-$BFFF
 		case	0x06:	// $C000-$DFFF
 		case	0x07:	// $E000-$FFFF
-			return	CPU_MEM_BANK[addr>>13][addr&0x1FFF];
+			return	MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
 	}
 
 	return	0x00;	// Warning予防
@@ -911,7 +911,7 @@ void	NES::Write( WORD addr, BYTE data )
 {
 	switch( addr>>13 ) {
 		case	0x00:	// $0000-$1FFF
-			RAM[addr&0x07FF] = data;
+			MMU.RAM[addr&0x07FF] = data;
 			break;
 		case	0x01:	// $2000-$3FFF
 			if( !rom->IsNSF() ) {
@@ -987,23 +987,23 @@ void	NES::WriteReg( WORD addr, BYTE data )
 		case 0x10: case 0x11: case 0x12: case 0x13:
 		case 0x15:
 			apu->Write( addr, data );
-			CPUREG[addr & 0xFF] = data;
+			MMU.CPUREG[addr & 0xFF] = data;
 			break;
 
 		case	0x14:
 			ppu->DMA( data );
 			cpu->DMA( 514 ); // DMA Pending cycle
-			CPUREG[addr & 0xFF] = data;
+			MMU.CPUREG[addr & 0xFF] = data;
 			break;
 
 		case	0x16:
 			mapper->ExWrite( addr, data );	// For VS-Unisystem
 			pad->Write( addr, data );
-			CPUREG[addr & 0xFF] = data;
+			MMU.CPUREG[addr & 0xFF] = data;
 			m_TapeIn = data;
 			break;
 		case	0x17:
-			CPUREG[addr & 0xFF] = data;
+			MMU.CPUREG[addr & 0xFF] = data;
 			pad->Write( addr, data );
 			apu->Write( addr, data );
 			break;
@@ -1062,7 +1062,7 @@ void	NES::LoadSRAM()
 	if( rom->IsNSF() )
 		return;
 
-	ZEROMEMORY( WRAM, sizeof(WRAM) );
+	ZEROMEMORY( MMU.WRAM, sizeof(MMU.WRAM) );
 
 	if( !rom->IsSAVERAM() )
 		return;
@@ -1094,7 +1094,7 @@ void	NES::LoadSRAM()
 		size = ftell( fp );
 		::fseek( fp, 0, SEEK_SET );
 		if( size <= 128*1024 ) {
-			if( ::fread( WRAM, size, 1, fp ) != 1 )
+			if( ::fread( MMU.WRAM, size, 1, fp ) != 1 )
 				throw	"File Read error.";
 		}
 
@@ -1126,7 +1126,7 @@ INT	i;
 		return;
 
 	for( i = 0; i < SAVERAM_SIZE; i++ ) {
-		if( WRAM[i] != 0x00 )
+		if( MMU.WRAM[i] != 0x00 )
 			break;
 	}
 
@@ -1153,7 +1153,7 @@ INT	i;
 				throw	szErrorString;
 			}
 
-			if( ::fwrite( WRAM, SAVERAM_SIZE, 1, fp ) != 1 ) {
+			if( ::fwrite( MMU.WRAM, SAVERAM_SIZE, 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
 				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
@@ -1418,7 +1418,7 @@ void	NES::SaveDISK()
 
 void	NES::LoadTurboFile()
 {
-	ZEROMEMORY( ERAM, sizeof(ERAM) );
+	ZEROMEMORY( MMU.ERAM, sizeof(MMU.ERAM) );
 
 	if( pad->GetExController() != PAD::EXCONTROLLER_TURBOFILE )
 		return;
@@ -1452,7 +1452,7 @@ void	NES::LoadTurboFile()
 		if( size > 32*1024 ) {
 			size = 32*1024;
 		}
-		if( ::fread( ERAM, size, 1, fp ) != 1 )
+		if( ::fread( MMU.ERAM, size, 1, fp ) != 1 )
 			throw	"File Read error.";
 
 		DEBUGOUT( "Ok.\n" );
@@ -1479,12 +1479,12 @@ INT	i;
 	if( pad->GetExController() != PAD::EXCONTROLLER_TURBOFILE )
 		return;
 
-	for( i = 0; i < sizeof(ERAM); i++ ) {
-		if( ERAM[i] != 0x00 )
+	for( i = 0; i < sizeof(MMU.ERAM); i++ ) {
+		if( MMU.ERAM[i] != 0x00 )
 			break;
 	}
 
-	if( i < sizeof(ERAM) ) {
+	if( i < sizeof(MMU.ERAM) ) {
 		DEBUGOUT( "Saving TURBOFILE...\n" );
 
 		string	pathstr, tempstr;
@@ -1507,7 +1507,7 @@ INT	i;
 				throw	szErrorString;
 			}
 
-			if( ::fwrite( ERAM, sizeof(ERAM), 1, fp ) != 1 ) {
+			if( ::fwrite( MMU.ERAM, sizeof(MMU.ERAM), 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
 				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
@@ -1810,15 +1810,15 @@ BOOL	NES::ReadState( FILE* fp )
 					}
 
 					// LOAD PPU STATE
-					PPUREG[0] = reg.ppureg.ppu.reg0;
-					PPUREG[1] = reg.ppureg.ppu.reg1;
-					PPUREG[2] = reg.ppureg.ppu.reg2;
-					PPUREG[3] = reg.ppureg.ppu.reg3;
-					PPU7_Temp = reg.ppureg.ppu.reg7;
-					loopy_t = reg.ppureg.ppu.loopy_t;
-					loopy_v = reg.ppureg.ppu.loopy_v;
-					loopy_x = reg.ppureg.ppu.loopy_x;
-					PPU56Toggle = reg.ppureg.ppu.toggle56;
+					MMU.PPUREG[0] = reg.ppureg.ppu.reg0;
+					MMU.PPUREG[1] = reg.ppureg.ppu.reg1;
+					MMU.PPUREG[2] = reg.ppureg.ppu.reg2;
+					MMU.PPUREG[3] = reg.ppureg.ppu.reg3;
+					MMU.PPU7_Temp = reg.ppureg.ppu.reg7;
+					MMU.loopy_t = reg.ppureg.ppu.loopy_t;
+					MMU.loopy_v = reg.ppureg.ppu.loopy_v;
+					MMU.loopy_x = reg.ppureg.ppu.loopy_x;
+					MMU.PPU56Toggle = reg.ppureg.ppu.toggle56;
 				} else {
 					REGSTAT	reg;
 					if( ::fread( &reg, sizeof(REGSTAT), 1, fp ) != 1 ) {
@@ -1855,15 +1855,15 @@ BOOL	NES::ReadState( FILE* fp )
 					cpu->SetDmaCycles( (INT)reg.cpureg.cpu.DMA_cycles );
 
 					// LOAD PPU STATE
-					PPUREG[0] = reg.ppureg.ppu.reg0;
-					PPUREG[1] = reg.ppureg.ppu.reg1;
-					PPUREG[2] = reg.ppureg.ppu.reg2;
-					PPUREG[3] = reg.ppureg.ppu.reg3;
-					PPU7_Temp = reg.ppureg.ppu.reg7;
-					loopy_t = reg.ppureg.ppu.loopy_t;
-					loopy_v = reg.ppureg.ppu.loopy_v;
-					loopy_x = reg.ppureg.ppu.loopy_x;
-					PPU56Toggle = reg.ppureg.ppu.toggle56;
+					MMU.PPUREG[0] = reg.ppureg.ppu.reg0;
+					MMU.PPUREG[1] = reg.ppureg.ppu.reg1;
+					MMU.PPUREG[2] = reg.ppureg.ppu.reg2;
+					MMU.PPUREG[3] = reg.ppureg.ppu.reg3;
+					MMU.PPU7_Temp = reg.ppureg.ppu.reg7;
+					MMU.loopy_t = reg.ppureg.ppu.loopy_t;
+					MMU.loopy_v = reg.ppureg.ppu.loopy_v;
+					MMU.loopy_x = reg.ppureg.ppu.loopy_x;
+					MMU.PPU56Toggle = reg.ppureg.ppu.toggle56;
 				}
 
 				// APU STATE
@@ -1885,12 +1885,12 @@ BOOL	NES::ReadState( FILE* fp )
 					// ファイルの読み込みに失敗しました
 					throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
-				::memcpy( RAM, ram.RAM, sizeof(ram.RAM) );
-				::memcpy( BGPAL, ram.BGPAL, sizeof(ram.BGPAL) );
-				::memcpy( SPPAL, ram.SPPAL, sizeof(ram.SPPAL) );
-				::memcpy( SPRAM, ram.SPRAM, sizeof(ram.SPRAM) );
+				::memcpy( MMU.RAM, ram.RAM, sizeof(ram.RAM) );
+				::memcpy( MMU.BGPAL, ram.BGPAL, sizeof(ram.BGPAL) );
+				::memcpy( MMU.SPPAL, ram.SPPAL, sizeof(ram.SPPAL) );
+				::memcpy( MMU.SPRAM, ram.SPRAM, sizeof(ram.SPRAM) );
 				if( rom->IsSAVERAM() ) {
-					if( ::fread( WRAM, SAVERAM_SIZE, 1, fp ) != 1 ) {
+					if( ::fread( MMU.WRAM, SAVERAM_SIZE, 1, fp ) != 1 ) {
 						// ファイルの読み込みに失敗しました
 						throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 					}
@@ -1909,21 +1909,21 @@ BOOL	NES::ReadState( FILE* fp )
 				// ちょっと前のバージョン
 					if( mmu.CPU_MEM_TYPE[3] == BANKTYPE_RAM
 					 || mmu.CPU_MEM_TYPE[3] == BANKTYPE_DRAM ) {
-						if( ::fread( CPU_MEM_BANK[3], 8*1024, 1, fp ) != 1 ) {
+						if( ::fread( MMU.CPU_MEM_BANK[3], 8*1024, 1, fp ) != 1 ) {
 							// ファイルの読み込みに失敗しました
 							throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 						}
 					} else if( !rom->IsSAVERAM() ) {
-						SetPROM_8K_Bank( 3, mmu.CPU_MEM_PAGE[3] );
+						MMU.SetPROM_8K_Bank( 3, mmu.CPU_MEM_PAGE[3] );
 					}
 					// バンク0〜3以外ロード
 					for( i = 4; i < 8; i++ ) {
-						CPU_MEM_TYPE[i] = mmu.CPU_MEM_TYPE[i];
-						CPU_MEM_PAGE[i] = mmu.CPU_MEM_PAGE[i];
-						if( CPU_MEM_TYPE[i] == BANKTYPE_ROM ) {
-							SetPROM_8K_Bank( i, CPU_MEM_PAGE[i] );
+						MMU.CPU_MEM_TYPE[i] = mmu.CPU_MEM_TYPE[i];
+						MMU.CPU_MEM_PAGE[i] = mmu.CPU_MEM_PAGE[i];
+						if( MMU.CPU_MEM_TYPE[i] == BANKTYPE_ROM ) {
+							MMU.SetPROM_8K_Bank( i, MMU.CPU_MEM_PAGE[i] );
 						} else {
-							if( ::fread( CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
+							if( ::fread( MMU.CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
 								// ファイルの読み込みに失敗しました
 								throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 							}
@@ -1933,12 +1933,12 @@ BOOL	NES::ReadState( FILE* fp )
 				// 最新バージョン
 					// SRAMがあっても全部ロードしなおし
 					for( i = 3; i < 8; i++ ) {
-						CPU_MEM_TYPE[i] = mmu.CPU_MEM_TYPE[i];
-						CPU_MEM_PAGE[i] = mmu.CPU_MEM_PAGE[i];
-						if( CPU_MEM_TYPE[i] == BANKTYPE_ROM ) {
-							SetPROM_8K_Bank( i, CPU_MEM_PAGE[i] );
+						MMU.CPU_MEM_TYPE[i] = mmu.CPU_MEM_TYPE[i];
+						MMU.CPU_MEM_PAGE[i] = mmu.CPU_MEM_PAGE[i];
+						if( MMU.CPU_MEM_TYPE[i] == BANKTYPE_ROM ) {
+							MMU.SetPROM_8K_Bank( i, MMU.CPU_MEM_PAGE[i] );
 						} else {
-							if( ::fread( CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
+							if( ::fread( MMU.CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
 								// ファイルの読み込みに失敗しました
 								throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 							}
@@ -1946,7 +1946,7 @@ BOOL	NES::ReadState( FILE* fp )
 					}
 				}
 				// VRAM
-				if( ::fread( VRAM, 4*1024, 1, fp ) != 1 ) {
+				if( ::fread( MMU.VRAM, 4*1024, 1, fp ) != 1 ) {
 					// ファイルの読み込みに失敗しました
 					throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 				}
@@ -1954,7 +1954,7 @@ BOOL	NES::ReadState( FILE* fp )
 				// CRAM
 				for( i = 0; i < 8; i++ ) {
 					if( mmu.CRAM_USED[i] != 0 ) {
-						if( ::fread( &CRAM[0x1000*i], 4*1024, 1, fp ) != 1 ) {
+						if( ::fread( &MMU.CRAM[0x1000*i], 4*1024, 1, fp ) != 1 ) {
 							// ファイルの読み込みに失敗しました
 							throw	AppWrapper::GetErrorString( IDS_ERROR_READ );
 						}
@@ -1963,11 +1963,11 @@ BOOL	NES::ReadState( FILE* fp )
 				// BANK
 				for( i = 0; i < 12; i++ ) {
 					if( mmu.PPU_MEM_TYPE[i] == BANKTYPE_VROM ) {
-						SetVROM_1K_Bank( i, mmu.PPU_MEM_PAGE[i] );
+						MMU.SetVROM_1K_Bank( i, mmu.PPU_MEM_PAGE[i] );
 					} else if( mmu.PPU_MEM_TYPE[i] == BANKTYPE_CRAM ) {
-						SetCRAM_1K_Bank( i, mmu.PPU_MEM_PAGE[i] );
+						MMU.SetCRAM_1K_Bank( i, mmu.PPU_MEM_PAGE[i] );
 					} else if( mmu.PPU_MEM_TYPE[i] == BANKTYPE_VRAM ) {
-						SetVRAM_1K_Bank( i, mmu.PPU_MEM_PAGE[i] );
+						MMU.SetVRAM_1K_Bank( i, mmu.PPU_MEM_PAGE[i] );
 					} else {
 						throw	"Unknown bank types.";
 					}
@@ -2139,15 +2139,15 @@ void	NES::WriteState( FILE* fp )
 	reg.cpureg.cpu.base_cycles = base_cycles;
 
 	// SAVE PPU STATE
-	reg.ppureg.ppu.reg0 = PPUREG[0];
-	reg.ppureg.ppu.reg1 = PPUREG[1];
-	reg.ppureg.ppu.reg2 = PPUREG[2];
-	reg.ppureg.ppu.reg3 = PPUREG[3];
-	reg.ppureg.ppu.reg7 = PPU7_Temp;
-	reg.ppureg.ppu.loopy_t  = loopy_t;
-	reg.ppureg.ppu.loopy_v  = loopy_v;
-	reg.ppureg.ppu.loopy_x  = loopy_x;
-	reg.ppureg.ppu.toggle56 = PPU56Toggle;
+	reg.ppureg.ppu.reg0 = MMU.PPUREG[0];
+	reg.ppureg.ppu.reg1 = MMU.PPUREG[1];
+	reg.ppureg.ppu.reg2 = MMU.PPUREG[2];
+	reg.ppureg.ppu.reg3 = MMU.PPUREG[3];
+	reg.ppureg.ppu.reg7 = MMU.PPU7_Temp;
+	reg.ppureg.ppu.loopy_t  = MMU.loopy_t;
+	reg.ppureg.ppu.loopy_v  = MMU.loopy_v;
+	reg.ppureg.ppu.loopy_x  = MMU.loopy_x;
+	reg.ppureg.ppu.toggle56 = MMU.PPU56Toggle;
 
 	// Write File
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
@@ -2169,10 +2169,10 @@ void	NES::WriteState( FILE* fp )
 	::ZeroMemory( &ram, sizeof(RAMSTAT) );
 
 	// SAVE RAM STATE
-	::memcpy( ram.RAM, RAM, sizeof(ram.RAM) );
-	::memcpy( ram.BGPAL, BGPAL, sizeof(ram.BGPAL) );
-	::memcpy( ram.SPPAL, SPPAL, sizeof(ram.SPPAL) );
-	::memcpy( ram.SPRAM, SPRAM, sizeof(ram.SPRAM) );
+	::memcpy( ram.RAM, MMU.RAM, sizeof(ram.RAM) );
+	::memcpy( ram.BGPAL, MMU.BGPAL, sizeof(ram.BGPAL) );
+	::memcpy( ram.SPPAL, MMU.SPPAL, sizeof(ram.SPPAL) );
+	::memcpy( ram.SPRAM, MMU.SPRAM, sizeof(ram.SPRAM) );
 
 	// S-RAM STATE(使用/未使用に関わらず存在すればセーブする)
 	if( rom->IsSAVERAM() ) {
@@ -2194,7 +2194,7 @@ void	NES::WriteState( FILE* fp )
 		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 	if( rom->IsSAVERAM() ) {
-		if( ::fwrite( WRAM, SAVERAM_SIZE, 1, fp ) != 1 )
+		if( ::fwrite( MMU.WRAM, SAVERAM_SIZE, 1, fp ) != 1 )
 			// ファイルの書き込みに失敗しました
 			throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 		}
@@ -2214,25 +2214,25 @@ void	NES::WriteState( FILE* fp )
 	// VirtuaNES0.30から
 	// バンク３はSRAM使用に関わらずセーブ
 	for( i = 3; i < 8; i++ ) {
-		mmu.CPU_MEM_TYPE[i] = CPU_MEM_TYPE[i];
-		mmu.CPU_MEM_PAGE[i] = CPU_MEM_PAGE[i];
+		mmu.CPU_MEM_TYPE[i] = MMU.CPU_MEM_TYPE[i];
+		mmu.CPU_MEM_PAGE[i] = MMU.CPU_MEM_PAGE[i];
 
-		if( CPU_MEM_TYPE[i] == BANKTYPE_RAM
-		 || CPU_MEM_TYPE[i] == BANKTYPE_DRAM ) {
+		if( MMU.CPU_MEM_TYPE[i] == BANKTYPE_RAM
+		 || MMU.CPU_MEM_TYPE[i] == BANKTYPE_DRAM ) {
 			size += 8*1024;	// 8K BANK
 		}
 	}
 
 	// SAVE VRAM MEMORY DATA
 	for( i = 0; i < 12; i++ ) {
-		mmu.PPU_MEM_TYPE[i] = PPU_MEM_TYPE[i];
-		mmu.PPU_MEM_PAGE[i] = PPU_MEM_PAGE[i];
+		mmu.PPU_MEM_TYPE[i] = MMU.PPU_MEM_TYPE[i];
+		mmu.PPU_MEM_PAGE[i] = MMU.PPU_MEM_PAGE[i];
 	}
 	size += 4*1024;	// 1K BANK x 4 (VRAM)
 
 	for( i = 0; i < 8; i++ ) {
-		mmu.CRAM_USED[i] = CRAM_USED[i];
-		if( CRAM_USED[i] != 0 ) {
+		mmu.CRAM_USED[i] = MMU.CRAM_USED[i];
+		if( MMU.CRAM_USED[i] != 0 ) {
 			size += 4*1024;	// 4K BANK
 		}
 	}
@@ -2255,22 +2255,22 @@ void	NES::WriteState( FILE* fp )
 	// WRITE CPU RAM MEMORY BANK
 	for( i = 3; i < 8; i++ ) {
 		if( mmu.CPU_MEM_TYPE[i] != BANKTYPE_ROM ) {
-			if( ::fwrite( CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
+			if( ::fwrite( MMU.CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
 				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
 		}
 	}
 	// WRITE VRAM MEMORY(常に4K分すべて書き込む)
-	if( ::fwrite( VRAM, 4*1024, 1, fp ) != 1 ) {
+	if( ::fwrite( MMU.VRAM, 4*1024, 1, fp ) != 1 ) {
 		// ファイルの書き込みに失敗しました
 		throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 	}
 
 	// WRITE CRAM MEMORY
 	for( i = 0; i < 8; i++ ) {
-		if( CRAM_USED[i] != 0 ) {
-			if( ::fwrite( &CRAM[0x1000*i], 4*1024, 1, fp ) != 1 ) {
+		if( MMU.CRAM_USED[i] != 0 ) {
+			if( ::fwrite( &MMU.CRAM[0x1000*i], 4*1024, 1, fp ) != 1 ) {
 				// ファイルの書き込みに失敗しました
 				throw	AppWrapper::GetErrorString( IDS_ERROR_WRITE );
 			}
@@ -3388,13 +3388,13 @@ void	NES::GenieCodeProcess()
 		addr = m_GenieCode[i].address;
 		if( addr & 0x8000 ) {
 		// 8character codes
-			if( CPU_MEM_BANK[addr>>13][addr&0x1FFF] == m_GenieCode[i].cmp ) {
-				CPU_MEM_BANK[addr>>13][addr&0x1FFF] = m_GenieCode[i].data;
+			if( MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] == m_GenieCode[i].cmp ) {
+				MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = m_GenieCode[i].data;
 			}
 		} else {
 		// 6character codes
 			addr |= 0x8000;
-			CPU_MEM_BANK[addr>>13][addr&0x1FFF] = m_GenieCode[i].data;
+			MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = m_GenieCode[i].data;
 		}
 	}
 }

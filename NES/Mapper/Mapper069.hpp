@@ -7,10 +7,10 @@ void	Mapper069::Reset()
 	irq_enable = 0;
 	irq_counter = 0;
 
-	SetPROM_32K_Bank( 0, 1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 
-	if( VROM_1K_SIZE ) {
-		SetVROM_8K_Bank( 0 );
+	if( MMU.VROM_1K_SIZE ) {
+		MMU.SetVROM_8K_Bank( 0 );
 	}
 
 	nes->apu->SelectExSound(32);
@@ -43,29 +43,29 @@ void	Mapper069::Write( WORD addr, BYTE data )
 				case	0x02:	case	0x03:
 				case	0x04:	case	0x05:
 				case	0x06:	case	0x07:
-					SetVROM_1K_Bank( reg&0x07, data );
+					MMU.SetVROM_1K_Bank( reg&0x07, data );
 					break;
 				case	0x08:
 					if( !patch && !(data & 0x40) ) {
-						SetPROM_8K_Bank( 3, data );
+						MMU.SetPROM_8K_Bank( 3, data );
 					}
 					break;
 				case	0x09:
-					SetPROM_8K_Bank( 4, data );
+					MMU.SetPROM_8K_Bank( 4, data );
 					break;
 				case	0x0A:
-					SetPROM_8K_Bank( 5, data );
+					MMU.SetPROM_8K_Bank( 5, data );
 					break;
 				case	0x0B:
-					SetPROM_8K_Bank( 6, data );
+					MMU.SetPROM_8K_Bank( 6, data );
 					break;
 
 				case	0x0C:
 					data &= 0x03;
-					if( data == 0 )	     SetVRAM_Mirror( VRAM_VMIRROR );
-					else if( data == 1 ) SetVRAM_Mirror( VRAM_HMIRROR );
-					else if( data == 2 ) SetVRAM_Mirror( VRAM_MIRROR4L );
-					else		     SetVRAM_Mirror( VRAM_MIRROR4H );
+					if( data == 0 )	     MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+					else if( data == 1 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+					else if( data == 2 ) MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
+					else		     MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
 					break;
 
 				case	0x0D:

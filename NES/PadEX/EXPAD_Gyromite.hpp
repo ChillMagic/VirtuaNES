@@ -8,11 +8,11 @@ INT	EXPAD_Gyromite::CheckSignal()
 
 	// throttling detection issues
 	ConfigWrapper::DirectDrawGetPaletteData( palette );
-	pixel = palette[BGPAL[0]];
+	pixel = palette[MMU.BGPAL[0]];
 
 	for( INT lcv=1; lcv<16; lcv++ ) {
 		// reject non-solid screens
-		if( memcmp( &(palette[BGPAL[lcv]]), &pixel, sizeof(ConfigWrapper::RGBQUAD) ) != 0 ) {
+		if( memcmp( &(palette[MMU.BGPAL[lcv]]), &pixel, sizeof(ConfigWrapper::RGBQUAD) ) != 0 ) {
 			return 0xF00;
 	}
 	}

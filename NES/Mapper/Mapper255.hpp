@@ -3,9 +3,9 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper255::Reset()
 {
-	SetPROM_32K_Bank( 0 );
-	SetVROM_8K_Bank( 0 );
-	SetVRAM_Mirror( VRAM_VMIRROR );
+	MMU.SetPROM_32K_Bank( 0 );
+	MMU.SetVROM_8K_Bank( 0 );
+	MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 
 	reg[0] = 0;
 	reg[1] = 0;
@@ -36,38 +36,38 @@ void	Mapper255::Write( WORD addr, BYTE data )
 	INT	bank = (addr & 0x4000)>>14;
 
 	if( addr & 0x2000 ) {
-		SetVRAM_Mirror( VRAM_HMIRROR );
+		MMU.SetVRAM_Mirror( VRAM_HMIRROR );
 	} else {
-		SetVRAM_Mirror( VRAM_VMIRROR );
+		MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 	}
 
 	if( addr & 0x1000 ) {
 		if( addr & 0x0040 ) {
-			SetPROM_8K_Bank( 4, 0x80*bank+prg*4+2 );
-			SetPROM_8K_Bank( 5, 0x80*bank+prg*4+3 );
-			SetPROM_8K_Bank( 6, 0x80*bank+prg*4+2 );
-			SetPROM_8K_Bank( 7, 0x80*bank+prg*4+3 );
+			MMU.SetPROM_8K_Bank( 4, 0x80*bank+prg*4+2 );
+			MMU.SetPROM_8K_Bank( 5, 0x80*bank+prg*4+3 );
+			MMU.SetPROM_8K_Bank( 6, 0x80*bank+prg*4+2 );
+			MMU.SetPROM_8K_Bank( 7, 0x80*bank+prg*4+3 );
 		} else {
-			SetPROM_8K_Bank( 4, 0x80*bank+prg*4+0 );
-			SetPROM_8K_Bank( 5, 0x80*bank+prg*4+1 );
-			SetPROM_8K_Bank( 6, 0x80*bank+prg*4+0 );
-			SetPROM_8K_Bank( 7, 0x80*bank+prg*4+1 );
+			MMU.SetPROM_8K_Bank( 4, 0x80*bank+prg*4+0 );
+			MMU.SetPROM_8K_Bank( 5, 0x80*bank+prg*4+1 );
+			MMU.SetPROM_8K_Bank( 6, 0x80*bank+prg*4+0 );
+			MMU.SetPROM_8K_Bank( 7, 0x80*bank+prg*4+1 );
 		}
 	} else {
-		SetPROM_8K_Bank( 4, 0x80*bank+prg*4+0 );
-		SetPROM_8K_Bank( 5, 0x80*bank+prg*4+1 );
-		SetPROM_8K_Bank( 6, 0x80*bank+prg*4+2 );
-		SetPROM_8K_Bank( 7, 0x80*bank+prg*4+3 );
+		MMU.SetPROM_8K_Bank( 4, 0x80*bank+prg*4+0 );
+		MMU.SetPROM_8K_Bank( 5, 0x80*bank+prg*4+1 );
+		MMU.SetPROM_8K_Bank( 6, 0x80*bank+prg*4+2 );
+		MMU.SetPROM_8K_Bank( 7, 0x80*bank+prg*4+3 );
 	}
 
-	SetVROM_1K_Bank( 0, 0x200*bank+chr*8+0 );
-	SetVROM_1K_Bank( 1, 0x200*bank+chr*8+1 );
-	SetVROM_1K_Bank( 2, 0x200*bank+chr*8+2 );
-	SetVROM_1K_Bank( 3, 0x200*bank+chr*8+3 );
-	SetVROM_1K_Bank( 4, 0x200*bank+chr*8+4 );
-	SetVROM_1K_Bank( 5, 0x200*bank+chr*8+5 );
-	SetVROM_1K_Bank( 6, 0x200*bank+chr*8+6 );
-	SetVROM_1K_Bank( 7, 0x200*bank+chr*8+7 );
+	MMU.SetVROM_1K_Bank( 0, 0x200*bank+chr*8+0 );
+	MMU.SetVROM_1K_Bank( 1, 0x200*bank+chr*8+1 );
+	MMU.SetVROM_1K_Bank( 2, 0x200*bank+chr*8+2 );
+	MMU.SetVROM_1K_Bank( 3, 0x200*bank+chr*8+3 );
+	MMU.SetVROM_1K_Bank( 4, 0x200*bank+chr*8+4 );
+	MMU.SetVROM_1K_Bank( 5, 0x200*bank+chr*8+5 );
+	MMU.SetVROM_1K_Bank( 6, 0x200*bank+chr*8+6 );
+	MMU.SetVROM_1K_Bank( 7, 0x200*bank+chr*8+7 );
 }
 
 void	Mapper255::SaveState( LPBYTE p )

@@ -3,13 +3,13 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper003::Reset()
 {
-	switch( PROM_16K_SIZE ) {
+	switch( MMU.PROM_16K_SIZE ) {
 		case	1:	// 16K only
-			SetPROM_16K_Bank( 4, 0 );
-			SetPROM_16K_Bank( 6, 0 );
+			MMU.SetPROM_16K_Bank( 4, 0 );
+			MMU.SetPROM_16K_Bank( 6, 0 );
 			break;
 		case	2:	// 32K
-			SetPROM_32K_Bank( 0 );
+			MMU.SetPROM_32K_Bank( 0 );
 			break;
 	}
 //	nes->SetRenderMethod( NES::TILE_RENDER );
@@ -34,7 +34,7 @@ void	Mapper003::WriteLow( WORD addr, BYTE data )
 			Mapper::WriteLow( addr, data );
 		} else {
 			if( addr >= 0x4800 ) {
-				SetVROM_8K_Bank( data & 0x03 );
+				MMU.SetVROM_8K_Bank( data & 0x03 );
 			}
 		}
 	}
@@ -43,5 +43,5 @@ void	Mapper003::WriteLow( WORD addr, BYTE data )
 
 void	Mapper003::Write( WORD addr, BYTE data )
 {
-	SetVROM_8K_Bank( data );
+	MMU.SetVROM_8K_Bank( data );
 }

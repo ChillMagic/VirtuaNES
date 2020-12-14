@@ -47,24 +47,24 @@ void	Mapper167::SetBank_CPU()
 	if(regs[1]&0x08){
 		bank &= 0xfe;
 		if(rom_type==0){
-			SetPROM_16K_Bank(4, base+bank+1);
-			SetPROM_16K_Bank(6, base+bank+0);
+			MMU.SetPROM_16K_Bank(4, base+bank+1);
+			MMU.SetPROM_16K_Bank(6, base+bank+0);
 		}else{
-			SetPROM_16K_Bank(6, base+bank+1);
-			SetPROM_16K_Bank(4, base+bank+0);
+			MMU.SetPROM_16K_Bank(6, base+bank+1);
+			MMU.SetPROM_16K_Bank(4, base+bank+0);
 		}
 //		DEBUGOUT("32K MODE!\n");
 	}else{
 		if(regs[1]&0x04){
-			SetPROM_16K_Bank(4, 0x1f);
-			SetPROM_16K_Bank(6, base+bank);
+			MMU.SetPROM_16K_Bank(4, 0x1f);
+			MMU.SetPROM_16K_Bank(6, base+bank);
 //			DEBUGOUT("HIGH 16K MODE!\n");
 		}else{
-			SetPROM_16K_Bank(4, base+bank);
+			MMU.SetPROM_16K_Bank(4, base+bank);
 			if(rom_type==0){
-				SetPROM_16K_Bank(6, 0x20);
+				MMU.SetPROM_16K_Bank(6, 0x20);
 			}else{
-				SetPROM_16K_Bank(6, 0x07);
+				MMU.SetPROM_16K_Bank(6, 0x07);
 			}
 //			DEBUGOUT("LOW  16K MODE!\n");
 		}
@@ -75,7 +75,7 @@ void	Mapper167::SetBank_CPU()
 
 void	Mapper167::SetBank_PPU()
 {
-	SetCRAM_8K_Bank(0);
+	MMU.SetCRAM_8K_Bank(0);
 }
 
 void	Mapper167::SaveState( LPBYTE p )

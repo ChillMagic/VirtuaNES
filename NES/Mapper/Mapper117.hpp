@@ -4,9 +4,9 @@
 
 void    Mapper117::Reset()
 {
-	SetPROM_32K_Bank( 0, 1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
-	if( VROM_1K_SIZE ) {
-		SetVROM_8K_Bank( 0 );
+	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	if( MMU.VROM_1K_SIZE ) {
+		MMU.SetVROM_8K_Bank( 0 );
 	}
 }
 
@@ -14,37 +14,37 @@ void	Mapper117::Write( WORD addr, BYTE data )
 {
 	switch( addr ) {
 		case	0x8000:
-			SetPROM_8K_Bank( 4, data );
+			MMU.SetPROM_8K_Bank( 4, data );
 			break;
 		case	0x8001:
-			SetPROM_8K_Bank( 5, data );
+			MMU.SetPROM_8K_Bank( 5, data );
 			break;
 		case	0x8002:
-			SetPROM_8K_Bank( 6, data );
+			MMU.SetPROM_8K_Bank( 6, data );
 			break;
 		case	0xA000:
-			SetVROM_1K_Bank( 0, data );
+			MMU.SetVROM_1K_Bank( 0, data );
 			break;
 		case	0xA001:
-			SetVROM_1K_Bank( 1, data );
+			MMU.SetVROM_1K_Bank( 1, data );
 			break;
 		case	0xA002:
-			SetVROM_1K_Bank( 2, data );
+			MMU.SetVROM_1K_Bank( 2, data );
 			break;
 		case	0xA003:
-			SetVROM_1K_Bank( 3, data );
+			MMU.SetVROM_1K_Bank( 3, data );
 			break;
 		case	0xA004:
-			SetVROM_1K_Bank( 4, data );
+			MMU.SetVROM_1K_Bank( 4, data );
 			break;
 		case	0xA005:
-			SetVROM_1K_Bank( 5, data );
+			MMU.SetVROM_1K_Bank( 5, data );
 			break;
 		case	0xA006:
-			SetVROM_1K_Bank( 6, data );
+			MMU.SetVROM_1K_Bank( 6, data );
 			break;
 		case	0xA007:
-			SetVROM_1K_Bank( 7, data );
+			MMU.SetVROM_1K_Bank( 7, data );
 			break;
 		case	0xC001:
 		case	0xC002:

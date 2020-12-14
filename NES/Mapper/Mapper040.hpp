@@ -6,11 +6,11 @@ void	Mapper040::Reset()
 	irq_enable = 0;
 	irq_line = 0;
 
-	SetPROM_8K_Bank( 3, 6 );
-	SetPROM_32K_Bank( 4, 5, 0, 7 );
+	MMU.SetPROM_8K_Bank( 3, 6 );
+	MMU.SetPROM_32K_Bank( 4, 5, 0, 7 );
 
-	if( VROM_1K_SIZE ) {
-		SetVROM_8K_Bank( 0 );
+	if( MMU.VROM_1K_SIZE ) {
+		MMU.SetVROM_8K_Bank( 0 );
 	}
 }
 
@@ -29,7 +29,7 @@ void	Mapper040::Write( WORD addr, BYTE data )
 		case	0xC000:
 			break;
 		case	0xE000:
-			SetPROM_8K_Bank( 6, data&0x07 );
+			MMU.SetPROM_8K_Bank( 6, data&0x07 );
 			break;
 	}
 }

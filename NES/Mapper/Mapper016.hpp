@@ -15,7 +15,7 @@ void	Mapper016::Reset()
 
 	eeprom_type = 0;
 
-	SetPROM_32K_Bank( 0, 1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 
 	DWORD	crc = nes->rom->GetPROM_CRC();
 
@@ -24,7 +24,7 @@ void	Mapper016::Reset()
 		patch = 1;
 		eeprom_type = 0xFF;
 
-		WRAM[0x0BBC] = 0xFF;	// SRAM対策
+		MMU.WRAM[0x0BBC] = 0xFF;	// SRAM対策
 	}
 
 	if( crc == 0x1d6f27f7 ) {	// Dragon Ball Z 2(Korean Hack)
@@ -85,16 +85,16 @@ void	Mapper016::Reset()
 
 	if( eeprom_type == 0 ) {
 		nes->SetSAVERAM_SIZE( 128 );
-		x24c01.Reset( WRAM );
+		x24c01.Reset( MMU.WRAM );
 	} else 
 	if( eeprom_type == 1 ) {
 		nes->SetSAVERAM_SIZE( 256 );
-		x24c02.Reset( WRAM );
+		x24c02.Reset( MMU.WRAM );
 	} else 
 	if( eeprom_type == 2 ) {
 		nes->SetSAVERAM_SIZE( 384 );
-		x24c02.Reset( WRAM );
-		x24c01.Reset( WRAM+256 );
+		x24c02.Reset( MMU.WRAM );
+		x24c01.Reset( MMU.WRAM+256 );
 	}
 }
 
@@ -152,8 +152,8 @@ void	Mapper016::WriteSubA( WORD addr, BYTE data )
 		case	0x0005:
 		case	0x0006:
 		case	0x0007:
-			if( VROM_1K_SIZE ) {
-				SetVROM_1K_Bank( addr&0x0007, data );
+			if( MMU.VROM_1K_SIZE ) {
+				MMU.SetVROM_1K_Bank( addr&0x0007, data );
 			}
 			if( eeprom_type == 2 ) {
 				reg[0] = data;
@@ -162,15 +162,15 @@ void	Mapper016::WriteSubA( WORD addr, BYTE data )
 			break;
 
 		case	0x0008:
-			SetPROM_16K_Bank( 4, data );
+			MMU.SetPROM_16K_Bank( 4, data );
 			break;
 
 		case	0x0009:
 			data &= 0x03;
-			if( data == 0 )	     SetVRAM_Mirror( VRAM_VMIRROR );
-			else if( data == 1 ) SetVRAM_Mirror( VRAM_HMIRROR );
-			else if( data == 2 ) SetVRAM_Mirror( VRAM_MIRROR4L );
-			else		     SetVRAM_Mirror( VRAM_MIRROR4H );
+			if( data == 0 )	     MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			else if( data == 1 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+			else if( data == 2 ) MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
+			else		     MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
 			break;
 
 		case	0x000A:
@@ -215,31 +215,31 @@ void	Mapper016::WriteSubB( WORD addr, BYTE data )
 		case	0x8002:
 		case	0x8003:
 			reg[0] = data & 0x01;
-			SetPROM_8K_Bank( 4, reg[0]*0x20+reg[2]*2+0 );
-			SetPROM_8K_Bank( 5, reg[0]*0x20+reg[2]*2+1 );
+			MMU.SetPROM_8K_Bank( 4, reg[0]*0x20+reg[2]*2+0 );
+			MMU.SetPROM_8K_Bank( 5, reg[0]*0x20+reg[2]*2+1 );
 			break;
 		case	0x8004:
 		case	0x8005:
 		case	0x8006:
 		case	0x8007:
 			reg[1] = data & 0x01;
-			SetPROM_8K_Bank( 6, reg[1]*0x20+0x1E );
-			SetPROM_8K_Bank( 7, reg[1]*0x20+0x1F );
+			MMU.SetPROM_8K_Bank( 6, reg[1]*0x20+0x1E );
+			MMU.SetPROM_8K_Bank( 7, reg[1]*0x20+0x1F );
 			break;
 		case	0x8008:
 			reg[2] = data;
-			SetPROM_8K_Bank( 4, reg[0]*0x20+reg[2]*2+0 );
-			SetPROM_8K_Bank( 5, reg[0]*0x20+reg[2]*2+1 );
-			SetPROM_8K_Bank( 6, reg[1]*0x20+0x1E );
-			SetPROM_8K_Bank( 7, reg[1]*0x20+0x1F );
+			MMU.SetPROM_8K_Bank( 4, reg[0]*0x20+reg[2]*2+0 );
+			MMU.SetPROM_8K_Bank( 5, reg[0]*0x20+reg[2]*2+1 );
+			MMU.SetPROM_8K_Bank( 6, reg[1]*0x20+0x1E );
+			MMU.SetPROM_8K_Bank( 7, reg[1]*0x20+0x1F );
 			break;
 
 		case	0x8009:
 			data &= 0x03;
-			if( data == 0 )	     SetVRAM_Mirror( VRAM_VMIRROR );
-			else if( data == 1 ) SetVRAM_Mirror( VRAM_HMIRROR );
-			else if( data == 2 ) SetVRAM_Mirror( VRAM_MIRROR4L );
-			else		     SetVRAM_Mirror( VRAM_MIRROR4H );
+			if( data == 0 )	     MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			else if( data == 1 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+			else if( data == 2 ) MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
+			else		     MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
 			break;
 
 		case	0x800A:

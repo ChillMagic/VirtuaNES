@@ -5,15 +5,15 @@ void	Mapper096::Reset()
 {
 	reg[0] = reg[1] = 0;
 
-	SetPROM_32K_Bank( 0, 1, 2, 3 );
+	MMU.SetPROM_32K_Bank( 0, 1, 2, 3 );
 	SetBank();
 
-	SetVRAM_Mirror( VRAM_MIRROR4L );
+	MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
 }
 
 void	Mapper096::Write( WORD addr, BYTE data )
 {
-	SetPROM_32K_Bank( data & 0x03 );
+	MMU.SetPROM_32K_Bank( data & 0x03 );
 
 	reg[0] = (data & 0x04) >> 2;
 	SetBank();
@@ -29,8 +29,8 @@ void	Mapper096::PPU_Latch( WORD addr )
 
 void	Mapper096::SetBank()
 {
-	SetCRAM_4K_Bank( 0, reg[0]*4+reg[1] );
-	SetCRAM_4K_Bank( 4, reg[0]*4+0x03 );
+	MMU.SetCRAM_4K_Bank( 0, reg[0]*4+reg[1] );
+	MMU.SetCRAM_4K_Bank( 4, reg[0]*4+0x03 );
 }
 
 void	Mapper096::SaveState( LPBYTE p )

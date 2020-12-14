@@ -172,7 +172,7 @@ BYTE	Mapper004::ReadLow( WORD addr )
 {
 	if( !vs_patch ) {
 		if( addr >= 0x5000 && addr <= 0x5FFF ) {
-			return	XRAM[addr-0x4000];
+			return	MMU.XRAM[addr-0x4000];
 		}
 	} else if( vs_patch == 1 ) {
 		// VS TKO Boxing Security
@@ -235,7 +235,7 @@ BYTE	Mapper004::ReadLow( WORD addr )
 void	Mapper004::WriteLow( WORD addr, BYTE data )
 {
 	if( addr >= 0x5000 && addr <= 0x5FFF ) {
-		XRAM[addr-0x4000] = data;
+		MMU.XRAM[addr-0x4000] = data;
 	} else {
 		Mapper::WriteLow( addr, data );
 	}
@@ -292,8 +292,8 @@ void	Mapper004::Write( WORD addr, BYTE data )
 		case	0xA000:
 			reg[2] = data;
 			if( !nes->rom->Is4SCREEN() ) {
-				if( data & 0x01 ) SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xA001:
@@ -426,41 +426,41 @@ LPBYTE	lpScn = nes->ppu->GetScreenPtr();
 void	Mapper004::SetBank_CPU()
 {
 	if( reg[0] & 0x40 ) {
-		SetPROM_32K_Bank( PROM_8K_SIZE-2, prg1, prg0, PROM_8K_SIZE-1 );
+		MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-2, prg1, prg0, MMU.PROM_8K_SIZE-1 );
 	} else {
-		SetPROM_32K_Bank( prg0, prg1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+		MMU.SetPROM_32K_Bank( prg0, prg1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 	}
 }
 
 void	Mapper004::SetBank_PPU()
 {
-	if( VROM_1K_SIZE ) {
+	if( MMU.VROM_1K_SIZE ) {
 		if( reg[0] & 0x80 ) {
-			SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
+			MMU.SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
 					 chr01, chr01+1, chr23, chr23+1 );
 		} else {
-			SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
+			MMU.SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
 					 chr4, chr5, chr6, chr7 );
 		}
 	} else {
 		if( reg[0] & 0x80 ) {
-			SetCRAM_1K_Bank( 4, (chr01+0)&0x07 );
-			SetCRAM_1K_Bank( 5, (chr01+1)&0x07 );
-			SetCRAM_1K_Bank( 6, (chr23+0)&0x07 );
-			SetCRAM_1K_Bank( 7, (chr23+1)&0x07 );
-			SetCRAM_1K_Bank( 0, chr4&0x07 );
-			SetCRAM_1K_Bank( 1, chr5&0x07 );
-			SetCRAM_1K_Bank( 2, chr6&0x07 );
-			SetCRAM_1K_Bank( 3, chr7&0x07 );
+			MMU.SetCRAM_1K_Bank( 4, (chr01+0)&0x07 );
+			MMU.SetCRAM_1K_Bank( 5, (chr01+1)&0x07 );
+			MMU.SetCRAM_1K_Bank( 6, (chr23+0)&0x07 );
+			MMU.SetCRAM_1K_Bank( 7, (chr23+1)&0x07 );
+			MMU.SetCRAM_1K_Bank( 0, chr4&0x07 );
+			MMU.SetCRAM_1K_Bank( 1, chr5&0x07 );
+			MMU.SetCRAM_1K_Bank( 2, chr6&0x07 );
+			MMU.SetCRAM_1K_Bank( 3, chr7&0x07 );
 		} else {
-			SetCRAM_1K_Bank( 0, (chr01+0)&0x07 );
-			SetCRAM_1K_Bank( 1, (chr01+1)&0x07 );
-			SetCRAM_1K_Bank( 2, (chr23+0)&0x07 );
-			SetCRAM_1K_Bank( 3, (chr23+1)&0x07 );
-			SetCRAM_1K_Bank( 4, chr4&0x07 );
-			SetCRAM_1K_Bank( 5, chr5&0x07 );
-			SetCRAM_1K_Bank( 6, chr6&0x07 );
-			SetCRAM_1K_Bank( 7, chr7&0x07 );
+			MMU.SetCRAM_1K_Bank( 0, (chr01+0)&0x07 );
+			MMU.SetCRAM_1K_Bank( 1, (chr01+1)&0x07 );
+			MMU.SetCRAM_1K_Bank( 2, (chr23+0)&0x07 );
+			MMU.SetCRAM_1K_Bank( 3, (chr23+1)&0x07 );
+			MMU.SetCRAM_1K_Bank( 4, chr4&0x07 );
+			MMU.SetCRAM_1K_Bank( 5, chr5&0x07 );
+			MMU.SetCRAM_1K_Bank( 6, chr6&0x07 );
+			MMU.SetCRAM_1K_Bank( 7, chr7&0x07 );
 		}
 	}
 }

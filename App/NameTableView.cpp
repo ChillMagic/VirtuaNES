@@ -137,20 +137,20 @@ WNDMSG	CNameTableView::OnTimer( WNDMSGPARAM )
 
 	// パレット更新
 	for( INT i = 0; i < 16; i++ ) {
-		m_BitmapHdr.rgb[i] = m_Palette[BGPAL[i]];
+		m_BitmapHdr.rgb[i] = m_Palette[MMU.BGPAL[i]];
 	}
 
 	// キャラクタデータ更新
 	for( INT n = 0; n < 4; n++ ) {
-		LPBYTE	lpVRAM = PPU_MEM_BANK[8+n];
+		LPBYTE	lpVRAM = MMU.PPU_MEM_BANK[8+n];
 		LPBYTE	lpScnv = &m_lpPattern[(n>>1)*512*240+(n&1)*256];
 
 		for( INT y = 0; y < 30; y++ ) {
 			for( INT x = 0; x < 32; x++ ) {
-				INT	tile = lpVRAM[x+y*32]*16+((PPUREG[0]&PPU_BGTBL_BIT)<<8);
+				INT	tile = lpVRAM[x+y*32]*16+((MMU.PPUREG[0]&PPU_BGTBL_BIT)<<8);
 				BYTE	attr = ((lpVRAM[0x03C0+(x/4)+(y>>2)*8]>>((x&2)+(y&2)*2))&3)<<2;
 				LPBYTE	lpScn = &lpScnv[x*8+y*8*512];
-				LPBYTE	lpPtn = &PPU_MEM_BANK[tile>>10][tile&0x03FF];
+				LPBYTE	lpPtn = &MMU.PPU_MEM_BANK[tile>>10][tile&0x03FF];
 				for( INT p = 0; p < 8; p++ ) {
 					BYTE	chr_l = lpPtn[p];
 					BYTE	chr_h = lpPtn[p+8];

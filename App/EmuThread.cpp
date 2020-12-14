@@ -1041,9 +1041,9 @@ INT	nNetTimeoutCount = 0;
 
 //				// 描画
 //				if( g_nes->ppu->GetExtMonoMode() ) {
-//					DirectDraw.SetPaletteMode( (PPUREG[1]&PPU_BGCOLOR_BIT)>>5, 0 );
+//					DirectDraw.SetPaletteMode( (MMU.PPUREG[1]&PPU_BGCOLOR_BIT)>>5, 0 );
 //				} else {
-//					DirectDraw.SetPaletteMode( (PPUREG[1]&PPU_BGCOLOR_BIT)>>5, PPUREG[1]&PPU_COLORMODE_BIT );
+//					DirectDraw.SetPaletteMode( (MMU.PPUREG[1]&PPU_BGCOLOR_BIT)>>5, MMU.PPUREG[1]&PPU_COLORMODE_BIT );
 //				}
 				// ディスクアクセスランプ
 				DirectDraw.SetDiskAccessLamp( (Config.graphics.bDiskAccessLamp && g_nes->mapper->ExCmdRead( Mapper::EXCMDRD_DISKACCESS ))?TRUE:FALSE );

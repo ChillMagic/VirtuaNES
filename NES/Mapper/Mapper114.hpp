@@ -3,9 +3,9 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper114::Reset()
 {
-	SetPROM_32K_Bank( 0, 1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
-	if( VROM_1K_SIZE ) {
-		SetVROM_8K_Bank( 0 );
+	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	if( MMU.VROM_1K_SIZE ) {
+		MMU.SetVROM_8K_Bank( 0 );
 	}
 
 	reg_a = reg_c = reg_m = 0;
@@ -35,8 +35,8 @@ void	Mapper114::Write( WORD addr, BYTE data )
 	} else {
 		switch( addr & 0xE000 ) {
 			case	0x8000:
-				if( data & 0x01 ) SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 				break;
 			case	0xA000:
 				reg_c = 1;
@@ -90,21 +90,21 @@ void	Mapper114::HSync( INT scanline )
 void	Mapper114::SetBank_CPU()
 {
 	if( reg_m & 0x80 ) {
-		SetPROM_16K_Bank( 4, reg_m & 0x1F );
+		MMU.SetPROM_16K_Bank( 4, reg_m & 0x1F );
 	} else {
-		SetPROM_8K_Bank( 4, reg_b[4] );
-		SetPROM_8K_Bank( 5, reg_b[5] );
+		MMU.SetPROM_8K_Bank( 4, reg_b[4] );
+		MMU.SetPROM_8K_Bank( 5, reg_b[5] );
 	}
 }
 
 void	Mapper114::SetBank_PPU()
 {
-	SetVROM_2K_Bank( 0, reg_b[0]>>1 );
-	SetVROM_2K_Bank( 2, reg_b[2]>>1 );
-	SetVROM_1K_Bank( 4, reg_b[6] );
-	SetVROM_1K_Bank( 5, reg_b[1] );
-	SetVROM_1K_Bank( 6, reg_b[7] );
-	SetVROM_1K_Bank( 7, reg_b[3] );
+	MMU.SetVROM_2K_Bank( 0, reg_b[0]>>1 );
+	MMU.SetVROM_2K_Bank( 2, reg_b[2]>>1 );
+	MMU.SetVROM_1K_Bank( 4, reg_b[6] );
+	MMU.SetVROM_1K_Bank( 5, reg_b[1] );
+	MMU.SetVROM_1K_Bank( 6, reg_b[7] );
+	MMU.SetVROM_1K_Bank( 7, reg_b[3] );
 }
 
 void	Mapper114::SaveState( LPBYTE p )

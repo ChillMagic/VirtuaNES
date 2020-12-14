@@ -40,37 +40,37 @@ void	Mapper119::Write( WORD addr, BYTE data )
 
 			switch( reg[0] & 0x07 ) {
 				case	0x00:
-					if( VROM_1K_SIZE ) {
+					if( MMU.VROM_1K_SIZE ) {
 						chr01 = data & 0xFE;
 						SetBank_PPU();
 					}
 					break;
 				case	0x01:
-					if( VROM_1K_SIZE ) {
+					if( MMU.VROM_1K_SIZE ) {
 						chr23 = data & 0xFE;
 						SetBank_PPU();
 					}
 					break;
 				case	0x02:
-					if( VROM_1K_SIZE ) {
+					if( MMU.VROM_1K_SIZE ) {
 						chr4 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x03:
-					if( VROM_1K_SIZE ) {
+					if( MMU.VROM_1K_SIZE ) {
 						chr5 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x04:
-					if( VROM_1K_SIZE ) {
+					if( MMU.VROM_1K_SIZE ) {
 						chr6 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x05:
-					if( VROM_1K_SIZE ) {
+					if( MMU.VROM_1K_SIZE ) {
 						chr7 = data;
 						SetBank_PPU();
 					}
@@ -88,8 +88,8 @@ void	Mapper119::Write( WORD addr, BYTE data )
 		case	0xA000:
 			reg[2] = data;
 			if( !nes->rom->Is4SCREEN() ) {
-				if( data & 0x01 ) SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xA001:
@@ -134,50 +134,50 @@ void	Mapper119::HSync( INT scanline )
 void	Mapper119::SetBank_CPU()
 {
 	if( reg[0] & 0x40 ) {
-		SetPROM_32K_Bank( PROM_8K_SIZE-2, prg1, prg0, PROM_8K_SIZE-1 );
+		MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-2, prg1, prg0, MMU.PROM_8K_SIZE-1 );
 	} else {
-		SetPROM_32K_Bank( prg0, prg1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+		MMU.SetPROM_32K_Bank( prg0, prg1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 	}
 }
 
 void	Mapper119::SetBank_PPU()
 {
 	if( reg[0]&0x80 ) {
-		if( chr4&0x40 )	SetCRAM_1K_Bank( 0, chr4&0x07 );
-		else		SetVROM_1K_Bank( 0, chr4 );
-		if( chr5&0x40 )	SetCRAM_1K_Bank( 1, chr5&0x07 );
-		else		SetVROM_1K_Bank( 1, chr5 );
-		if( chr6&0x40 )	SetCRAM_1K_Bank( 2, chr6&0x07 );
-		else		SetVROM_1K_Bank( 2, chr6 );
-		if( chr7&0x40 )	SetCRAM_1K_Bank( 3, chr7&0x07 );
-		else		SetVROM_1K_Bank( 3, chr7 );
+		if( chr4&0x40 )	MMU.SetCRAM_1K_Bank( 0, chr4&0x07 );
+		else		MMU.SetVROM_1K_Bank( 0, chr4 );
+		if( chr5&0x40 )	MMU.SetCRAM_1K_Bank( 1, chr5&0x07 );
+		else		MMU.SetVROM_1K_Bank( 1, chr5 );
+		if( chr6&0x40 )	MMU.SetCRAM_1K_Bank( 2, chr6&0x07 );
+		else		MMU.SetVROM_1K_Bank( 2, chr6 );
+		if( chr7&0x40 )	MMU.SetCRAM_1K_Bank( 3, chr7&0x07 );
+		else		MMU.SetVROM_1K_Bank( 3, chr7 );
 
-		if( (chr01+0)&0x40 ) SetCRAM_1K_Bank( 4, (chr01+0)&0x07 );
-		else		     SetVROM_1K_Bank( 4, (chr01+0) );
-		if( (chr01+1)&0x40 ) SetCRAM_1K_Bank( 5, (chr01+1)&0x07 );
-		else		     SetVROM_1K_Bank( 5, (chr01+1) );
-		if( (chr23+0)&0x40 ) SetCRAM_1K_Bank( 6, (chr23+0)&0x07 );
-		else		     SetVROM_1K_Bank( 6, (chr23+0) );
-		if( (chr23+1)&0x40 ) SetCRAM_1K_Bank( 7, (chr23+1)&0x07 );
-		else		     SetVROM_1K_Bank( 7, (chr23+1) );
+		if( (chr01+0)&0x40 ) MMU.SetCRAM_1K_Bank( 4, (chr01+0)&0x07 );
+		else		     MMU.SetVROM_1K_Bank( 4, (chr01+0) );
+		if( (chr01+1)&0x40 ) MMU.SetCRAM_1K_Bank( 5, (chr01+1)&0x07 );
+		else		     MMU.SetVROM_1K_Bank( 5, (chr01+1) );
+		if( (chr23+0)&0x40 ) MMU.SetCRAM_1K_Bank( 6, (chr23+0)&0x07 );
+		else		     MMU.SetVROM_1K_Bank( 6, (chr23+0) );
+		if( (chr23+1)&0x40 ) MMU.SetCRAM_1K_Bank( 7, (chr23+1)&0x07 );
+		else		     MMU.SetVROM_1K_Bank( 7, (chr23+1) );
 	} else {
-		if( (chr01+0)&0x40 ) SetCRAM_1K_Bank( 0, (chr01+0)&0x07 );
-		else		     SetVROM_1K_Bank( 0, (chr01+0) );
-		if( (chr01+1)&0x40 ) SetCRAM_1K_Bank( 1, (chr01+1)&0x07 );
-		else		     SetVROM_1K_Bank( 1, (chr01+1) );
-		if( (chr23+0)&0x40 ) SetCRAM_1K_Bank( 2, (chr23+0)&0x07 );
-		else		     SetVROM_1K_Bank( 2, (chr23+0) );
-		if( (chr23+1)&0x40 ) SetCRAM_1K_Bank( 3, (chr23+1)&0x07 );
-		else		     SetVROM_1K_Bank( 3, (chr23+1) );
+		if( (chr01+0)&0x40 ) MMU.SetCRAM_1K_Bank( 0, (chr01+0)&0x07 );
+		else		     MMU.SetVROM_1K_Bank( 0, (chr01+0) );
+		if( (chr01+1)&0x40 ) MMU.SetCRAM_1K_Bank( 1, (chr01+1)&0x07 );
+		else		     MMU.SetVROM_1K_Bank( 1, (chr01+1) );
+		if( (chr23+0)&0x40 ) MMU.SetCRAM_1K_Bank( 2, (chr23+0)&0x07 );
+		else		     MMU.SetVROM_1K_Bank( 2, (chr23+0) );
+		if( (chr23+1)&0x40 ) MMU.SetCRAM_1K_Bank( 3, (chr23+1)&0x07 );
+		else		     MMU.SetVROM_1K_Bank( 3, (chr23+1) );
 
-		if( chr4&0x40 )	SetCRAM_1K_Bank( 4, chr4&0x07 );
-		else		SetVROM_1K_Bank( 4, chr4 );
-		if( chr5&0x40 )	SetCRAM_1K_Bank( 5, chr5&0x07 );
-		else		SetVROM_1K_Bank( 5, chr5 );
-		if( chr6&0x40 )	SetCRAM_1K_Bank( 6, chr6&0x07 );
-		else		SetVROM_1K_Bank( 6, chr6 );
-		if( chr7&0x40 )	SetCRAM_1K_Bank( 7, chr7&0x07 );
-		else		SetVROM_1K_Bank( 7, chr7 );
+		if( chr4&0x40 )	MMU.SetCRAM_1K_Bank( 4, chr4&0x07 );
+		else		MMU.SetVROM_1K_Bank( 4, chr4 );
+		if( chr5&0x40 )	MMU.SetCRAM_1K_Bank( 5, chr5&0x07 );
+		else		MMU.SetVROM_1K_Bank( 5, chr5 );
+		if( chr6&0x40 )	MMU.SetCRAM_1K_Bank( 6, chr6&0x07 );
+		else		MMU.SetVROM_1K_Bank( 6, chr6 );
+		if( chr7&0x40 )	MMU.SetCRAM_1K_Bank( 7, chr7&0x07 );
+		else		MMU.SetVROM_1K_Bank( 7, chr7 );
 	}
 }
 

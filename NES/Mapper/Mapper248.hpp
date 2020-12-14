@@ -28,7 +28,7 @@ void	Mapper248::Reset()
 
 void	Mapper248::WriteLow( WORD addr, BYTE data )
 {
-	SetPROM_32K_Bank( 2*data, 2*data+1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( 2*data, 2*data+1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 }
 
 void	Mapper248::Write( WORD addr, BYTE data )
@@ -81,9 +81,9 @@ void	Mapper248::Write( WORD addr, BYTE data )
 			reg[2] = data;
 			if( !nes->rom->Is4SCREEN() ) {
 				if( data & 0x01 ) {
-					SetVRAM_Mirror( VRAM_HMIRROR );
+					MMU.SetVRAM_Mirror( VRAM_HMIRROR );
 				} else {
-					SetVRAM_Mirror( VRAM_VMIRROR );
+					MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 				}
 			}
 			break;
@@ -120,20 +120,20 @@ void	Mapper248::HSync( INT scanline )
 void	Mapper248::SetBank_CPU()
 {
 	if( reg[0] & 0x40 ) {
-		SetPROM_32K_Bank( PROM_8K_SIZE-2, prg1, prg0, PROM_8K_SIZE-1 );
+		MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-2, prg1, prg0, MMU.PROM_8K_SIZE-1 );
 	} else {
-		SetPROM_32K_Bank( prg0, prg1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+		MMU.SetPROM_32K_Bank( prg0, prg1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 	}
 }
 
 void	Mapper248::SetBank_PPU()
 {
-	if( VROM_1K_SIZE ) {
+	if( MMU.VROM_1K_SIZE ) {
 		if( reg[0] & 0x80 ) {
-			SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
+			MMU.SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
 					 chr01, chr01+1, chr23, chr23+1 );
 		} else {
-			SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
+			MMU.SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
 					 chr4, chr5, chr6, chr7 );
 		}
 	}

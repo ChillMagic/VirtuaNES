@@ -4,10 +4,10 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper189::Reset()
 {
-	SetPROM_32K_Bank( PROM_8K_SIZE-4, PROM_8K_SIZE-3, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-4, MMU.PROM_8K_SIZE-3, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 
-	if( VROM_1K_SIZE ) {
-		SetVROM_8K_Bank( 0 );
+	if( MMU.VROM_1K_SIZE ) {
+		MMU.SetVROM_8K_Bank( 0 );
 	}
 
 	reg[0] = reg[1] = 0;
@@ -33,10 +33,10 @@ void	Mapper189::Reset()
 	DWORD	crc = nes->rom->GetPROM_CRC();
 	if( crc == 0x20ca2ad3 ) {	// Street Fighter IV (GOUDER)
 		patch = 1;
-		SetPROM_32K_Bank( 0 );
+		MMU.SetPROM_32K_Bank( 0 );
 
 		// $4000-$5FFF
-		SetPROM_Bank( 2, XRAM, BANKTYPE_ROM );
+		MMU.SetPROM_Bank( 2, MMU.XRAM, BANKTYPE_ROM );
 	}
 }
 
@@ -44,10 +44,10 @@ void	Mapper189::WriteLow( WORD addr, BYTE data )
 {
 	if( (addr & 0xFF00) == 0x4100 ) {
 	// Street Fighter 2 YOKO
-		SetPROM_32K_Bank( (data&0x30)>>4 );
+		MMU.SetPROM_32K_Bank( (data&0x30)>>4 );
 	} else if( (addr & 0xFF00) == 0x6100 ) {
 	// Master Fighter 2
-		SetPROM_32K_Bank( data&0x03 );
+		MMU.SetPROM_32K_Bank( data&0x03 );
 	}
 
 	if( patch ) {
@@ -72,20 +72,20 @@ void	Mapper189::WriteLow( WORD addr, BYTE data )
 		};
 
 		if( (addr >= 0x4800) && (addr <= 0x4FFF) ) {
-			SetPROM_32K_Bank( ((data&0x10)>>3)+(data&0x1) );
+			MMU.SetPROM_32K_Bank( ((data&0x10)>>3)+(data&0x1) );
 
 			if( !nes->rom->Is4SCREEN() ) {
-				if( data & 0x20 ) SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x20 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 		}
 		if( (addr>=0x5000) && (addr<=0x57FF) ) {
 			lwd = data;
 		}
 		if( (addr>=0x5800) && (addr<=0x5FFF) ) {
-//			XRAM[0x1000+(addr & 3)] = 
+//			MMU.XRAM[0x1000+(addr & 3)] = 
 			// $5800 "JMP $xxxx" write
-			XRAM[0x1800+(addr & 3)] = 
+			MMU.XRAM[0x1800+(addr & 3)] = 
 			protect_dat[ addr & 3 ] = data ^ a5000xordat[ lwd ];
 		}
 	}
@@ -131,8 +131,8 @@ void	Mapper189::Write( WORD addr, BYTE data )
 			break;
 
 		case	0xA000:
-			if( data&0x01 ) SetVRAM_Mirror( VRAM_HMIRROR );
-			else		SetVRAM_Mirror( VRAM_VMIRROR );
+			if( data&0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+			else		MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			break;
 
 		case	0xC000:
@@ -169,36 +169,36 @@ void	Mapper189::HSync( INT scanline )
 void	Mapper189::SetBank_PPU()
 {
 	if( patch ) {
-		SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
+		MMU.SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
 				 chr4, chr5, chr6, chr7 );
 	} else {
-		if( VROM_1K_SIZE ) {
+		if( MMU.VROM_1K_SIZE ) {
 			if( reg[0] & 0x80 ) {
-				SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
+				MMU.SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
 						 chr01, chr01+1, chr23, chr23+1 );
 			} else {
-				SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
+				MMU.SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
 						 chr4, chr5, chr6, chr7 );
 			}
 		} else {
 			if( reg[0] & 0x80 ) {
-				SetCRAM_1K_Bank( 4, (chr01+0)&0x07 );
-				SetCRAM_1K_Bank( 5, (chr01+1)&0x07 );
-				SetCRAM_1K_Bank( 6, (chr23+0)&0x07 );
-				SetCRAM_1K_Bank( 7, (chr23+1)&0x07 );
-				SetCRAM_1K_Bank( 0, chr4&0x07 );
-				SetCRAM_1K_Bank( 1, chr5&0x07 );
-				SetCRAM_1K_Bank( 2, chr6&0x07 );
-				SetCRAM_1K_Bank( 3, chr7&0x07 );
+				MMU.SetCRAM_1K_Bank( 4, (chr01+0)&0x07 );
+				MMU.SetCRAM_1K_Bank( 5, (chr01+1)&0x07 );
+				MMU.SetCRAM_1K_Bank( 6, (chr23+0)&0x07 );
+				MMU.SetCRAM_1K_Bank( 7, (chr23+1)&0x07 );
+				MMU.SetCRAM_1K_Bank( 0, chr4&0x07 );
+				MMU.SetCRAM_1K_Bank( 1, chr5&0x07 );
+				MMU.SetCRAM_1K_Bank( 2, chr6&0x07 );
+				MMU.SetCRAM_1K_Bank( 3, chr7&0x07 );
 			} else {
-				SetCRAM_1K_Bank( 0, (chr01+0)&0x07 );
-				SetCRAM_1K_Bank( 1, (chr01+1)&0x07 );
-				SetCRAM_1K_Bank( 2, (chr23+0)&0x07 );
-				SetCRAM_1K_Bank( 3, (chr23+1)&0x07 );
-				SetCRAM_1K_Bank( 4, chr4&0x07 );
-				SetCRAM_1K_Bank( 5, chr5&0x07 );
-				SetCRAM_1K_Bank( 6, chr6&0x07 );
-				SetCRAM_1K_Bank( 7, chr7&0x07 );
+				MMU.SetCRAM_1K_Bank( 0, (chr01+0)&0x07 );
+				MMU.SetCRAM_1K_Bank( 1, (chr01+1)&0x07 );
+				MMU.SetCRAM_1K_Bank( 2, (chr23+0)&0x07 );
+				MMU.SetCRAM_1K_Bank( 3, (chr23+1)&0x07 );
+				MMU.SetCRAM_1K_Bank( 4, chr4&0x07 );
+				MMU.SetCRAM_1K_Bank( 5, chr5&0x07 );
+				MMU.SetCRAM_1K_Bank( 6, chr6&0x07 );
+				MMU.SetCRAM_1K_Bank( 7, chr7&0x07 );
 			}
 		}
 	}

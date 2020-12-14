@@ -3,8 +3,8 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper182::Reset()
 {
-	SetPROM_32K_Bank( 0, 1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
-	SetVROM_8K_Bank( 0 );
+	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	MMU.SetVROM_8K_Bank( 0 );
 
 	reg = 0;
 	irq_enable = 0;
@@ -15,8 +15,8 @@ void	Mapper182::Write( WORD addr, BYTE data )
 {
 	switch( addr & 0xF003 ) {
 		case	0x8001:
-			if( data & 0x01 ) SetVRAM_Mirror( VRAM_HMIRROR );
-			else		  SetVRAM_Mirror( VRAM_VMIRROR );
+			if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+			else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			break;
 		case	0xA000:
 			reg = data & 0x07;
@@ -24,30 +24,30 @@ void	Mapper182::Write( WORD addr, BYTE data )
 		case	0xC000:
 			switch( reg ) {
 				case	0:
-					SetVROM_1K_Bank( 0, (data&0xFE)+0 );
-					SetVROM_1K_Bank( 1, (data&0xFE)+1 );
+					MMU.SetVROM_1K_Bank( 0, (data&0xFE)+0 );
+					MMU.SetVROM_1K_Bank( 1, (data&0xFE)+1 );
 					break;
 				case	1:
-					SetVROM_1K_Bank( 5, data );
+					MMU.SetVROM_1K_Bank( 5, data );
 					break;
 				case	2:
-					SetVROM_1K_Bank( 2, (data&0xFE)+0 );
-					SetVROM_1K_Bank( 3, (data&0xFE)+1 );
+					MMU.SetVROM_1K_Bank( 2, (data&0xFE)+0 );
+					MMU.SetVROM_1K_Bank( 3, (data&0xFE)+1 );
 					break;
 				case	3:
-					SetVROM_1K_Bank( 7, data );
+					MMU.SetVROM_1K_Bank( 7, data );
 					break;
 				case	4:
-					SetPROM_8K_Bank( 4, data );
+					MMU.SetPROM_8K_Bank( 4, data );
 					break;
 				case	5:
-					SetPROM_8K_Bank( 5, data );
+					MMU.SetPROM_8K_Bank( 5, data );
 					break;
 				case	6:
-					SetVROM_1K_Bank( 4, data );
+					MMU.SetVROM_1K_Bank( 4, data );
 					break;
 				case	7:
-					SetVROM_1K_Bank( 6, data );
+					MMU.SetVROM_1K_Bank( 6, data );
 					break;
 			}
 			break;

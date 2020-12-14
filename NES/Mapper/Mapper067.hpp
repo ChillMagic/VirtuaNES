@@ -8,10 +8,10 @@ void	Mapper067::Reset()
 	irq_counter = 0;
 	irq_occur = 0;
 
-	SetPROM_32K_Bank( 0, 1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 
-	SetVROM_4K_Bank( 0, 0 );
-	SetVROM_4K_Bank( 4, VROM_4K_SIZE-1 );
+	MMU.SetVROM_4K_Bank( 0, 0 );
+	MMU.SetVROM_4K_Bank( 4, MMU.VROM_4K_SIZE-1 );
 
 	DWORD	crc = nes->rom->GetPROM_CRC();
 
@@ -24,16 +24,16 @@ void	Mapper067::Write( WORD addr, BYTE data )
 {
 	switch( addr & 0xF800 ) {
 		case	0x8800:
-			SetVROM_2K_Bank( 0, data );
+			MMU.SetVROM_2K_Bank( 0, data );
 			break;
 		case	0x9800:
-			SetVROM_2K_Bank( 2, data );
+			MMU.SetVROM_2K_Bank( 2, data );
 			break;
 		case	0xA800:
-			SetVROM_2K_Bank( 4, data );
+			MMU.SetVROM_2K_Bank( 4, data );
 			break;
 		case	0xB800:
-			SetVROM_2K_Bank( 6, data );
+			MMU.SetVROM_2K_Bank( 6, data );
 			break;
 
 		case	0xC800:
@@ -55,14 +55,14 @@ void	Mapper067::Write( WORD addr, BYTE data )
 
 		case	0xE800:
 			data &= 0x03;
-			if( data == 0 )	     SetVRAM_Mirror( VRAM_VMIRROR );
-			else if( data == 1 ) SetVRAM_Mirror( VRAM_HMIRROR );
-			else if( data == 2 ) SetVRAM_Mirror( VRAM_MIRROR4L );
-			else		     SetVRAM_Mirror( VRAM_MIRROR4H );
+			if( data == 0 )	     MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			else if( data == 1 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+			else if( data == 2 ) MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
+			else		     MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
 			break;
 
 		case	0xF800:
-			SetPROM_16K_Bank( 4, data );
+			MMU.SetPROM_16K_Bank( 4, data );
 			break;
 	}
 }

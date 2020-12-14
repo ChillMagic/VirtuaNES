@@ -3,10 +3,10 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper134::Reset()
 {
-	SetPROM_32K_Bank( 0 );
-//	SetPROM_16K_Bank( 6, 0 );
-//	SetPROM_16K_Bank( 6, 1 );
-	SetVROM_8K_Bank( 0 );
+	MMU.SetPROM_32K_Bank( 0 );
+//	MMU.SetPROM_16K_Bank( 6, 0 );
+//	MMU.SetPROM_16K_Bank( 6, 1 );
+	MMU.SetVROM_8K_Bank( 0 );
 }
 
 void	Mapper134::WriteLow( WORD addr, BYTE data )
@@ -33,17 +33,17 @@ void	Mapper134::WriteLow( WORD addr, BYTE data )
 					chr |= data & 0x3;
 					break;
 				case 7:
-					if( data & 0x01 ) SetVRAM_Mirror( VRAM_HMIRROR );
-					else		  SetVRAM_Mirror( VRAM_VMIRROR );
+					if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+					else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 					break;
 			}
 			break;
 	}
-	SetPROM_32K_Bank( prg );
-//	SetPROM_16K_Bank( 4, (prg<<1)|0 );
-//	SetPROM_16K_Bank( 6, (prg<<1)|1 ); 
-	SetVROM_8K_Bank( chr );
-	CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+	MMU.SetPROM_32K_Bank( prg );
+//	MMU.SetPROM_16K_Bank( 4, (prg<<1)|0 );
+//	MMU.SetPROM_16K_Bank( 6, (prg<<1)|1 ); 
+	MMU.SetVROM_8K_Bank( chr );
+	MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
 }
 
 void	Mapper134::SaveState( LPBYTE p )

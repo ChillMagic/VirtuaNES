@@ -9,7 +9,7 @@ void	Mapper249::Reset()
 	prg0 = 0;
 	prg1 = 1;
 
-	SetPROM_32K_Bank( 0,1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( 0,1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 
 	chr01 = 0;
 	chr23 = 2;
@@ -18,7 +18,7 @@ void	Mapper249::Reset()
 	chr6  = 6;
 	chr7  = 7;
 
-	SetVROM_8K_Bank( 0 );
+	MMU.SetVROM_8K_Bank( 0 );
 
 	we_sram  = 0;	// Disable
 	irq_enable = 0;	// Disable
@@ -46,7 +46,7 @@ void	Mapper249::WriteLow( WORD addr, BYTE data )
 	}
 
 	if( addr>=0x6000 && addr<0x8000 ) {
-		CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+		MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
 	}
 }
 
@@ -74,8 +74,8 @@ void	Mapper249::Write( WORD addr, BYTE data )
 						m7=(data&0x80)>>7;
 						data=(m5<<7)|(m4<<6)|(m2<<5)|(m6<<4)|(m7<<3)|(m3<<2)|(m1<<1)|m0;
 					}
-					SetVROM_1K_Bank( 0, data&0xFE );
-					SetVROM_1K_Bank( 1, data|0x01 );
+					MMU.SetVROM_1K_Bank( 0, data&0xFE );
+					MMU.SetVROM_1K_Bank( 1, data|0x01 );
 					break;
 				case	0x01:
 					if( spdata == 1 ) {
@@ -89,8 +89,8 @@ void	Mapper249::Write( WORD addr, BYTE data )
 						m7=(data&0x80)>>7;
 						data=(m5<<7)|(m4<<6)|(m2<<5)|(m6<<4)|(m7<<3)|(m3<<2)|(m1<<1)|m0;
 					}
-					SetVROM_1K_Bank( 2, data&0xFE );
-					SetVROM_1K_Bank( 3, data|0x01 );
+					MMU.SetVROM_1K_Bank( 2, data&0xFE );
+					MMU.SetVROM_1K_Bank( 3, data|0x01 );
 					break;
 				case	0x02:
 					if( spdata == 1 ) {
@@ -104,7 +104,7 @@ void	Mapper249::Write( WORD addr, BYTE data )
 							m7=(data&0x80)>>7;
 							data=(m5<<7)|(m4<<6)|(m2<<5)|(m6<<4)|(m7<<3)|(m3<<2)|(m1<<1)|m0;
 					}
-					SetVROM_1K_Bank( 4, data );
+					MMU.SetVROM_1K_Bank( 4, data );
 					break;
 				case	0x03:
 					if( spdata == 1 ) {
@@ -118,7 +118,7 @@ void	Mapper249::Write( WORD addr, BYTE data )
 							m7=(data&0x80)>>7;
 							data=(m5<<7)|(m4<<6)|(m2<<5)|(m6<<4)|(m7<<3)|(m3<<2)|(m1<<1)|m0;
 					}
-					SetVROM_1K_Bank( 5, data );
+					MMU.SetVROM_1K_Bank( 5, data );
 					break;
 				case	0x04:
 					if( spdata == 1 ) {
@@ -132,7 +132,7 @@ void	Mapper249::Write( WORD addr, BYTE data )
 							m7=(data&0x80)>>7;
 							data=(m5<<7)|(m4<<6)|(m2<<5)|(m6<<4)|(m7<<3)|(m3<<2)|(m1<<1)|m0;
 					}
-					SetVROM_1K_Bank( 6, data );
+					MMU.SetVROM_1K_Bank( 6, data );
 					break;
 				case	0x05:
 					if( spdata == 1 ) {
@@ -146,7 +146,7 @@ void	Mapper249::Write( WORD addr, BYTE data )
 							m7=(data&0x80)>>7;
 							data=(m5<<7)|(m4<<6)|(m2<<5)|(m6<<4)|(m7<<3)|(m3<<2)|(m1<<1)|m0;
 					}
-					SetVROM_1K_Bank( 7, data );
+					MMU.SetVROM_1K_Bank( 7, data );
 					break;
 				case	0x06:
 					if( spdata == 1 ) {
@@ -173,7 +173,7 @@ void	Mapper249::Write( WORD addr, BYTE data )
 							data=(m5<<7)|(m4<<6)|(m2<<5)|(m6<<4)|(m7<<3)|(m3<<2)|(m1<<1)|m0;
 						}
 					}
-					SetPROM_8K_Bank( 4, data );
+					MMU.SetPROM_8K_Bank( 4, data );
 					break;
 				case	0x07:
 					if( spdata == 1 ) {
@@ -200,7 +200,7 @@ void	Mapper249::Write( WORD addr, BYTE data )
 							data=(m5<<7)|(m4<<6)|(m2<<5)|(m6<<4)|(m7<<3)|(m3<<2)|(m1<<1)|m0;
 						}
 					}
-					SetPROM_8K_Bank( 5, data );
+					MMU.SetPROM_8K_Bank( 5, data );
 					break;
 			}
 			break;
@@ -208,8 +208,8 @@ void	Mapper249::Write( WORD addr, BYTE data )
 		case    0xA800:
 			reg[2] = data;
 			if( !nes->rom->Is4SCREEN() ) {
-				if( data & 0x01 ) SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xA001:

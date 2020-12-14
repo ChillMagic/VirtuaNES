@@ -3,10 +3,10 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper091::Reset()
 {
-	SetPROM_32K_Bank( PROM_8K_SIZE-2, PROM_8K_SIZE-1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 
-	if( VROM_8K_SIZE ) {
-		SetVROM_8K_Bank( 0, 0, 0, 0, 0, 0, 0, 0 );
+	if( MMU.VROM_8K_SIZE ) {
+		MMU.SetVROM_8K_Bank( 0, 0, 0, 0, 0, 0, 0, 0 );
 	}
 
 	irq_enable = 0;
@@ -23,14 +23,14 @@ void	Mapper091::WriteLow( WORD addr, BYTE data )
 		case	0x6001:
 		case	0x6002:
 		case	0x6003:
-			SetVROM_2K_Bank( (addr&0x03)*2, data );
+			MMU.SetVROM_2K_Bank( (addr&0x03)*2, data );
 			break;
 
 		case	0x7000:
-			SetPROM_8K_Bank( 4, data );
+			MMU.SetPROM_8K_Bank( 4, data );
 			break;
 		case	0x7001:
-			SetPROM_8K_Bank( 5, data );
+			MMU.SetPROM_8K_Bank( 5, data );
 			break;
 
 		case	0x7002:

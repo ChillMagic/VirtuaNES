@@ -8,7 +8,7 @@ void	Mapper051::Reset()
 
 	SetBank_CPU();
 
-	SetCRAM_8K_Bank( 0 );
+	MMU.SetCRAM_8K_Bank( 0 );
 }
 
 void	Mapper051::WriteLow( WORD addr, BYTE data )
@@ -32,36 +32,36 @@ void	Mapper051::SetBank_CPU()
 {
 	switch(mode) {
 		case 0:
-			SetVRAM_Mirror( VRAM_VMIRROR );
-			SetPROM_8K_Bank( 3, (bank|0x2c|3) );
-			SetPROM_8K_Bank( 4, (bank|0x00|0) );
-			SetPROM_8K_Bank( 5, (bank|0x00|1) );
-			SetPROM_8K_Bank( 6, (bank|0x0c|2) );
-			SetPROM_8K_Bank( 7, (bank|0x0c|3) );
+			MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			MMU.SetPROM_8K_Bank( 3, (bank|0x2c|3) );
+			MMU.SetPROM_8K_Bank( 4, (bank|0x00|0) );
+			MMU.SetPROM_8K_Bank( 5, (bank|0x00|1) );
+			MMU.SetPROM_8K_Bank( 6, (bank|0x0c|2) );
+			MMU.SetPROM_8K_Bank( 7, (bank|0x0c|3) );
 			break;
 		case 1:
-			SetVRAM_Mirror( VRAM_VMIRROR );
-			SetPROM_8K_Bank( 3, (bank|0x20|3) );
-			SetPROM_8K_Bank( 4, (bank|0x00|0) );
-			SetPROM_8K_Bank( 5, (bank|0x00|1) );
-			SetPROM_8K_Bank( 6, (bank|0x00|2) );
-			SetPROM_8K_Bank( 7, (bank|0x00|3) );
+			MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			MMU.SetPROM_8K_Bank( 3, (bank|0x20|3) );
+			MMU.SetPROM_8K_Bank( 4, (bank|0x00|0) );
+			MMU.SetPROM_8K_Bank( 5, (bank|0x00|1) );
+			MMU.SetPROM_8K_Bank( 6, (bank|0x00|2) );
+			MMU.SetPROM_8K_Bank( 7, (bank|0x00|3) );
 			break;
 		case 2:
-			SetVRAM_Mirror( VRAM_VMIRROR );
-			SetPROM_8K_Bank( 3, (bank|0x2e|3) );
-			SetPROM_8K_Bank( 4, (bank|0x02|0) );
-			SetPROM_8K_Bank( 5, (bank|0x02|1) );
-			SetPROM_8K_Bank( 6, (bank|0x0e|2) );
-			SetPROM_8K_Bank( 7, (bank|0x0e|3) );
+			MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			MMU.SetPROM_8K_Bank( 3, (bank|0x2e|3) );
+			MMU.SetPROM_8K_Bank( 4, (bank|0x02|0) );
+			MMU.SetPROM_8K_Bank( 5, (bank|0x02|1) );
+			MMU.SetPROM_8K_Bank( 6, (bank|0x0e|2) );
+			MMU.SetPROM_8K_Bank( 7, (bank|0x0e|3) );
 			break;
 		case 3:
-			SetVRAM_Mirror( VRAM_HMIRROR );
-			SetPROM_8K_Bank( 3, (bank|0x20|3) );
-			SetPROM_8K_Bank( 4, (bank|0x00|0) );
-			SetPROM_8K_Bank( 5, (bank|0x00|1) );
-			SetPROM_8K_Bank( 6, (bank|0x00|2) );
-			SetPROM_8K_Bank( 7, (bank|0x00|3) );
+			MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+			MMU.SetPROM_8K_Bank( 3, (bank|0x20|3) );
+			MMU.SetPROM_8K_Bank( 4, (bank|0x00|0) );
+			MMU.SetPROM_8K_Bank( 5, (bank|0x00|1) );
+			MMU.SetPROM_8K_Bank( 6, (bank|0x00|2) );
+			MMU.SetPROM_8K_Bank( 7, (bank|0x00|3) );
 			break;
 	}
 }

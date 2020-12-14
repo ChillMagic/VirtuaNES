@@ -3,17 +3,17 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper079::Reset()
 {
-	SetPROM_32K_Bank( 0 );
+	MMU.SetPROM_32K_Bank( 0 );
 
-	if( VROM_1K_SIZE ) {
-		SetVROM_8K_Bank( 0 );
+	if( MMU.VROM_1K_SIZE ) {
+		MMU.SetVROM_8K_Bank( 0 );
 	}
 }
 
 void	Mapper079::WriteLow( WORD addr, BYTE data )
 {
 	if( addr&0x0100 ) {
-		SetPROM_32K_Bank( (data>>3)&0x01 );
-		SetVROM_8K_Bank( data&0x07 );
+		MMU.SetPROM_32K_Bank( (data>>3)&0x01 );
+		MMU.SetVROM_8K_Bank( data&0x07 );
 	}
 }

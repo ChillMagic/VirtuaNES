@@ -3,14 +3,14 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper243::Reset()
 {
-	SetPROM_32K_Bank( 0 );
-	if( VROM_8K_SIZE > 4 ) {
-		SetVROM_8K_Bank( 4 );
-	} else if( VROM_8K_SIZE ) {
-		SetVROM_8K_Bank( 0 );
+	MMU.SetPROM_32K_Bank( 0 );
+	if( MMU.VROM_8K_SIZE > 4 ) {
+		MMU.SetVROM_8K_Bank( 4 );
+	} else if( MMU.VROM_8K_SIZE ) {
+		MMU.SetVROM_8K_Bank( 0 );
 	}
 
-	SetVRAM_Mirror( VRAM_HMIRROR );
+	MMU.SetVRAM_Mirror( VRAM_HMIRROR );
 
 	reg[0] = 0;
 	reg[1] = 0;
@@ -44,14 +44,14 @@ void	Mapper243::WriteLow( WORD addr, BYTE data )
 				break;
 		}
 
-		SetPROM_32K_Bank( reg[1] );
-		SetVROM_8K_Bank( reg[2]*8+0, reg[2]*8+1, reg[2]*8+2, reg[2]*8+3,
+		MMU.SetPROM_32K_Bank( reg[1] );
+		MMU.SetVROM_8K_Bank( reg[2]*8+0, reg[2]*8+1, reg[2]*8+2, reg[2]*8+3,
 				 reg[2]*8+4, reg[2]*8+5, reg[2]*8+6, reg[2]*8+7 );
 
 		if( reg[3] ) {
-			SetVRAM_Mirror( VRAM_VMIRROR );
+			MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 		} else {
-			SetVRAM_Mirror( VRAM_HMIRROR );
+			MMU.SetVRAM_Mirror( VRAM_HMIRROR );
 		}
 	}
 }

@@ -36,12 +36,12 @@
 //#define	OP6502W(A)	RD6502W((A))
 
 // ゼロページリード
-#define	ZPRD(A)		(RAM[(BYTE)(A)])
-//#define	ZPRDW(A)	(*((LPWORD)&RAM[(BYTE)(A)]))
-#define	ZPRDW(A)	((WORD)RAM[(BYTE)(A)]+((WORD)RAM[(BYTE)((A)+1)]<<8))
+#define	ZPRD(A)		(MMU.RAM[(BYTE)(A)])
+//#define	ZPRDW(A)	(*((LPWORD)&MMU.RAM[(BYTE)(A)]))
+#define	ZPRDW(A)	((WORD)MMU.RAM[(BYTE)(A)]+((WORD)MMU.RAM[(BYTE)((A)+1)]<<8))
 
-#define	ZPWR(A,V)	{ RAM[(BYTE)(A)]=(V); }
-#define	ZPWRW(A,V)	{ *((LPWORD)&RAM[(BYTE)(A)])=(WORD)(V); }
+#define	ZPWR(A,V)	{ MMU.RAM[(BYTE)(A)]=(V); }
+#define	ZPWRW(A,V)	{ *((LPWORD)&MMU.RAM[(BYTE)(A)])=(WORD)(V); }
 
 // サイクルカウンタ
 #define	ADD_CYCLE(V)	{ exec_cycles += (V); }
@@ -595,8 +595,8 @@ CPU::~CPU()
 }
 
 // メモリアクセス
-//#define	OP6502(A)	(CPU_MEM_BANK[(A)>>13][(A)&0x1FFF])
-//#define	OP6502W(A)	(*((WORD*)&CPU_MEM_BANK[(A)>>13][(A)&0x1FFF]))
+//#define	OP6502(A)	(MMU.CPU_MEM_BANK[(A)>>13][(A)&0x1FFF])
+//#define	OP6502W(A)	(*((WORD*)&MMU.CPU_MEM_BANK[(A)>>13][(A)&0x1FFF]))
 
 #if	0
 #define	OP6502(A)	RD6502((A))
@@ -604,18 +604,18 @@ CPU::~CPU()
 #else
 inline	BYTE	OP6502( WORD addr )
 {
-	return	CPU_MEM_BANK[addr>>13][addr&0x1FFF];
+	return	MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
 }
 
 inline	WORD	OP6502W( WORD addr )
 {
 #if	0
 	WORD	ret;
-	ret  = (WORD)CPU_MEM_BANK[(addr+0)>>13][(addr+0)&0x1FFF];
-	ret |= (WORD)CPU_MEM_BANK[(addr+1)>>13][(addr+1)&0x1FFF]<<8;
+	ret  = (WORD)MMU.CPU_MEM_BANK[(addr+0)>>13][(addr+0)&0x1FFF];
+	ret |= (WORD)MMU.CPU_MEM_BANK[(addr+1)>>13][(addr+1)&0x1FFF]<<8;
 	return	ret;
 #else
-	return	*((WORD*)&CPU_MEM_BANK[addr>>13][addr&0x1FFF]);
+	return	*((WORD*)&MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF]);
 #endif
 }
 #endif
@@ -624,24 +624,24 @@ inline	BYTE	CPU::RD6502( WORD addr )
 {
 	if( addr < 0x2000 ) {
 	// RAM (Mirror $0800, $1000, $1800)
-		return	RAM[addr&0x07FF];
+		return	MMU.RAM[addr&0x07FF];
 	} else if( addr < 0x8000 ) {
 	// Others
 		return	nes->Read( addr );
 	} else {
 	// Dummy access
-		mapper->Read( addr, CPU_MEM_BANK[addr>>13][addr&0x1FFF] );
+		mapper->Read( addr, MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] );
 	}
 
 	// Quick bank read
-	return	CPU_MEM_BANK[addr>>13][addr&0x1FFF];
+	return	MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
 }
 
 inline	WORD	CPU::RD6502W( WORD addr )
 {
 	if( addr < 0x2000 ) {
 	// RAM (Mirror $0800, $1000, $1800)
-		return	*((WORD*)&RAM[addr&0x07FF]);
+		return	*((WORD*)&MMU.RAM[addr&0x07FF]);
 	} else if( addr < 0x8000 ) {
 	// Others
 		return	(WORD)nes->Read(addr)+(WORD)nes->Read(addr+1)*0x100;
@@ -650,11 +650,11 @@ inline	WORD	CPU::RD6502W( WORD addr )
 	// Quick bank read
 #if	0
 	WORD	ret;
-	ret  = (WORD)CPU_MEM_BANK[(addr+0)>>13][(addr+0)&0x1FFF];
-	ret |= (WORD)CPU_MEM_BANK[(addr+1)>>13][(addr+1)&0x1FFF]<<8;
+	ret  = (WORD)MMU.CPU_MEM_BANK[(addr+0)>>13][(addr+0)&0x1FFF];
+	ret |= (WORD)MMU.CPU_MEM_BANK[(addr+1)>>13][(addr+1)&0x1FFF]<<8;
 	return	ret;
 #else
-	return	*((WORD*)&CPU_MEM_BANK[addr>>13][addr&0x1FFF]);
+	return	*((WORD*)&MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF]);
 #endif
 }
 
@@ -663,7 +663,7 @@ inline	void	CPU::WR6502( WORD addr, BYTE data )
 {
 	if( addr < 0x2000 ) {
 	// RAM (Mirror $0800, $1000, $1800)
-		RAM[addr&0x07FF] = data;
+		MMU.RAM[addr&0x07FF] = data;
 	} else {
 	// Others
 		nes->Write( addr, data );
@@ -691,7 +691,7 @@ void	CPU::Reset()
 	DMA_cycles = 0;
 
 	// STACK quick access
-	STACK = &RAM[0x0100];
+	STACK = &MMU.RAM[0x0100];
 
 	// Zero/Negative FLAG
 	ZN_Table[0] = Z_FLAG;

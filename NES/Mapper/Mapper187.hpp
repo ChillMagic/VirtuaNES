@@ -10,10 +10,10 @@ INT	i;
 		bank[i] = 0x00;
 	}
 
-	prg[0] = PROM_8K_SIZE-4;
-	prg[1] = PROM_8K_SIZE-3;
-	prg[2] = PROM_8K_SIZE-2;
-	prg[3] = PROM_8K_SIZE-1;
+	prg[0] = MMU.PROM_8K_SIZE-4;
+	prg[1] = MMU.PROM_8K_SIZE-3;
+	prg[2] = MMU.PROM_8K_SIZE-2;
+	prg[3] = MMU.PROM_8K_SIZE-1;
 	SetBank_CPU();
 
 	ext_mode = 0;
@@ -62,8 +62,8 @@ void	Mapper187::WriteLow( WORD addr, BYTE data )
 		} else {
 			prg[0] = bank[6];
 			prg[1] = bank[7];
-			prg[2] = PROM_8K_SIZE-2;
-			prg[3] = PROM_8K_SIZE-1;
+			prg[2] = MMU.PROM_8K_SIZE-2;
+			prg[3] = MMU.PROM_8K_SIZE-1;
 		}
 		SetBank_CPU();
 	}
@@ -85,7 +85,7 @@ void	Mapper187::Write( WORD addr, BYTE data )
 //			}
 			chr_mode = data;
 			if( (data&0xF0) == 0 ) {
-				prg[2] = PROM_8K_SIZE-2;
+				prg[2] = MMU.PROM_8K_SIZE-2;
 				SetBank_CPU();
 			}
 			break;
@@ -177,9 +177,9 @@ void	Mapper187::Write( WORD addr, BYTE data )
 
 		case	0xA000:
 			if( data & 0x01 ) {
-				SetVRAM_Mirror( VRAM_HMIRROR );
+				MMU.SetVRAM_Mirror( VRAM_HMIRROR );
 			} else {
-				SetVRAM_Mirror( VRAM_VMIRROR );
+				MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xA001:
@@ -237,12 +237,12 @@ void	Mapper187::HSync( INT scanline )
 
 void	Mapper187::SetBank_CPU()
 {
-	SetPROM_32K_Bank( prg[0], prg[1], prg[2], prg[3] );
+	MMU.SetPROM_32K_Bank( prg[0], prg[1], prg[2], prg[3] );
 }
 
 void	Mapper187::SetBank_PPU()
 {
-	SetVROM_8K_Bank( chr[0], chr[1], chr[2], chr[3],
+	MMU.SetVROM_8K_Bank( chr[0], chr[1], chr[2], chr[3],
 			 chr[4], chr[5], chr[6], chr[7] );
 }
 

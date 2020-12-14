@@ -139,8 +139,8 @@ WNDMSG	CPaletteView::OnTimer( WNDMSGPARAM )
 
 	// パレット
 	for( INT i = 0; i < 16; i++ ) {
-		m_BitmapHdr.rgb[i]    = m_Palette[BGPAL[i]];
-		m_BitmapHdr.rgb[i+16] = m_Palette[SPPAL[i]];
+		m_BitmapHdr.rgb[i]    = m_Palette[MMU.BGPAL[i]];
+		m_BitmapHdr.rgb[i+16] = m_Palette[MMU.SPPAL[i]];
 	}
 
 	RECT	rc;

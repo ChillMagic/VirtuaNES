@@ -3,8 +3,8 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper228::Reset()
 {
-	SetPROM_32K_Bank( 0 );
-	SetVROM_8K_Bank( 0 );
+	MMU.SetPROM_32K_Bank( 0 );
+	MMU.SetVROM_8K_Bank( 0 );
 }
 
 void	Mapper228::Write( WORD addr, BYTE data )
@@ -25,22 +25,22 @@ void	Mapper228::Write( WORD addr, BYTE data )
 		if( addr & 0x0040 ) {
 			prg++;
 		}
-		SetPROM_8K_Bank( 4, prg*4+0 );
-		SetPROM_8K_Bank( 5, prg*4+1 );
-		SetPROM_8K_Bank( 6, prg*4+0 );
-		SetPROM_8K_Bank( 7, prg*4+1 );
+		MMU.SetPROM_8K_Bank( 4, prg*4+0 );
+		MMU.SetPROM_8K_Bank( 5, prg*4+1 );
+		MMU.SetPROM_8K_Bank( 6, prg*4+0 );
+		MMU.SetPROM_8K_Bank( 7, prg*4+1 );
 	} else {
-		SetPROM_8K_Bank( 4, prg*4+0 );
-		SetPROM_8K_Bank( 5, prg*4+1 );
-		SetPROM_8K_Bank( 6, prg*4+2 );
-		SetPROM_8K_Bank( 7, prg*4+3 );
+		MMU.SetPROM_8K_Bank( 4, prg*4+0 );
+		MMU.SetPROM_8K_Bank( 5, prg*4+1 );
+		MMU.SetPROM_8K_Bank( 6, prg*4+2 );
+		MMU.SetPROM_8K_Bank( 7, prg*4+3 );
 	}
 
-	SetVROM_8K_Bank( ((addr&0x000F)<<2)|(data&0x03) );
+	MMU.SetVROM_8K_Bank( ((addr&0x000F)<<2)|(data&0x03) );
 
 	if( addr & 0x2000 ) {
-		SetVRAM_Mirror( VRAM_HMIRROR );
+		MMU.SetVRAM_Mirror( VRAM_HMIRROR );
 	} else {
-		SetVRAM_Mirror( VRAM_VMIRROR );
+		MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 	}
 }

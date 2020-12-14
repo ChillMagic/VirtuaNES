@@ -3,19 +3,19 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper072::Reset()
 {
-	SetPROM_32K_Bank( 0, 1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 
-	if( VROM_8K_SIZE ) {
-		SetVROM_8K_Bank( 0 );
+	if( MMU.VROM_8K_SIZE ) {
+		MMU.SetVROM_8K_Bank( 0 );
 	}
 }
 
 void	Mapper072::Write( WORD addr, BYTE data )
 {
 	if( data & 0x80 ) {
-		SetPROM_16K_Bank( 4, data&0x0F );
+		MMU.SetPROM_16K_Bank( 4, data&0x0F );
 	} else if( data & 0x40 ) {
-		SetVROM_8K_Bank( data&0x0F );
+		MMU.SetVROM_8K_Bank( data&0x0F );
 	} else {
 		if( addr >= 0xC100 && addr <= 0xC11F && data == 0x20 ) {
 //DEBUGOUT( "ADDR:%04X DATA:%02X\n", addr, data );

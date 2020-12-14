@@ -12,10 +12,10 @@ void	Mapper019::Reset()
 	irq_enable = 0;
 	irq_counter = 0;
 
-	SetPROM_32K_Bank( 0, 1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 
-	if( VROM_1K_SIZE >= 8 ) {
-		SetVROM_8K_Bank( VROM_8K_SIZE-1 );
+	if( MMU.VROM_1K_SIZE >= 8 ) {
+		MMU.SetVROM_8K_Bank( MMU.VROM_8K_SIZE-1 );
 	}
 
 	exsound_enable = 0xFF;
@@ -82,7 +82,7 @@ BYTE	data = 0;
 					nes->apu->ExRead(addr);
 					data = exram[reg[2]&0x7F];
 				} else {
-					data = WRAM[reg[2]&0x7F];
+					data = MMU.WRAM[reg[2]&0x7F];
 				}
 				if( reg[2]&0x80 )
 					reg[2] = (reg[2]+1)|0x80;
@@ -112,7 +112,7 @@ void	Mapper019::WriteLow( WORD addr, BYTE data )
 					nes->apu->ExWrite( addr, data );
 					exram[reg[2]&0x7F] = data;
 				} else {
-					WRAM[reg[2]&0x7F] = data;
+					MMU.WRAM[reg[2]&0x7F] = data;
 				}
 				if( reg[2]&0x80 )
 					reg[2] = (reg[2]+1)|0x80;
@@ -153,114 +153,114 @@ void	Mapper019::Write( WORD addr, BYTE data )
 	switch( addr & 0xF800 ) {
 		case	0x8000:
 			if( (data < 0xE0) || (reg[0] != 0) ) {
-				SetVROM_1K_Bank( 0, data );
+				MMU.SetVROM_1K_Bank( 0, data );
 			} else {
-				SetCRAM_1K_Bank( 0, data&0x1F );
+				MMU.SetCRAM_1K_Bank( 0, data&0x1F );
 			}
 			break;
 		case	0x8800:
 			if( (data < 0xE0) || (reg[0] != 0) ) {
-				SetVROM_1K_Bank( 1, data );
+				MMU.SetVROM_1K_Bank( 1, data );
 			} else {
-				SetCRAM_1K_Bank( 1, data&0x1F );
+				MMU.SetCRAM_1K_Bank( 1, data&0x1F );
 			}
 			break;
 		case	0x9000:
 			if( (data < 0xE0) || (reg[0] != 0) ) {
-				SetVROM_1K_Bank( 2, data );
+				MMU.SetVROM_1K_Bank( 2, data );
 			} else {
-				SetCRAM_1K_Bank( 2, data&0x1F );
+				MMU.SetCRAM_1K_Bank( 2, data&0x1F );
 			}
 			break;
 		case	0x9800:
 			if( (data < 0xE0) || (reg[0] != 0) ) {
-				SetVROM_1K_Bank( 3, data );
+				MMU.SetVROM_1K_Bank( 3, data );
 			} else {
-				SetCRAM_1K_Bank( 3, data&0x1F );
+				MMU.SetCRAM_1K_Bank( 3, data&0x1F );
 			}
 			break;
 		case	0xA000:
 			if( (data < 0xE0) || (reg[1] != 0) ) {
-				SetVROM_1K_Bank( 4, data );
+				MMU.SetVROM_1K_Bank( 4, data );
 			} else {
-				SetCRAM_1K_Bank( 4, data&0x1F );
+				MMU.SetCRAM_1K_Bank( 4, data&0x1F );
 			}
 			break;
 		case	0xA800:
 			if( (data < 0xE0) || (reg[1] != 0) ) {
-				SetVROM_1K_Bank( 5, data );
+				MMU.SetVROM_1K_Bank( 5, data );
 			} else {
-				SetCRAM_1K_Bank( 5, data&0x1F );
+				MMU.SetCRAM_1K_Bank( 5, data&0x1F );
 			}
 			break;
 		case	0xB000:
 			if( (data < 0xE0) || (reg[1] != 0) ) {
-				SetVROM_1K_Bank( 6, data );
+				MMU.SetVROM_1K_Bank( 6, data );
 			} else {
-				SetCRAM_1K_Bank( 6, data&0x1F );
+				MMU.SetCRAM_1K_Bank( 6, data&0x1F );
 			}
 			break;
 		case	0xB800:
 			if( (data < 0xE0) || (reg[1] != 0) ) {
-				SetVROM_1K_Bank( 7, data );
+				MMU.SetVROM_1K_Bank( 7, data );
 			} else {
-				SetCRAM_1K_Bank( 7, data&0x1F );
+				MMU.SetCRAM_1K_Bank( 7, data&0x1F );
 			}
 			break;
 		case	0xC000:
 			if( !patch ) {
 				if( data <= 0xDF ) {
-					SetVROM_1K_Bank( 8, data );
+					MMU.SetVROM_1K_Bank( 8, data );
 				} else {
-					SetVRAM_1K_Bank( 8, data & 0x01 );
+					MMU.SetVRAM_1K_Bank( 8, data & 0x01 );
 				}
 			}
 			break;
 		case	0xC800:
 			if( !patch ) {
 				if( data <= 0xDF ) {
-					SetVROM_1K_Bank( 9, data );
+					MMU.SetVROM_1K_Bank( 9, data );
 				} else {
-					SetVRAM_1K_Bank( 9, data & 0x01 );
+					MMU.SetVRAM_1K_Bank( 9, data & 0x01 );
 				}
 			}
 			break;
 		case	0xD000:
 			if( !patch ) {
 				if( data <= 0xDF ) {
-					SetVROM_1K_Bank( 10, data );
+					MMU.SetVROM_1K_Bank( 10, data );
 				} else {
-					SetVRAM_1K_Bank( 10, data & 0x01 );
+					MMU.SetVRAM_1K_Bank( 10, data & 0x01 );
 				}
 			}
 			break;
 		case	0xD800:
 			if( !patch ) {
 				if( data <= 0xDF ) {
-					SetVROM_1K_Bank( 11, data );
+					MMU.SetVROM_1K_Bank( 11, data );
 				} else {
-					SetVRAM_1K_Bank( 11, data & 0x01 );
+					MMU.SetVRAM_1K_Bank( 11, data & 0x01 );
 				}
 			}
 			break;
 		case	0xE000:
-			SetPROM_8K_Bank( 4, data & 0x3F );
+			MMU.SetPROM_8K_Bank( 4, data & 0x3F );
 			if( patch == 2 ) {
-				if( data & 0x40 ) SetVRAM_Mirror( VRAM_VMIRROR );
-				else		  SetVRAM_Mirror( VRAM_MIRROR4L );
+				if( data & 0x40 ) MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
 			}
 			if( patch == 3 ) {
-				if( data & 0x80 ) SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x80 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xE800:
 			reg[0] = data & 0x40;
 			reg[1] = data & 0x80;
-			SetPROM_8K_Bank( 5, data & 0x3F );
+			MMU.SetPROM_8K_Bank( 5, data & 0x3F );
 			break;
 		case	0xF000:
-			SetPROM_8K_Bank( 6, data & 0x3F );
+			MMU.SetPROM_8K_Bank( 6, data & 0x3F );
 			break;
 		case	0xF800:
 			if( addr == 0xF800 ) {

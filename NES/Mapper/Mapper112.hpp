@@ -33,11 +33,11 @@ void	Mapper112::Write( WORD addr, BYTE data )
 			reg[1] = data;
 			switch( reg[0] & 0x07 ) {
 				case	0x00:
-					prg0 = (data&(PROM_8K_SIZE-1));
+					prg0 = (data&(MMU.PROM_8K_SIZE-1));
 					SetBank_CPU();
 					break;
 				case	0x01:
-					prg1 = (data&(PROM_8K_SIZE-1));
+					prg1 = (data&(MMU.PROM_8K_SIZE-1));
 					SetBank_CPU();
 					break;
 				case	0x02:
@@ -74,8 +74,8 @@ void	Mapper112::Write( WORD addr, BYTE data )
 		case	0xE000:
 			reg[2] = data;
 			if( !nes->rom->Is4SCREEN() ) {
-				if( data & 0x01 ) SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			SetBank_PPU();
 			break;
@@ -84,15 +84,15 @@ void	Mapper112::Write( WORD addr, BYTE data )
 
 void	Mapper112::SetBank_CPU()
 {
-	SetPROM_32K_Bank( prg0, prg1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( prg0, prg1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 }
 
 void	Mapper112::SetBank_PPU()
 {
 	if( reg[2] & 0x02 ) {
-		SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1, chr4, chr5, chr6, chr7 );
+		MMU.SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1, chr4, chr5, chr6, chr7 );
 	} else {
-		SetVROM_8K_Bank(((reg[3]<<6)&0x100)+chr01, 
+		MMU.SetVROM_8K_Bank(((reg[3]<<6)&0x100)+chr01, 
 				((reg[3]<<6)&0x100)+chr01+1, 
 				((reg[3]<<5)&0x100)+chr23, 
 				((reg[3]<<5)&0x100)+chr23+1, 

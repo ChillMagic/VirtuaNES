@@ -24,7 +24,7 @@ void Mapper164::WriteLow(WORD addr, BYTE data)
 		SetBank_CPU();
 		SetBank_PPU();
 	}else if(addr>=0x6000){
-		CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+		MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
 	}else{
 		DEBUGOUT("write to %04x:%02x\n", addr, data);
 	}
@@ -46,8 +46,8 @@ void	Mapper164::SetBank_CPU()
 		case 6:				/* NORMAL MODE */
 			bank = (reg5000&0x0f);
 			bank += (reg5000&0x20)>>1;
-			SetPROM_16K_Bank(4, bank+base);
-			SetPROM_16K_Bank(6, base+0x1f);
+			MMU.SetPROM_16K_Bank(4, bank+base);
+			MMU.SetPROM_16K_Bank(6, base+0x1f);
 			DEBUGOUT("-- normal mode: mode=%d, bank=%d --\n", mode, bank);
 			break;
 		case 1:
@@ -56,15 +56,15 @@ void	Mapper164::SetBank_CPU()
 			break;
 		case 5:				/* 32K MODE */
 			bank = (reg5000&0x0f);
-			SetPROM_32K_Bank(bank+(base>>1));
+			MMU.SetPROM_32K_Bank(bank+(base>>1));
 //			DEBUGOUT("-- 32K MODE: bank=%02x --\n", bank);
 			break;
 		case 7:				/* HALF MODE */
 			bank = (reg5000&0x0f);
 			bank += (bank&0x08)<<1;
-			SetPROM_16K_Bank(4, bank+base);
+			MMU.SetPROM_16K_Bank(4, bank+base);
 			bank = (bank&0x10)+0x0f;
-			SetPROM_16K_Bank(6, base+0x1f);
+			MMU.SetPROM_16K_Bank(6, base+0x1f);
 			DEBUGOUT("-- half mode --\n");
 			break;
 		default:
@@ -75,7 +75,7 @@ void	Mapper164::SetBank_CPU()
 
 void	Mapper164::SetBank_PPU()
 {
-	SetCRAM_8K_Bank(0);
+	MMU.SetCRAM_8K_Bank(0);
 }
 
 
@@ -88,10 +88,10 @@ void	Mapper164::PPU_ExtLatch( WORD ntbladr, BYTE& chr_l, BYTE& chr_h, BYTE& attr
 {
 	INT loopy_v = nes->ppu->GetPPUADDR();
 	INT loopy_y = nes->ppu->GetTILEY();
-	INT	tileofs = (PPUREG[0]&PPU_BGTBL_BIT)<<8;
+	INT	tileofs = (MMU.PPUREG[0]&PPU_BGTBL_BIT)<<8;
 	INT	attradr = 0x23C0+(loopy_v&0x0C00)+((loopy_v&0x0380)>>4);
 	INT	attrsft = (ntbladr&0x0040)>>4;
-	LPBYTE	pNTBL = PPU_MEM_BANK[ntbladr>>10];
+	LPBYTE	pNTBL = MMU.PPU_MEM_BANK[ntbladr>>10];
 	INT	ntbl_x  = ntbladr&0x001F;
 	INT	tileadr;
 
@@ -101,10 +101,10 @@ void	Mapper164::PPU_ExtLatch( WORD ntbladr, BYTE& chr_l, BYTE& chr_h, BYTE& attr
 
 	if(p_mode){
 		tileadr = (tileadr&0xfff7)|a3;
-		chr_l = chr_h = PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
+		chr_l = chr_h = MMU.PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
 	}else{
-		chr_l = PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
-		chr_h = PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
+		chr_l = MMU.PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
+		chr_h = MMU.PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
 	}
 
 }

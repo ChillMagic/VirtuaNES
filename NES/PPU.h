@@ -71,7 +71,7 @@ public:
 	void	ScanlineStart();
 	void	ScanlineNext();
 
-	WORD	GetPPUADDR()	{ return loopy_v; }
+	WORD	GetPPUADDR()	{ return MMU.loopy_v; }
 	WORD	GetTILEY()	{ return loopy_y; }
 
 	// Scanline base render
@@ -85,21 +85,21 @@ public:
 	void	SetExtMonoMode( BOOL bMode )	{ bExtMono = bMode; }
 	BOOL	GetExtMonoMode()	{ return bExtMono; }
 
-	BOOL	IsDispON()	{ return PPUREG[1]&(PPU_BGDISP_BIT|PPU_SPDISP_BIT); }
-	BOOL	IsBGON()	{ return PPUREG[1]&PPU_BGDISP_BIT; }
-	BOOL	IsSPON()	{ return PPUREG[1]&PPU_SPDISP_BIT; }
+	BOOL	IsDispON()	{ return MMU.PPUREG[1]&(PPU_BGDISP_BIT|PPU_SPDISP_BIT); }
+	BOOL	IsBGON()	{ return MMU.PPUREG[1]&PPU_BGDISP_BIT; }
+	BOOL	IsSPON()	{ return MMU.PPUREG[1]&PPU_SPDISP_BIT; }
 
-	BYTE	GetBGCOLOR()	{ return (PPUREG[1]&PPU_BGCOLOR_BIT)>>5; }
+	BYTE	GetBGCOLOR()	{ return (MMU.PPUREG[1]&PPU_BGCOLOR_BIT)>>5; }
 
-	BOOL	IsBGCLIP()	{ return PPUREG[1]&PPU_BGCLIP_BIT; }
-	BOOL	IsSPCLIP()	{ return PPUREG[1]&PPU_SPCLIP_BIT; }
+	BOOL	IsBGCLIP()	{ return MMU.PPUREG[1]&PPU_BGCLIP_BIT; }
+	BOOL	IsSPCLIP()	{ return MMU.PPUREG[1]&PPU_SPCLIP_BIT; }
 
-	BOOL	IsMONOCROME()	{ return PPUREG[1]&PPU_COLORMODE_BIT; }
+	BOOL	IsMONOCROME()	{ return MMU.PPUREG[1]&PPU_COLORMODE_BIT; }
 
-	BOOL	IsVBLANK()	{ return PPUREG[2]&PPU_VBLANK_FLAG; }
-	BOOL	IsSPHIT()	{ return PPUREG[2]&PPU_SPHIT_FLAG; }
-	BOOL	IsSPMAX()	{ return PPUREG[2]&PPU_SPMAX_FLAG; }
-	BOOL	IsPPUWE()	{ return PPUREG[2]&PPU_WENABLE_FLAG; }
+	BOOL	IsVBLANK()	{ return MMU.PPUREG[2]&PPU_VBLANK_FLAG; }
+	BOOL	IsSPHIT()	{ return MMU.PPUREG[2]&PPU_SPHIT_FLAG; }
+	BOOL	IsSPMAX()	{ return MMU.PPUREG[2]&PPU_SPMAX_FLAG; }
+	BOOL	IsPPUWE()	{ return MMU.PPUREG[2]&PPU_WENABLE_FLAG; }
 
 	BOOL	IsSprite0( INT scanline );
 

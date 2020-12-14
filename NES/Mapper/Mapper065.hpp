@@ -10,10 +10,10 @@ void	Mapper065::Reset()
 		patch = 1;
 	}
 
-	SetPROM_32K_Bank( 0, 1, PROM_8K_SIZE-2, PROM_8K_SIZE-1 );
+	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
 
-	if( VROM_8K_SIZE ) {
-		SetVROM_8K_Bank( 0 );
+	if( MMU.VROM_8K_SIZE ) {
+		MMU.SetVROM_8K_Bank( 0 );
 	}
 
 	irq_enable = 0;
@@ -24,20 +24,20 @@ void	Mapper065::Write( WORD addr, BYTE data )
 {
 	switch( addr ) {
 		case	0x8000:
-			SetPROM_8K_Bank( 4, data );
+			MMU.SetPROM_8K_Bank( 4, data );
 			break;
 
 		case	0x9000:
 			if( !patch ) {
-				if( data & 0x40 ) SetVRAM_Mirror( VRAM_VMIRROR );
-				else		  SetVRAM_Mirror( VRAM_HMIRROR );
+				if( data & 0x40 ) MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_HMIRROR );
 			}
 			break;
 
 		case	0x9001:
 			if( patch ) {
-				if( data & 0x80 ) SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x80 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 
@@ -78,14 +78,14 @@ void	Mapper065::Write( WORD addr, BYTE data )
 		case	0xB005:
 		case	0xB006:
 		case	0xB007:
-			SetVROM_1K_Bank( addr & 0x0007, data );
+			MMU.SetVROM_1K_Bank( addr & 0x0007, data );
 			break;
 
 		case	0xA000:
-			SetPROM_8K_Bank( 5, data );
+			MMU.SetPROM_8K_Bank( 5, data );
 			break;
 		case	0xC000:
-			SetPROM_8K_Bank( 6, data );
+			MMU.SetPROM_8K_Bank( 6, data );
 			break;
 	}
 }

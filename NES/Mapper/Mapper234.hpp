@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper234::Reset()
 {
-	SetPROM_32K_Bank( 0, 1, 2, 3 );
+	MMU.SetPROM_32K_Bank( 0, 1, 2, 3 );
 
 	reg[0] = 0;
 	reg[1] = 0;
@@ -42,16 +42,16 @@ void	Mapper234::Write( WORD addr, BYTE data )
 void	Mapper234::SetBank()
 {
 	if( reg[0] & 0x80 ) {
-		SetVRAM_Mirror( VRAM_HMIRROR );
+		MMU.SetVRAM_Mirror( VRAM_HMIRROR );
 	} else {
-		SetVRAM_Mirror( VRAM_VMIRROR );
+		MMU.SetVRAM_Mirror( VRAM_VMIRROR );
 	}
 	if( reg[0] & 0x40 ) {
-		SetPROM_32K_Bank( (reg[0]&0x0E)|(reg[1]&0x01) );
-		SetVROM_8K_Bank( ((reg[0]&0x0E)<<2)|((reg[1]>>4)&0x07) );
+		MMU.SetPROM_32K_Bank( (reg[0]&0x0E)|(reg[1]&0x01) );
+		MMU.SetVROM_8K_Bank( ((reg[0]&0x0E)<<2)|((reg[1]>>4)&0x07) );
 	} else {
-		SetPROM_32K_Bank( reg[0]&0x0F );
-		SetVROM_8K_Bank( ((reg[0]&0x0F)<<2)|((reg[1]>>4)&0x03) );
+		MMU.SetPROM_32K_Bank( reg[0]&0x0F );
+		MMU.SetVROM_8K_Bank( ((reg[0]&0x0F)<<2)|((reg[1]>>4)&0x03) );
 	}
 }
 

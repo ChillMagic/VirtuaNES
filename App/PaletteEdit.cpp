@@ -125,8 +125,8 @@ DLGMSG	CPaletteEdit::OnInitDialog( DLGMSGPARAM )
 	DirectDraw.GetPaletteTable( m_Palette );
 	::memcpy( m_PaletteUndo, m_Palette, sizeof(m_Palette) );
 	::memcpy( m_PaletteDefault, m_Palette, sizeof(m_Palette) );
-	::memcpy( m_BGPAL, BGPAL, 16 );
-	::memcpy( m_SPPAL, SPPAL, 16 );
+	::memcpy( m_BGPAL, MMU.BGPAL, 16 );
+	::memcpy( m_SPPAL, MMU.SPPAL, 16 );
 
 	m_PaletteSelect = 0;
 	OnChaneSelect();
@@ -206,8 +206,8 @@ DLGMSG	CPaletteEdit::OnLButtonDown( DLGMSGPARAM )
 		int	x = (xp-rc.left)/CELL_SIZE;
 		int	y = (yp-rc.top)/CELL_SIZE;
 
-		if( y == 0 ) m_PaletteSelect = BGPAL[x];
-		else	     m_PaletteSelect = SPPAL[x];
+		if( y == 0 ) m_PaletteSelect = MMU.BGPAL[x];
+		else	     m_PaletteSelect = MMU.SPPAL[x];
 
 		::memcpy( m_PaletteUndo, m_Palette, sizeof(m_Palette) );
 
@@ -258,8 +258,8 @@ DLGMSG	CPaletteEdit::OnRButtonDown( DLGMSGPARAM )
 		int	y = (yp-rc.top)/CELL_SIZE;
 
 		int	nSel;
-		if( y == 0 ) nSel = BGPAL[x];
-		else	     nSel = SPPAL[x];
+		if( y == 0 ) nSel = MMU.BGPAL[x];
+		else	     nSel = MMU.SPPAL[x];
 
 		::memcpy( m_PaletteUndo, m_Palette, sizeof(m_Palette) );
 
@@ -360,9 +360,9 @@ DLGMSG	CPaletteEdit::OnPaint( DLGMSGPARAM )
 
 DLGMSG	CPaletteEdit::OnTimer( DLGMSGPARAM )
 {
-	if( ::memcmp( m_BGPAL, BGPAL, 16 ) != 0 || ::memcmp( m_SPPAL, SPPAL, 16 ) != 0 ) {
-		::memcpy( m_BGPAL, BGPAL, 16 );
-		::memcpy( m_SPPAL, SPPAL, 16 );
+	if( ::memcmp( m_BGPAL, MMU.BGPAL, 16 ) != 0 || ::memcmp( m_SPPAL, MMU.SPPAL, 16 ) != 0 ) {
+		::memcpy( m_BGPAL, MMU.BGPAL, 16 );
+		::memcpy( m_SPPAL, MMU.SPPAL, 16 );
 
 		RECT	rcC;
 		::GetClientRect( m_hWnd, &rcC );
