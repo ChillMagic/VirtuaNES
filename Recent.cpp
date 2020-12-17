@@ -4,7 +4,7 @@
 #include <tchar.h>
 
 #include "Base/DebugOut.h"
-#include "PathLib.h"
+#include "Base/PathLib.h"
 
 #include "VirtuaNESres.h"
 #include "Recent.h"

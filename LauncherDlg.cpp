@@ -20,10 +20,10 @@ using namespace std;
 #include "VirtuaNESres.h"
 #include "Base/DebugOut.h"
 #include "App.h"
-#include "Pathlib.h"
-#include "Crclib.h"
+#include "Base/Pathlib.h"
+#include "Base/Crclib.h"
 #include "Base/Config.h"
-#include "Archive.h"
+#include "Base/Archive.h"
 
 #include "Wnd.h"
 #include "LauncherDlg.h"
