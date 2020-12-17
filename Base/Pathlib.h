@@ -6,7 +6,7 @@
 
 #include <string>
 
-#include "Typedef.h"
+#include "Base/Typedef.h"
 using namespace std;
 
 class	CPathlib

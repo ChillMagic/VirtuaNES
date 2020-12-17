@@ -11,8 +11,8 @@
 #include <mmsystem.h>
 #include <winsock.h>
 
-#include "Macro.h"
-#include "Typedef.h"
+#include "Base/Macro.h"
+#include "Base/Typedef.h"
 
 #include <string>
 using namespace std;

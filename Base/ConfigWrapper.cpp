@@ -1,6 +1,6 @@
 
-#include "ConfigWrapper.h"
-#include "Config.h"
+#include "Base/ConfigWrapper.h"
+#include "Base/Config.h"
 #include "DirectDraw.h"
 #include "DirectInput.h"
 #include "DirectSound.h"

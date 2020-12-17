@@ -1,7 +1,7 @@
 ﻿//
 // DirectSound class
 //
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "DirectSound.h"
 #include "COM.h"
 

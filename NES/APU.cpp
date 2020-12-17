@@ -5,8 +5,8 @@
 //                                               written     2002/06/27 //
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
-#include "DebugOut.h"
-#include "ConfigWrapper.h"
+#include "Base/DebugOut.h"
+#include "Base/ConfigWrapper.h"
 
 #include "Nes.h"
 #include "MMU.h"

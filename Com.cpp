@@ -2,7 +2,7 @@
 // COM利用サポートクラス
 //
 #include <objbase.h>
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "Com.h"
 
 INT	COM::m_nRefCount = 0;

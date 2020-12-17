@@ -5,7 +5,7 @@
 //                                               written     2002/06/30 //
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 
 #include "APU_FDS.h"
 #include "../State.h"

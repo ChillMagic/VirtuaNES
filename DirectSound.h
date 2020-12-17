@@ -13,8 +13,8 @@
 
 #include "ExtSoundFile.h"
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 class	CWaveData
 {

@@ -8,8 +8,8 @@
 #ifndef	__CPU_INCLUDED__
 #define	__CPU_INCLUDED__
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 class	NES;
 class	APU;

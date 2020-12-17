@@ -1,12 +1,12 @@
 ﻿//
 // エミュレータスレッドクラス
 //
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 
 #include "VirtuaNESres.h"
 #include "EmuThread.h"
 #include "MainFrame.h"
-#include "Pathlib.h"
+#include "Base/Pathlib.h"
 
 #include "NetPlay.h"
 

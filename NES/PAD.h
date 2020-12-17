@@ -9,8 +9,8 @@
 #ifndef	__PAD_INCLUDED__
 #define	__PAD_INCLUDED__
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 // class prototypes
 class	NES;

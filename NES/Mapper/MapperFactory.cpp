@@ -11,9 +11,9 @@
 //#include "ConfigWrapper::DirectSoundh"
 #include <ExtSoundFile.h>
 
-#include "DebugOut.h"
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/DebugOut.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "../Nes.h"
 #include "../MMU.h"
@@ -25,7 +25,7 @@
 
 #include "Mapper.h"
 
-#include "ConfigWrapper.h"
+#include "Base/ConfigWrapper.h"
 
 //////////////////////////////////////////////////////////////////////////
 #include "Mapper000.h"

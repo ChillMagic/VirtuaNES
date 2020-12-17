@@ -5,9 +5,9 @@
 //                                               written     2002/06/27 //
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
-#include "DebugOut.h"
-#include "Pathlib.h"
-#include "ConfigWrapper.h"
+#include "Base/DebugOut.h"
+#include "Base/Pathlib.h"
+#include "Base/ConfigWrapper.h"
 
 #include "APU_INTERNAL.h"
 

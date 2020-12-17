@@ -3,7 +3,7 @@
 //
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 
 CDebugOut	Dbg;
 

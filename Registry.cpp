@@ -2,7 +2,7 @@
 // レジストリサポートクラス
 //
 
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "Registry.h"
 
 #include <tchar.h>

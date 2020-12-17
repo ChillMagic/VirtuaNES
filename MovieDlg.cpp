@@ -8,7 +8,7 @@
 using namespace std;
 
 #include "VirtuaNESres.h"
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "App.h"
 
 #include "Wnd.h"

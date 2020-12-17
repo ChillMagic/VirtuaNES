@@ -8,8 +8,8 @@
 #ifndef	__APU_VRC7_INCLUDED__
 #define	__APU_VRC7_INCLUDED__
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "APU_INTERFACE.h"
 

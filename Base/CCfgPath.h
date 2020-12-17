@@ -1,5 +1,5 @@
 #pragma once
-#include "Typedef.h"
+#include "Base/Typedef.h"
 #include <cstdlib>
 
 class	CCfgPath

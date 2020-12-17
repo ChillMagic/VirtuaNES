@@ -10,10 +10,10 @@
 using namespace std;
 
 #include "VirtuaNESres.h"
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "App.h"
-#include "Config.h"
-#include "Pathlib.h"
+#include "Base/Config.h"
+#include "Base/Pathlib.h"
 
 #include "Wnd.h"
 #include "AviConvDlg.h"

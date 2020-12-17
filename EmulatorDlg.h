@@ -10,7 +10,7 @@
 using namespace std;
 
 #include "Wnd.h"
-#include "Config.h"
+#include "Base/Config.h"
 
 class	CEmulatorDlg : public CWnd
 {

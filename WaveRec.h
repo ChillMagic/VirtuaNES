@@ -8,7 +8,7 @@
 #include <Windows.h>
 #include <cstdio>
 
-#include "Typedef.h"
+#include "Base/Typedef.h"
 
 #pragma pack(1)
 typedef struct {

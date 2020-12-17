@@ -17,8 +17,8 @@ using namespace std;
 #include <cstdio>
 #include <cstdlib>
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 class	CDirectDraw
 {

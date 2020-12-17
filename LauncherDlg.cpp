@@ -14,15 +14,15 @@
 #include <string>
 using namespace std;
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "VirtuaNESres.h"
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "App.h"
 #include "Pathlib.h"
 #include "Crclib.h"
-#include "Config.h"
+#include "Base/Config.h"
 #include "Archive.h"
 
 #include "Wnd.h"

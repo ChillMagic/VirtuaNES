@@ -15,12 +15,12 @@
 #include <mbstring.h>
 #include <ctime>
 
-#include "Typedef.h"
-#include "Macro.h"
-#include "DebugOut.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
+#include "Base/DebugOut.h"
 
 #include "App.h"
-#include "Pathlib.h"
+#include "Base/Pathlib.h"
 
 #include "VirtuaNESres.h"
 

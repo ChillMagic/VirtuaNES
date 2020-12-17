@@ -8,8 +8,8 @@
 #ifndef	__APU_MMC5_INCLUDED__
 #define	__APU_MMC5_INCLUDED__
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "APU_INTERFACE.h"
 

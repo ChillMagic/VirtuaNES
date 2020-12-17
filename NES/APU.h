@@ -8,8 +8,8 @@
 #ifndef	__APU_INCLUDED__
 #define	__APU_INCLUDED__
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "ApuEx/APU_INTERNAL.h"
 #include "ApuEx/APU_VRC6.h"

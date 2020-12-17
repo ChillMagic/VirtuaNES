@@ -3,7 +3,7 @@
 //
 
 #include "AviWriter.h"
-#include "Macro.h"
+#include "Base/Macro.h"
 
 #pragma	comment(lib, "vfw32.lib")
 

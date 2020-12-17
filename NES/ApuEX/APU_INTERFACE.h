@@ -8,8 +8,8 @@
 #ifndef	__APU_INTERFACE_INCLUDED__
 #define	__APU_INTERFACE_INCLUDED__
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #define	APU_CLOCK		1789772.5f
 

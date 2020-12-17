@@ -1,7 +1,7 @@
 ﻿//
 // DirectDraw class
 //
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "DirectDraw.h"
 #include "COM.h"
 

@@ -10,10 +10,10 @@
 
 #include "VirtuaNESres.h"
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 
 #include "Nes.h"
 #include "MMU.h"

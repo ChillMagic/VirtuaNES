@@ -8,7 +8,7 @@
 #include "APU_N106.h"
 #include "../State.h"
 
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 
 #define	CHANNEL_VOL_SHIFT	6
 

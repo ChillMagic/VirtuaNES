@@ -9,10 +9,10 @@
 using namespace std;
 
 #include "VirtuaNESres.h"
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "App.h"
-#include "Pathlib.h"
-#include "Config.h"
+#include "Base/Pathlib.h"
+#include "Base/Config.h"
 
 #include "Wnd.h"
 #include "NetPlayDlg.h"

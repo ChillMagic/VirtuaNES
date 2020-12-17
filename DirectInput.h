@@ -7,8 +7,8 @@
 #define	DIRECTINPUT_VERSION	0x0700
 #include <dinput.h>
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include <string>
 using namespace std;

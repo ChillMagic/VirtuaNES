@@ -130,21 +130,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AboutDlg.cpp" />
-    <ClCompile Include="APIWrapper.cpp" />
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="AppWrapper.cpp" />
-    <ClCompile Include="Archive.cpp" />
     <ClCompile Include="AviConvDlg.cpp" />
     <ClCompile Include="AviWriter.cpp" />
+    <ClCompile Include="Base\APIWrapper.cpp" />
+    <ClCompile Include="Base\AppWrapper.cpp" />
+    <ClCompile Include="Base\Archive.cpp" />
+    <ClCompile Include="Base\Config.cpp" />
+    <ClCompile Include="Base\ConfigWrapper.cpp" />
+    <ClCompile Include="Base\Crclib.cpp" />
+    <ClCompile Include="Base\DebugOut.cpp" />
+    <ClCompile Include="Base\Pathlib.cpp" />
     <ClCompile Include="ChatDlg.cpp" />
     <ClCompile Include="CheatDlg.cpp" />
     <ClCompile Include="Com.cpp" />
-    <ClCompile Include="Config.cpp" />
-    <ClCompile Include="ConfigWrapper.cpp" />
     <ClCompile Include="ControllerDlg.cpp" />
-    <ClCompile Include="Crclib.cpp" />
     <ClCompile Include="DatachBarcodeDlg.cpp" />
-    <ClCompile Include="DebugOut.cpp" />
     <ClCompile Include="dinput.cpp" />
     <ClCompile Include="DipSwitchDlg.cpp" />
     <ClCompile Include="DirectDraw.cpp" />
@@ -189,7 +190,6 @@
     <ClCompile Include="NetPlayDlg.cpp" />
     <ClCompile Include="PaletteEdit.cpp" />
     <ClCompile Include="PaletteView.cpp" />
-    <ClCompile Include="Pathlib.cpp" />
     <ClCompile Include="PatternView.cpp" />
     <ClCompile Include="Plugin.cpp" />
     <ClCompile Include="Recent.cpp" />
@@ -225,29 +225,31 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AboutDlg.h" />
-    <ClInclude Include="APIWrapper.h" />
     <ClInclude Include="App.h" />
-    <ClInclude Include="AppWrapper.h" />
-    <ClInclude Include="Archive.h" />
     <ClInclude Include="AviConvDlg.h" />
     <ClInclude Include="AviWriter.h" />
-    <ClInclude Include="CCfgController.h" />
-    <ClInclude Include="CCfgEmulator.h" />
-    <ClInclude Include="CCfgGraphics.h" />
-    <ClInclude Include="CCfgMovie.h" />
-    <ClInclude Include="CCfgPath.h" />
-    <ClInclude Include="CCfgSound.h" />
-    <ClInclude Include="CGameOption.h" />
+    <ClInclude Include="Base\APIWrapper.h" />
+    <ClInclude Include="Base\AppWrapper.h" />
+    <ClInclude Include="Base\Archive.h" />
+    <ClInclude Include="Base\CCfgController.h" />
+    <ClInclude Include="Base\CCfgEmulator.h" />
+    <ClInclude Include="Base\CCfgGraphics.h" />
+    <ClInclude Include="Base\CCfgMovie.h" />
+    <ClInclude Include="Base\CCfgPath.h" />
+    <ClInclude Include="Base\CCfgSound.h" />
+    <ClInclude Include="Base\CGameOption.h" />
+    <ClInclude Include="Base\Config.h" />
+    <ClInclude Include="Base\ConfigWrapper.h" />
+    <ClInclude Include="Base\Crclib.h" />
+    <ClInclude Include="Base\DebugOut.h" />
+    <ClInclude Include="Base\Macro.h" />
+    <ClInclude Include="Base\Pathlib.h" />
     <ClInclude Include="ChatDlg.h" />
     <ClInclude Include="CheatDlg.h" />
     <ClInclude Include="CHyperLink.h" />
     <ClInclude Include="Com.h" />
-    <ClInclude Include="Config.h" />
-    <ClInclude Include="ConfigWrapper.h" />
     <ClInclude Include="ControllerDlg.h" />
-    <ClInclude Include="Crclib.h" />
     <ClInclude Include="DatachBarcodeDlg.h" />
-    <ClInclude Include="DebugOut.h" />
     <ClInclude Include="DipSwitchDlg.h" />
     <ClInclude Include="DirectDraw.h" />
     <ClInclude Include="DirectInput.h" />
@@ -266,7 +268,6 @@
     <ClInclude Include="lzAscii.h" />
     <ClInclude Include="lzSight.h" />
     <ClInclude Include="lzTVlayer.h" />
-    <ClInclude Include="Macro.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="MemoryView.h" />
     <ClInclude Include="MMTimer.h" />
@@ -639,7 +640,6 @@
     <ClInclude Include="nx_SuperEagle.h" />
     <ClInclude Include="PaletteEdit.h" />
     <ClInclude Include="PaletteView.h" />
-    <ClInclude Include="Pathlib.h" />
     <ClInclude Include="PatternView.h" />
     <ClInclude Include="Plugin.h" />
     <ClInclude Include="Pngwrite.h" />
@@ -655,7 +655,6 @@
     <ClInclude Include="ShortcutDlg.h" />
     <ClInclude Include="SimpleVirusChecker.h" />
     <ClInclude Include="SoundDlg.h" />
-    <ClInclude Include="Typedef.h" />
     <ClInclude Include="VirtuaNESres.h" />
     <ClInclude Include="WaveRec.h" />
     <ClInclude Include="Wnd.h" />

@@ -1,7 +1,7 @@
 ﻿//
 // Multimedia timer support
 //
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "MMTimer.h"
 
 // コンストラクタ/デストラクタの為のインスタンス

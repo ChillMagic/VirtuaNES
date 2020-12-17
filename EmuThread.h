@@ -14,11 +14,11 @@ using namespace std;
 
 #include "App.h"
 #include "MMTimer.h"
-#include "Config.h"
+#include "Base/Config.h"
 #include "WaveRec.h"
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "NES/Nes.h"
 #include "NES/MMU.h"

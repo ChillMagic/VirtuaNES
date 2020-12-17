@@ -11,8 +11,8 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "State.h"
 #include "Cheat.h"

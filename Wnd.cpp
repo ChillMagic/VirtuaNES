@@ -1,7 +1,7 @@
 ﻿//
 // へなちょこウインドウクラス
 //
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "Wnd.h"
 
 // Instance

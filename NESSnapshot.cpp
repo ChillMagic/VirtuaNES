@@ -1,16 +1,16 @@
 ﻿
 #include "VirtuaNESres.h"
-#include "AppWrapper.h"
-#include "ConfigWrapper.h"
-#include "DebugOut.h"
-#include "Typedef.h"
+#include "Base/AppWrapper.h"
+#include "Base/ConfigWrapper.h"
+#include "Base/DebugOut.h"
+#include "Base/Typedef.h"
 
 #include "NES/Nes.h"
 #include "NES/ROM.h"
 #include "NES/PPU.h"
 
 #include "DirectDraw.h"
-#include "Pathlib.h"
+#include "Base/Pathlib.h"
 #include "Pngwrite.h"
 
 

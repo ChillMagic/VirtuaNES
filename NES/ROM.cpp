@@ -8,18 +8,18 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "VirtuaNESres.h"
 
-#include "DebugOut.h"
-#include "AppWrapper.h"
-#include "Pathlib.h"
-#include "Crclib.h"
-#include "ConfigWrapper.h"
+#include "Base/DebugOut.h"
+#include "Base/AppWrapper.h"
+#include "Base/Pathlib.h"
+#include "Base/Crclib.h"
+#include "Base/ConfigWrapper.h"
 
-#include "Archive.h"
+#include "Base/Archive.h"
 
 #include "ROM.h"
 #include "ROMDB.h"

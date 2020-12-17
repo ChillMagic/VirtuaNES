@@ -4,7 +4,7 @@
 // 明示的にWinSock Libをリンク
 #pragma comment(lib, "wsock32.lib")
 
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "NetPlay.h"
 
 #define	CLOSESOCKET(soc) if((soc)!=INVALID_SOCKET){::closesocket((soc));(soc)=INVALID_SOCKET;}

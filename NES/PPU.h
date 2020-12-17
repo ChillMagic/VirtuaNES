@@ -8,8 +8,8 @@
 #ifndef	__PPU_INCLUDED__
 #define	__PPU_INCLUDED__
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "MMU.h"
 

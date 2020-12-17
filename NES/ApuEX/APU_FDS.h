@@ -8,8 +8,8 @@
 #ifndef	__FDSPLUGIN_INCLUDED__
 #define	__FDSPLUGIN_INCLUDED__
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "APU_INTERFACE.h"
 

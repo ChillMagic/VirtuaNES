@@ -10,8 +10,8 @@
 #include <string>
 using namespace std;
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "ROM.h"
 

@@ -4,7 +4,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include "Typedef.h"
+#include "Base/Typedef.h"
 
 struct VSDIPSWITCH
 {

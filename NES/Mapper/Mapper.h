@@ -8,8 +8,8 @@
 #ifndef	__MAPPER_INCLUDED__
 #define	__MAPPER_INCLUDED__
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 // class prototype
 class	NES;

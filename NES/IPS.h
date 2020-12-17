@@ -1,7 +1,7 @@
 ﻿#ifndef	__IPS_INCLUDED__
 #define	__IPS_INCLUDED__
 
-#include "Typedef.h"
+#include "Base/Typedef.h"
 
 BOOL	ApplyIPS( const char* filename, LPBYTE pROM, LONG imagesize );
 

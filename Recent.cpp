@@ -3,7 +3,7 @@
 //
 #include <tchar.h>
 
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "PathLib.h"
 
 #include "VirtuaNESres.h"

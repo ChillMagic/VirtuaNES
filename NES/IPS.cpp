@@ -1,13 +1,13 @@
-﻿#include "Typedef.h"
-#include "Pathlib.h"
-#include "ConfigWrapper.h"
-#include "DebugOut.h"
-#include "AppWrapper.h"
-#include "APIWrapper.h"
+﻿#include "Base/Typedef.h"
+#include "Base/Pathlib.h"
+#include "Base/ConfigWrapper.h"
+#include "Base/DebugOut.h"
+#include "Base/AppWrapper.h"
+#include "Base/APIWrapper.h"
 
 #include "minizip/unzip.h"
 #include "IPS.h"
-#include "Macro.h"
+#include "Base/Macro.h"
 
 #include <vector>
 using namespace std;

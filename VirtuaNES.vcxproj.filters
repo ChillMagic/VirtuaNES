@@ -35,15 +35,15 @@
     <Filter Include="Zlib\minizip">
       <UniqueIdentifier>{32003c8e-1165-447e-9534-b9fe9df2d96c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{331ce48e-2e04-488a-9ae0-f14e022ae6a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="App.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Archive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AviConvDlg.cpp">
@@ -61,19 +61,10 @@
     <ClCompile Include="Com.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Config.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ControllerDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Crclib.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DatachBarcodeDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugOut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DipSwitchDlg.cpp">
@@ -140,9 +131,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PaletteView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Pathlib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PatternView.cpp">
@@ -295,17 +283,32 @@
     <ClCompile Include="zlib\minizip\ioapi.c">
       <Filter>Zlib\minizip</Filter>
     </ClCompile>
-    <ClCompile Include="AppWrapper.cpp">
-      <Filter>NES</Filter>
-    </ClCompile>
-    <ClCompile Include="ConfigWrapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NESSnapshot.cpp">
       <Filter>NES</Filter>
     </ClCompile>
-    <ClCompile Include="APIWrapper.cpp">
-      <Filter>NES</Filter>
+    <ClCompile Include="Base\Config.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\ConfigWrapper.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\APIWrapper.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\AppWrapper.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\DebugOut.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Pathlib.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Crclib.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Archive.cpp">
+      <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,9 +316,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="App.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Archive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AviConvDlg.h">
@@ -336,19 +336,10 @@
     <ClInclude Include="Com.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ControllerDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Crclib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DatachBarcodeDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugOut.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DipSwitchDlg.h">
@@ -405,9 +396,6 @@
     <ClInclude Include="lzTVlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Macro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MainFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -456,9 +444,6 @@
     <ClInclude Include="PaletteView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pathlib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PatternView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -502,9 +487,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SoundDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Typedef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VirtuaNESres.h">
@@ -1626,35 +1608,53 @@
     <ClInclude Include="zlib\minizip\ioapi.h">
       <Filter>Zlib\minizip</Filter>
     </ClInclude>
-    <ClInclude Include="AppWrapper.h">
-      <Filter>NES</Filter>
+    <ClInclude Include="Base\CCfgController.h">
+      <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="CCfgSound.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Base\CCfgEmulator.h">
+      <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="ConfigWrapper.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Base\CCfgGraphics.h">
+      <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="CCfgController.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Base\CCfgMovie.h">
+      <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="CCfgEmulator.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Base\CCfgPath.h">
+      <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="CCfgPath.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Base\CCfgSound.h">
+      <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="CGameOption.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Base\CGameOption.h">
+      <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="CCfgGraphics.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Base\ConfigWrapper.h">
+      <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="CCfgMovie.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Base\Config.h">
+      <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="APIWrapper.h">
-      <Filter>NES</Filter>
+    <ClInclude Include="Base\DebugOut.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\APIWrapper.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\AppWrapper.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Macro.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Pathlib.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Crclib.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Archive.h">
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,10 @@
 ﻿//
 // DirectInput class
 //
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "DirectInput.h"
 #include "COM.h"
-#include "Config.h"
+#include "Base/Config.h"
 
 CDirectInput	DirectInput;
 

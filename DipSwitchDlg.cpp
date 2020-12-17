@@ -12,13 +12,13 @@
 #include <string>
 using namespace std;
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "VirtuaNESres.h"
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "App.h"
-#include "Pathlib.h"
+#include "Base/Pathlib.h"
 
 #include "EmuThread.h"
 #include "NES/VsUnisystem.h"

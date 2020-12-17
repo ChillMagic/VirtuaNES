@@ -5,7 +5,7 @@
 //                                               written     2001/09/18 //
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 
 #include "APU_MMC5.h"
 #include "../State.h"

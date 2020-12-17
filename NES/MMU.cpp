@@ -5,9 +5,9 @@
 //                                               written     2001/02/21 //
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
-#include "Typedef.h"
-#include "Macro.h"
-#include "DebugOut.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
+#include "Base/DebugOut.h"
 
 #include "MMU.h"
 

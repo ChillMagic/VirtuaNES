@@ -10,20 +10,20 @@
 #include <cmath>
 #include <ctime>
 
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
 #include "VirtuaNESres.h"
 
-#include "DebugOut.h"
-#include "AppWrapper.h"
-#include "Pathlib.h"
-#include "ConfigWrapper.h"
-#include "Crclib.h"
+#include "Base/DebugOut.h"
+#include "Base/AppWrapper.h"
+#include "Base/Pathlib.h"
+#include "Base/ConfigWrapper.h"
+#include "Base/Crclib.h"
 
 #include "Nes.h"
 
-#include "APIWrapper.h"
+#include "Base/APIWrapper.h"
 #include "MMU.h"
 #include "CPU.h"
 #include "PPU.h"

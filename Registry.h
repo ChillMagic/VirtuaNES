@@ -4,7 +4,7 @@
 #ifndef	__CREGISTRY_INCLUDED__
 #define	__CREGISTRY_INCLUDED__
 
-#include "Typedef.h"
+#include "Base/Typedef.h"
 
 #include <string>
 using namespace std;

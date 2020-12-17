@@ -8,9 +8,9 @@
 using namespace std;
 
 #include "VirtuaNESres.h"
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "App.h"
-#include "Pathlib.h"
+#include "Base/Pathlib.h"
 
 #include "Wnd.h"
 #include "FolderDlg.h"

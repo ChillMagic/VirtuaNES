@@ -3,7 +3,7 @@
 //
 #include <climits>
 
-#include "Typedef.h"
+#include "Base/Typedef.h"
 
 class	CRC
 {

@@ -4,7 +4,7 @@
 #ifndef	__DEBUGOUT_INCLUDED__
 #define	__DEBUGOUT_INCLUDED__
 
-#include "Typedef.h"
+#include "Base/Typedef.h"
 
 #include <string>
 using namespace std;

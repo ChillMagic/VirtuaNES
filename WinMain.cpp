@@ -8,19 +8,19 @@
 #include <string>
 using namespace std;
 
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "VirtuaNESres.h"
 
 #include "App.h"
 #include "Registry.h"
-#include "Pathlib.h"
+#include "Base/Pathlib.h"
 #include "MMTimer.h"
 
 #include "Wnd.h"
 #include "WndHook.h"
 #include "MainFrame.h"
 #include "Plugin.h"
-#include "Config.h"
+#include "Base/Config.h"
 #include "Recent.h"
 
 #include "DirectDraw.h"

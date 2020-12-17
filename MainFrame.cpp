@@ -13,16 +13,16 @@
 using namespace std;
 
 #include "VirtuaNESres.h"
-#include "DebugOut.h"
+#include "Base/DebugOut.h"
 #include "App.h"
-#include "Pathlib.h"
+#include "Base/Pathlib.h"
 #include "Plugin.h"
 
 #include "Wnd.h"
 #include "WndHook.h"
 #include "MainFrame.h"
 #include "Recent.h"
-#include "Config.h"
+#include "Base/Config.h"
 
 #include "NetPlay.h"
 

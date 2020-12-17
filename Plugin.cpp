@@ -3,8 +3,8 @@
 //
 #include "VirtuaNESres.h"
 
-#include "Pathlib.h"
-#include "DebugOut.h"
+#include "Base/Pathlib.h"
+#include "Base/DebugOut.h"
 
 #include "Plugin.h"
 

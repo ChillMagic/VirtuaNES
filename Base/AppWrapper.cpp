@@ -1,5 +1,5 @@
 ﻿
-#include "AppWrapper.h"
+#include "Base/AppWrapper.h"
 #include "App.h"
 
 LPCSTR AppWrapper::GetErrorString(INT nID)

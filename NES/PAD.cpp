@@ -5,11 +5,11 @@
 //                                               written     2001/02/22 //
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
-#include "Typedef.h"
-#include "Macro.h"
+#include "Base/Typedef.h"
+#include "Base/Macro.h"
 
-#include "DebugOut.h"
-#include "ConfigWrapper.h"
+#include "Base/DebugOut.h"
+#include "Base/ConfigWrapper.h"
 
 #include "Nes.h"
 #include "MMU.h"
