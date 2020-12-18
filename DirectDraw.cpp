@@ -769,6 +769,8 @@ DDBLTFX		ddbltfx;
 	return	TRUE;
 }
 
+template <typename T> void GDIDELETE(T& x) { if (x) { ::DeleteObject(x); x = NULL; } }
+
 // サーフェスの開放
 BOOL	CDirectDraw::ReleaseSurface( void )
 {

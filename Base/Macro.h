@@ -12,8 +12,6 @@ template <typename T> void DELETEARR(T &x) { if (x) { delete[] x; x = NULL; } }
 template <typename T> void RELEASE(T &x) { if(x) { x->Release(); x = NULL; } }
 template <typename T> void FREE(T &x) { if(x) { free(x); x = NULL; } }
 template <typename T> void FCLOSE(T &x) { if(x) { fclose(x); x = NULL; }}
-template <typename T> void GDIDELETE(T &x) { if(x) { ::DeleteObject(x); x = NULL; }}
-template <typename T> void CLOSEHANDLE(T &x) { if(x) { ::CloseHandle(x); x = NULL; }}
 
 // その他
 template <typename T1, typename T2>

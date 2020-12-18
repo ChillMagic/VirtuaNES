@@ -26,6 +26,8 @@ using namespace std;
 
 #include "DirectDraw.h"
 
+template <typename T> void CLOSEHANDLE(T& x) { if (x) { ::CloseHandle(x); x = NULL; } }
+
 CHAR	CAviConvDlg::g_szErrorMessage[256];
 
 DLG_MESSAGE_BEGIN(CAviConvDlg)
