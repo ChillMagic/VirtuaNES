@@ -5,9 +5,9 @@
 #include "Base/DebugOut.h"
 
 #include "Base/Config.h"
-#include "Registry.h"
+#include "App/Registry.h"
 
-#include "DirectInput.h"
+#include "App/DirectInput.h"
 #include "ExtSoundFile.h"
 
 #define	DIRECTINPUT_VERSION	0x0700

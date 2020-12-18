@@ -9,9 +9,9 @@
 #include "NES/ROM.h"
 #include "NES/PPU.h"
 
-#include "DirectDraw.h"
+#include "App/DirectDraw.h"
 #include "Base/Pathlib.h"
-#include "Pngwrite.h"
+#include "App/Pngwrite.h"
 
 
 BOOL	NES::Snapshot()

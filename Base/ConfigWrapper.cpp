@@ -1,9 +1,9 @@
 
 #include "Base/ConfigWrapper.h"
 #include "Base/Config.h"
-#include "DirectDraw.h"
-#include "DirectInput.h"
-#include "DirectSound.h"
+#include "App/DirectDraw.h"
+#include "App/DirectInput.h"
+#include "App/DirectSound.h"
 
 CCfgGraphics& ConfigWrapper::GetCCfgGraphics()
 {

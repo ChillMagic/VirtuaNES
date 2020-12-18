@@ -202,7 +202,10 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 	if( hMutex )
 		::ReleaseMutex( hMutex );
-	CLOSEHANDLE( hMutex );
+	if ( hMutex ) {
+		::CloseHandle(hMutex);
+		hMutex = NULL;
+	}
 
 _DoubleExecute_Exit:
 	::FreeLibrary( CApp::GetPlugin() );

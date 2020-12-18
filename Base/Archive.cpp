@@ -17,7 +17,7 @@
 #include "Base/Macro.h"
 #include "Base/DebugOut.h"
 
-#include "App.h"
+#include "App/App.h"
 #include "Base/Pathlib.h"
 
 #include "VirtuaNESres.h"

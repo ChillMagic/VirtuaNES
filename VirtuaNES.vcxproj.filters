@@ -38,135 +38,12 @@
     <Filter Include="Base">
       <UniqueIdentifier>{331ce48e-2e04-488a-9ae0-f14e022ae6a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{b0474463-95c1-4bd4-a42c-7f1c2806317e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AboutDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="App.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AviConvDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AviWriter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ChatDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CheatDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Com.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ControllerDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DatachBarcodeDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DipSwitchDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectDraw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectInput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectSound.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EmulatorDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EmuThread.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FolderDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOptionDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="JoyAxisDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LanguageDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LauncherDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MainFrame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MemoryView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MMTimer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MovieDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MovieInfoDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NameTableView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NetPlay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NetPlayDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PaletteEdit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PaletteView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PatternView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Plugin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Recent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Registry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RomInfoDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ShortcutDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SimpleVirusChecker.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WaveRec.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WinMain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Wnd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WndHook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NES\Mapper\Mapper.cpp">
@@ -229,9 +106,6 @@
     <ClCompile Include="NES\VsUnisystem.cpp">
       <Filter>NES</Filter>
     </ClCompile>
-    <ClCompile Include="dinput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="zlib\adler32.c">
       <Filter>Zlib</Filter>
     </ClCompile>
@@ -283,9 +157,6 @@
     <ClCompile Include="zlib\minizip\ioapi.c">
       <Filter>Zlib\minizip</Filter>
     </ClCompile>
-    <ClCompile Include="NESSnapshot.cpp">
-      <Filter>NES</Filter>
-    </ClCompile>
     <ClCompile Include="Base\Config.cpp">
       <Filter>Base</Filter>
     </ClCompile>
@@ -310,195 +181,144 @@
     <ClCompile Include="Base\Archive.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="App\AboutDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\App.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\AviConvDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\AviWriter.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\ChatDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\CheatDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\Com.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\ControllerDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\DatachBarcodeDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\dinput.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\DipSwitchDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\EmulatorDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\EmuThread.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\FolderDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\GameOptionDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\GraphicsDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\JoyAxisDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\LanguageDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\LauncherDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\MainFrame.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\MemoryView.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\MMTimer.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\MovieDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\MovieInfoDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\NameTableView.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\NetPlay.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\NetPlayDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\PaletteEdit.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\PaletteView.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\PatternView.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\Plugin.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\Recent.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\RomInfoDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\ShortcutDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\SoundDlg.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\WaveRec.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\WinMain.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\Wnd.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\WndHook.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\Registry.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\DirectDraw.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\DirectInput.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\DirectSound.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="NESSnapshot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AboutDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="App.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AviConvDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AviWriter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ChatDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CheatDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CHyperLink.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Com.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ControllerDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DatachBarcodeDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DipSwitchDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectDraw.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectInput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectSound.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EmulatorDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EmuThread.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FolderDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOptionDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hq2x.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="interp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="JoyAxisDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LanguageDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LauncherDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lq2x.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lzAscii.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lzSight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lzTVlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainFrame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MemoryView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MMTimer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MovieDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MovieInfoDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NameTableView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NetPlay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NetPlayDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="nx_2xSaI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="nx_hq2x.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="nx_Scale2x.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="nx_Super2xSaI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="nx_Super2xSaI_32bpp_mmx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="nx_SuperEagle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PaletteEdit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PaletteView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PatternView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Plugin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Pngwrite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Recent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Registry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render16bpp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render24bpp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render32bpp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render8bpp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RomInfoDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ShortcutDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SimpleVirusChecker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SoundDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VirtuaNESres.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WaveRec.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Wnd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WndHook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NES\Mapper\EEPROM.h">
@@ -1655,6 +1475,189 @@
     </ClInclude>
     <ClInclude Include="Base\Archive.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="App\AboutDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\App.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\AviConvDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\AviWriter.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\ChatDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\CheatDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\CHyperLink.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Com.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\ControllerDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\DatachBarcodeDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\DipSwitchDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\EmulatorDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\EmuThread.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\FolderDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\GameOptionDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\GraphicsDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\hq2x.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\interp.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\JoyAxisDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\LanguageDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\LauncherDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\lq2x.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\lzAscii.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\lzSight.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\lzTVlayer.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\MainFrame.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\MemoryView.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\MMTimer.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\MovieDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\MovieInfoDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\NameTableView.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\NetPlay.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\NetPlayDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\nx_2xSaI.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\nx_hq2x.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\nx_Scale2x.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\nx_Super2xSaI.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\nx_SuperEagle.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\PaletteEdit.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\PaletteView.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\PatternView.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Plugin.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Pngwrite.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Recent.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Render.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Render16bpp.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Render24bpp.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Render32bpp.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Render8bpp.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\RomInfoDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\ShortcutDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\SoundDlg.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\WaveRec.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Wnd.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\WndHook.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtSoundFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Registry.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\DirectSound.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\DirectDraw.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\DirectInput.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
