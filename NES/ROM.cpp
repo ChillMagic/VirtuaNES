@@ -26,6 +26,7 @@
 #include "MMU.h"
 
 #include "IPS.h"
+#include "Base/APIWrapper.h"
 
 //
 // コンストラクタ
@@ -463,19 +464,18 @@ NESHEADER	header;
 //
 // ROMファイル名のチェック(PALを自動判別)
 //
-void	ROM::FilenameCheck( const char* fname )
-{
-	// TODO: Use std::wstring
-	const char*	p = fname;
+void	ROM::FilenameCheck(const char* fname) {
+	unsigned char* p = (unsigned char*)fname;
 
-	while( *p != '\0' ) {
-		if( *p == '(' ) {
-			if( std::strncmp( p, "(E)", 3 ) == 0 ) {
+	while (*p != (unsigned char)'\0') {
+		if (*p == (unsigned char)'(') {
+			if (APIWrapper::mbsnbicmp(p, (unsigned char*)"(E)", 3) == 0) {
 				bPAL = TRUE;
 				return;
 			}
 		}
-		p++;
+
+		p = APIWrapper::mbsinc(p);
 	}
 }
 

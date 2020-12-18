@@ -7,12 +7,10 @@
 // Zlib use!
 // Reprogrammed by Norix
 //
-#include <Shlwapi.h>
 
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <mbstring.h>
 #include <ctime>
 
 #include "Base/Typedef.h"
@@ -26,6 +24,7 @@
 
 #define UNZ_BUFSIZE (65536)
 
+#include "APIWrapper.h"
 #include "minizip/unzip.h"
 
 #pragma	pack(1)
@@ -118,7 +117,7 @@ BOOL	ZlibUnZip( LPCSTR fname, LPBYTE* ppBuf, LPDWORD lpdwSize )
 		if( unzGetCurrentFileInfo( unzipFile, &unzipFileInfo, fname_buf, sizeof(fname_buf), NULL, 0, NULL, 0 ) != UNZ_OK )
 			break;
 
-		char*	pExt = ::PathFindExtension( fname_buf );
+		char*	pExt = APIWrapper::PathFindExtension( fname_buf );
 		if( _stricmp( pExt, ".nes" ) == 0 || _stricmp( pExt, ".fds" ) == 0 || _stricmp( pExt, ".nsf" ) == 0 ) {
 			if( unzipFileInfo.uncompressed_size ) {
 				if( unzOpenCurrentFile( unzipFile ) != UNZ_OK )
@@ -244,9 +243,9 @@ INDIVIDUALINFO	idvinfo;
 					if( *lpF0 == '[' || *lpF0 == ']' ) {
 						*lpF1++ = '\\';
 					}
-					_mbsncpy( lpF1, lpF0, 1 );
-					lpF0 = _mbsinc( lpF0 );
-					lpF1 = _mbsinc( lpF1 );
+					APIWrapper::mbsncpy( lpF1, lpF0, 1 );
+					lpF0 = APIWrapper::mbsinc( lpF0 );
+					lpF1 = APIWrapper::mbsinc( lpF1 );
 				}
 				*lpF1 = '\0';
 

@@ -28,17 +28,18 @@ private:
 
 extern	CDebugOut	Dbg;
 
+template <typename... Args>
+void DEBUGOUT(Args&&... args) {
 #if	defined(_DEBUG) || defined(_DEBUGOUT)
-#define	DEBUGOUT	Dbg.Out
-#else
-#define	DEBUGOUT
+	Dbg.Out(args...);
 #endif	// !_DEBUG
+}
 
+inline void DEBUGCLR() {
 #if	defined(_DEBUG) || defined(_DEBUGOUT)
-#define	DEBUGCLR	Dbg.Clear
-#else
-#define	DEBUGCLR
+	Dbg.Clear();
 #endif	// !_DEBUG
+}
 
 #endif	// !__DEBUGOUT_INCLUDED__
 

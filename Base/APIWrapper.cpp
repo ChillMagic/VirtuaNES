@@ -1,6 +1,8 @@
 
 #include "Base/APIWrapper.h"
 
+#include <mbstring.h>
+
 static bool implCreateDirectory(const char* path, void* security_attributes);
 static short implGetAsyncKeyState(int key);
 static char* implPathFindExtension(const char* path);
@@ -35,6 +37,18 @@ short APIWrapper::GetAsyncKeyStateRightButton()
 
 int APIWrapper::stricmp(const char* string1, const char* string2) {
 	return _stricmp(string1, string2);
+}
+
+unsigned char* APIWrapper::mbsncpy(unsigned char* dst, const unsigned char* src, size_t len) {
+	return _mbsncpy(dst, src, len);
+}
+
+unsigned char* APIWrapper::mbsinc(const unsigned char *path) {
+	return _mbsinc(path);
+}
+
+int APIWrapper::mbsnbicmp(unsigned char* str1, unsigned char* str2, size_t max_count) {
+	return _mbsnbicmp(str1, str2, max_count);
 }
 
 static bool implCreateDirectory(const char* path, void* security_attributes)

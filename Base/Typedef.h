@@ -8,6 +8,7 @@
 #ifndef	__TYPEDEF_INCLUDED__
 #define	__TYPEDEF_INCLUDED__
 #include <cstdint>
+#include <cstring>
 
 typedef	int		BOOL;
 
@@ -156,11 +157,6 @@ typedef	union	{
 #endif
 #else
 #define CALLBACK
-#endif
-
-#ifndef ZeroMemory
-#define ZeroMemory(Destination,Length) memset((Destination),0,(Length))
-#define FillMemory(Destination, Length, Fill) memset((Destination), (Fill), (Length))
 #endif
 
 typedef int* PINT;
