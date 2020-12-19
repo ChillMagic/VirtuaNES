@@ -51,6 +51,10 @@ int APIWrapper::mbsnbicmp(unsigned char* str1, unsigned char* str2, size_t max_c
 	return _mbsnbicmp(str1, str2, max_count);
 }
 
+unsigned char* APIWrapper::mbstok(unsigned char *str, const unsigned char *delim) {
+	return _mbstok(str, delim);
+}
+
 static bool implCreateDirectory(const char* path, void* security_attributes)
 {
 	return CreateDirectory(path, (LPSECURITY_ATTRIBUTES)security_attributes);

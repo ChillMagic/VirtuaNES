@@ -14,6 +14,8 @@
 
 #include "ROMDB.h"
 
+#include "Base/APIWrapper.h"
+
 #ifdef _WIN32
 #include <mbstring.h>
 #endif
@@ -78,7 +80,6 @@ BOOL	ROMDATABASE::HeaderCorrect( NESHEADER& hdr, DWORD crcall, DWORD crc )
 
 void	ROMDATABASE::LoadDatabase()
 {
-#ifdef _WIN32
 FILE*	fp = NULL;
 CHAR	buf[512];
 const UCHAR seps[] = ";\n\0";	// セパレータ
@@ -101,39 +102,39 @@ DEBUGOUT( "File:%s\n", Path.c_str() );
 			CHAR*	pToken;
 
 			// ALL CRC
-			if( !(pToken = (CHAR*)_mbstok( (UCHAR*)buf, seps )) )
+			if( !(pToken = (CHAR*)APIWrapper::mbstok( (UCHAR*)buf, seps )) )
 				continue;
 			db.crcall = strtoul( pToken, NULL, 16 );
 			// PRG CRC
-			if( !(pToken = (CHAR*)_mbstok( NULL, seps )) )
+			if( !(pToken = (CHAR*)APIWrapper::mbstok( NULL, seps )) )
 				continue;
 			db.crc = strtoul( pToken, NULL, 16 );
 
 			// Title
-			if( !(pToken = (CHAR*)_mbstok( NULL, seps )) )
+			if( !(pToken = (CHAR*)APIWrapper::mbstok( NULL, seps )) )
 				continue;
 			db.title = pToken;
 
 			// Control 1
-			if( !(pToken = (CHAR*)_mbstok( NULL, seps )) )
+			if( !(pToken = (CHAR*)APIWrapper::mbstok( NULL, seps )) )
 				continue;
 			db.control1 = atoi( pToken );
 			// Control 2
-			if( !(pToken = (CHAR*)_mbstok( NULL, seps )) )
+			if( !(pToken = (CHAR*)APIWrapper::mbstok( NULL, seps )) )
 				continue;
 			db.control2 = atoi( pToken );
 
 			// PRG SIZE
-			if( !(pToken = (CHAR*)_mbstok( NULL, seps )) )
+			if( !(pToken = (CHAR*)APIWrapper::mbstok( NULL, seps )) )
 				continue;
 			db.prg_size = atoi( pToken );
 			// CHR SIZE
-			if( !(pToken = (CHAR*)_mbstok( NULL, seps )) )
+			if( !(pToken = (CHAR*)APIWrapper::mbstok( NULL, seps )) )
 				continue;
 			db.chr_size = atoi( pToken );
 
 			// Country
-			if( !(pToken = (CHAR*)_mbstok( NULL, seps )) )
+			if( !(pToken = (CHAR*)APIWrapper::mbstok( NULL, seps )) )
 				continue;
 			db.country = pToken;
 
@@ -150,28 +151,28 @@ DEBUGOUT( "File:%s\n", Path.c_str() );
 			}
 
 			// Manufacturer
-			if( pToken = (CHAR*)_mbstok( NULL, seps ) ) {
+			if( pToken = (CHAR*)APIWrapper::mbstok( NULL, seps ) ) {
 				db.manufacturer = pToken;
 			} else {
 				db.manufacturer.erase( db.manufacturer.begin(), db.manufacturer.end() );
 			}
 
 			// Sale date
-			if( pToken = (CHAR*)_mbstok( NULL, seps ) ) {
+			if( pToken = (CHAR*)APIWrapper::mbstok( NULL, seps ) ) {
 				db.saledate = pToken;
 			} else {
 				db.saledate.erase( db.saledate.begin(), db.saledate.end() );
 			}
 
 			// Price
-			if( pToken = (CHAR*)_mbstok( NULL, seps ) ) {
+			if( pToken = (CHAR*)APIWrapper::mbstok( NULL, seps ) ) {
 				db.price = pToken;
 			} else {
 				db.price.erase( db.price.begin(), db.price.end() );
 			}
 
 			// Genre
-			if( pToken = (CHAR*)_mbstok( NULL, seps ) ) {
+			if( pToken = (CHAR*)APIWrapper::mbstok( NULL, seps ) ) {
 				db.genre = pToken;
 			} else {
 				db.genre.erase( db.genre.begin(), db.genre.end() );
@@ -183,6 +184,5 @@ DEBUGOUT( "File:%s\n", Path.c_str() );
 	} else {
 DEBUGOUT( "Database file not found.\n" );
 	}
-#endif
 }
 
