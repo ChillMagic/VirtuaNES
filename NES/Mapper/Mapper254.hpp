@@ -32,7 +32,7 @@ void	Mapper254::WriteLow( WORD addr, BYTE data )
 	switch( addr & 0xF000 ) {
 		case	0x6000:
 		case	0x7000:
-			MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+			nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
 			break;
 	}
 
@@ -41,9 +41,9 @@ BYTE	Mapper254::ReadLow( WORD addr )
 {
 	if( addr>=0x6000 ) {
 		if( protectflag ) {
-			return	(MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF]);
+			return	(nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF]);
 		} else {
-			return	((MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF])^0x1);
+			return	((nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF])^0x1);
 		}
 	}
 	return	Mapper::ReadLow( addr );
@@ -99,8 +99,8 @@ void	Mapper254::Write( WORD addr, BYTE data )
 		case	0xA000:
 			reg[2] = data;
 			if( !nes->rom->Is4SCREEN() ) {
-				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xA001:
@@ -166,42 +166,42 @@ void	Mapper254::HSync( INT scanline )
 void	Mapper254::SetBank_CPU()
 {
 	if( reg[0] & 0x40 ) {
-		MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-2, prg1, prg0, MMU.PROM_8K_SIZE-1 );
+		nes->mmu.SetPROM_32K_Bank( nes->mmu.PROM_8K_SIZE-2, prg1, prg0, nes->mmu.PROM_8K_SIZE-1 );
 	} else {
-		MMU.SetPROM_32K_Bank( prg0, prg1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+		nes->mmu.SetPROM_32K_Bank( prg0, prg1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 	}
 }
 
 void	Mapper254::SetBank_PPU()
 {
 
-	if( MMU.VROM_1K_SIZE ) {
+	if( nes->mmu.VROM_1K_SIZE ) {
 		if( reg[0] & 0x80 ) {
-			MMU.SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
+			nes->mmu.SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
 					 chr01, chr01+1, chr23, chr23+1 );
 		} else {
-			MMU.SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
+			nes->mmu.SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
 					 chr4, chr5, chr6, chr7 );
 		}
 	} else {
 		if( reg[0] & 0x80 ) {
-			MMU.SetCRAM_1K_Bank( 4, (chr01+0)&0x07 );
-			MMU.SetCRAM_1K_Bank( 5, (chr01+1)&0x07 );
-			MMU.SetCRAM_1K_Bank( 6, (chr23+0)&0x07 );
-			MMU.SetCRAM_1K_Bank( 7, (chr23+1)&0x07 );
-			MMU.SetCRAM_1K_Bank( 0, chr4&0x07 );
-			MMU.SetCRAM_1K_Bank( 1, chr5&0x07 );
-			MMU.SetCRAM_1K_Bank( 2, chr6&0x07 );
-			MMU.SetCRAM_1K_Bank( 3, chr7&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 4, (chr01+0)&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 5, (chr01+1)&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 6, (chr23+0)&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 7, (chr23+1)&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 0, chr4&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 1, chr5&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 2, chr6&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 3, chr7&0x07 );
 		} else {
-			MMU.SetCRAM_1K_Bank( 0, (chr01+0)&0x07 );
-			MMU.SetCRAM_1K_Bank( 1, (chr01+1)&0x07 );
-			MMU.SetCRAM_1K_Bank( 2, (chr23+0)&0x07 );
-			MMU.SetCRAM_1K_Bank( 3, (chr23+1)&0x07 );
-			MMU.SetCRAM_1K_Bank( 4, chr4&0x07 );
-			MMU.SetCRAM_1K_Bank( 5, chr5&0x07 );
-			MMU.SetCRAM_1K_Bank( 6, chr6&0x07 );
-			MMU.SetCRAM_1K_Bank( 7, chr7&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 0, (chr01+0)&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 1, (chr01+1)&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 2, (chr23+0)&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 3, (chr23+1)&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 4, chr4&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 5, chr5&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 6, chr6&0x07 );
+			nes->mmu.SetCRAM_1K_Bank( 7, chr7&0x07 );
 		}
 	}
 }

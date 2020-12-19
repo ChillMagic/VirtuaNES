@@ -13,7 +13,7 @@ INT	i;
 	prg1 = 1;
 	SetBank_CPU();
 
-	if( MMU.VROM_1K_SIZE ) {
+	if( nes->mmu.VROM_1K_SIZE ) {
 		chr01 = 0;
 		chr23 = 2;
 		chr4  = 4;
@@ -50,49 +50,49 @@ void	Mapper118::Write( WORD addr, BYTE data )
 
 			if( (reg[0] & 0x80) ) {
 				if( (reg[0] & 0x07) == 2 ) {
-					if( data & 0x80 ) MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
-					else		  MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
+					if( data & 0x80 ) nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4L );
+					else		  nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4H );
 				}
 			} else {
 				if( (reg[0] & 0x07) == 0 ) {
-					if( data & 0x80 ) MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
-					else		  MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
+					if( data & 0x80 ) nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4L );
+					else		  nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4H );
 				}
 			}
 
 			switch( reg[0] & 0x07 ) {
 				case	0x00:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr01 = data & 0xFE;
 						SetBank_PPU();
 					}
 					break;
 				case	0x01:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr23 = data & 0xFE;
 						SetBank_PPU();
 					}
 					break;
 				case	0x02:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr4 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x03:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr5 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x04:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr6 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x05:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr7 = data;
 						SetBank_PPU();
 					}
@@ -146,20 +146,20 @@ void	Mapper118::HSync( INT scanline )
 void	Mapper118::SetBank_CPU()
 {
 	if( reg[0] & 0x40 ) {
-		MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-2, prg1, prg0, MMU.PROM_8K_SIZE-1 );
+		nes->mmu.SetPROM_32K_Bank( nes->mmu.PROM_8K_SIZE-2, prg1, prg0, nes->mmu.PROM_8K_SIZE-1 );
 	} else {
-		MMU.SetPROM_32K_Bank( prg0, prg1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+		nes->mmu.SetPROM_32K_Bank( prg0, prg1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 	}
 }
 
 void	Mapper118::SetBank_PPU()
 {
-	if( MMU.VROM_1K_SIZE ) {
+	if( nes->mmu.VROM_1K_SIZE ) {
 		if( reg[0] & 0x80 ) {
-			MMU.SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
+			nes->mmu.SetVROM_8K_Bank( chr4, chr5, chr6, chr7,
 					 chr01, chr01+1, chr23, chr23+1 );
 		} else {
-			MMU.SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
+			nes->mmu.SetVROM_8K_Bank( chr01, chr01+1, chr23, chr23+1,
 					 chr4, chr5, chr6, chr7 );
 		}
 	}

@@ -71,9 +71,9 @@ void	Mapper165::Write( WORD addr, BYTE data )
 			reg[2] = data;
 			if( data & 0x01 ) 
 			{
-				MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
 			}else{
-				MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xA001:
@@ -87,7 +87,7 @@ void	Mapper165::Write( WORD addr, BYTE data )
 
 void	Mapper165::SetBank_CPU()
 {
-	MMU.SetPROM_32K_Bank( prg0, prg1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	nes->mmu.SetPROM_32K_Bank( prg0, prg1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 }
 
 void	Mapper165::SetBank_PPU()
@@ -104,9 +104,9 @@ void	Mapper165::SetBank_PPU()
 void	Mapper165::SetBank_PPUSUB( int bank, int page )
 {
 	if( page == 0 ) {
-		MMU.SetCRAM_4K_Bank( bank, page>>2 );
+		nes->mmu.SetCRAM_4K_Bank( bank, page>>2 );
 	} else {
-		MMU.SetVROM_4K_Bank( bank, page>>2 );
+		nes->mmu.SetVROM_4K_Bank( bank, page>>2 );
 	}
 }
 

@@ -55,8 +55,8 @@ void	Mapper191::WriteLow( WORD addr, BYTE data )
 					SetBank_CPU();
 					break;
 				case	7:
-					if( data & 0x02 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-					else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+					if( data & 0x02 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+					else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 					break;
 			}
 			break;
@@ -65,20 +65,20 @@ void	Mapper191::WriteLow( WORD addr, BYTE data )
 
 void	Mapper191::SetBank_CPU()
 {
-	MMU.SetPROM_32K_Bank( prg0 );
+	nes->mmu.SetPROM_32K_Bank( prg0 );
 }
 
 void	Mapper191::SetBank_PPU()
 {
-	if( MMU.VROM_1K_SIZE ) {
-		MMU.SetVROM_1K_Bank( 0, (((highbank<<3)+chr0)<<2)+0 );
-		MMU.SetVROM_1K_Bank( 1, (((highbank<<3)+chr0)<<2)+1 );
-		MMU.SetVROM_1K_Bank( 2, (((highbank<<3)+chr1)<<2)+2 );
-		MMU.SetVROM_1K_Bank( 3, (((highbank<<3)+chr1)<<2)+3 );
-		MMU.SetVROM_1K_Bank( 4, (((highbank<<3)+chr2)<<2)+0 );
-		MMU.SetVROM_1K_Bank( 5, (((highbank<<3)+chr2)<<2)+1 );
-		MMU.SetVROM_1K_Bank( 6, (((highbank<<3)+chr3)<<2)+2 );
-		MMU.SetVROM_1K_Bank( 7, (((highbank<<3)+chr3)<<2)+3 );
+	if( nes->mmu.VROM_1K_SIZE ) {
+		nes->mmu.SetVROM_1K_Bank( 0, (((highbank<<3)+chr0)<<2)+0 );
+		nes->mmu.SetVROM_1K_Bank( 1, (((highbank<<3)+chr0)<<2)+1 );
+		nes->mmu.SetVROM_1K_Bank( 2, (((highbank<<3)+chr1)<<2)+2 );
+		nes->mmu.SetVROM_1K_Bank( 3, (((highbank<<3)+chr1)<<2)+3 );
+		nes->mmu.SetVROM_1K_Bank( 4, (((highbank<<3)+chr2)<<2)+0 );
+		nes->mmu.SetVROM_1K_Bank( 5, (((highbank<<3)+chr2)<<2)+1 );
+		nes->mmu.SetVROM_1K_Bank( 6, (((highbank<<3)+chr3)<<2)+2 );
+		nes->mmu.SetVROM_1K_Bank( 7, (((highbank<<3)+chr3)<<2)+3 );
 	}
 }
 

@@ -3,12 +3,12 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper006::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0, 1, 14, 15 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, 14, 15 );
 
-	if( MMU.VROM_1K_SIZE ) {
-		MMU.SetVROM_8K_Bank( 0 );
+	if( nes->mmu.VROM_1K_SIZE ) {
+		nes->mmu.SetVROM_8K_Bank( 0 );
 	} else {
-		MMU.SetCRAM_8K_Bank( 0 );
+		nes->mmu.SetCRAM_8K_Bank( 0 );
 	}
 
 	irq_enable = 0;
@@ -19,12 +19,12 @@ void	Mapper006::WriteLow( WORD addr, BYTE data )
 {
 	switch( addr ) {
 		case	0x42FE:
-			if( data&0x10 ) MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
-			else		MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
+			if( data&0x10 ) nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4H );
+			else		nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4L );
 			break;
 		case	0x42FF:
-			if( data&0x10 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-			else		MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			if( data&0x10 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+			else		nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			break;
 
 		case	0x4501:
@@ -49,8 +49,8 @@ void	Mapper006::WriteLow( WORD addr, BYTE data )
 
 void	Mapper006::Write( WORD addr, BYTE data )
 {
-	MMU.SetPROM_16K_Bank( 4, (data&0x3C)>>2 );
-	MMU.SetCRAM_8K_Bank( data&0x03 );
+	nes->mmu.SetPROM_16K_Bank( 4, (data&0x3C)>>2 );
+	nes->mmu.SetCRAM_8K_Bank( data&0x03 );
 }
 
 void	Mapper006::HSync( INT scanline )

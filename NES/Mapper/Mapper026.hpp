@@ -8,10 +8,10 @@ void	Mapper026::Reset()
 	irq_latch = 0;
 	irq_clock = 0;
 
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 
-	if( MMU.VROM_1K_SIZE ) {
-		MMU.SetVROM_8K_Bank( 0 );
+	if( nes->mmu.VROM_1K_SIZE ) {
+		nes->mmu.SetVROM_8K_Bank( 0 );
 	}
 
 	DWORD	crc = nes->rom->GetPROM_CRC();
@@ -29,7 +29,7 @@ void	Mapper026::Write( WORD addr, BYTE data )
 {
 	switch( addr & 0xF003 ) {
 		case 0x8000:
-			MMU.SetPROM_16K_Bank( 4, data );
+			nes->mmu.SetPROM_16K_Bank( 4, data );
 			break;
 
 		case 0x9000: case 0x9001: case 0x9002: case 0x9003:
@@ -41,46 +41,46 @@ void	Mapper026::Write( WORD addr, BYTE data )
 
 		case 0xB003:
 			data = data & 0x7F;
-			if( data == 0x08 || data == 0x2C ) MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
-			else if( data == 0x20 )		   MMU.SetVRAM_Mirror( VRAM_VMIRROR );
-			else if( data == 0x24 )		   MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-			else if( data == 0x28 )		   MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
+			if( data == 0x08 || data == 0x2C ) nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4H );
+			else if( data == 0x20 )		   nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
+			else if( data == 0x24 )		   nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+			else if( data == 0x28 )		   nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4L );
 			break;
 
 		case 0xC000:
-			MMU.SetPROM_8K_Bank( 6, data );
+			nes->mmu.SetPROM_8K_Bank( 6, data );
 			break;
 
 		case 0xD000:
-			MMU.SetVROM_1K_Bank( 0, data );
+			nes->mmu.SetVROM_1K_Bank( 0, data );
 			break;
 
 		case 0xD001:
-			MMU.SetVROM_1K_Bank( 2, data );
+			nes->mmu.SetVROM_1K_Bank( 2, data );
 			break;
 
 		case 0xD002:
-			MMU.SetVROM_1K_Bank( 1, data );
+			nes->mmu.SetVROM_1K_Bank( 1, data );
 			break;
 
 		case 0xD003:
-			MMU.SetVROM_1K_Bank( 3, data );
+			nes->mmu.SetVROM_1K_Bank( 3, data );
 			break;
 
 		case 0xE000:
-			MMU.SetVROM_1K_Bank( 4, data );
+			nes->mmu.SetVROM_1K_Bank( 4, data );
 			break;
 
 		case 0xE001:
-			MMU.SetVROM_1K_Bank( 6, data );
+			nes->mmu.SetVROM_1K_Bank( 6, data );
 			break;
 
 		case 0xE002:
-			MMU.SetVROM_1K_Bank( 5, data );
+			nes->mmu.SetVROM_1K_Bank( 5, data );
 			break;
 
 		case 0xE003:
-			MMU.SetVROM_1K_Bank( 7, data );
+			nes->mmu.SetVROM_1K_Bank( 7, data );
 			break;
 
 		case 0xF000:

@@ -10,10 +10,10 @@ void	Mapper065::Reset()
 		patch = 1;
 	}
 
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 
-	if( MMU.VROM_8K_SIZE ) {
-		MMU.SetVROM_8K_Bank( 0 );
+	if( nes->mmu.VROM_8K_SIZE ) {
+		nes->mmu.SetVROM_8K_Bank( 0 );
 	}
 
 	irq_enable = 0;
@@ -24,20 +24,20 @@ void	Mapper065::Write( WORD addr, BYTE data )
 {
 	switch( addr ) {
 		case	0x8000:
-			MMU.SetPROM_8K_Bank( 4, data );
+			nes->mmu.SetPROM_8K_Bank( 4, data );
 			break;
 
 		case	0x9000:
 			if( !patch ) {
-				if( data & 0x40 ) MMU.SetVRAM_Mirror( VRAM_VMIRROR );
-				else		  MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				if( data & 0x40 ) nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
+				else		  nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
 			}
 			break;
 
 		case	0x9001:
 			if( patch ) {
-				if( data & 0x80 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x80 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 
@@ -78,14 +78,14 @@ void	Mapper065::Write( WORD addr, BYTE data )
 		case	0xB005:
 		case	0xB006:
 		case	0xB007:
-			MMU.SetVROM_1K_Bank( addr & 0x0007, data );
+			nes->mmu.SetVROM_1K_Bank( addr & 0x0007, data );
 			break;
 
 		case	0xA000:
-			MMU.SetPROM_8K_Bank( 5, data );
+			nes->mmu.SetPROM_8K_Bank( 5, data );
 			break;
 		case	0xC000:
-			MMU.SetPROM_8K_Bank( 6, data );
+			nes->mmu.SetPROM_8K_Bank( 6, data );
 			break;
 	}
 }

@@ -3,14 +3,14 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper000::Reset()
 {
-	switch( MMU.PROM_16K_SIZE ) {
+	switch( nes->mmu.PROM_16K_SIZE ) {
 		default:
 		case	1:	// 16K only
-			MMU.SetPROM_16K_Bank( 4, 0 );
-			MMU.SetPROM_16K_Bank( 6, 0 );
+			nes->mmu.SetPROM_16K_Bank( 4, 0 );
+			nes->mmu.SetPROM_16K_Bank( 6, 0 );
 			break;
 		case	2:	// 32K
-			MMU.SetPROM_32K_Bank( 0 );
+			nes->mmu.SetPROM_32K_Bank( 0 );
 			break;
 	}
 

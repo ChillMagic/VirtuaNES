@@ -5,17 +5,17 @@
 void	Mapper099::Reset()
 {
 	// set CPU bank pointers
-	if( MMU.PROM_8K_SIZE > 2 ) {
-		MMU.SetPROM_32K_Bank( 0, 1, 2, 3 );
-	} else if( MMU.PROM_8K_SIZE > 1 ) {
-		MMU.SetPROM_32K_Bank( 0, 1, 0, 1 );
+	if( nes->mmu.PROM_8K_SIZE > 2 ) {
+		nes->mmu.SetPROM_32K_Bank( 0, 1, 2, 3 );
+	} else if( nes->mmu.PROM_8K_SIZE > 1 ) {
+		nes->mmu.SetPROM_32K_Bank( 0, 1, 0, 1 );
 	} else {
-		MMU.SetPROM_32K_Bank( 0, 0, 0, 0 );
+		nes->mmu.SetPROM_32K_Bank( 0, 0, 0, 0 );
 	}
 
 	// set VROM bank
-	if( MMU.VROM_1K_SIZE ) {
-		MMU.SetVROM_8K_Bank( 0 );
+	if( nes->mmu.VROM_1K_SIZE ) {
+		nes->mmu.SetVROM_8K_Bank( 0 );
 	}
 
 	coin = 0;
@@ -34,9 +34,9 @@ void	Mapper099::ExWrite( WORD addr, BYTE data )
 {
 	if( addr == 0x4016 ) {
 		if( data & 0x04 ) {
-			MMU.SetVROM_8K_Bank( 1 );
+			nes->mmu.SetVROM_8K_Bank( 1 );
 		} else {
-			MMU.SetVROM_8K_Bank( 0 );
+			nes->mmu.SetVROM_8K_Bank( 0 );
 		}
 
 		if( nes->rom->GetPROM_CRC() == 0xC99EC059 ) {	// VS Raid on Bungeling Bay(J)

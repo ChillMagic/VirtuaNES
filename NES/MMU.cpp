@@ -229,4 +229,4 @@ void	MMUClass::SetVRAM_Mirror( INT bank0, INT bank1, INT bank2, INT bank3 )
 	SetVRAM_1K_Bank( 11, bank3 );
 }
 
-MMUClass MMU;
+MMUClass GlobalMMU;

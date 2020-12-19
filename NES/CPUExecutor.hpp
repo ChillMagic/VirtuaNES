@@ -5,6 +5,7 @@
 
 #include "CPU.h"
 #include "MMU.h"
+#include "NES.h"
 #include "Base/Typedef.h"
 
 class CPU::Executor
@@ -112,7 +113,7 @@ public:
 		STACK(cpu.STACK),
 		ZN_Table(cpu.ZN_Table),
 		m_bClockProcess(cpu.m_bClockProcess),
-		mmu(cpu.mmu) {
+		mmu(cpu.nes->mmu) {
 	}
 
 	/*--------------[ DEFINE                ]-------------------------------*/

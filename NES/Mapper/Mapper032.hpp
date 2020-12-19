@@ -6,10 +6,10 @@ void	Mapper032::Reset()
 	patch = 0;
 	reg = 0;
 
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 
-	if( MMU.VROM_8K_SIZE ) {
-		MMU.SetVROM_8K_Bank( 0 );
+	if( nes->mmu.VROM_8K_SIZE ) {
+		nes->mmu.SetVROM_8K_Bank( 0 );
 	}
 
 	DWORD	crc = nes->rom->GetPROM_CRC();
@@ -20,7 +20,7 @@ void	Mapper032::Reset()
 	}
 	// For Ai Sensei no Oshiete - Watashi no Hoshi(J)
 	if( crc == 0xfd3fc292 ) {
-		MMU.SetPROM_32K_Bank( 30, 31, 30, 31 );
+		nes->mmu.SetPROM_32K_Bank( 30, 31, 30, 31 );
 	}
 }
 
@@ -29,20 +29,20 @@ void	Mapper032::Write( WORD addr, BYTE data )
 	switch( addr & 0xF000 ) {
 		case	0x8000:
 			if( reg & 0x02 ) {
-				MMU.SetPROM_8K_Bank( 6, data );
+				nes->mmu.SetPROM_8K_Bank( 6, data );
 			} else {
-				MMU.SetPROM_8K_Bank( 4, data );
+				nes->mmu.SetPROM_8K_Bank( 4, data );
 			}
 			break;
 
 		case	0x9000:
 			reg = data;
-			if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-			else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			if( data & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+			else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			break;
 
 		case	0xA000:
-			MMU.SetPROM_8K_Bank( 5, data );
+			nes->mmu.SetPROM_8K_Bank( 5, data );
 			break;
 	}
 
@@ -53,20 +53,20 @@ void	Mapper032::Write( WORD addr, BYTE data )
 		case	0xB003:
 		case	0xB004:
 		case	0xB005:
-			MMU.SetVROM_1K_Bank( addr & 0x0007, data );
+			nes->mmu.SetVROM_1K_Bank( addr & 0x0007, data );
 			break;
 		case	0xB006:
-			MMU.SetVROM_1K_Bank( 6, data );
+			nes->mmu.SetVROM_1K_Bank( 6, data );
 
 			if( patch && (data & 0x40) ) {
-				MMU.SetVRAM_Mirror( 0, 0, 0, 1 );
+				nes->mmu.SetVRAM_Mirror( 0, 0, 0, 1 );
 			}
 			break;
 		case	0xB007:
-			MMU.SetVROM_1K_Bank( 7, data );
+			nes->mmu.SetVROM_1K_Bank( 7, data );
 
 			if( patch && (data & 0x40) ) {
-				MMU.SetVRAM_Mirror( 0, 0, 0, 0 );
+				nes->mmu.SetVRAM_Mirror( 0, 0, 0, 0 );
 			}
 			break;
 	}

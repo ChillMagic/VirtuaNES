@@ -55,16 +55,13 @@ typedef	struct	{
 	BYTE	INT_pending;	// 割り込みペンディングフラグ
 } R6502;
 
-
-struct MMUClass;
-
 class	CPU
 {
 public:
 	class Executor;
 	friend class Executor;
 public:
-	CPU( NES* parent, MMUClass &mmu );
+	CPU( NES* parent );
 	virtual	~CPU();
 
 	BYTE	RD6502( WORD addr );
@@ -109,8 +106,6 @@ protected:
 
 	// Clock process
 	BOOL	m_bClockProcess;
-	
-	MMUClass &mmu;
 private:
 };
 

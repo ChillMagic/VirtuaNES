@@ -333,19 +333,19 @@ INT	i;
 	pad = padold = 0;
 	repcnt = 0;
 
-	MMU.BGPAL[0] = MMU.BGPAL[1] = MMU.BGPAL[2] = MMU.BGPAL[3] = 
-	MMU.SPPAL[0] = MMU.SPPAL[1] = MMU.SPPAL[2] = MMU.SPPAL[3] = 0x0F;
+	nes->mmu.BGPAL[0] = nes->mmu.BGPAL[1] = nes->mmu.BGPAL[2] = nes->mmu.BGPAL[3] = 
+	nes->mmu.SPPAL[0] = nes->mmu.SPPAL[1] = nes->mmu.SPPAL[2] = nes->mmu.SPPAL[3] = 0x0F;
 
 	exaddr = 0;
 	ZEROMEMORY( exram, sizeof(exram) );
 
-	MMU.SetPROM_Bank( 2, MMU.WRAM+0xA000, BANKTYPE_RAM );	// 4000-5FFF
+	nes->mmu.SetPROM_Bank( 2, nes->mmu.WRAM+0xA000, BANKTYPE_RAM );	// 4000-5FFF
 
-	MMU.SetPROM_Bank( 3, MMU.WRAM+0x0000, BANKTYPE_RAM );	// 6000-7FFF
-	MMU.SetPROM_Bank( 4, MMU.WRAM+0x2000, BANKTYPE_RAM );	// 8000-9FFF
-	MMU.SetPROM_Bank( 5, MMU.WRAM+0x4000, BANKTYPE_RAM );	// A000-BFFF
-	MMU.SetPROM_Bank( 6, MMU.WRAM+0x6000, BANKTYPE_RAM );	// C000-DFFF
-	MMU.SetPROM_Bank( 7, MMU.WRAM+0x8000, BANKTYPE_RAM );	// E000-FFFF
+	nes->mmu.SetPROM_Bank( 3, nes->mmu.WRAM+0x0000, BANKTYPE_RAM );	// 6000-7FFF
+	nes->mmu.SetPROM_Bank( 4, nes->mmu.WRAM+0x2000, BANKTYPE_RAM );	// 8000-9FFF
+	nes->mmu.SetPROM_Bank( 5, nes->mmu.WRAM+0x4000, BANKTYPE_RAM );	// A000-BFFF
+	nes->mmu.SetPROM_Bank( 6, nes->mmu.WRAM+0x6000, BANKTYPE_RAM );	// C000-DFFF
+	nes->mmu.SetPROM_Bank( 7, nes->mmu.WRAM+0x8000, BANKTYPE_RAM );	// E000-FFFF
 
 	nsfheader = *(nes->rom->GetNsfHeader());
 	exchip = nsfheader.ExtraChipSelect;
@@ -379,55 +379,55 @@ INT	i;
 		if( banksize < 8 ) {
 			for( i = 0; i < 0x1000*banksize; i++ ) {
 				if( nsfheader.LoadAddress-0x8000+i < 0x8000 ) {
-					MMU.WRAM[0x2000+nsfheader.LoadAddress-0x8000+i] = pPtr[i];
+					nes->mmu.WRAM[0x2000+nsfheader.LoadAddress-0x8000+i] = pPtr[i];
 				}
 			}
 		} else {
 			for( i = 0; i < 0x8000; i++ ) {
 				if( nsfheader.LoadAddress-0x8000+i < 0x8000 ) {
-					MMU.WRAM[0x2000+nsfheader.LoadAddress-0x8000+i] = pPtr[i];
+					nes->mmu.WRAM[0x2000+nsfheader.LoadAddress-0x8000+i] = pPtr[i];
 				}
 			}
 		}
 	}
 
 	// $4700は待機無限ループ
-	MMU.WRAM[0xA700] = 0x4c;	//jmp
-	MMU.WRAM[0xA701] = 0x00;
-	MMU.WRAM[0xA702] = 0x47;
+	nes->mmu.WRAM[0xA700] = 0x4c;	//jmp
+	nes->mmu.WRAM[0xA701] = 0x00;
+	nes->mmu.WRAM[0xA702] = 0x47;
 
 	// $4710はInitルーチンを呼んだ後無限ループへ
-	MMU.WRAM[0xA710] = 0x20;	// jsr
-	MMU.WRAM[0xA711] = (BYTE) nsfheader.InitAddress & 0xFF;
-	MMU.WRAM[0xA712] = (BYTE)(nsfheader.InitAddress>>8);
-	MMU.WRAM[0xA713] = 0x4c;	// jmp
-	MMU.WRAM[0xA714] = 0x00;
-	MMU.WRAM[0xA715] = 0x47;
+	nes->mmu.WRAM[0xA710] = 0x20;	// jsr
+	nes->mmu.WRAM[0xA711] = (BYTE) nsfheader.InitAddress & 0xFF;
+	nes->mmu.WRAM[0xA712] = (BYTE)(nsfheader.InitAddress>>8);
+	nes->mmu.WRAM[0xA713] = 0x4c;	// jmp
+	nes->mmu.WRAM[0xA714] = 0x00;
+	nes->mmu.WRAM[0xA715] = 0x47;
 	
 	// $4720はPlayルーチンを呼んだ後無限ループへ
 #if	NSF_PROFILE
-	MMU.WRAM[0xA720] = 0x8D;	// sta
-	MMU.WRAM[0xA721] = 0x1E;	// $401E
-	MMU.WRAM[0xA722] = 0x40;	// $401E
+	nes->mmu.WRAM[0xA720] = 0x8D;	// sta
+	nes->mmu.WRAM[0xA721] = 0x1E;	// $401E
+	nes->mmu.WRAM[0xA722] = 0x40;	// $401E
 
-	MMU.WRAM[0xA723] = 0x20;	// jsr
-	MMU.WRAM[0xA724] = (BYTE) nsfheader.PlayAddress;
-	MMU.WRAM[0xA725] = (BYTE)(nsfheader.PlayAddress>>8);
+	nes->mmu.WRAM[0xA723] = 0x20;	// jsr
+	nes->mmu.WRAM[0xA724] = (BYTE) nsfheader.PlayAddress;
+	nes->mmu.WRAM[0xA725] = (BYTE)(nsfheader.PlayAddress>>8);
 
-	MMU.WRAM[0xA726] = 0x8D;	// sta
-	MMU.WRAM[0xA727] = 0x1F;	// $401F
-	MMU.WRAM[0xA728] = 0x40;	// $401F
+	nes->mmu.WRAM[0xA726] = 0x8D;	// sta
+	nes->mmu.WRAM[0xA727] = 0x1F;	// $401F
+	nes->mmu.WRAM[0xA728] = 0x40;	// $401F
 
-	MMU.WRAM[0xA729] = 0x4c;	//jmp
-	MMU.WRAM[0xA72A] = 0x00;
-	MMU.WRAM[0xA72B] = 0x47;
+	nes->mmu.WRAM[0xA729] = 0x4c;	//jmp
+	nes->mmu.WRAM[0xA72A] = 0x00;
+	nes->mmu.WRAM[0xA72B] = 0x47;
 #else
-	MMU.WRAM[0xA720] = 0x20;	// jsr
-	MMU.WRAM[0xA721] = (BYTE) nsfheader.PlayAddress;
-	MMU.WRAM[0xA722] = (BYTE)(nsfheader.PlayAddress>>8);
-	MMU.WRAM[0xA723] = 0x4c;	//jmp
-	MMU.WRAM[0xA724] = 0x00;
-	MMU.WRAM[0xA725] = 0x47;
+	nes->mmu.WRAM[0xA720] = 0x20;	// jsr
+	nes->mmu.WRAM[0xA721] = (BYTE) nsfheader.PlayAddress;
+	nes->mmu.WRAM[0xA722] = (BYTE)(nsfheader.PlayAddress>>8);
+	nes->mmu.WRAM[0xA723] = 0x4c;	//jmp
+	nes->mmu.WRAM[0xA724] = 0x00;
+	nes->mmu.WRAM[0xA725] = 0x47;
 #endif
 
 	nes->apu->SelectExSound( exchip );
@@ -493,13 +493,13 @@ BYTE	MapperNSF::ReadLow( WORD addr )
 		return	(BYTE)(((WORD)multipul[0]*(WORD)multipul[1])>>8);
 	}
 //	if( addr >= 0x47A0 && addr < 0x4800 ) {
-//		return	MMU.WRAM[addr+0x6000];
+//		return	nes->mmu.WRAM[addr+0x6000];
 //	}
 	if( addr >= 0x5C00 && addr < 0x5FFF ) {	// MMC5
-		return	MMU.DRAM[addr-0x5C00];
+		return	nes->mmu.DRAM[addr-0x5C00];
 	}
 	if( addr >= 0x6000 ) {
-		return	MMU.WRAM[addr-0x6000];
+		return	nes->mmu.WRAM[addr-0x6000];
 	}
 
 	return	(BYTE)(addr>>8);
@@ -518,17 +518,17 @@ void	MapperNSF::WriteLow( WORD addr, BYTE data )
 	} else if( addr == 0x5206 ) {	// MMC5
 		multipul[1] = data;
 	} else if( addr >= 0x5C00 && addr < 0x5FF6 ) {	// MMC5
-		MMU.DRAM[addr-0x5C00] = data;
+		nes->mmu.DRAM[addr-0x5C00] = data;
 	}
 //	if( addr >= 0x47A0 && addr < 0x4800 ) {
-//		MMU.WRAM[addr+0x6000] = data;
+//		nes->mmu.WRAM[addr+0x6000] = data;
 //	}
 	if( addr >= 0x5FF6 && addr <= 0x5FFF ) {
 	// Bank switch
 		BankSwitch( addr&0x0F, data );
 	}
 	if( addr >= 0x6000 ) {
-		MMU.WRAM[addr-0x6000] = data;
+		nes->mmu.WRAM[addr-0x6000] = data;
 
 		nes->apu->ExWrite( addr, data );
 	}
@@ -537,7 +537,7 @@ void	MapperNSF::WriteLow( WORD addr, BYTE data )
 void	MapperNSF::Write( WORD addr, BYTE data )
 {
 	if( (exchip&0x04) ) {
-		MMU.WRAM[addr-0x6000] = data;
+		nes->mmu.WRAM[addr-0x6000] = data;
 	}
 	nes->apu->ExWrite( addr, data );
 	if( addr == 0xF800 ) {
@@ -558,18 +558,18 @@ LPBYTE	pPtr;
 		for( i = 0; i < 0x1000; i++ ) {
 			addr = offs+i;
 			if( addr < 0 || addr > (4096*banksize)-1 ) {
-				MMU.WRAM[0x1000*(no&1)+i] = 0;
+				nes->mmu.WRAM[0x1000*(no&1)+i] = 0;
 			} else {
-				MMU.WRAM[0x1000*(no&1)+i] = pPtr[addr];
+				nes->mmu.WRAM[0x1000*(no&1)+i] = pPtr[addr];
 			}
 		}
 	} else if( no >= 8 && no <= 15 ) {
 		for( i = 0; i < 0x1000; i++ ) {
 			addr = offs+i;
 			if( addr < 0 || addr > (4096*banksize)-1 ) {
-				MMU.WRAM[0x2000+0x1000*(no&7)+i] = 0;
+				nes->mmu.WRAM[0x2000+0x1000*(no&7)+i] = 0;
 			} else {
-				MMU.WRAM[0x2000+0x1000*(no&7)+i] = pPtr[addr];
+				nes->mmu.WRAM[0x2000+0x1000*(no&7)+i] = pPtr[addr];
 			}
 		}
 	}

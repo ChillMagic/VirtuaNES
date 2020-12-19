@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper234::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0, 1, 2, 3 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, 2, 3 );
 
 	reg[0] = 0;
 	reg[1] = 0;
@@ -42,16 +42,16 @@ void	Mapper234::Write( WORD addr, BYTE data )
 void	Mapper234::SetBank()
 {
 	if( reg[0] & 0x80 ) {
-		MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+		nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
 	} else {
-		MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+		nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 	}
 	if( reg[0] & 0x40 ) {
-		MMU.SetPROM_32K_Bank( (reg[0]&0x0E)|(reg[1]&0x01) );
-		MMU.SetVROM_8K_Bank( ((reg[0]&0x0E)<<2)|((reg[1]>>4)&0x07) );
+		nes->mmu.SetPROM_32K_Bank( (reg[0]&0x0E)|(reg[1]&0x01) );
+		nes->mmu.SetVROM_8K_Bank( ((reg[0]&0x0E)<<2)|((reg[1]>>4)&0x07) );
 	} else {
-		MMU.SetPROM_32K_Bank( reg[0]&0x0F );
-		MMU.SetVROM_8K_Bank( ((reg[0]&0x0F)<<2)|((reg[1]>>4)&0x03) );
+		nes->mmu.SetPROM_32K_Bank( reg[0]&0x0F );
+		nes->mmu.SetVROM_8K_Bank( ((reg[0]&0x0F)<<2)|((reg[1]>>4)&0x03) );
 	}
 }
 

@@ -10,18 +10,18 @@ void	Mapper001::Reset()
 	patch = 0;
 	wram_patch = 0;
 
-	if( MMU.PROM_16K_SIZE < 32 ) {
-		MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	if( nes->mmu.PROM_16K_SIZE < 32 ) {
+		nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 	} else {
 		// For 512K/1M byte Cartridge
-		MMU.SetPROM_16K_Bank( 4, 0 );
-		MMU.SetPROM_16K_Bank( 6, 16-1 );
+		nes->mmu.SetPROM_16K_Bank( 4, 0 );
+		nes->mmu.SetPROM_16K_Bank( 6, 16-1 );
 
 		patch = 1;
 	}
 
-	if( MMU.VROM_8K_SIZE ) {
-//		MMU.SetVROM_8K_Bank( 0 );
+	if( nes->mmu.VROM_8K_SIZE ) {
+//		nes->mmu.SetVROM_8K_Bank( 0 );
 	}
 
 	DWORD	crc = nes->rom->GetPROM_CRC();
@@ -103,9 +103,9 @@ void	Mapper001::Write( WORD addr, BYTE data )
 		wram_bank += data&0x01;
 		if( wram_count == 5 ) {
 			if( wram_bank ) {
-				MMU.SetPROM_Bank( 3, &MMU.WRAM[0x2000], BANKTYPE_RAM );
+				nes->mmu.SetPROM_Bank( 3, &nes->mmu.WRAM[0x2000], BANKTYPE_RAM );
 			} else {
-				MMU.SetPROM_Bank( 3, &MMU.WRAM[0x0000], BANKTYPE_RAM );
+				nes->mmu.SetPROM_Bank( 3, &nes->mmu.WRAM[0x0000], BANKTYPE_RAM );
 			}
 			wram_bank = wram_count = 0;
 		}
@@ -141,64 +141,64 @@ void	Mapper001::Write( WORD addr, BYTE data )
 		switch( addr ) {
 			case	0:
 				if( reg[0] & 0x02 ) {
-					if( reg[0] & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-					else		    MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+					if( reg[0] & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+					else		    nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 				} else {
-					if( reg[0] & 0x01 ) MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
-					else		    MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
+					if( reg[0] & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4H );
+					else		    nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4L );
 				}
 				break;
 			case	1:
 				// Register #1
-				if( MMU.VROM_1K_SIZE ) {
+				if( nes->mmu.VROM_1K_SIZE ) {
 					if( reg[0] & 0x10 ) {
 						// CHR 4K bank lower($0000-$0FFF)
-						MMU.SetVROM_4K_Bank( 0, reg[1] );
+						nes->mmu.SetVROM_4K_Bank( 0, reg[1] );
 						// CHR 4K bank higher($1000-$1FFF)
-						MMU.SetVROM_4K_Bank( 4, reg[2] );
+						nes->mmu.SetVROM_4K_Bank( 4, reg[2] );
 					} else {
 						// CHR 8K bank($0000-$1FFF)
-						MMU.SetVROM_8K_Bank( reg[1]>>1 );
+						nes->mmu.SetVROM_8K_Bank( reg[1]>>1 );
 					}
 				} else {
 					// For Romancia
 					if( reg[0] & 0x10 ) {
-						MMU.SetCRAM_4K_Bank( 0, reg[1] );
+						nes->mmu.SetCRAM_4K_Bank( 0, reg[1] );
 					}
 				}
 				break;
 			case	2:
 				// Register #2
-				if( MMU.VROM_1K_SIZE ) {
+				if( nes->mmu.VROM_1K_SIZE ) {
 					if( reg[0] & 0x10 ) {
 						// CHR 4K bank lower($0000-$0FFF)
-						MMU.SetVROM_4K_Bank( 0, reg[1] );
+						nes->mmu.SetVROM_4K_Bank( 0, reg[1] );
 						// CHR 4K bank higher($1000-$1FFF)
-						MMU.SetVROM_4K_Bank( 4, reg[2] );
+						nes->mmu.SetVROM_4K_Bank( 4, reg[2] );
 					} else {
 						// CHR 8K bank($0000-$1FFF)
-						MMU.SetVROM_8K_Bank( reg[1]>>1 );
+						nes->mmu.SetVROM_8K_Bank( reg[1]>>1 );
 					}
 				} else {
 					// For Romancia
 					if( reg[0] & 0x10 ) {
-						MMU.SetCRAM_4K_Bank( 4, reg[2] );
+						nes->mmu.SetCRAM_4K_Bank( 4, reg[2] );
 					}
 				}
 				break;
 			case	3:
 				if( !(reg[0] & 0x08) ) {
 				// PRG 32K bank ($8000-$FFFF)
-					MMU.SetPROM_32K_Bank( reg[3]>>1 );
+					nes->mmu.SetPROM_32K_Bank( reg[3]>>1 );
 				} else {
 					if( reg[0] & 0x04 ) {
 					// PRG 16K bank ($8000-$BFFF)
-						MMU.SetPROM_16K_Bank( 4, reg[3] );
-						MMU.SetPROM_16K_Bank( 6, MMU.PROM_16K_SIZE-1 );
+						nes->mmu.SetPROM_16K_Bank( 4, reg[3] );
+						nes->mmu.SetPROM_16K_Bank( 6, nes->mmu.PROM_16K_SIZE-1 );
 					} else {
 					// PRG 16K bank ($C000-$FFFF)
-						MMU.SetPROM_16K_Bank( 6, reg[3] );
-						MMU.SetPROM_16K_Bank( 4, 0 );
+						nes->mmu.SetPROM_16K_Bank( 6, reg[3] );
+						nes->mmu.SetPROM_16K_Bank( 4, 0 );
 					}
 				}
 				break;
@@ -206,69 +206,69 @@ void	Mapper001::Write( WORD addr, BYTE data )
 	} else {
 		// For 512K/1M byte Cartridge
 		INT	PROM_BASE = 0;
-		if( MMU.PROM_16K_SIZE >= 32 ) {
+		if( nes->mmu.PROM_16K_SIZE >= 32 ) {
 			PROM_BASE = reg[1] & 0x10;
 		}
 
 		// For FinalFantasy I&II
 		if( wram_patch == 2 ) {
 			if( !(reg[1] & 0x18) ) {
-				MMU.SetPROM_Bank( 3, &MMU.WRAM[0x0000], BANKTYPE_RAM );
+				nes->mmu.SetPROM_Bank( 3, &nes->mmu.WRAM[0x0000], BANKTYPE_RAM );
 			} else {
-				MMU.SetPROM_Bank( 3, &MMU.WRAM[0x2000], BANKTYPE_RAM );
+				nes->mmu.SetPROM_Bank( 3, &nes->mmu.WRAM[0x2000], BANKTYPE_RAM );
 			}
 		}
 
 		// Register #0
 		if( addr == 0 ) {
 			if( reg[0] & 0x02 ) {
-				if( reg[0] & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-				else		    MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				if( reg[0] & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		    nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			} else {
-				if( reg[0] & 0x01 ) MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
-				else		    MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
+				if( reg[0] & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4H );
+				else		    nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4L );
 			}
 		}
 		// Register #1
-		if( MMU.VROM_1K_SIZE ) {
+		if( nes->mmu.VROM_1K_SIZE ) {
 			if( reg[0] & 0x10 ) {
 			// CHR 4K bank lower($0000-$0FFF)
-				MMU.SetVROM_4K_Bank( 0, reg[1] );
+				nes->mmu.SetVROM_4K_Bank( 0, reg[1] );
 			} else {
 			// CHR 8K bank($0000-$1FFF)
-				MMU.SetVROM_8K_Bank( reg[1]>>1 );
+				nes->mmu.SetVROM_8K_Bank( reg[1]>>1 );
 			}
 		} else {
 			// For Romancia
 			if( reg[0] & 0x10 ) {
-				MMU.SetCRAM_4K_Bank( 0, reg[1] );
+				nes->mmu.SetCRAM_4K_Bank( 0, reg[1] );
 			}
 		}
 		// Register #2
-		if( MMU.VROM_1K_SIZE ) {
+		if( nes->mmu.VROM_1K_SIZE ) {
 			if( reg[0] & 0x10 ) {
 			// CHR 4K bank higher($1000-$1FFF)
-				MMU.SetVROM_4K_Bank( 4, reg[2] );
+				nes->mmu.SetVROM_4K_Bank( 4, reg[2] );
 			}
 		} else {
 			// For Romancia
 			if( reg[0] & 0x10 ) {
-				MMU.SetCRAM_4K_Bank( 4, reg[2] );
+				nes->mmu.SetCRAM_4K_Bank( 4, reg[2] );
 			}
 		}
 		// Register #3
 		if( !(reg[0] & 0x08) ) {
 		// PRG 32K bank ($8000-$FFFF)
-			MMU.SetPROM_32K_Bank( (reg[3]&(0xF+PROM_BASE))>>1 );
+			nes->mmu.SetPROM_32K_Bank( (reg[3]&(0xF+PROM_BASE))>>1 );
 		} else {
 			if( reg[0] & 0x04 ) {
 			// PRG 16K bank ($8000-$BFFF)
-				MMU.SetPROM_16K_Bank( 4, PROM_BASE+(reg[3]&0x0F) );
-				if( MMU.PROM_16K_SIZE >= 32 ) MMU.SetPROM_16K_Bank( 6, PROM_BASE+16-1 );
+				nes->mmu.SetPROM_16K_Bank( 4, PROM_BASE+(reg[3]&0x0F) );
+				if( nes->mmu.PROM_16K_SIZE >= 32 ) nes->mmu.SetPROM_16K_Bank( 6, PROM_BASE+16-1 );
 			} else {
 			// PRG 16K bank ($C000-$FFFF)
-				MMU.SetPROM_16K_Bank( 6, PROM_BASE+(reg[3]&0x0F) );
-				if( MMU.PROM_16K_SIZE >= 32 ) MMU.SetPROM_16K_Bank( 4, PROM_BASE );
+				nes->mmu.SetPROM_16K_Bank( 6, PROM_BASE+(reg[3]&0x0F) );
+				if( nes->mmu.PROM_16K_SIZE >= 32 ) nes->mmu.SetPROM_16K_Bank( 4, PROM_BASE );
 			}
 		}
 	}

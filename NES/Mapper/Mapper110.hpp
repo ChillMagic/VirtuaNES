@@ -3,8 +3,8 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper110::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0 );
-	MMU.SetVROM_8K_Bank( 0 );
+	nes->mmu.SetPROM_32K_Bank( 0 );
+	nes->mmu.SetVROM_8K_Bank( 0 );
 
 	reg0 = 0;
 	reg1 = 0;
@@ -18,23 +18,23 @@ void	Mapper110::WriteLow( WORD addr, BYTE data )
 		case	0x4101:
 			switch( reg1 ) {
 				case	5:
-					MMU.SetPROM_32K_Bank( data );
+					nes->mmu.SetPROM_32K_Bank( data );
 					break;
 				case	0:
 					reg0 = data & 0x01;
-					MMU.SetVROM_8K_Bank( reg0 );
+					nes->mmu.SetVROM_8K_Bank( reg0 );
 					break;
 				case	2:
 					reg0 = data;
-					MMU.SetVROM_8K_Bank( reg0 );
+					nes->mmu.SetVROM_8K_Bank( reg0 );
 					break;
 				case	4:
 					reg0 = reg0 | (data<<1);
-					MMU.SetVROM_8K_Bank( reg0 );
+					nes->mmu.SetVROM_8K_Bank( reg0 );
 					break;
 				case	6:
 					reg0 = reg0 | (data<<2);
-					MMU.SetVROM_8K_Bank( reg0 );
+					nes->mmu.SetVROM_8K_Bank( reg0 );
 					break;
 				default:
 					break;

@@ -18,7 +18,7 @@ void	Mapper044::Reset()
 	prg1 = 1;
 
 	// set VROM banks
-	if( MMU.VROM_1K_SIZE ) {
+	if( nes->mmu.VROM_1K_SIZE ) {
 		chr01 = 0;
 		chr23 = 2;
 		chr4  = 4;
@@ -98,8 +98,8 @@ void	Mapper044::Write( WORD addr, BYTE data )
 		case	0xA000:
 			reg[2] = data;
 			if( !nes->rom->Is4SCREEN() ) {
-				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xA001:
@@ -150,39 +150,39 @@ void	Mapper044::HSync( INT scanline )
 void	Mapper044::SetBank_CPU()
 {
 	if( reg[0] & 0x40 ) {
-		MMU.SetPROM_8K_Bank( 4, ((bank == 6)?0x1e:0x0e)|(bank<<4) );
-		MMU.SetPROM_8K_Bank( 5, ((bank == 6)?0x1f&prg1:0x0f&prg1)|(bank<<4) );
-		MMU.SetPROM_8K_Bank( 6, ((bank == 6)?0x1f&prg0:0x0f&prg0)|(bank<<4) );
-		MMU.SetPROM_8K_Bank( 7, ((bank == 6)?0x1f:0x0f)|(bank<<4) );
+		nes->mmu.SetPROM_8K_Bank( 4, ((bank == 6)?0x1e:0x0e)|(bank<<4) );
+		nes->mmu.SetPROM_8K_Bank( 5, ((bank == 6)?0x1f&prg1:0x0f&prg1)|(bank<<4) );
+		nes->mmu.SetPROM_8K_Bank( 6, ((bank == 6)?0x1f&prg0:0x0f&prg0)|(bank<<4) );
+		nes->mmu.SetPROM_8K_Bank( 7, ((bank == 6)?0x1f:0x0f)|(bank<<4) );
 	} else {
-		MMU.SetPROM_8K_Bank( 4, ((bank == 6)?0x1f&prg0:0x0f&prg0)|(bank<<4) );
-		MMU.SetPROM_8K_Bank( 5, ((bank == 6)?0x1f&prg1:0x0f&prg1)|(bank<<4) );
-		MMU.SetPROM_8K_Bank( 6, ((bank == 6)?0x1e:0x0e)|(bank<<4) );
-		MMU.SetPROM_8K_Bank( 7, ((bank == 6)?0x1f:0x0f)|(bank<<4) );
+		nes->mmu.SetPROM_8K_Bank( 4, ((bank == 6)?0x1f&prg0:0x0f&prg0)|(bank<<4) );
+		nes->mmu.SetPROM_8K_Bank( 5, ((bank == 6)?0x1f&prg1:0x0f&prg1)|(bank<<4) );
+		nes->mmu.SetPROM_8K_Bank( 6, ((bank == 6)?0x1e:0x0e)|(bank<<4) );
+		nes->mmu.SetPROM_8K_Bank( 7, ((bank == 6)?0x1f:0x0f)|(bank<<4) );
 	}
 }
 
 void	Mapper044::SetBank_PPU()
 {
-	if( MMU.VROM_1K_SIZE ) {
+	if( nes->mmu.VROM_1K_SIZE ) {
 		if( reg[0] & 0x80 ) {
-			MMU.SetVROM_1K_Bank( 0, ((bank == 6)?0xff&chr4:0x7f&chr4)|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 1, ((bank == 6)?0xff&chr5:0x7f&chr5)|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 2, ((bank == 6)?0xff&chr6:0x7f&chr6)|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 3, ((bank == 6)?0xff&chr7:0x7f&chr7)|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 4, ((bank == 6)?0xff&chr01:0x7f&chr01)|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 5, ((bank == 6)?0xff&(chr01+1):0x7f&(chr01+1))|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 6, ((bank == 6)?0xff&chr23:0x7f&chr23)|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 7, ((bank == 6)?0xff&(chr23+1):0x7f&(chr23+1))|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 0, ((bank == 6)?0xff&chr4:0x7f&chr4)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 1, ((bank == 6)?0xff&chr5:0x7f&chr5)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 2, ((bank == 6)?0xff&chr6:0x7f&chr6)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 3, ((bank == 6)?0xff&chr7:0x7f&chr7)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 4, ((bank == 6)?0xff&chr01:0x7f&chr01)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 5, ((bank == 6)?0xff&(chr01+1):0x7f&(chr01+1))|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 6, ((bank == 6)?0xff&chr23:0x7f&chr23)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 7, ((bank == 6)?0xff&(chr23+1):0x7f&(chr23+1))|(bank<<7) );
 		} else {
-			MMU.SetVROM_1K_Bank( 0, ((bank == 6)?0xff&chr01:0x7f&chr01)|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 1, ((bank == 6)?0xff&(chr01+1):0x7f&(chr01+1))|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 2, ((bank == 6)?0xff&chr23:0x7f&chr23)|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 3, ((bank == 6)?0xff&(chr23+1):0x7f&(chr23+1))|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 4, ((bank == 6)?0xff&chr4:0x7f&chr4)|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 5, ((bank == 6)?0xff&chr5:0x7f&chr5)|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 6, ((bank == 6)?0xff&chr6:0x7f&chr6)|(bank<<7) );
-			MMU.SetVROM_1K_Bank( 7, ((bank == 6)?0xff&chr7:0x7f&chr7)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 0, ((bank == 6)?0xff&chr01:0x7f&chr01)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 1, ((bank == 6)?0xff&(chr01+1):0x7f&(chr01+1))|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 2, ((bank == 6)?0xff&chr23:0x7f&chr23)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 3, ((bank == 6)?0xff&(chr23+1):0x7f&(chr23+1))|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 4, ((bank == 6)?0xff&chr4:0x7f&chr4)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 5, ((bank == 6)?0xff&chr5:0x7f&chr5)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 6, ((bank == 6)?0xff&chr6:0x7f&chr6)|(bank<<7) );
+			nes->mmu.SetVROM_1K_Bank( 7, ((bank == 6)?0xff&chr7:0x7f&chr7)|(bank<<7) );
 		}
 	}
 }

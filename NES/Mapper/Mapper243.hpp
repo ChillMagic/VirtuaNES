@@ -3,14 +3,14 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper243::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0 );
-	if( MMU.VROM_8K_SIZE > 4 ) {
-		MMU.SetVROM_8K_Bank( 4 );
-	} else if( MMU.VROM_8K_SIZE ) {
-		MMU.SetVROM_8K_Bank( 0 );
+	nes->mmu.SetPROM_32K_Bank( 0 );
+	if( nes->mmu.VROM_8K_SIZE > 4 ) {
+		nes->mmu.SetVROM_8K_Bank( 4 );
+	} else if( nes->mmu.VROM_8K_SIZE ) {
+		nes->mmu.SetVROM_8K_Bank( 0 );
 	}
 
-	MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+	nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
 
 	reg[0] = 0;
 	reg[1] = 0;
@@ -44,14 +44,14 @@ void	Mapper243::WriteLow( WORD addr, BYTE data )
 				break;
 		}
 
-		MMU.SetPROM_32K_Bank( reg[1] );
-		MMU.SetVROM_8K_Bank( reg[2]*8+0, reg[2]*8+1, reg[2]*8+2, reg[2]*8+3,
+		nes->mmu.SetPROM_32K_Bank( reg[1] );
+		nes->mmu.SetVROM_8K_Bank( reg[2]*8+0, reg[2]*8+1, reg[2]*8+2, reg[2]*8+3,
 				 reg[2]*8+4, reg[2]*8+5, reg[2]*8+6, reg[2]*8+7 );
 
 		if( reg[3] ) {
-			MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 		} else {
-			MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+			nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
 		}
 	}
 }

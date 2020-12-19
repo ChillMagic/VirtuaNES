@@ -3,11 +3,11 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper202::Reset()
 {
-	MMU.SetPROM_16K_Bank( 4, 6 );
-	MMU.SetPROM_16K_Bank( 6, 7 );
+	nes->mmu.SetPROM_16K_Bank( 4, 6 );
+	nes->mmu.SetPROM_16K_Bank( 6, 7 );
 
-	if( MMU.VROM_1K_SIZE ) {
-		MMU.SetVROM_8K_Bank( 0 );
+	if( nes->mmu.VROM_1K_SIZE ) {
+		nes->mmu.SetVROM_8K_Bank( 0 );
 	}
 }
 
@@ -32,17 +32,17 @@ void	Mapper202::WriteSub( WORD addr, BYTE data )
 {
 	INT	bank = (addr>>1) & 0x07;
 
-	MMU.SetPROM_16K_Bank( 4, bank );
+	nes->mmu.SetPROM_16K_Bank( 4, bank );
 	if( (addr & 0x0C) == 0x0C ) {
-		MMU.SetPROM_16K_Bank( 6, bank+1 );
+		nes->mmu.SetPROM_16K_Bank( 6, bank+1 );
 	} else {
-		MMU.SetPROM_16K_Bank( 6, bank );
+		nes->mmu.SetPROM_16K_Bank( 6, bank );
 	}
-	MMU.SetVROM_8K_Bank( bank );
+	nes->mmu.SetVROM_8K_Bank( bank );
 
 	if( addr & 0x01 ) {
-		MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+		nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
 	} else {
-		MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+		nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 	}
 }

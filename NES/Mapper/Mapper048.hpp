@@ -7,8 +7,8 @@ void	Mapper048::Reset()
 	irq_enable = 0;
 	irq_counter = 0;
 
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
-	MMU.SetVROM_8K_Bank( 0 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
+	nes->mmu.SetVROM_8K_Bank( 0 );
 
 	DWORD	crc = nes->rom->GetPROM_CRC();
 //	if( crc == 0x547e6cc1 ) { // Flintstones - The Rescue of Dino & Hoppy(J)
@@ -21,32 +21,32 @@ void	Mapper048::Write( WORD addr, BYTE data )
 	switch( addr ) {
 		case	0x8000:
 			if( !reg ) {
-				if( data & 0x40 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x40 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
-			MMU.SetPROM_8K_Bank( 4, data );
+			nes->mmu.SetPROM_8K_Bank( 4, data );
 			break;
 		case	0x8001:
-			MMU.SetPROM_8K_Bank( 5, data );
+			nes->mmu.SetPROM_8K_Bank( 5, data );
 			break;
 
 		case	0x8002:
-			MMU.SetVROM_2K_Bank( 0, data );
+			nes->mmu.SetVROM_2K_Bank( 0, data );
 			break;
 		case	0x8003:
-			MMU.SetVROM_2K_Bank( 2, data );
+			nes->mmu.SetVROM_2K_Bank( 2, data );
 			break;
 		case	0xA000:
-			MMU.SetVROM_1K_Bank( 4, data );
+			nes->mmu.SetVROM_1K_Bank( 4, data );
 			break;
 		case	0xA001:
-			MMU.SetVROM_1K_Bank( 5, data );
+			nes->mmu.SetVROM_1K_Bank( 5, data );
 			break;
 		case	0xA002:
-			MMU.SetVROM_1K_Bank( 6, data );
+			nes->mmu.SetVROM_1K_Bank( 6, data );
 			break;
 		case	0xA003:
-			MMU.SetVROM_1K_Bank( 7, data );
+			nes->mmu.SetVROM_1K_Bank( 7, data );
 			break;
 
 		case	0xC000:
@@ -68,8 +68,8 @@ void	Mapper048::Write( WORD addr, BYTE data )
 			break;
 
 		case	0xE000:
-			if( data & 0x40 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-			else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			if( data & 0x40 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+			else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			reg = 1;
 			break;
 	}

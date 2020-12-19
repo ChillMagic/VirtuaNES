@@ -18,20 +18,20 @@ void	Mapper070::Reset()
 		patch = 1;
 	}
 
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
-	MMU.SetVROM_8K_Bank( 0 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
+	nes->mmu.SetVROM_8K_Bank( 0 );
 }
 
 void	Mapper070::Write( WORD addr, BYTE data )
 {
-	MMU.SetPROM_16K_Bank( 4, (data & 0x70)>>4 );
-	MMU.SetVROM_8K_Bank( data & 0x0F );
+	nes->mmu.SetPROM_16K_Bank( 4, (data & 0x70)>>4 );
+	nes->mmu.SetVROM_8K_Bank( data & 0x0F );
 
 	if( patch ) {
-		if( data & 0x80 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-		else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+		if( data & 0x80 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+		else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 	} else {
-		if( data & 0x80 ) MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
-		else		  MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
+		if( data & 0x80 ) nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4H );
+		else		  nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4L );
 	}
 }

@@ -3,9 +3,9 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper114::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
-	if( MMU.VROM_1K_SIZE ) {
-		MMU.SetVROM_8K_Bank( 0 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
+	if( nes->mmu.VROM_1K_SIZE ) {
+		nes->mmu.SetVROM_8K_Bank( 0 );
 	}
 
 	reg_a = reg_c = reg_m = 0;
@@ -35,8 +35,8 @@ void	Mapper114::Write( WORD addr, BYTE data )
 	} else {
 		switch( addr & 0xE000 ) {
 			case	0x8000:
-				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 				break;
 			case	0xA000:
 				reg_c = 1;
@@ -90,21 +90,21 @@ void	Mapper114::HSync( INT scanline )
 void	Mapper114::SetBank_CPU()
 {
 	if( reg_m & 0x80 ) {
-		MMU.SetPROM_16K_Bank( 4, reg_m & 0x1F );
+		nes->mmu.SetPROM_16K_Bank( 4, reg_m & 0x1F );
 	} else {
-		MMU.SetPROM_8K_Bank( 4, reg_b[4] );
-		MMU.SetPROM_8K_Bank( 5, reg_b[5] );
+		nes->mmu.SetPROM_8K_Bank( 4, reg_b[4] );
+		nes->mmu.SetPROM_8K_Bank( 5, reg_b[5] );
 	}
 }
 
 void	Mapper114::SetBank_PPU()
 {
-	MMU.SetVROM_2K_Bank( 0, reg_b[0]>>1 );
-	MMU.SetVROM_2K_Bank( 2, reg_b[2]>>1 );
-	MMU.SetVROM_1K_Bank( 4, reg_b[6] );
-	MMU.SetVROM_1K_Bank( 5, reg_b[1] );
-	MMU.SetVROM_1K_Bank( 6, reg_b[7] );
-	MMU.SetVROM_1K_Bank( 7, reg_b[3] );
+	nes->mmu.SetVROM_2K_Bank( 0, reg_b[0]>>1 );
+	nes->mmu.SetVROM_2K_Bank( 2, reg_b[2]>>1 );
+	nes->mmu.SetVROM_1K_Bank( 4, reg_b[6] );
+	nes->mmu.SetVROM_1K_Bank( 5, reg_b[1] );
+	nes->mmu.SetVROM_1K_Bank( 6, reg_b[7] );
+	nes->mmu.SetVROM_1K_Bank( 7, reg_b[3] );
 }
 
 void	Mapper114::SaveState( LPBYTE p )

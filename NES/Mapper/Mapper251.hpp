@@ -3,9 +3,9 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper251::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 
-	MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+	nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 
 	INT	i;
 	for( i = 0; i < 11; i++ )
@@ -59,20 +59,20 @@ void	Mapper251::SetBank()
 	}
 
 	if( reg[8] & 0x80 ) {
-		MMU.SetVROM_8K_Bank(chr[2],chr[3],chr[4],chr[5],chr[0],chr[0]+1,chr[1],chr[1]+1);
+		nes->mmu.SetVROM_8K_Bank(chr[2],chr[3],chr[4],chr[5],chr[0],chr[0]+1,chr[1],chr[1]+1);
 	} else {
-		MMU.SetVROM_8K_Bank(chr[0],chr[0]+1,chr[1],chr[1]+1,chr[2],chr[3],chr[4],chr[5]);
+		nes->mmu.SetVROM_8K_Bank(chr[0],chr[0]+1,chr[1],chr[1]+1,chr[2],chr[3],chr[4],chr[5]);
 	}
 
 	prg[0] = (reg[6]&((breg[3]&0x3F)^0x3F))|(breg[1]);
 	prg[1] = (reg[7]&((breg[3]&0x3F)^0x3F))|(breg[1]);
 	prg[2] = prg[3] =((breg[3]&0x3F)^0x3F)|(breg[1]);
-	prg[2] &= MMU.PROM_8K_SIZE-1;
+	prg[2] &= nes->mmu.PROM_8K_SIZE-1;
 
 	if( reg[8] & 0x40 ) {
-		MMU.SetPROM_32K_Bank( prg[2],prg[1],prg[0],prg[3] );
+		nes->mmu.SetPROM_32K_Bank( prg[2],prg[1],prg[0],prg[3] );
 	} else {
-		MMU.SetPROM_32K_Bank( prg[0],prg[1],prg[2],prg[3] );
+		nes->mmu.SetPROM_32K_Bank( prg[0],prg[1],prg[2],prg[3] );
 	}
 }
 

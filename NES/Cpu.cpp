@@ -28,7 +28,7 @@
 // コンストラクタ/デストラクタ
 //
 //CPU::CPU( NES* parent )
-CPU::CPU(NES* parent, MMUClass &mmu) : nes(parent), mmu(mmu) {
+CPU::CPU(NES* parent) : nes(parent) {
 	//	nes = parent;
 	m_bClockProcess = FALSE;
 }
@@ -39,23 +39,23 @@ CPU::~CPU() {
 BYTE CPU::RD6502(WORD addr) {
 	if (addr < 0x2000) {
 		// RAM (Mirror $0800, $1000, $1800)
-		return mmu.RAM[addr & 0x07FF];
+		return nes->mmu.RAM[addr & 0x07FF];
 	}
 	if (addr < 0x8000) {
 		// Others
 		return nes->Read(addr);
 	}
 	// Dummy access
-	mapper->Read(addr, mmu.CPU_MEM_BANK[addr >> 13][addr & 0x1FFF]);
+	mapper->Read(addr, nes->mmu.CPU_MEM_BANK[addr >> 13][addr & 0x1FFF]);
 
 	// Quick bank read
-	return mmu.CPU_MEM_BANK[addr >> 13][addr & 0x1FFF];
+	return nes->mmu.CPU_MEM_BANK[addr >> 13][addr & 0x1FFF];
 }
 
 WORD CPU::RD6502W(WORD addr) {
 	if (addr < 0x2000) {
 		// RAM (Mirror $0800, $1000, $1800)
-		return *((WORD*)&mmu.RAM[addr & 0x07FF]);
+		return *((WORD*)&nes->mmu.RAM[addr & 0x07FF]);
 	}
 	if (addr < 0x8000) {
 		// Others
@@ -65,11 +65,11 @@ WORD CPU::RD6502W(WORD addr) {
 	// Quick bank read
 #if	0
 	WORD	ret;
-	ret  = (WORD)mmu.CPU_MEM_BANK[(addr+0)>>13][(addr+0)&0x1FFF];
-	ret |= (WORD)mmu.CPU_MEM_BANK[(addr+1)>>13][(addr+1)&0x1FFF]<<8;
+	ret  = (WORD)nes->mmu.CPU_MEM_BANK[(addr+0)>>13][(addr+0)&0x1FFF];
+	ret |= (WORD)nes->mmu.CPU_MEM_BANK[(addr+1)>>13][(addr+1)&0x1FFF]<<8;
 	return	ret;
 #else
-	return *((WORD*)&mmu.CPU_MEM_BANK[addr >> 13][addr & 0x1FFF]);
+	return *((WORD*)&nes->mmu.CPU_MEM_BANK[addr >> 13][addr & 0x1FFF]);
 #endif
 }
 
@@ -77,7 +77,7 @@ WORD CPU::RD6502W(WORD addr) {
 void CPU::WR6502(WORD addr, BYTE data) {
 	if (addr < 0x2000) {
 		// RAM (Mirror $0800, $1000, $1800)
-		mmu.RAM[addr & 0x07FF] = data;
+		nes->mmu.RAM[addr & 0x07FF] = data;
 	}
 	else {
 		// Others
@@ -105,7 +105,7 @@ void CPU::Reset() {
 	DMA_cycles = 0;
 
 	// STACK quick access
-	STACK = &mmu.RAM[0x0100];
+	STACK = &nes->mmu.RAM[0x0100];
 
 	// Zero/Negative FLAG
 	ZN_Table[0] = Z_FLAG;

@@ -9,11 +9,11 @@ void	Mapper100::Reset()
 
 	prg0 = 0;
 	prg1 = 1;
-	prg2 = MMU.PROM_8K_SIZE-2;
-	prg3 = MMU.PROM_8K_SIZE-1;
+	prg2 = nes->mmu.PROM_8K_SIZE-2;
+	prg3 = nes->mmu.PROM_8K_SIZE-1;
 	SetBank_CPU();
 
-	if( MMU.VROM_1K_SIZE ) {
+	if( nes->mmu.VROM_1K_SIZE ) {
 		chr0 = 0;
 		chr1 = 1;
 		chr2 = 2;
@@ -44,39 +44,39 @@ void	Mapper100::Write( WORD addr, BYTE data )
 
 			switch( reg[0] & 0xC7 ) {
 				case	0x00:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr0 = data&0xFE;
 						chr1 = chr0+1;
 						SetBank_PPU();
 					}
 					break;
 				case	0x01:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr2 = data&0xFE;
 						chr3 = chr2+1;
 						SetBank_PPU();
 					}
 					break;
 				case	0x02:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr4 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x03:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr5 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x04:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr6 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x05:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr7 = data;
 						SetBank_PPU();
 					}
@@ -100,39 +100,39 @@ void	Mapper100::Write( WORD addr, BYTE data )
 					break;
 
 				case	0x80:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr4 = data&0xFE;
 						chr5 = chr4+1;
 						SetBank_PPU();
 					}
 					break;
 				case	0x81:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr6 = data&0xFE;
 						chr7 = chr6+1;
 						SetBank_PPU();
 					}
 					break;
 				case	0x82:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr0 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x83:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr1 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x84:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr2 = data;
 						SetBank_PPU();
 					}
 					break;
 				case	0x85:
-					if( MMU.VROM_1K_SIZE ) {
+					if( nes->mmu.VROM_1K_SIZE ) {
 						chr3 = data;
 						SetBank_PPU();
 					}
@@ -143,8 +143,8 @@ void	Mapper100::Write( WORD addr, BYTE data )
 		case	0xA000:
 			reg[2] = data;
 			if( !nes->rom->Is4SCREEN() ) {
-				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xA001:
@@ -187,13 +187,13 @@ void	Mapper100::HSync( INT scanline )
 
 void	Mapper100::SetBank_CPU()
 {
-	MMU.SetPROM_32K_Bank( prg0, prg1, prg2, prg3 );
+	nes->mmu.SetPROM_32K_Bank( prg0, prg1, prg2, prg3 );
 }
 
 void	Mapper100::SetBank_PPU()
 {
-	if( MMU.VROM_1K_SIZE ) {
-		MMU.SetVROM_8K_Bank( chr0, chr1, chr2, chr3, chr4, chr5, chr6, chr7 );
+	if( nes->mmu.VROM_1K_SIZE ) {
+		nes->mmu.SetVROM_8K_Bank( chr0, chr1, chr2, chr3, chr4, chr5, chr6, chr7 );
 	}
 }
 

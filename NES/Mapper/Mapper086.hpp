@@ -3,8 +3,8 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper086::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0, 1, 2, 3 );
-	MMU.SetVROM_8K_Bank( 0 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, 2, 3 );
+	nes->mmu.SetVROM_8K_Bank( 0 );
 
 	reg = 0xFF;
 	cnt = 0;
@@ -13,9 +13,9 @@ void	Mapper086::Reset()
 void	Mapper086::WriteLow( WORD addr, BYTE data )
 {
 	if( addr == 0x6000 ) {
-		MMU.SetPROM_32K_Bank( (data&0x30)>>4 );
+		nes->mmu.SetPROM_32K_Bank( (data&0x30)>>4 );
 
-		MMU.SetVROM_8K_Bank( (data&0x03)|((data & 0x40)>>4) );
+		nes->mmu.SetVROM_8K_Bank( (data&0x03)|((data & 0x40)>>4) );
 	}
 	if( addr == 0x7000 ) {
 		if( !(reg&0x10) && (data&0x10) && !cnt ) {

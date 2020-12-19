@@ -132,15 +132,15 @@ void	PPU::Reset()
 	bExtNameTable = FALSE;
 	bExtMono = FALSE;
 
-	MMU.PPUREG[0] = MMU.PPUREG[1] = 0;
+	nes->mmu.PPUREG[0] = nes->mmu.PPUREG[1] = 0;
 
-	MMU.PPU56Toggle = 0;
+	nes->mmu.PPU56Toggle = 0;
 
-	MMU.PPU7_Temp = 0xFF;	// VS Excitebikeでおかしくなる($2006を読みに行くバグがある)
-//	MMU.PPU7_Temp = 0;
+	nes->mmu.PPU7_Temp = 0xFF;	// VS Excitebikeでおかしくなる($2006を読みに行くバグがある)
+//	nes->mmu.PPU7_Temp = 0;
 
-	MMU.loopy_v = MMU.loopy_t = 0;
-	MMU.loopy_x = loopy_y = 0;
+	nes->mmu.loopy_v = nes->mmu.loopy_t = 0;
+	nes->mmu.loopy_x = loopy_y = 0;
 	loopy_shift = 0;
 
 	if( lpScreen )
@@ -161,35 +161,35 @@ BYTE	data = 0x00;
 		case	0x2003: // SPR-RAM Address Register(W)
 		case	0x2005: // PPU Scroll Register(W2)
 		case	0x2006: // VRAM Address Register(W2)
-			data = MMU.PPU7_Temp;	// 多分
+			data = nes->mmu.PPU7_Temp;	// 多分
 			break;
 		// Read/Write Register
 		case	0x2002: // PPU Status Register(R)
 //DEBUGOUT( "2002 RD L:%3d C:%8d\n", ScanlineNo, nes->cpu->GetTotalCycles() );
-			data = MMU.PPUREG[2] | VSSecurityData;
-			MMU.PPU56Toggle = 0;
-			MMU.PPUREG[2] &= ~PPU_VBLANK_FLAG;
+			data = nes->mmu.PPUREG[2] | VSSecurityData;
+			nes->mmu.PPU56Toggle = 0;
+			nes->mmu.PPUREG[2] &= ~PPU_VBLANK_FLAG;
 			break;
 		case	0x2004: // SPR_RAM I/O Register(RW)
-			data = MMU.SPRAM[ MMU.PPUREG[3]++ ];
+			data = nes->mmu.SPRAM[ nes->mmu.PPUREG[3]++ ];
 			break;
 		case	0x2007: // VRAM I/O Register(RW)
-			WORD	addr = MMU.loopy_v & 0x3FFF;
-			data = MMU.PPU7_Temp;
-			if( MMU.PPUREG[0] & PPU_INC32_BIT ) MMU.loopy_v+=32;
-			else				MMU.loopy_v++;
+			WORD	addr = nes->mmu.loopy_v & 0x3FFF;
+			data = nes->mmu.PPU7_Temp;
+			if( nes->mmu.PPUREG[0] & PPU_INC32_BIT ) nes->mmu.loopy_v+=32;
+			else				nes->mmu.loopy_v++;
 			if( addr >= 0x3000 ) {
 				if( addr >= 0x3F00 ) {
 //					data &= 0x3F;
 					if( !(addr&0x0010) ) {
-						return	MMU.BGPAL[addr&0x000F];
+						return	nes->mmu.BGPAL[addr&0x000F];
 					} else {
-						return	MMU.SPPAL[addr&0x000F];
+						return	nes->mmu.SPPAL[addr&0x000F];
 					}
 				}
 				addr &= 0xEFFF;
 			}
-			MMU.PPU7_Temp = MMU.PPU_MEM_BANK[addr>>10][addr&0x03FF];
+			nes->mmu.PPU7_Temp = nes->mmu.PPU_MEM_BANK[addr>>10][addr&0x03FF];
 	}
 
 	return	data;
@@ -213,65 +213,65 @@ void	PPU::Write( WORD addr, BYTE data )
 		case	0x2000: // PPU Control Register #1(W)
 			// NameTable select
 			// t:0000110000000000=d:00000011
-			MMU.loopy_t = (MMU.loopy_t & 0xF3FF)|(((WORD)data & 0x03)<<10);
+			nes->mmu.loopy_t = (nes->mmu.loopy_t & 0xF3FF)|(((WORD)data & 0x03)<<10);
 
-			if( (data & 0x80) && !(MMU.PPUREG[0] & 0x80) && (MMU.PPUREG[2] & 0x80) ) {
+			if( (data & 0x80) && !(nes->mmu.PPUREG[0] & 0x80) && (nes->mmu.PPUREG[2] & 0x80) ) {
 				nes->cpu->NMI();	// hmm..
 			}
-//DEBUGOUT( "W2000 %02X O:%02X S:%02X L:%3d C:%8d\n", data, MMU.PPUREG[0], MMU.PPUREG[2], ScanlineNo, nes->cpu->GetTotalCycles() );
+//DEBUGOUT( "W2000 %02X O:%02X S:%02X L:%3d C:%8d\n", data, nes->mmu.PPUREG[0], nes->mmu.PPUREG[2], ScanlineNo, nes->cpu->GetTotalCycles() );
 
-			MMU.PPUREG[0] = data;
+			nes->mmu.PPUREG[0] = data;
 			break;
 		case	0x2001: // PPU Control Register #2(W)
 //DEBUGOUT( "W2001 %02X L:%3d C:%8d\n", data, ScanlineNo, nes->cpu->GetTotalCycles() );
-			MMU.PPUREG[1] = data;
+			nes->mmu.PPUREG[1] = data;
 			break;
 		case	0x2003: // SPR-RAM Address Register(W)
-			MMU.PPUREG[3] = data;
+			nes->mmu.PPUREG[3] = data;
 			break;
 		case	0x2004: // SPR_RAM I/O Register(RW)
-			MMU.SPRAM[ MMU.PPUREG[3]++ ] = data;
+			nes->mmu.SPRAM[ nes->mmu.PPUREG[3]++ ] = data;
 			break;
 
 		case	0x2005: // PPU Scroll Register(W2)
 //DEBUGOUT( "SCR WRT L:%3d C:%8d\n", ScanlineNo, nes->cpu->GetTotalCycles() );
-			if( !MMU.PPU56Toggle ) {
+			if( !nes->mmu.PPU56Toggle ) {
 			// First write
 				// tile X t:0000000000011111=d:11111000
-				MMU.loopy_t = (MMU.loopy_t & 0xFFE0)|(((WORD)data)>>3);
+				nes->mmu.loopy_t = (nes->mmu.loopy_t & 0xFFE0)|(((WORD)data)>>3);
 				// scroll offset X x=d:00000111
-				MMU.loopy_x = data & 0x07;
+				nes->mmu.loopy_x = data & 0x07;
 			} else {
 			// Second write
 				// tile Y t:0000001111100000=d:11111000
-				MMU.loopy_t = (MMU.loopy_t & 0xFC1F)|((((WORD)data) & 0xF8)<<2);
+				nes->mmu.loopy_t = (nes->mmu.loopy_t & 0xFC1F)|((((WORD)data) & 0xF8)<<2);
 				// scroll offset Y t:0111000000000000=d:00000111
-				MMU.loopy_t = (MMU.loopy_t & 0x8FFF)|((((WORD)data) & 0x07)<<12);
+				nes->mmu.loopy_t = (nes->mmu.loopy_t & 0x8FFF)|((((WORD)data) & 0x07)<<12);
 			}
-			MMU.PPU56Toggle = !MMU.PPU56Toggle;
+			nes->mmu.PPU56Toggle = !nes->mmu.PPU56Toggle;
 			break;
 		case	0x2006: // VRAM Address Register(W2)
-			if( !MMU.PPU56Toggle ) {
+			if( !nes->mmu.PPU56Toggle ) {
 			// First write
 				// t:0011111100000000=d:00111111
 				// t:1100000000000000=0
-				MMU.loopy_t = (MMU.loopy_t & 0x00FF)|((((WORD)data) & 0x3F)<<8);
+				nes->mmu.loopy_t = (nes->mmu.loopy_t & 0x00FF)|((((WORD)data) & 0x3F)<<8);
 			} else {
 			// Second write
 				// t:0000000011111111=d:11111111
-				MMU.loopy_t = (MMU.loopy_t & 0xFF00)|(WORD)data;
+				nes->mmu.loopy_t = (nes->mmu.loopy_t & 0xFF00)|(WORD)data;
 				// v=t
-				MMU.loopy_v = MMU.loopy_t;
+				nes->mmu.loopy_v = nes->mmu.loopy_t;
 
-				nes->mapper->PPU_Latch( MMU.loopy_v );
+				nes->mapper->PPU_Latch( nes->mmu.loopy_v );
 			}
-			MMU.PPU56Toggle = !MMU.PPU56Toggle;
+			nes->mmu.PPU56Toggle = !nes->mmu.PPU56Toggle;
 			break;
 
 		case	0x2007: // VRAM I/O Register(RW)
-			WORD	vaddr = MMU.loopy_v & 0x3FFF;
-			if( MMU.PPUREG[0] & PPU_INC32_BIT ) MMU.loopy_v+=32;
-			else				MMU.loopy_v++;
+			WORD	vaddr = nes->mmu.loopy_v & 0x3FFF;
+			if( nes->mmu.PPUREG[0] & PPU_INC32_BIT ) nes->mmu.loopy_v+=32;
+			else				nes->mmu.loopy_v++;
 
 			if( vaddr >= 0x3000 ) {
 				if( vaddr >= 0x3F00 ) {
@@ -284,20 +284,20 @@ void	PPU::Write( WORD addr, BYTE data )
 					}
 
 					if( !(vaddr&0x000F) ) {
-						MMU.BGPAL[0] = MMU.SPPAL[0] = data;
+						nes->mmu.BGPAL[0] = nes->mmu.SPPAL[0] = data;
 					} else if( !(vaddr&0x0010) ) {
-						MMU.BGPAL[vaddr&0x000F] = data;
+						nes->mmu.BGPAL[vaddr&0x000F] = data;
 					} else {
-						MMU.SPPAL[vaddr&0x000F] = data;
+						nes->mmu.SPPAL[vaddr&0x000F] = data;
 					}
-					MMU.BGPAL[0x04] = MMU.BGPAL[0x08] = MMU.BGPAL[0x0C] = MMU.BGPAL[0x00];
-					MMU.SPPAL[0x00] = MMU.SPPAL[0x04] = MMU.SPPAL[0x08] = MMU.SPPAL[0x0C] = MMU.BGPAL[0x00];
+					nes->mmu.BGPAL[0x04] = nes->mmu.BGPAL[0x08] = nes->mmu.BGPAL[0x0C] = nes->mmu.BGPAL[0x00];
+					nes->mmu.SPPAL[0x00] = nes->mmu.SPPAL[0x04] = nes->mmu.SPPAL[0x08] = nes->mmu.SPPAL[0x0C] = nes->mmu.BGPAL[0x00];
 					return;
 				}
 				vaddr &= 0xEFFF;
 			}
-			if( MMU.PPU_MEM_TYPE[vaddr>>10] != BANKTYPE_VROM ) {
-				MMU.PPU_MEM_BANK[vaddr>>10][vaddr&0x03FF] = data;
+			if( nes->mmu.PPU_MEM_TYPE[vaddr>>10] != BANKTYPE_VROM ) {
+				nes->mmu.PPU_MEM_BANK[vaddr>>10][vaddr&0x03FF] = data;
 			}
 			break;
 	}
@@ -308,30 +308,30 @@ void	PPU::DMA( BYTE data )
 WORD	addr = data<<8;
 
 	for( INT i = 0; i < 256; i++ ) {
-		MMU.SPRAM[i] = nes->Read( addr+i );
+		nes->mmu.SPRAM[i] = nes->Read( addr+i );
 	}
 }
 
 void	PPU::VBlankStart()
 {
-	MMU.PPUREG[2] |= PPU_VBLANK_FLAG;
-//	MMU.PPUREG[2] |= PPU_SPHIT_FLAG;	// VBlank突入時に必ずON？
+	nes->mmu.PPUREG[2] |= PPU_VBLANK_FLAG;
+//	nes->mmu.PPUREG[2] |= PPU_SPHIT_FLAG;	// VBlank突入時に必ずON？
 }
 
 void	PPU::VBlankEnd()
 {
-	MMU.PPUREG[2] &= ~PPU_VBLANK_FLAG;
+	nes->mmu.PPUREG[2] &= ~PPU_VBLANK_FLAG;
 	// VBlank脱出時にクリアされる
 	// エキサイトバイクで重要
-	MMU.PPUREG[2] &= ~PPU_SPHIT_FLAG;
+	nes->mmu.PPUREG[2] &= ~PPU_SPHIT_FLAG;
 }
 
 void	PPU::FrameStart()
 {
-	if( MMU.PPUREG[1] & (PPU_SPDISP_BIT|PPU_BGDISP_BIT) ) {
-		MMU.loopy_v = MMU.loopy_t;
-		loopy_shift = MMU.loopy_x;
-		loopy_y = (MMU.loopy_v&0x7000)>>12;
+	if( nes->mmu.PPUREG[1] & (PPU_SPDISP_BIT|PPU_BGDISP_BIT) ) {
+		nes->mmu.loopy_v = nes->mmu.loopy_t;
+		loopy_shift = nes->mmu.loopy_x;
+		loopy_y = (nes->mmu.loopy_v&0x7000)>>12;
 	}
 
 	if( lpScreen ) {
@@ -356,33 +356,33 @@ void	PPU::SetRenderScanline( INT scanline )
 
 void	PPU::ScanlineStart()
 {
-	if( MMU.PPUREG[1] & (PPU_BGDISP_BIT|PPU_SPDISP_BIT) ) {
-		MMU.loopy_v = (MMU.loopy_v & 0xFBE0)|(MMU.loopy_t & 0x041F);
-		loopy_shift = MMU.loopy_x;
-		loopy_y = (MMU.loopy_v&0x7000)>>12;
-		nes->mapper->PPU_Latch( 0x2000 + (MMU.loopy_v & 0x0FFF) );
+	if( nes->mmu.PPUREG[1] & (PPU_BGDISP_BIT|PPU_SPDISP_BIT) ) {
+		nes->mmu.loopy_v = (nes->mmu.loopy_v & 0xFBE0)|(nes->mmu.loopy_t & 0x041F);
+		loopy_shift = nes->mmu.loopy_x;
+		loopy_y = (nes->mmu.loopy_v&0x7000)>>12;
+		nes->mapper->PPU_Latch( 0x2000 + (nes->mmu.loopy_v & 0x0FFF) );
 	}
 }
 
 void	PPU::ScanlineNext()
 {
-	if( MMU.PPUREG[1] & (PPU_BGDISP_BIT|PPU_SPDISP_BIT) ) {
-		if( (MMU.loopy_v & 0x7000) == 0x7000 ) {
-			MMU.loopy_v &= 0x8FFF;
-			if( (MMU.loopy_v & 0x03E0) == 0x03A0 ) {
-				MMU.loopy_v ^= 0x0800;
-				MMU.loopy_v &= 0xFC1F;
+	if( nes->mmu.PPUREG[1] & (PPU_BGDISP_BIT|PPU_SPDISP_BIT) ) {
+		if( (nes->mmu.loopy_v & 0x7000) == 0x7000 ) {
+			nes->mmu.loopy_v &= 0x8FFF;
+			if( (nes->mmu.loopy_v & 0x03E0) == 0x03A0 ) {
+				nes->mmu.loopy_v ^= 0x0800;
+				nes->mmu.loopy_v &= 0xFC1F;
 			} else {
-				if( (MMU.loopy_v & 0x03E0) == 0x03E0 ) {
-					MMU.loopy_v &= 0xFC1F;
+				if( (nes->mmu.loopy_v & 0x03E0) == 0x03E0 ) {
+					nes->mmu.loopy_v &= 0xFC1F;
 				} else {
-					MMU.loopy_v += 0x0020;
+					nes->mmu.loopy_v += 0x0020;
 				}
 			}
 		} else {
-			MMU.loopy_v += 0x1000;
+			nes->mmu.loopy_v += 0x1000;
 		}
-		loopy_y = (MMU.loopy_v&0x7000)>>12;
+		loopy_y = (nes->mmu.loopy_v&0x7000)>>12;
 	}
 }
 
@@ -395,11 +395,11 @@ BYTE	BGmono[33+1];
 	ZEROMEMORY( BGmono, sizeof(BGmono) );
 
 	// Linecolor mode
-	lpColormode[scanline] = ((MMU.PPUREG[1]&PPU_BGCOLOR_BIT)>>5)|((MMU.PPUREG[1]&PPU_COLORMODE_BIT)<<7);
+	lpColormode[scanline] = ((nes->mmu.PPUREG[1]&PPU_BGCOLOR_BIT)>>5)|((nes->mmu.PPUREG[1]&PPU_COLORMODE_BIT)<<7);
 
 	// Render BG
-	if( !(MMU.PPUREG[1]&PPU_BGDISP_BIT) ) {
-		::memset( lpScanline, MMU.BGPAL[0], SCREEN_WIDTH );
+	if( !(nes->mmu.PPUREG[1]&PPU_BGDISP_BIT) ) {
+		::memset( lpScanline, nes->mmu.BGPAL[0], SCREEN_WIDTH );
 		if( nes->GetRenderMethod() == NES::TILE_RENDER ) {
 			nes->EmulationCPU( FETCH_CYCLES*4*32 );
 		}
@@ -410,12 +410,12 @@ BYTE	BGmono[33+1];
 				LPBYTE	pScn = lpScanline+(8-loopy_shift);
 				LPBYTE	pBGw = BGwrite;
 
-				INT	tileofs = (MMU.PPUREG[0]&PPU_BGTBL_BIT)<<8;
-				INT	ntbladr = 0x2000+(MMU.loopy_v&0x0FFF);
-				INT	attradr = 0x23C0+(MMU.loopy_v&0x0C00)+((MMU.loopy_v&0x0380)>>4);
+				INT	tileofs = (nes->mmu.PPUREG[0]&PPU_BGTBL_BIT)<<8;
+				INT	ntbladr = 0x2000+(nes->mmu.loopy_v&0x0FFF);
+				INT	attradr = 0x23C0+(nes->mmu.loopy_v&0x0C00)+((nes->mmu.loopy_v&0x0380)>>4);
 				INT	ntbl_x  = ntbladr&0x001F;
 				INT	attrsft = (ntbladr&0x0040)>>4;
-				LPBYTE	pNTBL = MMU.PPU_MEM_BANK[ntbladr>>10];
+				LPBYTE	pNTBL = nes->mmu.PPU_MEM_BANK[ntbladr>>10];
 
 				INT	tileadr;
 				INT	cache_tile = 0xFFFF0000;
@@ -436,11 +436,11 @@ BYTE	BGmono[33+1];
 					} else {
 						cache_tile = tileadr;
 						cache_attr = attr;
-						chr_l = MMU.PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
-						chr_h = MMU.PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
+						chr_l = nes->mmu.PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
+						chr_h = nes->mmu.PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
 						*pBGw = chr_h|chr_l;
 
-						LPBYTE	pBGPAL = &MMU.BGPAL[attr];
+						LPBYTE	pBGPAL = &nes->mmu.BGPAL[attr];
 						{
 						register INT	c1 = ((chr_l>>1)&0x55)|(chr_h&0xAA);
 						register INT	c2 = (chr_l&0x55)|((chr_h<<1)&0xAA);
@@ -466,7 +466,7 @@ BYTE	BGmono[33+1];
 						ntbl_x = 0;
 						ntbladr ^= 0x41F;
 						attradr = 0x03C0+((ntbladr&0x0380)>>4);
-						pNTBL = MMU.PPU_MEM_BANK[ntbladr>>10];
+						pNTBL = nes->mmu.PPU_MEM_BANK[ntbladr>>10];
 					} else {
 						ntbladr++;
 					}
@@ -476,7 +476,7 @@ BYTE	BGmono[33+1];
 				LPBYTE	pScn = lpScanline+(8-loopy_shift);
 				LPBYTE	pBGw = BGwrite;
 
-				INT	ntbladr = 0x2000+(MMU.loopy_v&0x0FFF);
+				INT	ntbladr = 0x2000+(nes->mmu.loopy_v&0x0FFF);
 				INT	ntbl_x  = ntbladr & 0x1F;
 
 				INT	cache_tile = 0xFFFF0000;
@@ -494,7 +494,7 @@ BYTE	BGmono[33+1];
 						cache_attr = attr;
 						*pBGw = chr_h|chr_l;
 
-						LPBYTE	pBGPAL = &MMU.BGPAL[attr];
+						LPBYTE	pBGPAL = &nes->mmu.BGPAL[attr];
 						{
 						register INT	c1 = ((chr_l>>1)&0x55)|(chr_h&0xAA);
 						register INT	c2 = (chr_l&0x55)|((chr_h<<1)&0xAA);
@@ -530,11 +530,11 @@ BYTE	BGmono[33+1];
 					LPBYTE	pScn = lpScanline+(8-loopy_shift);
 					LPBYTE	pBGw = BGwrite;
 
-					INT	ntbladr = 0x2000+(MMU.loopy_v&0x0FFF);
-					INT	attradr = 0x03C0+((MMU.loopy_v&0x0380)>>4);
+					INT	ntbladr = 0x2000+(nes->mmu.loopy_v&0x0FFF);
+					INT	attradr = 0x03C0+((nes->mmu.loopy_v&0x0380)>>4);
 					INT	ntbl_x  = ntbladr&0x001F;
 					INT	attrsft = (ntbladr&0x0040)>>4;
-					LPBYTE	pNTBL = MMU.PPU_MEM_BANK[ntbladr>>10];
+					LPBYTE	pNTBL = nes->mmu.PPU_MEM_BANK[ntbladr>>10];
 
 					INT	tileadr;
 					INT	cache_tile = 0xFFFF0000;
@@ -544,7 +544,7 @@ BYTE	BGmono[33+1];
 					BYTE	chr_h, chr_l, attr;
 
 					for( INT i = 0; i < 33; i++ ) {
-						tileadr = ((MMU.PPUREG[0]&PPU_BGTBL_BIT)<<8)+pNTBL[ntbladr&0x03FF]*0x10+loopy_y;
+						tileadr = ((nes->mmu.PPUREG[0]&PPU_BGTBL_BIT)<<8)+pNTBL[ntbladr&0x03FF]*0x10+loopy_y;
 
 						if( i != 0 ) {
 							nes->EmulationCPU( FETCH_CYCLES*4 );
@@ -556,11 +556,11 @@ BYTE	BGmono[33+1];
 							cache_tile = tileadr;
 							cache_attr = attr;
 
-							chr_l = MMU.PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
-							chr_h = MMU.PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
+							chr_l = nes->mmu.PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
+							chr_h = nes->mmu.PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
 							*pBGw = chr_l|chr_h;
 
-							LPBYTE	pBGPAL = &MMU.BGPAL[attr];
+							LPBYTE	pBGPAL = &nes->mmu.BGPAL[attr];
 							{
 							register INT	c1 = ((chr_l>>1)&0x55)|(chr_h&0xAA);
 							register INT	c2 = (chr_l&0x55)|((chr_h<<1)&0xAA);
@@ -590,7 +590,7 @@ BYTE	BGmono[33+1];
 							ntbl_x = 0;
 							ntbladr ^= 0x41F;
 							attradr = 0x03C0+((ntbladr&0x0380)>>4);
-							pNTBL = MMU.PPU_MEM_BANK[ntbladr>>10];
+							pNTBL = nes->mmu.PPU_MEM_BANK[ntbladr>>10];
 						} else {
 							ntbladr++;
 						}
@@ -607,26 +607,26 @@ BYTE	BGmono[33+1];
 
 					BYTE	chr_h, chr_l, attr;
 
-					WORD	loopy_v_tmp = MMU.loopy_v;
+					WORD	loopy_v_tmp = nes->mmu.loopy_v;
 
 					for( INT i = 0; i < 33; i++ ) {
 						if( i != 0 ) {
 							nes->EmulationCPU( FETCH_CYCLES*4 );
 						}
 
-						ntbladr = 0x2000+(MMU.loopy_v&0x0FFF);
-						tileadr = ((MMU.PPUREG[0]&PPU_BGTBL_BIT)<<8)+MMU.PPU_MEM_BANK[ntbladr>>10][ntbladr&0x03FF]*0x10+((MMU.loopy_v&0x7000)>>12);
-						attr = ((MMU.PPU_MEM_BANK[ntbladr>>10][0x03C0+((ntbladr&0x0380)>>4)+((ntbladr&0x001C)>>2)]>>(((ntbladr&0x40)>>4)+(ntbladr&0x02)))&3)<<2;
+						ntbladr = 0x2000+(nes->mmu.loopy_v&0x0FFF);
+						tileadr = ((nes->mmu.PPUREG[0]&PPU_BGTBL_BIT)<<8)+nes->mmu.PPU_MEM_BANK[ntbladr>>10][ntbladr&0x03FF]*0x10+((nes->mmu.loopy_v&0x7000)>>12);
+						attr = ((nes->mmu.PPU_MEM_BANK[ntbladr>>10][0x03C0+((ntbladr&0x0380)>>4)+((ntbladr&0x001C)>>2)]>>(((ntbladr&0x40)>>4)+(ntbladr&0x02)))&3)<<2;
 
 						if( cache_tile != tileadr || cache_attr != attr ) {
 							cache_tile = tileadr;
 							cache_attr = attr;
 
-							chr_l = MMU.PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
-							chr_h = MMU.PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
+							chr_l = nes->mmu.PPU_MEM_BANK[tileadr>>10][ tileadr&0x03FF   ];
+							chr_h = nes->mmu.PPU_MEM_BANK[tileadr>>10][(tileadr&0x03FF)+8];
 							*pBGw = chr_l|chr_h;
 
-							LPBYTE	pBGPAL = &MMU.BGPAL[attr];
+							LPBYTE	pBGPAL = &nes->mmu.BGPAL[attr];
 							{
 							register INT	c1 = ((chr_l>>1)&0x55)|(chr_h&0xAA);
 							register INT	c2 = (chr_l&0x55)|((chr_h<<1)&0xAA);
@@ -652,20 +652,20 @@ BYTE	BGmono[33+1];
 							nes->mapper->PPU_ChrLatch( tileadr );
 						}
 
-						if( (MMU.loopy_v & 0x1F) == 0x1F ) {
-							MMU.loopy_v ^= 0x041F;
+						if( (nes->mmu.loopy_v & 0x1F) == 0x1F ) {
+							nes->mmu.loopy_v ^= 0x041F;
 						} else {
-							MMU.loopy_v++;
+							nes->mmu.loopy_v++;
 						}
 					}
-					MMU.loopy_v = loopy_v_tmp;
+					nes->mmu.loopy_v = loopy_v_tmp;
 				}
 			} else {
 				// With Extension Latch(For MMC5)
 				LPBYTE	pScn = lpScanline+(8-loopy_shift);
 				LPBYTE	pBGw = BGwrite;
 
-				INT	ntbladr = 0x2000+(MMU.loopy_v&0x0FFF);
+				INT	ntbladr = 0x2000+(nes->mmu.loopy_v&0x0FFF);
 				INT	ntbl_x  = ntbladr & 0x1F;
 
 				INT	cache_tile = 0xFFFF0000;
@@ -686,7 +686,7 @@ BYTE	BGmono[33+1];
 						cache_attr = attr;
 						*pBGw = chr_l|chr_h;
 
-						LPBYTE	pBGPAL   = &MMU.BGPAL[attr];
+						LPBYTE	pBGPAL   = &nes->mmu.BGPAL[attr];
 						{
 						register INT	c1 = ((chr_l>>1)&0x55)|(chr_h&0xAA);
 						register INT	c2 = (chr_l&0x55)|((chr_h<<1)&0xAA);
@@ -716,22 +716,22 @@ BYTE	BGmono[33+1];
 				}
 			}
 		}
-		if( !(MMU.PPUREG[1]&PPU_BGCLIP_BIT) && bLeftClip ) {
+		if( !(nes->mmu.PPUREG[1]&PPU_BGCLIP_BIT) && bLeftClip ) {
 			LPBYTE	pScn = lpScanline+8;
 			for( INT i = 0; i < 8; i++ ) {
-				pScn[i] = MMU.BGPAL[0];
+				pScn[i] = nes->mmu.BGPAL[0];
 			}
 		}
 	}
 
 	// Render sprites
-	MMU.PPUREG[2] &= ~PPU_SPMAX_FLAG;
+	nes->mmu.PPUREG[2] &= ~PPU_SPMAX_FLAG;
 
 	// 表示期間外であればキャンセル
 	if( scanline > 239 )
 		return;
 
-	if( !(MMU.PPUREG[1]&PPU_SPDISP_BIT) ) {
+	if( !(nes->mmu.PPUREG[1]&PPU_SPDISP_BIT) ) {
 		return;
 	}
 
@@ -748,11 +748,11 @@ BYTE	BGmono[33+1];
 	ZEROMEMORY( SPwrite, sizeof(SPwrite) );
 
 	spmax = 0;
-	sp = (LPSPRITE)MMU.SPRAM;
-	sp_h = (MMU.PPUREG[0]&PPU_SP16_BIT)?15:7;
+	sp = (LPSPRITE)nes->mmu.SPRAM;
+	sp_h = (nes->mmu.PPUREG[0]&PPU_SP16_BIT)?15:7;
 
 	// Left clip
-	if( !(MMU.PPUREG[1]&PPU_SPCLIP_BIT) && bLeftClip ) {
+	if( !(nes->mmu.PPUREG[1]&PPU_SPCLIP_BIT) && bLeftClip ) {
 		SPwrite[0] = 0xFF;
 	}
 
@@ -762,9 +762,9 @@ BYTE	BGmono[33+1];
 		if( sp_y != (sp_y & sp_h) )
 			continue;
 
-		if( !(MMU.PPUREG[0]&PPU_SP16_BIT) ) {
+		if( !(nes->mmu.PPUREG[0]&PPU_SP16_BIT) ) {
 		// 8x8 Sprite
-			spraddr = (((INT)MMU.PPUREG[0]&PPU_SPTBL_BIT)<<9)+((INT)sp->tile<<4);
+			spraddr = (((INT)nes->mmu.PPUREG[0]&PPU_SPTBL_BIT)<<9)+((INT)sp->tile<<4);
 			if( !(sp->attr&SP_VMIRROR_BIT) )
 				spraddr += sp_y;
 			else
@@ -778,8 +778,8 @@ BYTE	BGmono[33+1];
 				spraddr += ((~sp_y&8)<<1)+(7-(sp_y&7));
 		}
 		// Character pattern
-		chr_l = MMU.PPU_MEM_BANK[spraddr>>10][ spraddr&0x3FF   ];
-		chr_h = MMU.PPU_MEM_BANK[spraddr>>10][(spraddr&0x3FF)+8];
+		chr_l = nes->mmu.PPU_MEM_BANK[spraddr>>10][ spraddr&0x3FF   ];
+		chr_h = nes->mmu.PPU_MEM_BANK[spraddr>>10][(spraddr&0x3FF)+8];
 
 		// Character latch(For MMC2/MMC4)
 		if( bChrLatch ) {
@@ -794,13 +794,13 @@ BYTE	BGmono[33+1];
 		BYTE	SPpat = chr_l|chr_h;
 
 		// Sprite hitcheck
-		if( i == 0 && !(MMU.PPUREG[2]&PPU_SPHIT_FLAG) ) {
+		if( i == 0 && !(nes->mmu.PPUREG[2]&PPU_SPHIT_FLAG) ) {
 			INT	BGpos = ((sp->x&0xF8)+((loopy_shift+(sp->x&7))&8))>>3;
 			INT	BGsft = 8-((loopy_shift+sp->x)&7);
 			BYTE	BGmsk = (((WORD)pBGw[BGpos+0]<<8)|(WORD)pBGw[BGpos+1])>>BGsft;
 
 			if( SPpat & BGmsk ) {
-				MMU.PPUREG[2] |= PPU_SPHIT_FLAG;
+				nes->mmu.PPUREG[2] |= PPU_SPHIT_FLAG;
 			}
 		}
 
@@ -823,7 +823,7 @@ BYTE	BGmono[33+1];
 		}
 
 		// Attribute
-		LPBYTE	pSPPAL = &MMU.SPPAL[(sp->attr&SP_COLOR_BIT)<<2];
+		LPBYTE	pSPPAL = &nes->mmu.SPPAL[(sp->attr&SP_COLOR_BIT)<<2];
 		// Ptr
 		LPBYTE	pScn   = lpScanline+sp->x+8;
 
@@ -860,7 +860,7 @@ BYTE	BGmono[33+1];
 		}
 	}
 	if( spmax > 8-1 ) {
-		MMU.PPUREG[2] |= PPU_SPMAX_FLAG;
+		nes->mmu.PPUREG[2] |= PPU_SPMAX_FLAG;
 	}
 }
 
@@ -868,20 +868,20 @@ BYTE	BGmono[33+1];
 BOOL	PPU::IsSprite0( INT scanline )
 {
 	// スプライトorBG非表示はキャンセル(ヒットしない)
-	if( (MMU.PPUREG[1]&(PPU_SPDISP_BIT|PPU_BGDISP_BIT)) != (PPU_SPDISP_BIT|PPU_BGDISP_BIT) )
+	if( (nes->mmu.PPUREG[1]&(PPU_SPDISP_BIT|PPU_BGDISP_BIT)) != (PPU_SPDISP_BIT|PPU_BGDISP_BIT) )
 		return	FALSE;
 
 	// 既にヒットしていたらキャンセル
-	if( MMU.PPUREG[2]&PPU_SPHIT_FLAG )
+	if( nes->mmu.PPUREG[2]&PPU_SPHIT_FLAG )
 		return	FALSE;
 
-	if( !(MMU.PPUREG[0]&PPU_SP16_BIT) ) {
+	if( !(nes->mmu.PPUREG[0]&PPU_SP16_BIT) ) {
 	// 8x8
-		if( (scanline < (INT)MMU.SPRAM[0]+1) || (scanline > ((INT)MMU.SPRAM[0]+7+1)) )
+		if( (scanline < (INT)nes->mmu.SPRAM[0]+1) || (scanline > ((INT)nes->mmu.SPRAM[0]+7+1)) )
 			return	FALSE;
 	} else {
 	// 8x16
-		if( (scanline < (INT)MMU.SPRAM[0]+1) || (scanline > ((INT)MMU.SPRAM[0]+15+1)) )
+		if( (scanline < (INT)nes->mmu.SPRAM[0]+1) || (scanline > ((INT)nes->mmu.SPRAM[0]+15+1)) )
 			return	FALSE;
 	}
 
@@ -895,18 +895,18 @@ INT	spmax;
 INT	sp_h;
 LPSPRITE sp;
 
-	MMU.PPUREG[2] &= ~PPU_SPMAX_FLAG;
+	nes->mmu.PPUREG[2] &= ~PPU_SPMAX_FLAG;
 
 	// スプライト非表示はキャンセル
-	if( !(MMU.PPUREG[1]&PPU_SPDISP_BIT) )
+	if( !(nes->mmu.PPUREG[1]&PPU_SPDISP_BIT) )
 		return;
 
 	// 表示期間外であればキャンセル
 	if( scanline < 0 || scanline > 239 )
 		return;
 
-	sp = (LPSPRITE)MMU.SPRAM;
-	sp_h = (MMU.PPUREG[0]&PPU_SP16_BIT)?15:7;
+	sp = (LPSPRITE)nes->mmu.SPRAM;
+	sp_h = (nes->mmu.PPUREG[0]&PPU_SP16_BIT)?15:7;
 
 	spmax = 0;
 	// Sprite Max check
@@ -917,7 +917,7 @@ LPSPRITE sp;
 		}
 
 		if( ++spmax > 8-1 ) {
-			MMU.PPUREG[2] |= PPU_SPMAX_FLAG;
+			nes->mmu.PPUREG[2] |= PPU_SPMAX_FLAG;
 			break;
 		}
 	}

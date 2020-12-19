@@ -34,12 +34,12 @@ void	Mapper020::Reset()
 	MechanicalSound( MECHANICAL_SOUND_ALLSTOP );
 
 //	::memset( DRAM, 0xFF, sizeof(DRAM) );
-	MMU.SetPROM_Bank( 3, MMU.DRAM+0x0000, BANKTYPE_DRAM );
-	MMU.SetPROM_Bank( 4, MMU.DRAM+0x2000, BANKTYPE_DRAM );
-	MMU.SetPROM_Bank( 5, MMU.DRAM+0x4000, BANKTYPE_DRAM );
-	MMU.SetPROM_Bank( 6, MMU.DRAM+0x6000, BANKTYPE_DRAM );
-	MMU.SetPROM_Bank( 7, nes->rom->GetDISKBIOS(), BANKTYPE_ROM );
-	MMU.SetCRAM_8K_Bank( 0 );
+	nes->mmu.SetPROM_Bank( 3, nes->mmu.DRAM+0x0000, BANKTYPE_DRAM );
+	nes->mmu.SetPROM_Bank( 4, nes->mmu.DRAM+0x2000, BANKTYPE_DRAM );
+	nes->mmu.SetPROM_Bank( 5, nes->mmu.DRAM+0x4000, BANKTYPE_DRAM );
+	nes->mmu.SetPROM_Bank( 6, nes->mmu.DRAM+0x6000, BANKTYPE_DRAM );
+	nes->mmu.SetPROM_Bank( 7, nes->rom->GetDISKBIOS(), BANKTYPE_ROM );
+	nes->mmu.SetCRAM_8K_Bank( 0 );
 
 	// デフォルト
 //	nes->SetIrqType( NES::IRQ_HSYNC );
@@ -77,7 +77,7 @@ void	Mapper020::Reset()
 
 	// パチもん
 	if( nes->rom->GetMakerID() == 0x00 && nes->rom->GetGameID() == 0x00000000 ) {
-		::memset( MMU.RAM+0x100, 0xFF, 0x100 );
+		::memset( nes->mmu.RAM+0x100, 0xFF, 0x100 );
 	}
 
 DEBUGOUT( "MAKER ID=%02X\n", nes->rom->GetMakerID() );
@@ -346,8 +346,8 @@ void	Mapper020::ExWrite( WORD addr, BYTE data )
 			}
 
 			// Mirror
-			if( data&0x08 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-			else		MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			if( data&0x08 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+			else		nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			break;
 
 		case	0x4026:	// External connector output/Battery sense
@@ -361,13 +361,13 @@ void	Mapper020::ExWrite( WORD addr, BYTE data )
 
 void	Mapper020::WriteLow( WORD addr, BYTE data )
 {
-	MMU.DRAM[addr-0x6000] = data;
+	nes->mmu.DRAM[addr-0x6000] = data;
 }
 
 void	Mapper020::Write( WORD addr, BYTE data )
 {
 	if( addr < 0xE000 ) {
-		MMU.DRAM[addr-0x6000] = data;
+		nes->mmu.DRAM[addr-0x6000] = data;
 	}
 }
 
@@ -598,5 +598,5 @@ void	Mapper020::LoadState( LPBYTE p )
 	}
 
 	// DiskBios Setup(ステートで上書きされている為)
-	MMU.SetPROM_Bank( 7, nes->rom->GetDISKBIOS(), BANKTYPE_ROM );
+	nes->mmu.SetPROM_Bank( 7, nes->rom->GetDISKBIOS(), BANKTYPE_ROM );
 }

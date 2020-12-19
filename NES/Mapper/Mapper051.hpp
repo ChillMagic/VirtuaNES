@@ -8,7 +8,7 @@ void	Mapper051::Reset()
 
 	SetBank_CPU();
 
-	MMU.SetCRAM_8K_Bank( 0 );
+	nes->mmu.SetCRAM_8K_Bank( 0 );
 }
 
 void	Mapper051::WriteLow( WORD addr, BYTE data )
@@ -32,36 +32,36 @@ void	Mapper051::SetBank_CPU()
 {
 	switch(mode) {
 		case 0:
-			MMU.SetVRAM_Mirror( VRAM_VMIRROR );
-			MMU.SetPROM_8K_Bank( 3, (bank|0x2c|3) );
-			MMU.SetPROM_8K_Bank( 4, (bank|0x00|0) );
-			MMU.SetPROM_8K_Bank( 5, (bank|0x00|1) );
-			MMU.SetPROM_8K_Bank( 6, (bank|0x0c|2) );
-			MMU.SetPROM_8K_Bank( 7, (bank|0x0c|3) );
+			nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
+			nes->mmu.SetPROM_8K_Bank( 3, (bank|0x2c|3) );
+			nes->mmu.SetPROM_8K_Bank( 4, (bank|0x00|0) );
+			nes->mmu.SetPROM_8K_Bank( 5, (bank|0x00|1) );
+			nes->mmu.SetPROM_8K_Bank( 6, (bank|0x0c|2) );
+			nes->mmu.SetPROM_8K_Bank( 7, (bank|0x0c|3) );
 			break;
 		case 1:
-			MMU.SetVRAM_Mirror( VRAM_VMIRROR );
-			MMU.SetPROM_8K_Bank( 3, (bank|0x20|3) );
-			MMU.SetPROM_8K_Bank( 4, (bank|0x00|0) );
-			MMU.SetPROM_8K_Bank( 5, (bank|0x00|1) );
-			MMU.SetPROM_8K_Bank( 6, (bank|0x00|2) );
-			MMU.SetPROM_8K_Bank( 7, (bank|0x00|3) );
+			nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
+			nes->mmu.SetPROM_8K_Bank( 3, (bank|0x20|3) );
+			nes->mmu.SetPROM_8K_Bank( 4, (bank|0x00|0) );
+			nes->mmu.SetPROM_8K_Bank( 5, (bank|0x00|1) );
+			nes->mmu.SetPROM_8K_Bank( 6, (bank|0x00|2) );
+			nes->mmu.SetPROM_8K_Bank( 7, (bank|0x00|3) );
 			break;
 		case 2:
-			MMU.SetVRAM_Mirror( VRAM_VMIRROR );
-			MMU.SetPROM_8K_Bank( 3, (bank|0x2e|3) );
-			MMU.SetPROM_8K_Bank( 4, (bank|0x02|0) );
-			MMU.SetPROM_8K_Bank( 5, (bank|0x02|1) );
-			MMU.SetPROM_8K_Bank( 6, (bank|0x0e|2) );
-			MMU.SetPROM_8K_Bank( 7, (bank|0x0e|3) );
+			nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
+			nes->mmu.SetPROM_8K_Bank( 3, (bank|0x2e|3) );
+			nes->mmu.SetPROM_8K_Bank( 4, (bank|0x02|0) );
+			nes->mmu.SetPROM_8K_Bank( 5, (bank|0x02|1) );
+			nes->mmu.SetPROM_8K_Bank( 6, (bank|0x0e|2) );
+			nes->mmu.SetPROM_8K_Bank( 7, (bank|0x0e|3) );
 			break;
 		case 3:
-			MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-			MMU.SetPROM_8K_Bank( 3, (bank|0x20|3) );
-			MMU.SetPROM_8K_Bank( 4, (bank|0x00|0) );
-			MMU.SetPROM_8K_Bank( 5, (bank|0x00|1) );
-			MMU.SetPROM_8K_Bank( 6, (bank|0x00|2) );
-			MMU.SetPROM_8K_Bank( 7, (bank|0x00|3) );
+			nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+			nes->mmu.SetPROM_8K_Bank( 3, (bank|0x20|3) );
+			nes->mmu.SetPROM_8K_Bank( 4, (bank|0x00|0) );
+			nes->mmu.SetPROM_8K_Bank( 5, (bank|0x00|1) );
+			nes->mmu.SetPROM_8K_Bank( 6, (bank|0x00|2) );
+			nes->mmu.SetPROM_8K_Bank( 7, (bank|0x00|3) );
 			break;
 	}
 }

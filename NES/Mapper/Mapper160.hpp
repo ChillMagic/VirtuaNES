@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper160::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 
 	irq_enable = 0;
 	irq_counter = 0;
@@ -15,13 +15,13 @@ void	Mapper160::Write( WORD addr, BYTE data )
 {
 	switch( addr ) {
 		case	0x8000:
-			MMU.SetPROM_8K_Bank( 4, data );
+			nes->mmu.SetPROM_8K_Bank( 4, data );
 			break;
 		case	0x8001:
-			MMU.SetPROM_8K_Bank( 5, data );
+			nes->mmu.SetPROM_8K_Bank( 5, data );
 			break;
 		case	0x8002:
-			MMU.SetPROM_8K_Bank( 6, data );
+			nes->mmu.SetPROM_8K_Bank( 6, data );
 			break;
 
 		case	0x9000:
@@ -40,33 +40,33 @@ void	Mapper160::Write( WORD addr, BYTE data )
 			} else {
 				refresh_type = 0;
 			}
-			MMU.SetVROM_1K_Bank( 0, data );
+			nes->mmu.SetVROM_1K_Bank( 0, data );
 			break;
 		case	0x9001:
-			MMU.SetVROM_1K_Bank( 1, data );
+			nes->mmu.SetVROM_1K_Bank( 1, data );
 			break;
 
 		case	0x9002:
 			if( refresh_type == 2 && data != 0xE8 ) {
 				refresh_type = 0;
 			}
-			MMU.SetVROM_1K_Bank( 2, data );
+			nes->mmu.SetVROM_1K_Bank( 2, data );
 			break;
 
 		case	0x9003:
-			MMU.SetVROM_1K_Bank( 3, data );
+			nes->mmu.SetVROM_1K_Bank( 3, data );
 			break;
 		case	0x9004:
-			MMU.SetVROM_1K_Bank( 4, data );
+			nes->mmu.SetVROM_1K_Bank( 4, data );
 			break;
 		case	0x9005:
-			MMU.SetVROM_1K_Bank( 5, data );
+			nes->mmu.SetVROM_1K_Bank( 5, data );
 			break;
 		case	0x9006:
-			MMU.SetVROM_1K_Bank( 6, data );
+			nes->mmu.SetVROM_1K_Bank( 6, data );
 			break;
 		case	0x9007:
-			MMU.SetVROM_1K_Bank( 7, data );
+			nes->mmu.SetVROM_1K_Bank( 7, data );
 			break;
 
 		case	0xC000:
@@ -91,50 +91,50 @@ void	Mapper160::HSync( INT scanline )
 	if( scanline == 0 || scanline == 239 ) {
 		switch( refresh_type ) {
 			case	1:
-				MMU.SetVROM_8K_Bank(0x58,0x59,0x5A,0x5B,0x58,0x59,0x5A,0x5B);
+				nes->mmu.SetVROM_8K_Bank(0x58,0x59,0x5A,0x5B,0x58,0x59,0x5A,0x5B);
 				break;
 			case	2:
-				MMU.SetVROM_8K_Bank(0x78,0x79,0x7A,0x7B,0x78,0x79,0x7A,0x7B);
+				nes->mmu.SetVROM_8K_Bank(0x78,0x79,0x7A,0x7B,0x78,0x79,0x7A,0x7B);
 				break;
 			case	3:
-				MMU.SetVROM_8K_Bank(0x7C,0x7D,0x7E,0x7F,0x7C,0x7D,0x7E,0x7F);
+				nes->mmu.SetVROM_8K_Bank(0x7C,0x7D,0x7E,0x7F,0x7C,0x7D,0x7E,0x7F);
 				break;
 			case	5:
-				MMU.SetVROM_8K_Bank(0x70,0x71,0x72,0x73,0x74,0x75,0x76,0x77);
+				nes->mmu.SetVROM_8K_Bank(0x70,0x71,0x72,0x73,0x74,0x75,0x76,0x77);
 				break;
 			case	6:
-				MMU.SetVROM_8K_Bank(0x5C,0x5D,0x5E,0x5F,0x7C,0x7D,0x7E,0x7F);
+				nes->mmu.SetVROM_8K_Bank(0x5C,0x5D,0x5E,0x5F,0x7C,0x7D,0x7E,0x7F);
 				break;
 		}
 	}
 	if( scanline == 64 ) {
 		if( refresh_type == 4 ) {
-			if( MMU.PPU_MEM_BANK[8][32*10+16] == 0x0A ) {
-				MMU.SetVROM_1K_Bank( 0, 0x68 );
-				MMU.SetVROM_1K_Bank( 1, 0x69 );
-				MMU.SetVROM_1K_Bank( 2, 0x6A );
-				MMU.SetVROM_1K_Bank( 3, 0x6B );
+			if( nes->mmu.PPU_MEM_BANK[8][32*10+16] == 0x0A ) {
+				nes->mmu.SetVROM_1K_Bank( 0, 0x68 );
+				nes->mmu.SetVROM_1K_Bank( 1, 0x69 );
+				nes->mmu.SetVROM_1K_Bank( 2, 0x6A );
+				nes->mmu.SetVROM_1K_Bank( 3, 0x6B );
 			} else {
-				MMU.SetVROM_1K_Bank( 0, 0x6C );
-				MMU.SetVROM_1K_Bank( 1, 0x6D );
-				MMU.SetVROM_1K_Bank( 2, 0x6E );
-				MMU.SetVROM_1K_Bank( 3, 0x6F );
+				nes->mmu.SetVROM_1K_Bank( 0, 0x6C );
+				nes->mmu.SetVROM_1K_Bank( 1, 0x6D );
+				nes->mmu.SetVROM_1K_Bank( 2, 0x6E );
+				nes->mmu.SetVROM_1K_Bank( 3, 0x6F );
 			}
 		}
 	}
 	if( scanline == 128 ) {
 		if( refresh_type == 4 ) {
-			MMU.SetVROM_1K_Bank( 0, 0x68 );
-			MMU.SetVROM_1K_Bank( 1, 0x69 );
-			MMU.SetVROM_1K_Bank( 2, 0x6A );
-			MMU.SetVROM_1K_Bank( 3, 0x6B );
+			nes->mmu.SetVROM_1K_Bank( 0, 0x68 );
+			nes->mmu.SetVROM_1K_Bank( 1, 0x69 );
+			nes->mmu.SetVROM_1K_Bank( 2, 0x6A );
+			nes->mmu.SetVROM_1K_Bank( 3, 0x6B );
 		} else if( refresh_type == 5 ) {
-			MMU.SetVROM_8K_Bank(0x74,0x75,0x76,0x77,0x74,0x75,0x76,0x77);
+			nes->mmu.SetVROM_8K_Bank(0x74,0x75,0x76,0x77,0x74,0x75,0x76,0x77);
 		}
 	}
 	if( scanline == 160 ) {
 		if( refresh_type == 6 ) {
-			MMU.SetVROM_8K_Bank(0x60,0x61,0x5E,0x5F,0x7C,0x7D,0x7E,0x7F);
+			nes->mmu.SetVROM_8K_Bank(0x60,0x61,0x5E,0x5F,0x7C,0x7D,0x7E,0x7F);
 		}
 	}
 

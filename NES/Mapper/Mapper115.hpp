@@ -11,15 +11,15 @@ void	Mapper115::Reset()
 
 	prg0 = prg0L = 0;
 	prg1 = prg1L = 1;
-	prg2 = MMU.PROM_8K_SIZE-2;
-	prg3 = MMU.PROM_8K_SIZE-1;
+	prg2 = nes->mmu.PROM_8K_SIZE-2;
+	prg3 = nes->mmu.PROM_8K_SIZE-1;
 
 	ExPrgSwitch = 0;
 	ExChrSwitch = 0;
 
 	SetBank_CPU();
 
-	if( MMU.VROM_1K_SIZE ) {
+	if( nes->mmu.VROM_1K_SIZE ) {
 		chr0 = 0;
 		chr1 = 1;
 		chr2 = 2;
@@ -106,8 +106,8 @@ void	Mapper115::Write( WORD addr, BYTE data )
 		case	0xA000:
 			reg[2] = data;
 			if( !nes->rom->Is4SCREEN() ) {
-				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xA001:
@@ -156,28 +156,28 @@ void	Mapper115::SetBank_CPU()
 		prg0 = ((ExPrgSwitch<<1)&0x1e);
 		prg1 = prg0+1;
 
-		MMU.SetPROM_32K_Bank( prg0, prg1, prg0+2, prg1+2);
+		nes->mmu.SetPROM_32K_Bank( prg0, prg1, prg0+2, prg1+2);
 	} else {
 		prg0 = prg0L;
 		prg1 = prg1L;
 		if( reg[0] & 0x40 ) {
-			MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-2, prg1, prg0, MMU.PROM_8K_SIZE-1 );
+			nes->mmu.SetPROM_32K_Bank( nes->mmu.PROM_8K_SIZE-2, prg1, prg0, nes->mmu.PROM_8K_SIZE-1 );
 		} else {
-			MMU.SetPROM_32K_Bank( prg0, prg1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+			nes->mmu.SetPROM_32K_Bank( prg0, prg1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 		}
 	}
 }
 
 void	Mapper115::SetBank_PPU()
 {
-	if( MMU.VROM_1K_SIZE ) {
+	if( nes->mmu.VROM_1K_SIZE ) {
 		if( reg[0] & 0x80 ) {
-			MMU.SetVROM_8K_Bank( (ExChrSwitch<<8)+chr4, (ExChrSwitch<<8)+chr5,
+			nes->mmu.SetVROM_8K_Bank( (ExChrSwitch<<8)+chr4, (ExChrSwitch<<8)+chr5,
 					 (ExChrSwitch<<8)+chr6, (ExChrSwitch<<8)+chr7,
 					 (ExChrSwitch<<8)+chr0, (ExChrSwitch<<8)+chr1,
 					 (ExChrSwitch<<8)+chr2, (ExChrSwitch<<8)+chr3 );
 		} else {
-			MMU.SetVROM_8K_Bank( (ExChrSwitch<<8)+chr0, (ExChrSwitch<<8)+chr1,
+			nes->mmu.SetVROM_8K_Bank( (ExChrSwitch<<8)+chr0, (ExChrSwitch<<8)+chr1,
 					 (ExChrSwitch<<8)+chr2, (ExChrSwitch<<8)+chr3,
 			 		 (ExChrSwitch<<8)+chr4, (ExChrSwitch<<8)+chr5,
 			 		 (ExChrSwitch<<8)+chr6, (ExChrSwitch<<8)+chr7 );

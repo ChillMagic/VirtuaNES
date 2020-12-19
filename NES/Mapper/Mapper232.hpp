@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper232::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 
 	reg[0] = 0x0C;
 	reg[1] = 0x00;
@@ -29,10 +29,10 @@ void	Mapper232::Write( WORD addr, BYTE data )
 		reg[1] = data & 0x03;
 	}
 
-	MMU.SetPROM_8K_Bank( 4, (reg[0]|reg[1])*2+0 );
-	MMU.SetPROM_8K_Bank( 5, (reg[0]|reg[1])*2+1 );
-	MMU.SetPROM_8K_Bank( 6, (reg[0]|0x03)*2+0 );
-	MMU.SetPROM_8K_Bank( 7, (reg[0]|0x03)*2+1 );
+	nes->mmu.SetPROM_8K_Bank( 4, (reg[0]|reg[1])*2+0 );
+	nes->mmu.SetPROM_8K_Bank( 5, (reg[0]|reg[1])*2+1 );
+	nes->mmu.SetPROM_8K_Bank( 6, (reg[0]|0x03)*2+0 );
+	nes->mmu.SetPROM_8K_Bank( 7, (reg[0]|0x03)*2+1 );
 }
 
 void	Mapper232::SaveState( LPBYTE p )

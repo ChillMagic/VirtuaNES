@@ -47,24 +47,24 @@ void	Mapper167::SetBank_CPU()
 	if(regs[1]&0x08){
 		bank &= 0xfe;
 		if(rom_type==0){
-			MMU.SetPROM_16K_Bank(4, base+bank+1);
-			MMU.SetPROM_16K_Bank(6, base+bank+0);
+			nes->mmu.SetPROM_16K_Bank(4, base+bank+1);
+			nes->mmu.SetPROM_16K_Bank(6, base+bank+0);
 		}else{
-			MMU.SetPROM_16K_Bank(6, base+bank+1);
-			MMU.SetPROM_16K_Bank(4, base+bank+0);
+			nes->mmu.SetPROM_16K_Bank(6, base+bank+1);
+			nes->mmu.SetPROM_16K_Bank(4, base+bank+0);
 		}
 //		DEBUGOUT("32K MODE!\n");
 	}else{
 		if(regs[1]&0x04){
-			MMU.SetPROM_16K_Bank(4, 0x1f);
-			MMU.SetPROM_16K_Bank(6, base+bank);
+			nes->mmu.SetPROM_16K_Bank(4, 0x1f);
+			nes->mmu.SetPROM_16K_Bank(6, base+bank);
 //			DEBUGOUT("HIGH 16K MODE!\n");
 		}else{
-			MMU.SetPROM_16K_Bank(4, base+bank);
+			nes->mmu.SetPROM_16K_Bank(4, base+bank);
 			if(rom_type==0){
-				MMU.SetPROM_16K_Bank(6, 0x20);
+				nes->mmu.SetPROM_16K_Bank(6, 0x20);
 			}else{
-				MMU.SetPROM_16K_Bank(6, 0x07);
+				nes->mmu.SetPROM_16K_Bank(6, 0x07);
 			}
 //			DEBUGOUT("LOW  16K MODE!\n");
 		}
@@ -75,7 +75,7 @@ void	Mapper167::SetBank_CPU()
 
 void	Mapper167::SetBank_PPU()
 {
-	MMU.SetCRAM_8K_Bank(0);
+	nes->mmu.SetCRAM_8K_Bank(0);
 }
 
 void	Mapper167::SaveState( LPBYTE p )

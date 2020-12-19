@@ -25,8 +25,8 @@ void	EXPAD_TurboFile::Write4016( BYTE data )
 	}
 	// Write bit
 	if( data & 0x04 ) {
-		MMU.ERAM[bank*0x2000+tf_address] &= ~tf_databit;
-		MMU.ERAM[bank*0x2000+tf_address] |= (data&0x01)?tf_databit:0;
+		nes->mmu.ERAM[bank*0x2000+tf_address] &= ~tf_databit;
+		nes->mmu.ERAM[bank*0x2000+tf_address] |= (data&0x01)?tf_databit:0;
 	}
 	// Address inc/bit shift
 	if( (tf_dataold&(~data)) & 0x04 ) {
@@ -38,7 +38,7 @@ void	EXPAD_TurboFile::Write4016( BYTE data )
 		}
 	}
 	// Read bit
-	if( MMU.ERAM[bank*0x2000+tf_address] & tf_databit ) {
+	if( nes->mmu.ERAM[bank*0x2000+tf_address] & tf_databit ) {
 		tf_data = 0x04;
 	} else {
 		tf_data = 0x00;

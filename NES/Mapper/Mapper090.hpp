@@ -3,8 +3,8 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper090::Reset()
 {
-	MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-4, MMU.PROM_8K_SIZE-3, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
-	MMU.SetVROM_8K_Bank( 0 );
+	nes->mmu.SetPROM_32K_Bank( nes->mmu.PROM_8K_SIZE-4, nes->mmu.PROM_8K_SIZE-3, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
+	nes->mmu.SetVROM_8K_Bank( 0 );
 
 	patch = 0;
 
@@ -35,7 +35,7 @@ void	Mapper090::Reset()
 	mul_val1 = mul_val2 = 0;
 
 	for( INT i = 0; i < 4; i++ ) {
-		prg_reg[i] = MMU.PROM_8K_SIZE-4+i;
+		prg_reg[i] = nes->mmu.PROM_8K_SIZE-4+i;
 		ntl_reg[i] = 0;
 		nth_reg[i] = 0;
 		chl_reg[i] = i;
@@ -218,22 +218,22 @@ void	Mapper090::Clock(INT cycles)
 void	Mapper090::SetBank_CPU()
 {
 	if( prg_size == 0 ) {
-		MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-4, MMU.PROM_8K_SIZE-3, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+		nes->mmu.SetPROM_32K_Bank( nes->mmu.PROM_8K_SIZE-4, nes->mmu.PROM_8K_SIZE-3, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 	} else
 	if( prg_size == 1 ) {
-		MMU.SetPROM_32K_Bank( prg_reg[1]*2, prg_reg[1]*2+1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+		nes->mmu.SetPROM_32K_Bank( prg_reg[1]*2, prg_reg[1]*2+1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 	} else
 	if( prg_size == 2 ) {
 		if( prg_E000 ) {
-			MMU.SetPROM_32K_Bank( prg_reg[0], prg_reg[1], prg_reg[2], prg_reg[3] );
+			nes->mmu.SetPROM_32K_Bank( prg_reg[0], prg_reg[1], prg_reg[2], prg_reg[3] );
 		} else {
 			if( prg_6000 ) {
-				MMU.SetPROM_8K_Bank( 3, prg_reg[3] );
+				nes->mmu.SetPROM_8K_Bank( 3, prg_reg[3] );
 			}
-			MMU.SetPROM_32K_Bank( prg_reg[0], prg_reg[1], prg_reg[2], MMU.PROM_8K_SIZE-1 );
+			nes->mmu.SetPROM_32K_Bank( prg_reg[0], prg_reg[1], prg_reg[2], nes->mmu.PROM_8K_SIZE-1 );
 		}
 	} else {
-		MMU.SetPROM_32K_Bank( prg_reg[3], prg_reg[2], prg_reg[1], prg_reg[0] );
+		nes->mmu.SetPROM_32K_Bank( prg_reg[3], prg_reg[2], prg_reg[1], prg_reg[0] );
 	}
 }
 
@@ -246,19 +246,19 @@ INT	bank[8];
 	}
 
 	if( chr_size == 0 ) {
-		MMU.SetVROM_8K_Bank( bank[0] );
+		nes->mmu.SetVROM_8K_Bank( bank[0] );
 	} else
 	if( chr_size == 1 ) {
-		MMU.SetVROM_4K_Bank( 0, bank[0] );
-		MMU.SetVROM_4K_Bank( 4, bank[4] );
+		nes->mmu.SetVROM_4K_Bank( 0, bank[0] );
+		nes->mmu.SetVROM_4K_Bank( 4, bank[4] );
 	} else
 	if( chr_size == 2 ) {
-		MMU.SetVROM_2K_Bank( 0, bank[0] );
-		MMU.SetVROM_2K_Bank( 2, bank[2] );
-		MMU.SetVROM_2K_Bank( 4, bank[4] );
-		MMU.SetVROM_2K_Bank( 6, bank[6] );
+		nes->mmu.SetVROM_2K_Bank( 0, bank[0] );
+		nes->mmu.SetVROM_2K_Bank( 2, bank[2] );
+		nes->mmu.SetVROM_2K_Bank( 4, bank[4] );
+		nes->mmu.SetVROM_2K_Bank( 6, bank[6] );
 	} else {
-		MMU.SetVROM_8K_Bank( bank[0], bank[1], bank[2], bank[3], bank[4], bank[5], bank[6], bank[7] );
+		nes->mmu.SetVROM_8K_Bank( bank[0], bank[1], bank[2], bank[3], bank[4], bank[5], bank[6], bank[7] );
 	}
 }
 
@@ -278,19 +278,19 @@ INT	bank[4];
 		}
 
 		if( mir_mode ) {
-			MMU.SetVROM_1K_Bank(  8, bank[0] );
-			MMU.SetVROM_1K_Bank(  9, bank[1] );
-			MMU.SetVROM_1K_Bank( 10, bank[2] );
-			MMU.SetVROM_1K_Bank( 11, bank[3] );
+			nes->mmu.SetVROM_1K_Bank(  8, bank[0] );
+			nes->mmu.SetVROM_1K_Bank(  9, bank[1] );
+			nes->mmu.SetVROM_1K_Bank( 10, bank[2] );
+			nes->mmu.SetVROM_1K_Bank( 11, bank[3] );
 		}
 	} else {
 		if( mir_type == 0 ) {
-			MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 		} else
 		if( mir_type == 1 ) {
-			MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+			nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
 		} else {
-			MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
+			nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4L );
 		}
 	}
 }

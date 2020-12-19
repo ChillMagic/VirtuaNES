@@ -9,7 +9,7 @@ void	Mapper046::Reset()
 	reg[3] = 0;
 
 	SetBank();
-	MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+	nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 }
 
 void	Mapper046::WriteLow( WORD addr, BYTE data )
@@ -28,19 +28,19 @@ void	Mapper046::Write( WORD addr, BYTE data )
 
 void	Mapper046::SetBank()
 {
-	MMU.SetPROM_8K_Bank( 4, reg[0]*8+reg[2]*4+0 );
-	MMU.SetPROM_8K_Bank( 5, reg[0]*8+reg[2]*4+1 );
-	MMU.SetPROM_8K_Bank( 6, reg[0]*8+reg[2]*4+2 );
-	MMU.SetPROM_8K_Bank( 7, reg[0]*8+reg[2]*4+3 );
+	nes->mmu.SetPROM_8K_Bank( 4, reg[0]*8+reg[2]*4+0 );
+	nes->mmu.SetPROM_8K_Bank( 5, reg[0]*8+reg[2]*4+1 );
+	nes->mmu.SetPROM_8K_Bank( 6, reg[0]*8+reg[2]*4+2 );
+	nes->mmu.SetPROM_8K_Bank( 7, reg[0]*8+reg[2]*4+3 );
 
-	MMU.SetVROM_1K_Bank( 0, reg[1]*64+reg[3]*8+0 );
-	MMU.SetVROM_1K_Bank( 1, reg[1]*64+reg[3]*8+1 );
-	MMU.SetVROM_1K_Bank( 2, reg[1]*64+reg[3]*8+2 );
-	MMU.SetVROM_1K_Bank( 3, reg[1]*64+reg[3]*8+3 );
-	MMU.SetVROM_1K_Bank( 4, reg[1]*64+reg[3]*8+4 );
-	MMU.SetVROM_1K_Bank( 5, reg[1]*64+reg[3]*8+5 );
-	MMU.SetVROM_1K_Bank( 6, reg[1]*64+reg[3]*8+6 );
-	MMU.SetVROM_1K_Bank( 7, reg[1]*64+reg[3]*8+7 );
+	nes->mmu.SetVROM_1K_Bank( 0, reg[1]*64+reg[3]*8+0 );
+	nes->mmu.SetVROM_1K_Bank( 1, reg[1]*64+reg[3]*8+1 );
+	nes->mmu.SetVROM_1K_Bank( 2, reg[1]*64+reg[3]*8+2 );
+	nes->mmu.SetVROM_1K_Bank( 3, reg[1]*64+reg[3]*8+3 );
+	nes->mmu.SetVROM_1K_Bank( 4, reg[1]*64+reg[3]*8+4 );
+	nes->mmu.SetVROM_1K_Bank( 5, reg[1]*64+reg[3]*8+5 );
+	nes->mmu.SetVROM_1K_Bank( 6, reg[1]*64+reg[3]*8+6 );
+	nes->mmu.SetVROM_1K_Bank( 7, reg[1]*64+reg[3]*8+7 );
 }
 
 void	Mapper046::SaveState( LPBYTE p )

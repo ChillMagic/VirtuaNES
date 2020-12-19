@@ -10,15 +10,15 @@ void	Mapper116::Reset()
 
 	prg0 = prg0L = 0;
 	prg1 = prg1L = 1;
-	prg2 = MMU.PROM_8K_SIZE-2;
-	prg3 = MMU.PROM_8K_SIZE-1;
+	prg2 = nes->mmu.PROM_8K_SIZE-2;
+	prg3 = nes->mmu.PROM_8K_SIZE-1;
 
 	ExPrgSwitch = 0;
 	ExChrSwitch = 0;
 
 	SetBank_CPU();
 
-	if( MMU.VROM_1K_SIZE ) {
+	if( nes->mmu.VROM_1K_SIZE ) {
 		chr0 = 0;
 		chr1 = 1;
 		chr2 = 2;
@@ -101,8 +101,8 @@ DEBUGOUT( "MPRWR A=%04X D=%02X L=%3d CYC=%d\n", addr&0xFFFF, data&0xFF, nes->Get
 		case	0xA000:
 			reg[2] = data;
 			if( !nes->rom->Is4SCREEN() ) {
-				if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-				else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				if( data & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+				else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			}
 			break;
 		case	0xA001:
@@ -177,24 +177,24 @@ LPBYTE	lpScn = nes->ppu->GetScreenPtr();
 void	Mapper116::SetBank_CPU()
 {
 	if( reg[0] & 0x40 ) {
-		MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-2, prg1, prg0, MMU.PROM_8K_SIZE-1 );
+		nes->mmu.SetPROM_32K_Bank( nes->mmu.PROM_8K_SIZE-2, prg1, prg0, nes->mmu.PROM_8K_SIZE-1 );
 	} else {
-		MMU.SetPROM_32K_Bank( prg0, prg1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+		nes->mmu.SetPROM_32K_Bank( prg0, prg1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 	}
 }
 
 void	Mapper116::SetBank_PPU()
 {
-	if( MMU.VROM_1K_SIZE ) {
+	if( nes->mmu.VROM_1K_SIZE ) {
 		if( ExChrSwitch & 0x04 ) {
 			INT	chrbank = 256;
-			MMU.SetVROM_8K_Bank( chrbank+chr4, chrbank+chr5,
+			nes->mmu.SetVROM_8K_Bank( chrbank+chr4, chrbank+chr5,
 					 chrbank+chr6, chrbank+chr7,
 					 chr0, chr1,
 					 chr2, chr3 );
 		} else {
 			INT	chrbank = 0;
-			MMU.SetVROM_8K_Bank( chrbank+chr4, chrbank+chr5,
+			nes->mmu.SetVROM_8K_Bank( chrbank+chr4, chrbank+chr5,
 					 chrbank+chr6, chrbank+chr7,
 					 chr0, chr1,
 					 chr2, chr3 );
@@ -202,16 +202,16 @@ void	Mapper116::SetBank_PPU()
 
 #if	0
 		if( reg[0] & 0x80 ) {
-//			MMU.SetVROM_8K_Bank( chrbank+chr4, chrbank+chr5,
+//			nes->mmu.SetVROM_8K_Bank( chrbank+chr4, chrbank+chr5,
 //					 chrbank+chr6, chrbank+chr7,
 //					 chrbank+chr0, chrbank+chr1,
 //					 chrbank+chr2, chrbank+chr3 );
-			MMU.SetVROM_8K_Bank( chrbank+chr4, chrbank+chr5,
+			nes->mmu.SetVROM_8K_Bank( chrbank+chr4, chrbank+chr5,
 					 chrbank+chr6, chrbank+chr7,
 					 chr0, chr1,
 					 chr2, chr3 );
 		} else {
-			MMU.SetVROM_8K_Bank( chr0, chr1,
+			nes->mmu.SetVROM_8K_Bank( chr0, chr1,
 					 chr2, chr3,
 					 chrbank+chr4, chrbank+chr5,
 					 chrbank+chr6, chrbank+chr7 );

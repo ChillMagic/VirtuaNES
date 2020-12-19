@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper190::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 
 //	DWORD	crc = nes->rom->GetPROM_CRC();
 //	if( crc == 0x6F3D187A ) {
@@ -26,15 +26,15 @@ void	Mapper190::WriteLow( WORD addr, BYTE data )
 		mp190_lcmd = data;
 		switch( data ) {
 			case	0xE0:
-				MMU.SetPROM_32K_Bank( 0 );
+				nes->mmu.SetPROM_32K_Bank( 0 );
 				break;
 			case	0xEE:
-				MMU.SetPROM_32K_Bank( 3 );
+				nes->mmu.SetPROM_32K_Bank( 3 );
 				break;
 		}
 	}
 	if( (addr==0x5001) && (mp190_lcmd==0x00) ) {
-		 MMU.SetPROM_32K_Bank( 7 );
+		 nes->mmu.SetPROM_32K_Bank( 7 );
 	}
 	if( addr == 0x5080 ) {
 		switch( data ) {
@@ -43,7 +43,7 @@ void	Mapper190::WriteLow( WORD addr, BYTE data )
 			case 0x3:lowoutdata=0x00;break;
 		}
 	}
-	MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+	nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
 }
 
 BYTE	Mapper190::ReadLow( WORD addr )
@@ -52,7 +52,7 @@ BYTE	Mapper190::ReadLow( WORD addr )
 		case	0x5000:
 			return	lowoutdata;
 		default:
-			return	MMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
+			return	nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
 	}
 }
 
@@ -70,22 +70,22 @@ void	Mapper190::Write( WORD addr, BYTE data )
 			mp190_lcchk = data;
 			switch( data ) {
 				case	0x28:
-					MMU.SetPROM_8K_Bank( 4, 0x1F );
-					MMU.SetPROM_8K_Bank( 5, 0x1F );
-					MMU.SetPROM_8K_Bank( 6, 0x17 );
-					MMU.SetPROM_8K_Bank( 7, 0x1F );
+					nes->mmu.SetPROM_8K_Bank( 4, 0x1F );
+					nes->mmu.SetPROM_8K_Bank( 5, 0x1F );
+					nes->mmu.SetPROM_8K_Bank( 6, 0x17 );
+					nes->mmu.SetPROM_8K_Bank( 7, 0x1F );
 					break;
 				case	0x2A:
-					MMU.SetPROM_8K_Bank( 4, 0x1F );
-					MMU.SetPROM_8K_Bank( 5, 0x0F );
-					MMU.SetPROM_8K_Bank( 6, 0x17 );
-					MMU.SetPROM_8K_Bank( 7, 0x1F );
+					nes->mmu.SetPROM_8K_Bank( 4, 0x1F );
+					nes->mmu.SetPROM_8K_Bank( 5, 0x0F );
+					nes->mmu.SetPROM_8K_Bank( 6, 0x17 );
+					nes->mmu.SetPROM_8K_Bank( 7, 0x1F );
 					break;
 				case 0x06:
-					MMU.SetPROM_8K_Bank( 4, 0x1E );
-					MMU.SetPROM_8K_Bank( 5, 0x1F );
-					MMU.SetPROM_8K_Bank( 6, 0x1F );
-					MMU.SetPROM_8K_Bank( 7, 0x1F );
+					nes->mmu.SetPROM_8K_Bank( 4, 0x1E );
+					nes->mmu.SetPROM_8K_Bank( 5, 0x1F );
+					nes->mmu.SetPROM_8K_Bank( 6, 0x1F );
+					nes->mmu.SetPROM_8K_Bank( 7, 0x1F );
 					break;	
 			}
 			break;
@@ -94,68 +94,68 @@ void	Mapper190::Write( WORD addr, BYTE data )
 				switch( mp190_cmd & 0x07 ) {
 					case	0:
 						if( cbase == 0 ) {
-							MMU.SetVROM_1K_Bank(0,data+0x100);
-							MMU.SetVROM_1K_Bank(1,data+0x101);
+							nes->mmu.SetVROM_1K_Bank(0,data+0x100);
+							nes->mmu.SetVROM_1K_Bank(1,data+0x101);
 						} else {
-							MMU.SetVROM_1K_Bank(4,data+0x100);
-							MMU.SetVROM_1K_Bank(5,data+0x101);
+							nes->mmu.SetVROM_1K_Bank(4,data+0x100);
+							nes->mmu.SetVROM_1K_Bank(5,data+0x101);
 						}
 						break;
 					case	1:
 						if( cbase == 0 ) {
-							MMU.SetVROM_1K_Bank(2,data+0x100);
-							MMU.SetVROM_1K_Bank(3,data+0x101);
+							nes->mmu.SetVROM_1K_Bank(2,data+0x100);
+							nes->mmu.SetVROM_1K_Bank(3,data+0x101);
 						} else {
-							MMU.SetVROM_1K_Bank(6,data+0x100);
-							MMU.SetVROM_1K_Bank(7,data+0x101);
+							nes->mmu.SetVROM_1K_Bank(6,data+0x100);
+							nes->mmu.SetVROM_1K_Bank(7,data+0x101);
 						}
 						break;
 					case	2:
 						if( cbase == 0 ) {
-							MMU.SetVROM_1K_Bank(4,data);
+							nes->mmu.SetVROM_1K_Bank(4,data);
 						} else {
-							MMU.SetVROM_1K_Bank(0,data);
+							nes->mmu.SetVROM_1K_Bank(0,data);
 						}
 						break;
 					case	3:
 						if( cbase == 0 ) {
-							MMU.SetVROM_1K_Bank(5,data);
+							nes->mmu.SetVROM_1K_Bank(5,data);
 						} else {
-							MMU.SetVROM_1K_Bank(1,data);
+							nes->mmu.SetVROM_1K_Bank(1,data);
 						}
 						break;
 					case	4:
 						if( cbase == 0 ) {
-							MMU.SetVROM_1K_Bank(6,data);
+							nes->mmu.SetVROM_1K_Bank(6,data);
 						} else {
-							MMU.SetVROM_1K_Bank(2,data);
+							nes->mmu.SetVROM_1K_Bank(2,data);
 						}
 						break;
 					case	5:
 						if( cbase == 0 ) {
-							MMU.SetVROM_1K_Bank(7,data);
+							nes->mmu.SetVROM_1K_Bank(7,data);
 						} else {
-							MMU.SetVROM_1K_Bank(3,data);
+							nes->mmu.SetVROM_1K_Bank(3,data);
 						}
 						break;
 					case	6:
-						data=data&((MMU.PROM_8K_SIZE*2)-1);
+						data=data&((nes->mmu.PROM_8K_SIZE*2)-1);
 						if( mp190_lcmd & 0x40 ) {
-							MMU.SetPROM_8K_Bank(6,data);
-							MMU.SetPROM_8K_Bank(4,(MMU.PROM_8K_SIZE-1)*2);
+							nes->mmu.SetPROM_8K_Bank(6,data);
+							nes->mmu.SetPROM_8K_Bank(4,(nes->mmu.PROM_8K_SIZE-1)*2);
 						} else {
-							MMU.SetPROM_8K_Bank(4,data);
-							MMU.SetPROM_8K_Bank(6,(MMU.PROM_8K_SIZE-1)*2);
+							nes->mmu.SetPROM_8K_Bank(4,data);
+							nes->mmu.SetPROM_8K_Bank(6,(nes->mmu.PROM_8K_SIZE-1)*2);
 						}
 						break;
 					case	7:
-						data=data&((MMU.PROM_8K_SIZE*2)-1);
+						data=data&((nes->mmu.PROM_8K_SIZE*2)-1);
 						if( mp190_lcmd & 0x40 ) {
-							MMU.SetPROM_8K_Bank(5,data);
-							MMU.SetPROM_8K_Bank(4,(MMU.PROM_8K_SIZE-1)*2);
+							nes->mmu.SetPROM_8K_Bank(5,data);
+							nes->mmu.SetPROM_8K_Bank(4,(nes->mmu.PROM_8K_SIZE-1)*2);
 						} else {
-							MMU.SetPROM_8K_Bank(5,data);
-							MMU.SetPROM_8K_Bank(6,(MMU.PROM_8K_SIZE-1)*2);
+							nes->mmu.SetPROM_8K_Bank(5,data);
+							nes->mmu.SetPROM_8K_Bank(6,(nes->mmu.PROM_8K_SIZE-1)*2);
 						}
 						break;
 				}
@@ -163,9 +163,9 @@ void	Mapper190::Write( WORD addr, BYTE data )
 			break;
 		case	0xA000:
 		        if( (data&0x1) == 0x1 )
-				MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+				nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
 			else
-				MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+				nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 		        break;
 		case	0xA001:
 			break;

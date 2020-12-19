@@ -4,13 +4,13 @@
 void	Mapper050::Reset()
 {
 	irq_enable = 0;
-	MMU.SetPROM_8K_Bank( 3, 15 );
-	MMU.SetPROM_8K_Bank( 4, 8 );
-	MMU.SetPROM_8K_Bank( 5, 9 );
-	MMU.SetPROM_8K_Bank( 6, 0 );
-	MMU.SetPROM_8K_Bank( 7, 11 );
-	if( MMU.VROM_1K_SIZE ) {
-		MMU.SetVROM_8K_Bank( 0 );
+	nes->mmu.SetPROM_8K_Bank( 3, 15 );
+	nes->mmu.SetPROM_8K_Bank( 4, 8 );
+	nes->mmu.SetPROM_8K_Bank( 5, 9 );
+	nes->mmu.SetPROM_8K_Bank( 6, 0 );
+	nes->mmu.SetPROM_8K_Bank( 7, 11 );
+	if( nes->mmu.VROM_1K_SIZE ) {
+		nes->mmu.SetVROM_8K_Bank( 0 );
 	}
 }
 
@@ -21,7 +21,7 @@ void	Mapper050::ExWrite( WORD addr, BYTE data )
 			irq_enable = data & 0x01;
 			nes->cpu->ClrIRQ( IRQ_MAPPER );
 		} else {
-			MMU.SetPROM_8K_Bank( 6, (data&0x08)|((data&0x01)<<2)|((data&0x06)>>1) );
+			nes->mmu.SetPROM_8K_Bank( 6, (data&0x08)|((data&0x01)<<2)|((data&0x06)>>1) );
 		}
 	}
 }
@@ -33,7 +33,7 @@ void	Mapper050::WriteLow( WORD addr, BYTE data )
 			irq_enable = data & 0x01;
 			nes->cpu->ClrIRQ( IRQ_MAPPER );
 		} else {
-			MMU.SetPROM_8K_Bank( 6, (data&0x08)|((data&0x01)<<2)|((data&0x06)>>1) );
+			nes->mmu.SetPROM_8K_Bank( 6, (data&0x08)|((data&0x01)<<2)|((data&0x06)>>1) );
 		}
 	}
 }

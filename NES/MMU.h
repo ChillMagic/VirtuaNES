@@ -95,7 +95,7 @@ struct MMUClass
 	void	SetVRAM_Mirror(INT bank0, INT bank1, INT bank2, INT bank3);
 };
 
-extern MMUClass MMU;
+extern MMUClass GlobalMMU;
 
 // メモリタイプ
 // For PROM (CPU)

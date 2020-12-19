@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper002::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 
 	patch = 0;
 
@@ -33,7 +33,7 @@ void	Mapper002::WriteLow( WORD addr, BYTE data )
 {
 	if( !nes->rom->IsSAVERAM() ) {
 		if( addr >= 0x5000 && patch == 1 )
-			MMU.SetPROM_16K_Bank( 4, data );
+			nes->mmu.SetPROM_16K_Bank( 4, data );
 	} else {
 		Mapper::WriteLow( addr, data );
 	}
@@ -42,7 +42,7 @@ void	Mapper002::WriteLow( WORD addr, BYTE data )
 void	Mapper002::Write( WORD addr, BYTE data )
 {
 	if( patch != 2 )
-		MMU.SetPROM_16K_Bank( 4, data );
+		nes->mmu.SetPROM_16K_Bank( 4, data );
 	else
-		MMU.SetPROM_16K_Bank( 4, data>>4 );
+		nes->mmu.SetPROM_16K_Bank( 4, data>>4 );
 }

@@ -3,9 +3,9 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper255::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0 );
-	MMU.SetVROM_8K_Bank( 0 );
-	MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+	nes->mmu.SetPROM_32K_Bank( 0 );
+	nes->mmu.SetVROM_8K_Bank( 0 );
+	nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 
 	reg[0] = 0;
 	reg[1] = 0;
@@ -36,38 +36,38 @@ void	Mapper255::Write( WORD addr, BYTE data )
 	INT	bank = (addr & 0x4000)>>14;
 
 	if( addr & 0x2000 ) {
-		MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+		nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
 	} else {
-		MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+		nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 	}
 
 	if( addr & 0x1000 ) {
 		if( addr & 0x0040 ) {
-			MMU.SetPROM_8K_Bank( 4, 0x80*bank+prg*4+2 );
-			MMU.SetPROM_8K_Bank( 5, 0x80*bank+prg*4+3 );
-			MMU.SetPROM_8K_Bank( 6, 0x80*bank+prg*4+2 );
-			MMU.SetPROM_8K_Bank( 7, 0x80*bank+prg*4+3 );
+			nes->mmu.SetPROM_8K_Bank( 4, 0x80*bank+prg*4+2 );
+			nes->mmu.SetPROM_8K_Bank( 5, 0x80*bank+prg*4+3 );
+			nes->mmu.SetPROM_8K_Bank( 6, 0x80*bank+prg*4+2 );
+			nes->mmu.SetPROM_8K_Bank( 7, 0x80*bank+prg*4+3 );
 		} else {
-			MMU.SetPROM_8K_Bank( 4, 0x80*bank+prg*4+0 );
-			MMU.SetPROM_8K_Bank( 5, 0x80*bank+prg*4+1 );
-			MMU.SetPROM_8K_Bank( 6, 0x80*bank+prg*4+0 );
-			MMU.SetPROM_8K_Bank( 7, 0x80*bank+prg*4+1 );
+			nes->mmu.SetPROM_8K_Bank( 4, 0x80*bank+prg*4+0 );
+			nes->mmu.SetPROM_8K_Bank( 5, 0x80*bank+prg*4+1 );
+			nes->mmu.SetPROM_8K_Bank( 6, 0x80*bank+prg*4+0 );
+			nes->mmu.SetPROM_8K_Bank( 7, 0x80*bank+prg*4+1 );
 		}
 	} else {
-		MMU.SetPROM_8K_Bank( 4, 0x80*bank+prg*4+0 );
-		MMU.SetPROM_8K_Bank( 5, 0x80*bank+prg*4+1 );
-		MMU.SetPROM_8K_Bank( 6, 0x80*bank+prg*4+2 );
-		MMU.SetPROM_8K_Bank( 7, 0x80*bank+prg*4+3 );
+		nes->mmu.SetPROM_8K_Bank( 4, 0x80*bank+prg*4+0 );
+		nes->mmu.SetPROM_8K_Bank( 5, 0x80*bank+prg*4+1 );
+		nes->mmu.SetPROM_8K_Bank( 6, 0x80*bank+prg*4+2 );
+		nes->mmu.SetPROM_8K_Bank( 7, 0x80*bank+prg*4+3 );
 	}
 
-	MMU.SetVROM_1K_Bank( 0, 0x200*bank+chr*8+0 );
-	MMU.SetVROM_1K_Bank( 1, 0x200*bank+chr*8+1 );
-	MMU.SetVROM_1K_Bank( 2, 0x200*bank+chr*8+2 );
-	MMU.SetVROM_1K_Bank( 3, 0x200*bank+chr*8+3 );
-	MMU.SetVROM_1K_Bank( 4, 0x200*bank+chr*8+4 );
-	MMU.SetVROM_1K_Bank( 5, 0x200*bank+chr*8+5 );
-	MMU.SetVROM_1K_Bank( 6, 0x200*bank+chr*8+6 );
-	MMU.SetVROM_1K_Bank( 7, 0x200*bank+chr*8+7 );
+	nes->mmu.SetVROM_1K_Bank( 0, 0x200*bank+chr*8+0 );
+	nes->mmu.SetVROM_1K_Bank( 1, 0x200*bank+chr*8+1 );
+	nes->mmu.SetVROM_1K_Bank( 2, 0x200*bank+chr*8+2 );
+	nes->mmu.SetVROM_1K_Bank( 3, 0x200*bank+chr*8+3 );
+	nes->mmu.SetVROM_1K_Bank( 4, 0x200*bank+chr*8+4 );
+	nes->mmu.SetVROM_1K_Bank( 5, 0x200*bank+chr*8+5 );
+	nes->mmu.SetVROM_1K_Bank( 6, 0x200*bank+chr*8+6 );
+	nes->mmu.SetVROM_1K_Bank( 7, 0x200*bank+chr*8+7 );
 }
 
 void	Mapper255::SaveState( LPBYTE p )

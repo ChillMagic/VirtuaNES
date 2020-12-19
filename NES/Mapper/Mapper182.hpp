@@ -3,8 +3,8 @@
 //////////////////////////////////////////////////////////////////////////
 void	Mapper182::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0, 1, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
-	MMU.SetVROM_8K_Bank( 0 );
+	nes->mmu.SetPROM_32K_Bank( 0, 1, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
+	nes->mmu.SetVROM_8K_Bank( 0 );
 
 	reg = 0;
 	irq_enable = 0;
@@ -15,8 +15,8 @@ void	Mapper182::Write( WORD addr, BYTE data )
 {
 	switch( addr & 0xF003 ) {
 		case	0x8001:
-			if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-			else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			if( data & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+			else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			break;
 		case	0xA000:
 			reg = data & 0x07;
@@ -24,30 +24,30 @@ void	Mapper182::Write( WORD addr, BYTE data )
 		case	0xC000:
 			switch( reg ) {
 				case	0:
-					MMU.SetVROM_1K_Bank( 0, (data&0xFE)+0 );
-					MMU.SetVROM_1K_Bank( 1, (data&0xFE)+1 );
+					nes->mmu.SetVROM_1K_Bank( 0, (data&0xFE)+0 );
+					nes->mmu.SetVROM_1K_Bank( 1, (data&0xFE)+1 );
 					break;
 				case	1:
-					MMU.SetVROM_1K_Bank( 5, data );
+					nes->mmu.SetVROM_1K_Bank( 5, data );
 					break;
 				case	2:
-					MMU.SetVROM_1K_Bank( 2, (data&0xFE)+0 );
-					MMU.SetVROM_1K_Bank( 3, (data&0xFE)+1 );
+					nes->mmu.SetVROM_1K_Bank( 2, (data&0xFE)+0 );
+					nes->mmu.SetVROM_1K_Bank( 3, (data&0xFE)+1 );
 					break;
 				case	3:
-					MMU.SetVROM_1K_Bank( 7, data );
+					nes->mmu.SetVROM_1K_Bank( 7, data );
 					break;
 				case	4:
-					MMU.SetPROM_8K_Bank( 4, data );
+					nes->mmu.SetPROM_8K_Bank( 4, data );
 					break;
 				case	5:
-					MMU.SetPROM_8K_Bank( 5, data );
+					nes->mmu.SetPROM_8K_Bank( 5, data );
 					break;
 				case	6:
-					MMU.SetVROM_1K_Bank( 4, data );
+					nes->mmu.SetVROM_1K_Bank( 4, data );
 					break;
 				case	7:
-					MMU.SetVROM_1K_Bank( 6, data );
+					nes->mmu.SetVROM_1K_Bank( 6, data );
 					break;
 			}
 			break;

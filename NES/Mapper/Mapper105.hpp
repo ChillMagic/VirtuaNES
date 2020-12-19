@@ -4,7 +4,7 @@
 
 void	Mapper105::Reset()
 {
-	MMU.SetPROM_32K_Bank( 0 );
+	nes->mmu.SetPROM_32K_Bank( 0 );
 
 	reg[0] = 0x0C;
 	reg[1] = 0x00;
@@ -38,15 +38,15 @@ void	Mapper105::Write( WORD addr, BYTE data )
 
 	if( reg[0] & 0x02 ) {
 		if( reg[0] & 0x01 ) {
-			MMU.SetVRAM_Mirror( VRAM_HMIRROR );
+			nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
 		} else {
-			MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 		}
 	} else {
 		if( reg[0] & 0x01 ) {
-			MMU.SetVRAM_Mirror( VRAM_MIRROR4H );
+			nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4H );
 		} else {
-			MMU.SetVRAM_Mirror( VRAM_MIRROR4L );
+			nes->mmu.SetVRAM_Mirror( VRAM_MIRROR4L );
 		}
 	}
 
@@ -59,27 +59,27 @@ void	Mapper105::Write( WORD addr, BYTE data )
 			if(reg[1] & 0x08) {
 				if (reg[0] & 0x08) {
 					if (reg[0] & 0x04) {
-						MMU.SetPROM_8K_Bank(4,((reg[3] & 0x07) * 2 + 16));
-						MMU.SetPROM_8K_Bank(5,((reg[3] & 0x07) * 2 + 17));
-						MMU.SetPROM_8K_Bank(6,30);
-						MMU.SetPROM_8K_Bank(7,31);
+						nes->mmu.SetPROM_8K_Bank(4,((reg[3] & 0x07) * 2 + 16));
+						nes->mmu.SetPROM_8K_Bank(5,((reg[3] & 0x07) * 2 + 17));
+						nes->mmu.SetPROM_8K_Bank(6,30);
+						nes->mmu.SetPROM_8K_Bank(7,31);
 					} else {
-						MMU.SetPROM_8K_Bank(4,16);
-						MMU.SetPROM_8K_Bank(5,17);
-						MMU.SetPROM_8K_Bank(6,((reg[3] & 0x07) * 2 + 16));
-						MMU.SetPROM_8K_Bank(7,((reg[3] & 0x07) * 2 + 17));
+						nes->mmu.SetPROM_8K_Bank(4,16);
+						nes->mmu.SetPROM_8K_Bank(5,17);
+						nes->mmu.SetPROM_8K_Bank(6,((reg[3] & 0x07) * 2 + 16));
+						nes->mmu.SetPROM_8K_Bank(7,((reg[3] & 0x07) * 2 + 17));
 					}
 				} else {
-					MMU.SetPROM_8K_Bank(4,((reg[3] & 0x06) * 2 + 16));
-					MMU.SetPROM_8K_Bank(5,((reg[3] & 0x06) * 2 + 17));
-					MMU.SetPROM_8K_Bank(6,((reg[3] & 0x06) * 2 + 18));
-					MMU.SetPROM_8K_Bank(7,((reg[3] & 0x06) * 2 + 19));
+					nes->mmu.SetPROM_8K_Bank(4,((reg[3] & 0x06) * 2 + 16));
+					nes->mmu.SetPROM_8K_Bank(5,((reg[3] & 0x06) * 2 + 17));
+					nes->mmu.SetPROM_8K_Bank(6,((reg[3] & 0x06) * 2 + 18));
+					nes->mmu.SetPROM_8K_Bank(7,((reg[3] & 0x06) * 2 + 19));
 				}
 			} else {
-				MMU.SetPROM_8K_Bank(4,((reg[1] & 0x06) * 2 + 0));
-				MMU.SetPROM_8K_Bank(5,((reg[1] & 0x06) * 2 + 1));
-				MMU.SetPROM_8K_Bank(6,((reg[1] & 0x06) * 2 + 2));
-				MMU.SetPROM_8K_Bank(7,((reg[1] & 0x06) * 2 + 3));
+				nes->mmu.SetPROM_8K_Bank(4,((reg[1] & 0x06) * 2 + 0));
+				nes->mmu.SetPROM_8K_Bank(5,((reg[1] & 0x06) * 2 + 1));
+				nes->mmu.SetPROM_8K_Bank(6,((reg[1] & 0x06) * 2 + 2));
+				nes->mmu.SetPROM_8K_Bank(7,((reg[1] & 0x06) * 2 + 3));
 			}
 
 			if( reg[1] & 0x10 ) {

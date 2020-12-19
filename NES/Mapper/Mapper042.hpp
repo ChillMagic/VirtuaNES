@@ -6,11 +6,11 @@ void	Mapper042::Reset()
 	irq_enable = 0;
 	irq_counter = 0;
 
-	MMU.SetPROM_8K_Bank( 3, 0 );
-	MMU.SetPROM_32K_Bank( MMU.PROM_8K_SIZE-4, MMU.PROM_8K_SIZE-3, MMU.PROM_8K_SIZE-2, MMU.PROM_8K_SIZE-1 );
+	nes->mmu.SetPROM_8K_Bank( 3, 0 );
+	nes->mmu.SetPROM_32K_Bank( nes->mmu.PROM_8K_SIZE-4, nes->mmu.PROM_8K_SIZE-3, nes->mmu.PROM_8K_SIZE-2, nes->mmu.PROM_8K_SIZE-1 );
 
-	if( MMU.VROM_1K_SIZE ) {
-		MMU.SetVROM_8K_Bank( 0 );
+	if( nes->mmu.VROM_1K_SIZE ) {
+		nes->mmu.SetVROM_8K_Bank( 0 );
 	}
 }
 
@@ -18,12 +18,12 @@ void	Mapper042::Write( WORD addr, BYTE data )
 {
 	switch( addr & 0xE003 ) {
 		case	0xE000:
-			MMU.SetPROM_8K_Bank( 3, data&0x0F );
+			nes->mmu.SetPROM_8K_Bank( 3, data&0x0F );
 			break;
 
 		case	0xE001:
-			if( data&0x08 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-			else		MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+			if( data&0x08 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+			else		nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 			break;
 
 		case	0xE002:

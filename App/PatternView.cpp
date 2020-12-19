@@ -162,7 +162,7 @@ WNDMSG	CPatternView::OnTimer( WNDMSGPARAM )
 		return	TRUE;
 
 	// パレット
-	LPBYTE	pPAL = (m_SelectPal<4)?&MMU.BGPAL[m_SelectPal*4]:&MMU.SPPAL[(m_SelectPal&3)*4];
+	LPBYTE	pPAL = (m_SelectPal<4)?&GlobalMMU.BGPAL[m_SelectPal*4]:&GlobalMMU.SPPAL[(m_SelectPal&3)*4];
 	m_BitmapHdr.rgb[0] = m_Palette[pPAL[0]];
 	m_BitmapHdr.rgb[1] = m_Palette[pPAL[1]];
 	m_BitmapHdr.rgb[2] = m_Palette[pPAL[2]];
@@ -171,10 +171,10 @@ WNDMSG	CPatternView::OnTimer( WNDMSGPARAM )
 	// キャラクタデータ更新
 	for( INT i = 0; i < 8; i++ ) {
 		// 更新されたバンクのみキャラクタ更新
-		if( m_lpBank[i] != MMU.PPU_MEM_BANK[i] || MMU.PPU_MEM_TYPE[i] == BANKTYPE_CRAM ) {
-			m_lpBank[i] = MMU.PPU_MEM_BANK[i];
+		if( m_lpBank[i] != GlobalMMU.PPU_MEM_BANK[i] || GlobalMMU.PPU_MEM_TYPE[i] == BANKTYPE_CRAM ) {
+			m_lpBank[i] = GlobalMMU.PPU_MEM_BANK[i];
 
-			LPBYTE	lpPtn = MMU.PPU_MEM_BANK[i];
+			LPBYTE	lpPtn = GlobalMMU.PPU_MEM_BANK[i];
 			for( INT p = 0; p < 64; p++ ) {
 				LPBYTE	lpScn = &m_lpPattern[i*32*128+(p&15)*8+(p/16)*8*128];
 				for( INT y = 0; y < 8; y++ ) {

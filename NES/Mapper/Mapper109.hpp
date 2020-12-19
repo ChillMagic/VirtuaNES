@@ -5,7 +5,7 @@
 void	Mapper109::Reset()
 {
 	reg = 0;
-	MMU.SetPROM_32K_Bank( 0 );
+	nes->mmu.SetPROM_32K_Bank( 0 );
 
 	chr0 = 0;
 	chr1 = 0;
@@ -45,15 +45,15 @@ void	Mapper109::WriteLow( WORD addr, BYTE data )
 					SetBank_PPU();
 					break;
 				case	5:
-					MMU.SetPROM_32K_Bank( data & 0x07 );
+					nes->mmu.SetPROM_32K_Bank( data & 0x07 );
 					break;
 				case	6:
 					chrmode1 = data & 0x07;
 					SetBank_PPU();
 					break;
 				case	7:
-					if( data & 0x01 ) MMU.SetVRAM_Mirror( VRAM_HMIRROR );
-					else		  MMU.SetVRAM_Mirror( VRAM_VMIRROR );
+					if( data & 0x01 ) nes->mmu.SetVRAM_Mirror( VRAM_HMIRROR );
+					else		  nes->mmu.SetVRAM_Mirror( VRAM_VMIRROR );
 					break;
 			}
 		break;
@@ -63,15 +63,15 @@ void	Mapper109::WriteLow( WORD addr, BYTE data )
 
 void	Mapper109::SetBank_PPU()
 {
-	if( MMU.VROM_1K_SIZE ) {
-		MMU.SetVROM_1K_Bank( 0, chr0 );
-		MMU.SetVROM_1K_Bank( 1, chr1|((chrmode1<<3)&0x8) );
-		MMU.SetVROM_1K_Bank( 2, chr2|((chrmode1<<2)&0x8) );
-		MMU.SetVROM_1K_Bank( 3, chr3|((chrmode1<<1)&0x8) |(chrmode0*0x10) );
-		MMU.SetVROM_1K_Bank( 4, MMU.VROM_1K_SIZE-4 );
-		MMU.SetVROM_1K_Bank( 5, MMU.VROM_1K_SIZE-3 );
-		MMU.SetVROM_1K_Bank( 6, MMU.VROM_1K_SIZE-2 );
-		MMU.SetVROM_1K_Bank( 7, MMU.VROM_1K_SIZE-1 );
+	if( nes->mmu.VROM_1K_SIZE ) {
+		nes->mmu.SetVROM_1K_Bank( 0, chr0 );
+		nes->mmu.SetVROM_1K_Bank( 1, chr1|((chrmode1<<3)&0x8) );
+		nes->mmu.SetVROM_1K_Bank( 2, chr2|((chrmode1<<2)&0x8) );
+		nes->mmu.SetVROM_1K_Bank( 3, chr3|((chrmode1<<1)&0x8) |(chrmode0*0x10) );
+		nes->mmu.SetVROM_1K_Bank( 4, nes->mmu.VROM_1K_SIZE-4 );
+		nes->mmu.SetVROM_1K_Bank( 5, nes->mmu.VROM_1K_SIZE-3 );
+		nes->mmu.SetVROM_1K_Bank( 6, nes->mmu.VROM_1K_SIZE-2 );
+		nes->mmu.SetVROM_1K_Bank( 7, nes->mmu.VROM_1K_SIZE-1 );
 	}
 }
 
