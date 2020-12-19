@@ -5,7 +5,7 @@
 
 #include "CPU.h"
 #include "MMU.h"
-#include "../Typedef.h"
+#include "Base/Typedef.h"
 
 class CPU::Executor
 {
