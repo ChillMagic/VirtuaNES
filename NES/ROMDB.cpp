@@ -16,10 +16,6 @@
 
 #include "Base/APIWrapper.h"
 
-#ifdef _WIN32
-#include <mbstring.h>
-#endif
-
 ROMDATABASE	romdatabase;
 
 //
