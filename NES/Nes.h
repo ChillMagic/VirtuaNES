@@ -55,7 +55,7 @@ class	APU;
 class	ROM;
 class	PAD;
 class	Mapper;
-struct  MMUClass;
+struct  MMU;
 
 //
 // NES クラス
@@ -69,7 +69,7 @@ public:
 	APU*	apu;
 	ROM*	rom;
 	PAD*	pad;
-	MMUClass &mmu;
+	MMU &mmu;
 	Mapper*	mapper;
 
 	NESCONFIG* nescfg;

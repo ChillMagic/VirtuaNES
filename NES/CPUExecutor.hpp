@@ -32,7 +32,7 @@ private:
 	// Clock process
 	BOOL& m_bClockProcess;
 	
-	MMUClass& mmu;
+	MMU& mmu;
 
 	BYTE RD6502(WORD addr) {
 		return cpu.RD6502(addr);
@@ -59,28 +59,13 @@ private:
 	BYTE DT = 0;
 public:
 	// メモリアクセス
-	//#define	OP6502(A)	(mmu.CPU_MEM_BANK[(A)>>13][(A)&0x1FFF])
-	//#define	OP6502W(A)	(*((WORD*)&mmu.CPU_MEM_BANK[(A)>>13][(A)&0x1FFF]))
-
-#if	0
-#define	OP6502(A)	RD6502((A))
-#define	OP6502W(A)	RD6502W((A))
-#else
 	BYTE OP6502(WORD addr) {
 		return mmu.GetCPU_MEM_BANK(addr);
 	}
 
 	WORD OP6502W(WORD addr) {
-#if	0
-		WORD	ret;
-		ret = (WORD)mmu.CPU_MEM_BANK[(addr + 0) >> 13][(addr + 0) & 0x1FFF];
-		ret |= (WORD)mmu.CPU_MEM_BANK[(addr + 1) >> 13][(addr + 1) & 0x1FFF] << 8;
-		return	ret;
-#else
 		return reinterpret_cast<WORD&>(mmu.GetCPU_MEM_BANK(addr));
-#endif
 	}
-#endif
 
 	int Exec(int request_cycles);
 private:
