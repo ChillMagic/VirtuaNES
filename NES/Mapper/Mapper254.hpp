@@ -32,7 +32,7 @@ void	Mapper254::WriteLow( WORD addr, BYTE data )
 	switch( addr & 0xF000 ) {
 		case	0x6000:
 		case	0x7000:
-			nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+			nes->mmu.GetCPU_MEM_BANK(addr) = data;
 			break;
 	}
 
@@ -41,9 +41,9 @@ BYTE	Mapper254::ReadLow( WORD addr )
 {
 	if( addr>=0x6000 ) {
 		if( protectflag ) {
-			return	(nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF]);
+			return	(nes->mmu.GetCPU_MEM_BANK(addr));
 		} else {
-			return	((nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF])^0x1);
+			return	((nes->mmu.GetCPU_MEM_BANK(addr))^0x1);
 		}
 	}
 	return	Mapper::ReadLow( addr );

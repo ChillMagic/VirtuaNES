@@ -263,7 +263,7 @@ void	Mapper005::Write( WORD addr, BYTE data )
 	if( sram_we_a == 0x02 && sram_we_b == 0x01 ) {
 		if( addr >= 0x8000 && addr < 0xE000 ) {
 			if( nes->mmu.CPU_MEM_TYPE[addr>>13] == BANKTYPE_RAM ) {
-				nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+				nes->mmu.GetCPU_MEM_BANK(addr) = data;
 			}
 		}
 	}

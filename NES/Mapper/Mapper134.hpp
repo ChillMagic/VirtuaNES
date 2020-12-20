@@ -43,7 +43,7 @@ void	Mapper134::WriteLow( WORD addr, BYTE data )
 //	nes->mmu.SetPROM_16K_Bank( 4, (prg<<1)|0 );
 //	nes->mmu.SetPROM_16K_Bank( 6, (prg<<1)|1 ); 
 	nes->mmu.SetVROM_8K_Bank( chr );
-	nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+	nes->mmu.GetCPU_MEM_BANK(addr) = data;
 }
 
 void	Mapper134::SaveState( LPBYTE p )

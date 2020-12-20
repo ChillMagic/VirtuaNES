@@ -36,7 +36,7 @@ void	Mapper246::WriteLow( WORD addr, BYTE data )
 				nes->mmu.SetVROM_2K_Bank(6,data);
 				break;
 			default:
-				nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+				nes->mmu.GetCPU_MEM_BANK(addr) = data;
 				break;
 		}
 	}

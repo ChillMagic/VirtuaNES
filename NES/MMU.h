@@ -10,7 +10,6 @@
 #define	__MMU_INCLUDED__
 
 #include "Base/Typedef.h"
-#include "Base/Macro.h"
 
 struct MMUClass
 {
@@ -93,6 +92,13 @@ struct MMUClass
 	void	SetVRAM_Bank(INT bank0, INT bank1, INT bank2, INT bank3);
 	void	SetVRAM_Mirror(INT type);
 	void	SetVRAM_Mirror(INT bank0, INT bank1, INT bank2, INT bank3);
+
+	auto&	GetCPU_MEM_BANK(WORD addr) {
+		return CPU_MEM_BANK[addr >> 13][addr & 0x1FFF];
+	}
+	auto&	GetRAM(WORD addr) {
+		return RAM[addr & 0x07FF];
+	}
 };
 
 extern MMUClass GlobalMMU;

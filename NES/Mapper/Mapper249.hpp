@@ -46,7 +46,7 @@ void	Mapper249::WriteLow( WORD addr, BYTE data )
 	}
 
 	if( addr>=0x6000 && addr<0x8000 ) {
-		nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+		nes->mmu.GetCPU_MEM_BANK(addr) = data;
 	}
 }
 

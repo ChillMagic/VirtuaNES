@@ -885,7 +885,7 @@ BYTE	NES::Read( WORD addr )
 {
 	switch( addr>>13 ) {
 		case	0x00:	// $0000-$1FFF
-			return	mmu.RAM[addr&0x07FF];
+			return	mmu.GetRAM(addr);
 		case	0x01:	// $2000-$3FFF
 			return	ppu->Read( addr&0xE007 );
 		case	0x02:	// $4000-$5FFF
@@ -901,7 +901,7 @@ BYTE	NES::Read( WORD addr )
 		case	0x05:	// $A000-$BFFF
 		case	0x06:	// $C000-$DFFF
 		case	0x07:	// $E000-$FFFF
-			return	mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
+			return	mmu.GetCPU_MEM_BANK(addr);
 	}
 
 	return	0x00;	// Warning予防
@@ -911,7 +911,7 @@ void	NES::Write( WORD addr, BYTE data )
 {
 	switch( addr>>13 ) {
 		case	0x00:	// $0000-$1FFF
-			mmu.RAM[addr&0x07FF] = data;
+			mmu.GetRAM(addr) = data;
 			break;
 		case	0x01:	// $2000-$3FFF
 			if( !rom->IsNSF() ) {
@@ -3388,13 +3388,13 @@ void	NES::GenieCodeProcess()
 		addr = m_GenieCode[i].address;
 		if( addr & 0x8000 ) {
 		// 8character codes
-			if( mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] == m_GenieCode[i].cmp ) {
-				mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = m_GenieCode[i].data;
+			if( mmu.GetCPU_MEM_BANK(addr) == m_GenieCode[i].cmp ) {
+				mmu.GetCPU_MEM_BANK(addr) = m_GenieCode[i].data;
 			}
 		} else {
 		// 6character codes
 			addr |= 0x8000;
-			mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = m_GenieCode[i].data;
+			mmu.GetCPU_MEM_BANK(addr) = m_GenieCode[i].data;
 		}
 	}
 }

@@ -43,7 +43,7 @@ void	Mapper190::WriteLow( WORD addr, BYTE data )
 			case 0x3:lowoutdata=0x00;break;
 		}
 	}
-	nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+	nes->mmu.GetCPU_MEM_BANK(addr) = data;
 }
 
 BYTE	Mapper190::ReadLow( WORD addr )
@@ -52,7 +52,7 @@ BYTE	Mapper190::ReadLow( WORD addr )
 		case	0x5000:
 			return	lowoutdata;
 		default:
-			return	nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
+			return	nes->mmu.GetCPU_MEM_BANK(addr);
 	}
 }
 

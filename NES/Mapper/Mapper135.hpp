@@ -55,7 +55,7 @@ void	Mapper135::WriteLow( WORD addr, BYTE data )
 			break;
 	}
 
-	nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+	nes->mmu.GetCPU_MEM_BANK(addr) = data;
 }
 
 void	Mapper135::SetBank_PPU()

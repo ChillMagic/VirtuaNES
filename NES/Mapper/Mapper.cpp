@@ -35,7 +35,7 @@ BYTE	Mapper::ReadLow( WORD addr )
 {
 	// $6000-$7FFF WRAM
 	if( addr >= 0x6000 && addr <= 0x7FFF ) {
-		return	nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
+		return	nes->mmu.GetCPU_MEM_BANK(addr);
 	}
 
 	return	(BYTE)(addr>>8);
@@ -46,7 +46,7 @@ void	Mapper::WriteLow( WORD addr, BYTE data )
 {
 	// $6000-$7FFF WRAM
 	if( addr >= 0x6000 && addr <= 0x7FFF ) {
-		nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+		nes->mmu.GetCPU_MEM_BANK(addr) = data;
 	}
 }
 

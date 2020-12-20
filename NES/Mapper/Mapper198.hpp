@@ -23,14 +23,14 @@ void	Mapper198::Reset()
 void	Mapper198::WriteLow( WORD addr, BYTE data )
 {
 	if( addr>0x4018 && addr<0x6000 )
-		nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+		nes->mmu.GetCPU_MEM_BANK(addr) = data;
 	else
 		adr5000buf[addr&0xFFF] = data;
 }
 BYTE	Mapper198::ReadLow( WORD addr )
 {
 	if( addr>0x4018 && addr<0x6000 )
-		return	nes->mmu.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
+		return	nes->mmu.GetCPU_MEM_BANK(addr);
 	else
 		return	adr5000buf[addr&0xFFF];
 }

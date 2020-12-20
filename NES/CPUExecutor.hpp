@@ -67,7 +67,7 @@ public:
 #define	OP6502W(A)	RD6502W((A))
 #else
 	BYTE OP6502(WORD addr) {
-		return mmu.CPU_MEM_BANK[addr >> 13][addr & 0x1FFF];
+		return mmu.GetCPU_MEM_BANK(addr);
 	}
 
 	WORD OP6502W(WORD addr) {
@@ -77,7 +77,7 @@ public:
 		ret |= (WORD)mmu.CPU_MEM_BANK[(addr + 1) >> 13][(addr + 1) & 0x1FFF] << 8;
 		return	ret;
 #else
-		return *((WORD*)&mmu.CPU_MEM_BANK[addr >> 13][addr & 0x1FFF]);
+		return reinterpret_cast<WORD&>(mmu.GetCPU_MEM_BANK(addr));
 #endif
 	}
 #endif

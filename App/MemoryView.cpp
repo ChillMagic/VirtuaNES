@@ -298,7 +298,7 @@ WNDMSG	CMemoryView::OnChar( WNDMSGPARAM )
 		case	'9':
 			if( m_DispLines ) {
 				INT	addr = m_StartAddress+(m_CursorX/2)+m_CursorY*16;
-				BYTE	data = GlobalMMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
+				BYTE	data = GlobalMMU.GetCPU_MEM_BANK(addr);
 				if( !(m_CursorX&1) ) {
 					data &= 0x0F;
 					data |= (Keys-'0')<<4;
@@ -306,7 +306,7 @@ WNDMSG	CMemoryView::OnChar( WNDMSGPARAM )
 					data &= 0xF0;
 					data |= (Keys-'0');
 				}
-				GlobalMMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+				GlobalMMU.GetCPU_MEM_BANK(addr) = data;
 
 				if( ++m_CursorX > 32-1 ) {
 					if( ++m_CursorY > m_DispLines-1 ) {
@@ -330,7 +330,7 @@ WNDMSG	CMemoryView::OnChar( WNDMSGPARAM )
 		case	'F':
 			if( m_DispLines ) {
 				INT	addr = m_StartAddress+(m_CursorX/2)+m_CursorY*16;
-				BYTE	data = GlobalMMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF];
+				BYTE	data = GlobalMMU.GetCPU_MEM_BANK(addr);
 				if( !(m_CursorX&1) ) {
 					data &= 0x0F;
 					data |= (Keys-'A'+10)<<4;
@@ -338,7 +338,7 @@ WNDMSG	CMemoryView::OnChar( WNDMSGPARAM )
 					data &= 0xF0;
 					data |= (Keys-'A'+10);
 				}
-				GlobalMMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] = data;
+				GlobalMMU.GetCPU_MEM_BANK(addr) = data;
 				if( ++m_CursorX > 32-1 ) {
 					if( ++m_CursorY > m_DispLines-1 ) {
 						wScrollNotify = SB_LINEDOWN;
@@ -544,7 +544,7 @@ void	CMemoryView::OnDraw( HDC hDC )
 		for( INT d = 0; d < 16; d++ ) {
 			CHAR	szTemp[16];
 			INT	addr = address+d;
-			::wsprintf( szTemp, "%02X ", GlobalMMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF] );
+			::wsprintf( szTemp, "%02X ", GlobalMMU.GetCPU_MEM_BANK(addr) );
 			::strcat( szBuf, szTemp );
 		}
 		::strcat( szBuf, " " );
@@ -553,9 +553,9 @@ void	CMemoryView::OnDraw( HDC hDC )
 			INT	addr = address+a;
 
 			if( m_logFont.lfCharSet == SHIFTJIS_CHARSET ) {
-				::wsprintf( szTemp, "%1c", ::_ismbcprint(GlobalMMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF])?GlobalMMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF]:'.' );
+				::wsprintf( szTemp, "%1c", ::_ismbcprint(GlobalMMU.GetCPU_MEM_BANK(addr))?GlobalMMU.GetCPU_MEM_BANK(addr):'.' );
 			} else {
-				::wsprintf( szTemp, "%1c", ::isprint(GlobalMMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF])?GlobalMMU.CPU_MEM_BANK[addr>>13][addr&0x1FFF]:'.' );
+				::wsprintf( szTemp, "%1c", ::isprint(GlobalMMU.GetCPU_MEM_BANK(addr))?GlobalMMU.GetCPU_MEM_BANK(addr):'.' );
 			}
 			::strcat( szBuf, szTemp );
 		}

@@ -39,23 +39,23 @@ CPU::~CPU() {
 BYTE CPU::RD6502(WORD addr) {
 	if (addr < 0x2000) {
 		// RAM (Mirror $0800, $1000, $1800)
-		return nes->mmu.RAM[addr & 0x07FF];
+		return nes->mmu.GetRAM(addr);
 	}
 	if (addr < 0x8000) {
 		// Others
 		return nes->Read(addr);
 	}
 	// Dummy access
-	mapper->Read(addr, nes->mmu.CPU_MEM_BANK[addr >> 13][addr & 0x1FFF]);
+	mapper->Read(addr, nes->mmu.GetCPU_MEM_BANK(addr));
 
 	// Quick bank read
-	return nes->mmu.CPU_MEM_BANK[addr >> 13][addr & 0x1FFF];
+	return nes->mmu.GetCPU_MEM_BANK(addr);
 }
 
 WORD CPU::RD6502W(WORD addr) {
 	if (addr < 0x2000) {
 		// RAM (Mirror $0800, $1000, $1800)
-		return *((WORD*)&nes->mmu.RAM[addr & 0x07FF]);
+		return reinterpret_cast<WORD&>(nes->mmu.GetRAM(addr));
 	}
 	if (addr < 0x8000) {
 		// Others
@@ -69,7 +69,7 @@ WORD CPU::RD6502W(WORD addr) {
 	ret |= (WORD)nes->mmu.CPU_MEM_BANK[(addr+1)>>13][(addr+1)&0x1FFF]<<8;
 	return	ret;
 #else
-	return *((WORD*)&nes->mmu.CPU_MEM_BANK[addr >> 13][addr & 0x1FFF]);
+	return reinterpret_cast<WORD&>(nes->mmu.GetCPU_MEM_BANK(addr));
 #endif
 }
 
@@ -77,7 +77,7 @@ WORD CPU::RD6502W(WORD addr) {
 void CPU::WR6502(WORD addr, BYTE data) {
 	if (addr < 0x2000) {
 		// RAM (Mirror $0800, $1000, $1800)
-		nes->mmu.RAM[addr & 0x07FF] = data;
+		nes->mmu.GetRAM(addr) = data;
 	}
 	else {
 		// Others
