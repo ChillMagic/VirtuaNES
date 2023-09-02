@@ -2,8 +2,7 @@
 // メインウインドウクラス
 //
 //
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 #include <process.h>
 #include <shellapi.h>
 #include <commdlg.h>

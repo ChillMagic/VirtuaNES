@@ -4,8 +4,7 @@
 #ifndef	__CCONFIG_INCLUDED__
 #define	__CCONFIG_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 #include <cstdlib>
 #define	DIRECTINPUT_VERSION	0x0700
 #include <dinput.h>

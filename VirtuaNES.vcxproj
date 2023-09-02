@@ -644,6 +644,7 @@
     <ClInclude Include="Typedef.h" />
     <ClInclude Include="VirtuaNESres.h" />
     <ClInclude Include="WaveRec.h" />
+    <ClInclude Include="WindowsSDKImport.h" />
     <ClInclude Include="Wnd.h" />
     <ClInclude Include="WndHook.h" />
     <ClInclude Include="zlib\crc32.h" />

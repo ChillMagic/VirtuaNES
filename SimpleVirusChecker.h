@@ -28,7 +28,7 @@
 #ifndef	__EASYVIRUSCHECKER__
 #define	__EASYVIRUSCHECKER__
 
-#include	<Windows.h>
+#include	"WindowsSDKImport.h"
 #include	<Shlwapi.h>
 
 #pragma comment( lib, "shlwapi.lib" )

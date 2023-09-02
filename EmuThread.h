@@ -4,8 +4,7 @@
 #ifndef	__CEMUTHREAD_INCLUDED__
 #define	__CEMUTHREAD_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 
 #include <string>
 #include <deque>

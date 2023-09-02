@@ -4,8 +4,7 @@
 #ifndef	__CPALETTEEDIT_INCLUDED__
 #define	__CPALETTEEDIT_INCLUDED__
 
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 #include <string>
 using namespace std;
 

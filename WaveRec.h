@@ -4,8 +4,7 @@
 #ifndef	__CWAVEREC_INCLUDED__
 #define	__CWAVEREC_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 #include <cstdio>
 
 #include "Typedef.h"

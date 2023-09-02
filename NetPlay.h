@@ -4,8 +4,7 @@
 #ifndef	__CNETPLAY_INCLUDED__
 #define	__CNETPLAY_INCLUDED__
 
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 #include <windowsx.h>
 #include <CommCtrl.h>
 #include <mmsystem.h>

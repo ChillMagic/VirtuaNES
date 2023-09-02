@@ -4,8 +4,7 @@
 #ifndef	__AVIFILEWRITER_INCLUDED__
 #define	__AVIFILEWRITER_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 #include <Vfw.h>
 
 class	CAVIWriter

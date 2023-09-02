@@ -4,8 +4,7 @@
 #ifndef	__CWNDHOOK_INCLUDED__
 #define	__CWNDHOOK_INCLUDED__
 
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 
 // prototypes
 class	CWnd;

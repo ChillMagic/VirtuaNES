@@ -1,8 +1,7 @@
 ﻿//
 // NES ROMDB class
 //
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 #include <cstdio>
 #include <cstdlib>
 #include <mbstring.h>

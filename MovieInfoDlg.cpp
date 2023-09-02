@@ -2,8 +2,7 @@
 // ムービー情報ダイアログクラス
 //
 //
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 #include <shellapi.h>
 #include <string>
 using namespace std;

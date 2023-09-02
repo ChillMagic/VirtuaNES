@@ -5,8 +5,7 @@
 //                                               written     2001/02/21 //
 //                                               last modify ----/--/-- //
 //////////////////////////////////////////////////////////////////////////
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 #include "Typedef.h"
 #include "Macro.h"
 #include "DebugOut.h"

@@ -4,8 +4,7 @@
 #ifndef	__DIRECTDRAW_INCLUDED__
 #define	__DIRECTDRAW_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 #include <objbase.h>
 #include <mmsystem.h>
 

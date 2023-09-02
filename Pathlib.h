@@ -4,8 +4,7 @@
 #ifndef	__CPATHLIB_INCLUDED__
 #define	__CPATHLIB_INCLUDED__
 
-#define	WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "WindowsSDKImport.h"
 #include <cstdio>
 #include <cstdlib>
 #include <ShlObj.h>
