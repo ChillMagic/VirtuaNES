@@ -8,7 +8,7 @@
 #include <Windows.h>
 #include <cstdio>
 #include <cstdlib>
-#include <shlobj.h>
+#include <ShlObj.h>
 #include <Shlwapi.h>
 
 #include <string>
