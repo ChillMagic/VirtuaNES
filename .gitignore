@@ -36,3 +36,8 @@
 x64/
 Debug/
 Release/
+
+# Project
+.vs
+.vscode
+.idea
