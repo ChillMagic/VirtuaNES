@@ -5,7 +5,6 @@
 #define	__CNETPLAY_INCLUDED__
 
 #include "WindowsSDKImport.h"
-#include <windowsx.h>
 #include <CommCtrl.h>
 #include <mmsystem.h>
 #include <winsock.h>

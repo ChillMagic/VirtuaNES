@@ -5,7 +5,6 @@
 #define	__CREGISTRY_INCLUDED__
 
 #include "WindowsSDKImport.h"
-#include <windowsx.h>
 #include <tchar.h>
 
 #include <string>

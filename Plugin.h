@@ -5,7 +5,6 @@
 #define	__CPLUGIN_INCLUDED__
 
 #include "WindowsSDKImport.h"
-#include <windowsx.h>
 #include <mbctype.h>
 
 #include <string>

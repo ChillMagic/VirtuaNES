@@ -3,7 +3,6 @@
 //
 //
 #include "WindowsSDKImport.h"
-#include <windowsx.h>
 
 #include <string>
 using namespace std;

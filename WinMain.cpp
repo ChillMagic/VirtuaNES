@@ -1,6 +1,5 @@
 ﻿#define	INITGUID
 #include "WindowsSDKImport.h"
-#include <windowsx.h>
 #include <CommCtrl.h>
 #include <crtdbg.h>
 

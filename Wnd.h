@@ -7,7 +7,6 @@
 #define	__CWND_INCLUDED__
 
 #include "WindowsSDKImport.h"
-#include <windowsx.h>
 #include <CommCtrl.h>
 
 #include <string>
