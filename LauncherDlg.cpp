@@ -871,8 +871,8 @@ DLGMSG	CLauncherDlg::OnInitDialog( DLGMSGPARAM )
 {
 //	DEBUGOUT( "CLauncherDlg::OnInitDialog\n" );
 	// ステータスバーの追加
-	HWND	hWndCtrl = ::CreateStatusWindow( WS_CHILD|WS_VISIBLE|CCS_BOTTOM|SBARS_SIZEGRIP,
-						"", m_hWnd, IDC_LCH_STATUS );
+	HWND	hWndCtrl = ::CreateWindow( STATUSCLASSNAME, NULL, WS_CHILD|WS_VISIBLE|CCS_BOTTOM|SBARS_SIZEGRIP,
+						0, 0, 0, 0, m_hWnd, (HMENU)IDC_LCH_STATUS, NULL, NULL );
 	if( !hWndCtrl ) {
 		bResult = FALSE;
 		return	TRUE;
