@@ -529,20 +529,6 @@ DDBLTFX		ddbltfx;
 			if( m_lpDD->SetCooperativeLevel( m_hWnd, DDSCL_ALLOWREBOOT|DDSCL_EXCLUSIVE|DDSCL_FULLSCREEN ) != DD_OK )
 				throw	"CDirectDraw:SetCooperativeLevel error";
 
-			// 画面解像度の設定
-			if( m_lpDD->SetDisplayMode( m_dwDisplayWidth, m_dwDisplayHeight,
-						    m_dwDisplayDepth, m_dwDisplayRate,
-							DDSDM_STANDARDVGAMODE ) != DD_OK ) {
-				// 失敗したらリフレッシュレート指定を無くしてもう一度やってみる
-				if( m_lpDD->SetDisplayMode( m_dwDisplayWidth, m_dwDisplayHeight,
-							    m_dwDisplayDepth, 0,
-								DDSDM_STANDARDVGAMODE ) != DD_OK ) {
-					throw	"CDirectDraw:SetDisplayMode failed.";
-				} else {
-					m_dwDisplayRate = 0;
-				}
-			}
-
 			// プライマリサーフェスとバックサーフェスの作成
 			ZEROMEMORY( &ddsd, sizeof(DDSURFACEDESC2) );
 			ddsd.dwSize = sizeof(DDSURFACEDESC2);

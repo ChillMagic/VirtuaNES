@@ -31,6 +31,7 @@ using namespace std;
 
 INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT nCmdShow )
 {
+	SetProcessDPIAware();
 #if	_DEBUG
 	// メモリリーク検出
 	int	Flag = _CrtSetDbgFlag( _CRTDBG_REPORT_FLAG );
